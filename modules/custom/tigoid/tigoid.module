@@ -1,0 +1,122 @@
+<?php
+
+/**
+ * @file
+ * Contains tigoid.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_help().
+ */
+function tigoid_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tigoid module.
+    case 'help.page.tigoid':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('OpenID Connect Pluggin for TigoID') . '</p>';
+      return $output;
+    
+    default:
+  }
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function tigoid_page_attachments(array &$page) {
+  
+  $configuration = \Drupal::config('openid_connect.settings.tigoid')
+    ->get('settings');
+  
+  if (isset($configuration['allow_he']) && !$configuration['allow_he']) {
+    return;
+  }
+  
+  if (\Drupal::currentUser()->isAuthenticated()) {
+    return;
+  }
+  
+  $redirect_uri = Url::fromRoute(
+    'tigoid.he.authorization_controller',
+    [], ['absolute' => TRUE]
+  )->toString(TRUE);
+  
+  $page['#attached']['library'][] = 'tigoid/tigoid_he';
+  $page['#attached']['drupalSettings']['tigoid_he']['authorization_endpoint'] = $redirect_uri->getGeneratedUrl();
+  
+}
+
+/**
+ * Skip alter.
+ */
+function tigoid__openid_connect_user_properties_to_skip_alter(&$properties_to_skip) {
+  
+  $key = array_search("mail", $properties_to_skip);
+  if ($key) {
+    unset($properties_to_skip[$key]);
+  }
+  
+  unset($mail_key);
+}
+
+/**
+ * Implements hook_user_format_name_alter().
+ */
+function tigoid_user_format_name_alter(&$name, $account) {
+  // Ensure that usernames are not displayed if they are email addresses, or if
+  // they are generated names starting with 'oidc_'.
+  $oidc_name = \Drupal::service('user.data')
+    ->get('openid_connect', $account->id(), 'oidc_name');
+  if (!empty($oidc_name) && (strpos($name, 'oidc_') === 0 || strpos($name, '@'))) {
+    $name = $oidc_name;
+  }
+  if (strlen($name) > 16) {
+    $aux_name = substr($name, 0, 16);
+    $pos = strpos($name, " ", 15);
+    // Valida que el caracter #17 no sea un espacio.
+    if ($pos != 16) {
+      $pos = strrpos($aux_name, " ");
+      if ($pos) {
+        // Recorta la cadena hasta el ultimo espacio encontrado.
+        $aux_name = substr($aux_name, 0, $pos);
+      }
+    }
+    $name = $aux_name;
+  }
+}
+
+/**
+ * Logs the current user out.
+ */
+function tigoid_user_logout() {
+  setcookie('SESSION_CLOSED', 'TRUE', time() + 3600 * 24, '/');
+  unset($_SESSION['emular_role']);
+  unset($_SESSION['ummasquerade_block']);
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tigoid_theme() {
+  return [
+    'login' => [
+      'variables' => [
+        'message' => NULL,
+        'link_below' => NULL,
+        'text_below' => NULL,
+        'create_account' => NULL,
+        'login' => NULL,
+        'uuid' => NULL,
+        'class' => NULL,
+        'labels' => NULL,
+        'plugin_id' => NULL,
+        'buttons_login' => NULL,
+      ],
+      'template' => 'login',
+    ],
+  ];
+}

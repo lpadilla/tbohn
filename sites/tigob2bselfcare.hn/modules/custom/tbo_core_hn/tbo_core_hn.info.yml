@@ -1,0 +1,9 @@
+name: TBO Core HN
+type: module
+description: TBO Core Honduras
+core: 8.x
+version: 0.25
+package: TBO
+dependencies:
+  - tbo_general
+  - tbo_core

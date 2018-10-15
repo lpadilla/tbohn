@@ -1,0 +1,5 @@
+
+access tigoid settings:
+  title: 'Access to TigoID configuration'
+  description: 'Allow access to settings of TigoID'
+  restrict access: true

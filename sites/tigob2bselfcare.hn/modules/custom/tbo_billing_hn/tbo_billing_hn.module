@@ -1,0 +1,140 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_billing_hn.module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_billing_hn_theme(){
+    return [
+        'current_invoice_hn' => [
+            'variables' => array(
+                'uuid' => NULL,
+                'directive' => NULL,
+                'config' => NULL,
+                'fields' => NULL,
+                'filters' => NULL,
+                'class' => NULL,
+                'id' => NULL,
+                'form' => NULL,
+                'title_invoice' => NULL,
+                'address_options' => NULL,
+                'filters_mobile' => NULL,
+                'showoptions' => NULL,
+                'display' => NULL,
+                'checked' => NULL,
+                'margin' => NULL,
+                'more_options' => NULL,
+            ),
+            'template' => 'block--current-invoice-hn',
+        ],
+        'billing_summary_hn' => [
+		      'variables' => [
+		        'uuid' => NULL,
+		        'directive' => NULL,
+		        'type' => NULL,
+		        'url' => NULL,
+		        'description' => NULL,
+		        'button_text' => NULL,
+		        'button_url' => NULL,
+		        'titleNoServices' => NULL,
+		        'fields' => NULL,
+		        'class' => NULL,
+		        'display' => NULL,
+		        'url_payment' => NULL,
+		        'segment' => NULL,
+		      ],
+		      'template' => 'block--billing-summary-hn',
+		    ],
+        'service_portfolio_hn' => array(
+            'variables' => array(
+                'uuid' => NULL,
+                'directive' => NULL,
+                'fields' => NULL,
+                'filters' => NULL,
+                'class' => NULL,
+                'buttons' => NULL,
+                'title' => NULL,
+                'others_display' => NULL,
+                'margin' => NULL,
+                'invoices' => NULL,
+            ),
+            'template' => 'block--service-portfolio-hn',
+        ),
+        'tbo_general_portfolio_hn' => [
+          'template' => 'tbo-general-portfolio-hn',
+          'render element' => 'content',
+        ],
+        'change_simcard' => [
+          'variables' => array(
+            'uuid' => NULL,
+            'directive' => NULL,
+            'fields' => NULL,
+            'filters' => NULL,
+            'modal' => NULL,
+            'buttons' => NULL,
+            'margin' => NULL,
+            'class' => NULL,
+            'form' => NULL,
+          ),
+          'template' => 'block--change-simcard-hn',
+        ],
+        'set_up_invoice_delivery_hn' => [
+           
+            'template' => 'block--set-up-invoice-delivery-hn',
+        ],
+        'invoice_history_hn' => [
+		      'variables' => [
+		        'uuid' => NULL,
+		        'title_view' => NULL,
+		        'form_config' => NULL,
+		        'headers_table' => NULL,
+		        'fields' => NULL,
+		        'opions_enable' => NULL,
+		        'show_detail' => NULL,
+		        'title_colum' => NULL,
+		        'environment' => NULL,
+		        'class' => NULL,
+		        'directive' => NULL,
+		      ],
+		      'template' => 'block--invoices-history-hn',
+        ],
+         'create_message' => [
+                'variables' => [
+                    'uuid' => NULL,
+                    'config' => NULL,
+                    'fields' => NULL,
+                    'filters' => NULL,
+                    'form' => NULL,
+                    'modal' => [],
+                    'directive' => NULL,
+                    'title' => NULL,
+                    'class' => NULL,
+                    'margin' => NULL,
+                ],
+                'template' => 'block--create-message',
+           ],
+            
+        'billing_header_operations_hn' => array(
+            'variables' =>array(
+            ),
+            'template' => 'block--header-operations-hn',
+        ),
+
+        'register-mail-invoice-hn' => [
+            'variables' => array(
+                'test' => NULL,
+            ),
+            'template' => 'block--register-mail-invoice-hn',
+        ],
+        'register-mail-invoices-hn' => [
+            'variables' => array(
+                'test' => NULL,
+            ),
+            'template' => 'block--register-mail-invoices-hn',
+        ],
+    ];
+}

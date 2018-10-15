@@ -1,0 +1,14 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+  {% if show_create_user %}
+    <div class="hidden-block" style="display: none;">
+  {% else %}
+    <div class="form-prueba">
+  {% endif %}
+  {{ form }}
+  </div>
+{% endblock %}

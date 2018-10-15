@@ -1,0 +1,155 @@
+{#
+/**
+ * @file
+ * Template for the main page.
+ */
+#}
+<div class="wrapper-page">
+  <header>
+    <div class="page-box">
+      <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        {% if logged_in and show_selector == false %}
+          <div class="row">
+            <div class="navbar-branding col s5 m7 l3">
+              <div class="box-content">
+                <div class="hambuger-menu">
+                <i class="prefix icon-pricelist-cyan">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>
+                </div>
+                <div class="user-menu">
+                 {#  <i class="material-icons button-collapse"
+                     data-activates="slide-out">user</i> #}
+                  <a href="#" data-activates="slide-out" class="button-collapse">
+                   {#  <i class="material-icons">menu</i> #}
+                    <i class="prefix icon-pricelist-cyan">
+                      <span class="path1"></span>
+                      <span class="path2"></span>
+                  </i>
+                  </a>
+                </div>
+                <div class="block block--logoheaderb2b">
+                  <div class="block__content">
+                    <a href="/inicio" title="Home" rel="home" class="navbar-brand">
+                      <img src="{{ logo_url }}" alt="Home" class="site-logo">
+                    </a>
+                  </div>
+                </div>
+                {{ page.navbar_branding }}
+              </div>
+            </div>
+
+            {% if page.navbar_search %}
+              <div class="navbar-search col s3 m4 l3">
+                {{ page.navbar_search }}
+              </div>
+            {% endif %}
+            {% if page.navbar_account %}
+              <div class="navbar-account col s4 m1 l6">
+                {{ page.navbar_account }}
+              </div>
+            {% endif %}
+          </div>
+          {% if page.tbo_menu_mobile %}
+            <div class="divider"></div>
+            <div class="section tbo_menu_mobile">
+              {{ page.tbo_menu_mobile }}
+            </div>
+          {% endif %}
+        {% endif %}
+        <div class="row box-unlocked">
+          <div class="col s12 ">
+            <div class="unlocked">
+              <div class="block block--logoheaderb2b">
+                <div class="block__content">
+                  <a href="/inicio" title="Home" rel="home" class="navbar-brand">
+                    <img src="{{ logo_url }}" alt="Home" class="site-logo">
+                  </a>
+                </div>
+              </div>
+              {{ page.navbar_branding }}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  {% if logged_in and show_selector == false and show_create_account == false %}
+  <main role="main">
+    {% else %}
+    <main role="main" class="main-authentication">
+      {% endif %}
+      <div class="page-box">
+        {% if show_create_account == false %}
+        <div class="container">
+          {% endif %}
+          {% if logged_in and show_selector == false and show_create_account == false %}
+            <div class="tbo_main_menu fixed open">
+              {{ page.tbo_menu_desktop }}
+            </div>
+            <div class="preloadingContainer">
+              <div class="preloadingData">
+                <svg class="spinner" width="100%" height="100%"
+                     viewBox="0 0 66 66"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <circle class="path" fill="none" stroke-width="6"
+                          stroke-linecap="round" cx="33" cy="33"
+                          r="30"></circle>
+                </svg>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if page.tbo_main_top %}
+            <div class="main-top">
+              {{ page.tbo_main_top }}
+            </div>
+          {% endif %}
+          <div class="box-container">
+            {% if logged_in and show_selector == false and show_create_account == false %}
+              {{ page.content }}
+            {% elseif show_selector == true or show_selector is defined %}
+              <div class="card selector-cuenta">
+                {{ page.content }}
+              </div>
+            {% elseif show_create_account == true %}
+              {% if show_create_user_form == true %}
+                {{ page.content }}
+              {% else %}
+                {{ page.content_norole }}
+              {% endif %}
+            {% else %}
+              {{ page.content }}
+              {{ page.content_noautenticate }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+    </main>
+    {% if page.tbo_footer_top %}
+
+      <div id="footer-top" class="footer-top {{ type_environment }}">
+        <div class="page-box">
+          <div class="container">
+            <div class="box-container">
+              {{ page.tbo_footer_top }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+</div>
+{% if logged_in and show_selector == false %}
+  {% if page.footer %}
+    <footer role="footer">
+      <div class="page-box">
+        <div class="container">
+          {{ page.footer }}
+        </div>
+      </div>
+    </footer>
+  {% endif %}
+{% endif %}

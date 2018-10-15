@@ -1,0 +1,530 @@
+{% macro validate_style(label, value, class) %}
+  {% import _self as forms %}
+    {% if ("destacado" in value.class) %}
+      {{ forms.destacado(label, value, class) }}
+    {% elseif ("1-columns" in value.class) %}
+      {{ forms.one_column(label, value, class) }}
+    {% elseif ("2-columns" in value.class) %}
+      {{ forms.two_column(label, value, class) }}
+    {% elseif ("3-columns" in value.class) %}
+      {{ forms.three_column(label, value, class) }}
+    {% elseif ("4-columns" in value.class) %}
+      {{ forms.four_column(label, value, class) }}
+    {% elseif ("5-columns" in value.class) %}
+      {{ forms.five_column(label, value, class) }}
+    {% elseif ("6-columns" in value.class) %}
+      {{ forms.six_column(label, value, class) }}
+    {% elseif ("7-columns" in value.class) %}
+      {{ forms.seven_column(label, value, class) }}
+    {% elseif ("8-columns" in value.class) %}
+      {{ forms.eight_column(label, value, class) }}
+    {% elseif ("9-columns" in value.class) %}
+      {{ forms.nine_column(label, value, class) }}
+    {% elseif ("10-columns" in value.class) %}
+      {{ forms.ten_column(label, value, class) }}
+    {% elseif ("11-columns" in value.class) %}
+      {{ forms.eleven_column(label, value, class) }}
+    {% elseif ("12-columns" in value.class) %}
+      {{ forms.twelve_column(label, value, class) }}
+    {% elseif ("title" in value.class) %}
+    {{ forms.title(label) }}
+  {% else %}
+    {{ forms.generally(label, value, class) }}
+  {% endif %}
+{% endmacro %}
+
+{% macro one_column(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field content-row col m1 s6 l1">
+    {% if value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% else %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro two_column(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field content-row col m2 s6 l2">
+    {% if value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% else %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro three_column(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field content-row col m3 s6 l3">
+    {% if value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% else %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+
+{% macro four_column(label, value, left, right, class) %}
+  {% import _self as forms %}
+  <div class="input-field content-row col m4 s6 l4">
+    {% if value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% else %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro five_column(label, value, left, right, class) %}
+  {% import _self as forms %}
+  <div class="input-field content-row m5 s6 l5">
+    {% if value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% else %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro six_column(label, value, left, right, class) %}
+  {% import _self as forms %}
+  <div class="input-field content-row col m6 s6 l6">
+    {% if value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% else %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro seven_column(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field content-row col m7 s6 l7">
+    {% if value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% else %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro eight_column(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field content-row col m8 s6 l8">
+    {% if value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% else %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro nine_column(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field content-row col m9 s6 l9">
+    {% if value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% else %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+
+{% macro ten_column(label, value, left, right, class) %}
+  {% import _self as forms %}
+  <div class="input-field content-row col m10 s6 l10">
+    {% if value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% else %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro eleven_column(label, value, left, right, class) %}
+  {% import _self as forms %}
+  <div class="input-field content-row m11 s6 l11">
+    {% if value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% else %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro twelve_column(label, value, left, right, class) %}
+  {% import _self as forms %}
+  <div class="input-field content-row col m12 s6 l12">
+    {% if value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% else %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+
+{% macro destacado(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field row-field {{ class }}">
+    {% if value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if label is not empty %}
+        <h2>{{ label }}</h2>
+      {% endif %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% else %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro generally(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field content-row col">
+    {% if value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% else %}
+        <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"/>
+        <label for="{{ value.identifier }}" class="">{{ label }}:</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+<!-- Select with ng-options -->
+{% macro select_multiple_ng_options(label, value) %}
+  <div class="form-item form-group form-type-select form-item-billing-select-enterprise">
+    {% if value.identifier == 'user' %}
+      <select id="billing-select-category" name="billing-select-category" ng-model="selectedUser" ng-change='changeUser()' class="" material-select multiple watch>
+        <option value="" selected disabled>{[{ labelUser }]}</option>
+        <option value="" selected disabled>{{ 'Todas' }}</option>
+        <option ng-if="quantiyUser == 1" ng-repeat="option in user" value="{[{option.name}]}" selected disabled>{[{option.name}]}</option>
+        <option ng-if="quantiyUser > 1" ng-repeat="option in user" value="{[{option.name}]}">{[{option.name}]}</option>
+      </select>
+    {% elseif value.identifier == 'request_code' %}
+      <select id="billing-select-category" name="billing-select-category" ng-model="selectedRequestCode" ng-change='changeRequestCode()' class="" material-select multiple watch>
+        <option value="" selected disabled>{[{ labelRequestCode }]}</option>
+        <option value="" selected disabled>{{ 'Todas' }}</option>
+        <option ng-if="quantityRequestCode == 1" ng-repeat="option in requestCode" value="{[{option.name}]}" selected disabled>{[{option.name}]}</option>
+        <option ng-if="quantityRequestCode > 1" ng-repeat="option in requestCode" value="{[{option.name}]}">{[{option.name}]}</option>
+      </select>
+    {% elseif value.identifier == 'status' %}
+      <select id="billing-select-status" name="billing-select-status" ng-model="selectedStatus" ng-change='changeStatus()' class="" material-select multiple watch>
+        <option value="" selected disabled>{[{ labelStatus }]}</option>
+        <option value="" selected disabled>{{ 'Todas' }}</option>
+        <option ng-if="quantityStatus == 1" ng-repeat="option in status" value="{[{option.name}]}" selected disabled>{[{option.name}]}</option>
+        <option ng-if="quantityStatus > 1" ng-repeat="option in status" value="{[{option.name}]}">{[{option.name}]}</option>
+      </select>
+    {% elseif value.identifier == 'order_number' %}
+      <select id="billing-select-order-number" name="billing-select-order-number" ng-model="selectedOrderNumber" ng-change='changeStatus()' class="" material-select multiple watch>
+        <option value="" selected disabled>{[{ labelOrderNumber }]}</option>
+        <option value="" selected disabled>{{ 'Todas' }}</option>
+        <option ng-if="quantityOrderNumber == 1" ng-repeat="option in orderNumber" value="{[{option.name}]}" selected disabled>{[{option.name}]}</option>
+        <option ng-if="quantityOrderNumber > 1" ng-repeat="option in orderNumber" value="{[{option.name}]}">{[{option.name}]}</option>
+      </select>
+    {% elseif value.identifier == 'line_number' %}
+      <select id="billing-select-line-number" name="billing-select-line-number" ng-model="selectedLineNumber" ng-change='changeStatus()' class="" material-select multiple watch>
+        <option value="" selected disabled>{[{ labelLineNumber }]}</option>
+        <option value="" selected disabled>{{ 'Todas' }}</option>
+        <option ng-if="quantityLineNumber == 1" ng-repeat="option in lineNumber" value="{[{option.name}]}" selected disabled>{[{option.name}]}</option>
+        <option ng-if="quantityLineNumber > 1" ng-repeat="option in lineNumber" value="{[{option.name}]}">{[{option.name}]}</option>
+      </select>
+    {% else %}
+      <select id="billing-select-category" name="billing-select-category" ng-model="selectedCategory" ng-change='changeCategory()' class="" material-select multiple watch>
+        <option value="" selected disabled>{[{ labelCategory }]}</option>
+        <option value="" selected disabled>Todas</option>
+        <option ng-if="quantiyCategory == 1" ng-repeat="option in category" value="{[{option.name}]}" selected disabled>{[{option.name}]}</option>
+        <option ng-if="quantiyCategory > 1" ng-repeat="option in category" value="{[{option.name}]}">{[{option.name}]}</option>
+      </select>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+<!-- Select with ng-options -->
+{% macro autocomplete_portafolio(label, value) %}
+  <i class="prefix icon-search-cyan">
+    <span class="path1"></span>
+  </i>
+  <div class="tags-wrapper" ng-mouseleave="closeSuggestions()">
+      <div id="tagsList" class="tags-cloud">
+        {% if value.validate_length %}
+          <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+                 class="form-control format-moments2"
+                 ng-click="searchAutocompleteClick('{{ value.identifier }}')"
+                 ng-change="searchAutocomplete('{{ value.identifier }}')" type="text" autocomplete="off"
+                 ng-keydown="checkKeyDownReference($event, '{{ value.identifier }}')"
+                 maxlength="{{ value.validate_length }}"/>
+          <label for="{{ value.identifier }}" class="">{{ label }}</label>
+        {% else %}
+          <input id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}"
+                 class="form-control format-moments2"
+                 ng-click="searchAutocompleteClick('{{ value.identifier }}')"
+                 ng-change="searchAutocomplete('{{ value.identifier }}')" type="text" autocomplete="off"
+                 ng-keydown="checkKeyDownReference($event, '{{ value.identifier }}')"/>
+          <label for="{{ value.identifier }}" class="">{{ label }}</label>
+        {% endif %}
+      </div>
+      <div id="suggestions" class="collection" style="border: none;">
+        <div id="suggestionsAutocomplete" class="collections suggestions">
+          <ul>
+            <li class="collection-item" ng-repeat="suggestion in suggestionsAutocomplete"
+                ng-click="resultClickedAutocomplete($index, '{{ value.identifier }}')"
+                ng-mouseover="$parent.selectedIndexAutocomplete=$index"
+                ng-class="{active : selectedIndexAutocomplete===$index}"
+                >
+              {[{suggestion.name}]}
+            </li>
+           </ul>
+         </div>
+      </div>
+    </div>
+{% endmacro %}
+
+<!-- Select with ng-options -->
+{% macro logo_filters(label, value) %}
+  <div class="box-filter">
+     <div class="icon-filter">
+        <span>{{ label }}</span>
+        <i class="prefix icon-filters-cyan">
+         <span class="path1"></span>
+         <span class="path2"></span>
+       </i>
+     </div>
+  </div>
+{% endmacro %}

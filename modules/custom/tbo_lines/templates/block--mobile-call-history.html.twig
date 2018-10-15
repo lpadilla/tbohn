@@ -1,0 +1,194 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block filters %}
+{% endblock %}
+{% block table %}
+  {% import "/modules/custom/tbo_lines/templates/consumption-filters-base.html.twig" as filter_base %}
+  {% if show_title %}
+    <div class="row">
+      <div class="header-card clearfix">
+        <div class="col s12">
+          <h3 class="title-card2">{{ title }}</h3>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {{ filter_base.consumption_filters(filters, buttons, 'filter_voz();') }}
+  <table class="table-white consumption-table segment-send" data-segment-event="TBO - Visualizar histórico consumos - Consulta"
+         data-segment-properties='{"category":"Portafolio de Servicios","label": "Telefonía móvil - Voz - movil","site":"NEW"}'>
+    <thead>
+    {% block table_head %}
+      <tr>
+        {% for item in fields %}
+          <th
+            scope="col" {% if item.service_field == 'date' %} ng-click="sortByVoz('{{ item.service_field }}');" {% endif %}
+            {% if item.service_field == 'date_hour' %} class="col-mobile" {% endif %}>
+            {{ item.label }}
+          </th>
+        {% endfor %}
+      </tr>
+    {% endblock %}
+    </thead>
+
+    <tbody>
+    {% block table_body %}
+      <tr data-ng-repeat="mobile_data in pagedItemsVoz[currentPageVoz] track by $index">
+        {% block table_body_td %}
+          {% for field in fields %}
+            <td {% if field.service_field == 'date_hour' %} class="col-mobile regular-cell" {% endif %}>
+              <div ng-cloak class="regular-cell" ng-click="test();">
+                {[{ mobile_data.{{ field.service_field }} == null || mobile_data.{{ field.service_field }} == "" ? "No
+                disponible" : mobile_data.{{ field.service_field }} }]}
+              </div>
+            </td>
+          {% endfor %}
+        {% endblock %}
+      </tr>
+      <tr ng-if="empty_data_voz != '' && empty_data_voz !== undefined " class="empty-message" colspan="12" id="nofoundop" >
+        <td colspan="12">{[{ empty_data_voz }]}</td>
+      </tr>
+    {% endblock %}
+    </tbody>
+
+    <tfoot>
+    {% block table_foot %}
+      <td colspan="12">
+        {% block paginate %}
+          <div ng-if="pagedItemsVoz.length > 1" class="pagination">
+            <ul class="pagination">
+              <li class="firts" ng-class="{disabled: currentPageVoz == 0}">
+                <a href ng-click="prevPageVoz()" >
+                  <i class="icon-prev">
+                    <span class="path1"></span>
+                  </i>
+                </a>
+              </li>
+              <li ng-repeat="n in rangeVoz(pagedItemsVoz.length, currentPageVoz, currentPageVoz + gapVoz) "
+                  ng-class="{active: n == currentPageVoz}"
+                  ng-click="setPageVoz()" class="waves-effect">
+                <a href ng-bind="n + 1">1</a>
+              </li>
+              <li class="last" ng-class="{disabled: (currentPageVoz) == pagedItemsVoz.length - 1}">
+                <a href ng-click="nextPageVoz()">
+                  <i class="icon-next">
+                    <span class="path1"></span>
+                  </i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        {% endblock %}
+      </td>
+    {% endblock %}
+    </tfoot>
+
+  </table>
+
+  {% block table_mobile %}
+    <table class="non-responsive-table consumption-table table-mobile">
+
+      <thead>
+      {% block table_head_mobile %}
+        <tr>
+          {% for item in fields_movil %}
+            <th
+              scope="col" {% if item.service_field == 'date_hour' %} ng-click="sortBy('{{ item.service_field }}');" {% endif %}>
+              {{ item.label }}
+            </th>
+          {% endfor %}
+        </tr>
+      {% endblock %}
+      </thead>
+
+      <tbody>
+      {% block table_body_mobile %}
+        <tr data-ng-repeat="mobile_data in pagedItemsVoz[currentPageVoz]  track by $index">
+          {% block table_body_td_mobile %}
+            {% for field in fields_movil %}
+              <td {% if field.service_field == 'date_hour' %} class="col-mobile regular-cell" {% endif %}>
+                <div ng-cloak class="regular-cell" ng-click="test();">
+                  {[{ mobile_data.{{ field.service_field }} == null || mobile_data.{{ field.service_field }} == "" ? "No
+                  disponible" : mobile_data.{{ field.service_field }} }]}
+                </div>
+              </td>
+            {% endfor %}
+          {% endblock %}
+        </tr>
+        <tr ng-if="empty_data_voz != '' && empty_data_voz !== undefined " class="empty-message" colspan="12" id="nofoundop" >
+          <td colspan="12">{[{ empty_data_voz }]}</td>
+        </tr>
+      {% endblock %}
+      </tbody>
+
+      <tfoot>
+      {% block table_foot_movile %}
+        <td colspan="12">
+          {% block paginate_movile %}
+            <div ng-if="pagedItemsVoz.length > 1" class="pagination">
+              <ul class="pagination">
+                <li class="firts" ng-class="{disabled: currentPageVoz == 0}">
+                  <a href ng-click="prevPageVoz()" >
+                    <i class="icon-prev">
+                      <span class="path1"></span>
+                    </i>
+                  </a>
+                </li>
+                <li ng-repeat="n in rangeVoz(pagedItemsVoz.length, currentPageVoz, currentPageVoz + gapVoz) "
+                    ng-class="{active: n == currentPageVoz}"
+                    ng-click="setPageVoz()" class="waves-effect">
+                  <a href ng-bind="n + 1">1</a>
+                </li>
+                <li class="last" ng-class="{disabled: (currentPageVoz) == pagedItemsVoz.length - 1}">
+                  <a href ng-click="nextPageVoz()">
+                    <i class="icon-next">
+                      <span class="path1"></span>
+                    </i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          {% endblock %}
+        </td>
+      {% endblock %}
+      </tfoot>
+    </table>
+  {% endblock %}
+{% endblock %}
+{% block other_content_data %}
+{% if show_report %}
+  <div class="card-block download-data">
+    <div class="box-body">
+      <div class="row {% if margin %}{% if margin.show_margin_card == false %} mt-0 {% endif %}{% endif %}">
+        <div class="col s12">
+          {% block other_content_data_card %}
+            <div class="card white clearfix">
+              <div class="col s12">
+                {% block other_content %}
+                  <div class="download-data-wrapper">
+                    {% if report.text_info.show %}
+                      <div class="download-data-text">
+                        <p>{{ report.text_info.label }}</p>
+                      </div>
+                    {% endif %}
+                    {% if report.download_button.show %}
+                      <div class="col input-field s12 m3">
+                        <select name="exportdata" ng-model="data.exportdata" ng-change="downloadReportVoz(data.exportdata,'download')" id="voz-download-select">
+                          <option value="" disabled selected>Seleccionar</option>
+                          <option value="txt">TXT</option>
+                          <option value="xlsx">XLS</option>
+                          <option value="csv">CSV</option>
+                        </select>
+                        <label>Exportación</label>
+                      </div>
+                    {% endif %}
+                  </div>
+                  {% endblock %}
+                </div>
+              </div>
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+{% endif %}
+{% endblock %}

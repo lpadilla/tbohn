@@ -1,0 +1,44 @@
+# Define the 'local' links for the module
+
+group.settings_tab:
+  route_name: tbo_groups.group_settings
+  title: Settings
+  base_route: tbo_groups.group_settings
+
+group.view:
+  route_name: entity.tbo_groups_group.canonical
+  base_route: entity.tbo_groups_group.canonical
+  title: View
+
+group.page_edit:
+  route_name: entity.tbo_groups_group.edit_form
+  base_route: entity.tbo_groups_group.canonical
+  title: Edit
+
+group.delete_confirm:
+  route_name:  entity.tbo_groups_group.delete_form
+  base_route:  entity.tbo_groups_group.canonical
+  title: Delete
+  weight: 10
+
+# Company user role group routing definition
+group_account_relations.settings_tab:
+  route_name: group_account_relations.settings
+  title: 'Settings'
+  base_route: group_account_relations.settings
+
+group.group_account_relations.canonical:
+  route_name: entity.group_account_relations.canonical
+  base_route: entity.group_account_relations.canonical
+  title: 'View'
+
+group.group_account_relations.edit_form:
+  route_name: entity.group_account_relations.edit_form
+  base_route: entity.group_account_relations.canonical
+  title: 'Edit'
+
+group.group_account_relations.delete_form:
+  route_name:  entity.group_account_relations.delete_form
+  base_route:  entity.group_account_relations.canonical
+  title: Delete
+  weight: 10

@@ -1,0 +1,255 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% import "tbo_general_portfolio.html.twig" as widgets_new %}
+
+{% block header_data %}
+{% endblock %}
+
+{% block filters %}
+{% endblock %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+{% endblock %}
+
+{% block message_exception %}
+{% endblock %}
+
+{% block end %}
+{% endblock %}
+
+{% block top_other_content %}
+  {% set directive_new = directive|replace({'-':'_'}) %}
+  <div id="{{ id }}" class="{{ class }}" {{ directive }} ng-cloak ng-init="uuid_{{ directive_new }} = '{{ uuid }}'">
+
+    <!-- Add Filters -->
+    <div class="card-block wrapper-filter options-typeB">
+      <div class="box-body">
+        <div class="row {% if margin %}{% if margin.show_margin_filter == false %} mb-0 {% endif %}{% endif %}">
+          <div class="col s12">
+            <div class="card gray-card clearfix">
+              <div class="col s12">
+                <form class="filter-portfolio">
+                  <div class="row">
+                    {% for filter in filters %}
+                      {{ widgets_new.validate_style( filter.label, filter, filter.class) }}
+                    {% endfor %}
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div><!-- cierro filter-desktop -->
+      </div>
+    </div><!--cierro wrapper-filter-->
+
+    <div class="card-block block-invoice" infinite-scroll="loadMore()" infinite-scroll-distance="1">
+      <div class="box-body">
+
+        <div class="row">
+          <h5 class="title-front col l6 hide-on-med-and-down">
+            {{ title }}
+          </h5>
+
+          {% if buttons.download_portfolio %}
+            {% if buttons.download_portfolio.show %}
+              <div class="col s12 m12 l6">
+                <a id="{{ buttons.download_portfolio.service_field }}" class="right waves-effect waves-light btn btn-second"
+                  {% if buttons.download_portfolio.active %}
+                   ng-click="downloadPortfolio()"
+                  {% else %}
+                   disabled
+                {% endif %}'>
+                {{ buttons.download_portfolio.label }}
+                </a>
+              </div>
+            {% endif %}
+          {% endif %}
+        </div>
+
+
+        <div>
+          <div class="messages-only" style="display: none;">
+            <button type="button" class="close prefix icon-x-cyan" data-dismiss="alert" aria-hidden="true">
+              <span class="path1"></span><span class="path2"></span>
+            </button>
+            <div class="text-alert">
+              <div class="icon-alert">
+                <span class="icon-1"></span>
+                <span class="icon-2"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="messages-batch" style="display: none;">
+            <button type="button" class="close prefix icon-x-cyan" data-dismiss="alert" aria-hidden="true">
+              <span class="path1"></span><span class="path2"></span>
+            </button>
+            <div class="text-alert">
+              <div class="icon-alert">
+                <span class="icon-1"></span>
+                <span class="icon-2"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div ng-repeat="(key, value) in invoices track by $index" class="invoice-row" ng-init="parentIndex = $index"
+             ng-mouseover="initDropdown()">
+
+          <div class="group title-card">{[{ key }]}</div>
+
+          <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}" ng-repeat="invoice in value track by $index">
+            <div class="col s12">
+              <div class="card white clearfix invoice-content">
+                <!-- Open card content -->
+                <div class="col s12 l10 content">
+
+                  {% set counter = 0 %}
+                  {% set show_category = true %}
+                  {% set slice = 2 %}
+                  <div class="column-left col s12 m12 l5 xl5">
+                    <div class="box-border">
+                      {% if others_display.image.show %}
+                        {% set counter = counter + 1 %}
+                        {% set slice = 1 %}
+                        <!--- Case with angular -->
+                        <div ng-switch="invoice.category_name" class="left card-icon prefix icon-service">
+                          <div ng-switch-when="Telefonía móvil" class="icon-mobilephone-cyan">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </div>
+                          <div ng-switch-when="Internet" class="icon-internet-cyan">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </div>
+                          <div ng-switch-when="Telefonía" class="icon-transfercall-cyan">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </div>
+                          <div ng-switch-when="Televisión" class="icon-tv-cyan">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </div>
+                          <div ng-switch-when="Conectividad" class="icon-modem-cyan">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </div>
+                          <div ng-switch-when="Vigilancia" class="category-vigilancia"></div>
+                          <div ng-switch-when="Cloud" class="icon-cloudsaas-cyan">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                          </div>
+                          <div ng-switch-when="Data Center" class="left card-icon category-data-center"></div>
+                          <div ng-switch-when="Internet Móvil" class="left card-icon category-internet-movil"></div>
+                          <div ng-switch-default class="left card-icon invoice-generic"></div>
+                        </div>
+                      {% endif %}
+                      {% for field in fields %}
+                      {% if counter < 2 %}
+                      {% set counter = counter + 1 %}
+
+                      {% set class = "col m6 s4 l10" %}
+                      {% if field.service_field == 'category_name' and show_category %}
+                      <div class="box-txt">
+                        <h3>{[{invoice.{{ field.service_field }} }]}</h3>
+                        {% if fields.service_status %}
+                          <div ng-switch="invoice.service_status2">
+                            <p ng-switch-when="Activo" class="info service-status-active">{[{invoice.service_status }]}</p>
+                            <p ng-switch-when="Inactivo" class="info service-status-inactive">{[{invoice.service_status }]}</p>
+                            <p ng-switch-when="Suspendido" class="info service-status-discontinued">{[{invoice.service_status }]}</p>
+                            <p ng-switch-default class="info service-status-default">{[{invoice.service_status }]}</p>
+                          </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    {% set show_category = false %}
+                    {% elseif field.service_field == 'service_status' and show_category %}
+                      <div class="col col m6 s4 l10">
+                        <p class="label">{[{invoice.{{ field.service_field }} }]}</p>
+                        {% if fields.category_name %}
+                          <p class="info">{[{ invoice.category_name }]}</p>
+                        {% endif %}
+                      </div>
+                      {% set show_category = false %}
+                    {% elseif field.service_field == 'service_plan' %}
+                      <div class="col 3 {{ class }}">
+                        <p class="label">{{ field.label }}</p>
+                        <p class="info">{[{invoice.{{ field.service_field }} }]}</p>
+                      </div>
+                    {% elseif field.service_field == 'service_contract' %}
+                      <div class="col 4 {{ class }}">
+                        <p class="label">{{ field.label }}</p>
+                        <p class="info">{[{invoice.{{ field.service_field }} }]}</p>
+                      </div>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                  </div>
+
+                  <div class="column-right col s12 m12 l7 xl7">
+                    {% if counter > 1 %}
+                      {% for field in fields[slice:] %}
+                        {% if field.service_field == 'category_name' and show_category %}
+                          <div class="col 1 s6 m6 l8">
+                            <p class="label">{[{invoice.{{ field.service_field }} }]}</p>
+                            {% if fields.service_status %}
+                              <div ng-switch="invoice.service_status2">
+                                <p ng-switch-when="Activo" class="info service-status-active">{[{invoice.service_status }]}</p>
+                                <p ng-switch-when="Inactivo" class="info service-status-active">{[{invoice.service_status }]}</p>
+                                <p ng-switch-when="Suspendido" class="info service-status-active">{[{invoice.service_status }]}</p>
+                                <p ng-switch-default class="info service-status-default">{[{invoice.service_status }]}</p>
+                              </div>
+                            {% endif %}
+                          </div>
+                          {% set show_category = false %}
+                        {% elseif field.service_field == 'service_status' and show_category %}
+                          <div class="col 2 s6 m6 l4">
+                            <p class="label">{[{invoice.{{ field.service_field }} }]}</p>
+                            {% if fields.category_name %}
+                              <p class="info">{[{ invoice.category_name }]}</p>
+                            {% endif %}
+                          </div>
+                          {% set show_category = false %}
+                        {% elseif field.service_field == 'service_plan' %}
+                          <div class="col 3 s6 m6 l6 xl9">
+                            <p class="label">{{ field.label }}</p>
+                            <p class="info">{[{invoice.{{ field.service_field }} }]}</p>
+                          </div>
+                        {% elseif field.service_field == 'service_contract' %}
+                          <div class="col 4 s6 m6 l6 xl3">
+                            <p class="label">{{ field.label }}</p>
+                            <p class="info">{[{invoice.{{ field.service_field }} }]}</p>
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
+
+                <!—- close card content -—>
+
+                <!-- Open Card button -->
+                {% if buttons.detail %}
+                  <div class="card-action col s12 l2">
+                    <a class="waves-effect waves-light btn btn-primary segment-click" {% if buttons.detail.active %} href="{{ url('<front>') }}{{ buttons.detail.url }}"
+                      ng-click="sendDetail($event,  invoice.service_contract,  key, invoice.category_name, invoice.service_status2, invoice.service_plan, invoice.productId, invoice.subscriptionNumber, invoice.service_type, invoice.measuringElement)"
+                    {% else %} disabled {% endif %} data-segment-event="TBO - Detalle - Consulta" data-segment-properties='{"category":"Portafolio de Servicios", "label":"{[{ invoice.category_name }]} - {[{ invoice.service_type }]}","site":"NEW"}'>
+                      {{ buttons.detail.label }}
+                    </a>
+                  </div>
+                {% endif %}
+                <!—Close card button—>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

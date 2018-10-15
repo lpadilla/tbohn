@@ -1,0 +1,8 @@
+name: TBO General BO
+type: module
+description: Modulo con todas las funciones transverales a los demas modulos de tbo Bolivia
+core: 8.x
+package: TBO
+dependencies:
+  - tbo_general
+

@@ -1,0 +1,14 @@
+{
+  "name": "drupal/tbo_simcard",
+  "type": "drupal-module",
+  "description": "TBO Change simcard user case",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/tbo_simcard",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/tbo_simcard",
+    "source": "http://cgit.drupalcode.org/tbo_simcard"
+  },
+  "require": { }
+}

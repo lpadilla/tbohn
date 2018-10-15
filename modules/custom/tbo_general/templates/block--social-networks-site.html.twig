@@ -1,0 +1,19 @@
+{% extends 'block__card_base.html.twig' %}
+
+  {% block filters %}
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+	{% block other_content_data %}
+     <div class="social-networks-content">
+      {% for item in config %}
+        {% if item.show_item == 1 %}
+          <a href="{{item.url_social_network}}" title="Home" rel="home" class="navbar-brand">
+            <img src="{{item.image_social_network}}" title="Home" rel="home" class="navbar-brand"/>
+          </a>
+        {% endif %}
+      {% endfor %}
+	  </div>
+	{% endblock %}

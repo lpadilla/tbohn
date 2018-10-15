@@ -1,0 +1,65 @@
+
+  {{ form.form_build_id }}
+  {{ form.form_token }}
+  {{ form.form_id }}
+
+
+  {{ form.error_msgs }}
+
+  <div class="field-contract-number items input-field col s12 m6 l6">
+    <i class="prefix icon-contracts-cyan"> 
+      <span class="path1"></span>
+      <span class="path2"></span>
+    </i>
+    {{ form.name }}
+    <!-- Modal Trigger -->
+  </div>
+
+  <!-- Field Document Type -->
+  <div class="items input-field col s12 m6 l6">
+
+    <div class="field-document-type col s4">
+      <i class="prefix icon-id-cyan">
+        <span class="path1"></span>
+        <span class="path2"></span>
+      </i>
+      {{ form.document_type }}
+    </div>
+
+    <!-- Field Document Number -->
+    <div class="field-document-number col s8">
+      {{ form.document_number }}
+    </div>
+
+  </div>
+
+  <!-- Field Contract Number -->
+  <div class="field-phone items input-field col s12 m6 l6">
+    <i class="prefix icon-mobilephone-cyan">
+      <span class="path1"></span>
+      <span class="path2"></span>
+    </i>
+    {{ form.cel_number }}
+    <!-- Modal Trigger -->
+
+  </div>
+
+  <!-- Field Referent Payment -->
+  <div class="field-referent-payment items input-field col s12 m6 l6">
+    <i class="prefix icon-paymentreference-cyan">
+      <span class="path1"></span>
+      <span class="path2"></span>
+    </i>
+    {{ form.mail }}
+    <!-- Modal Trigger -->
+  </div>
+
+  {# Boton #}
+  <div class="buttons-wrapper input-field col s12 m12 l12 center-align">
+    {{ form.submit }}
+  </div>
+
+
+
+
+

@@ -1,0 +1,186 @@
+{% extends 'block__card_base.html.twig' %}
+
+  {% block filters %}
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+
+  {% block other_content_data %}
+    {% import "modules/custom/tbo_lines/templates/consumption-filters-base.html.twig" as line_filters %}
+    {% if environment == 'movil' %}
+      {% set class = '' %}
+    {% else %}
+      {% set class = 'hide' %}
+    {% endif %}
+    <div class="card-block  wrapper-consumption-detail-data {{ class }}"
+         ng-class="{true: 'no-post', false: 'post'}[ type_service != 'POS']">
+      <div class="box-body">
+        <div class="row">
+          <div class="col s12">
+            <div class="card white clearfix">
+              <div class="header-card clearfix">
+                <div class="col s12">
+                  <h3 class="title-card2">{{ 'Consumo de datos'|t }}</h3>
+                </div>
+              </div>
+              <div class="col s12">
+                {{ line_filters.consumption_filters(filters, buttons, 'submitFilters()') }}
+                <table class="consumption-data-table table-white hide-on-med-and-down segment-send" data-segment-event="TBO - Visualizar histórico consumos - Consulta" data-segment-properties='{"category":"Portafolio de Servicios","label": "Telefonía móvil - Datos - movil","site":"NEW"}'>
+                  <thead>
+                  <tr>
+                    {% for item in table %}
+                      {% if item.show == 1 %}
+                        <th
+                          scope="col" {% if item.service_field == 'date' %} ng-click="orderResultsData('{{ item.service_field }}', '{{ loop.index }}')"{% endif %} >{{ item.label }}</th>
+                      {% endif %}
+                    {% endfor %}
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr
+                    data-ng-repeat="item in pagedItemsData[currentPageData] track by $index"
+                    ng-show="pagedItemsData.length">
+                    <td ng-repeat="(key, value) in item track by $index"
+                        ng-if="key != 'date' && key != 'download'">
+                        <span>
+                          {[{value == null || value == "" ? "No disponible" : value}]}
+                        </span>
+                    </td>
+                  </tr>
+                  <tr ng-show="pagedItemsData.length == 0">
+                    <td colspan="12" id="nofoundop">
+                      {{ 'No hay información disponible para las fechas seleccionadas. Por favor intenta con un rango de fechas diferentes'|t }}
+                    </td>
+                  </tr>
+                  </tbody>
+                  <tfoot>
+                  {% block table_foot %}
+                    <td colspan="12">
+                      <div ng-if="pagedItemsData.length > 1" class="pagination">
+                        <ul class="pagination">
+                          <li class="firts" ng-class="{disabled: currentPageData == 0}">
+                            <a href ng-click="prevPageData()" >
+                              <i class="icon-prev">
+                                <span class="path1"></span>
+                              </i>
+                            </a>
+                          </li>
+                          <li ng-repeat="n in rangeData(pagedItemsData.length, currentPageData, currentPageData + gapData) "
+                              ng-class="{active: n == currentPageData}"
+                              ng-click="setPageData()" class="waves-effect">
+                            <a href ng-bind="n + 1">1</a>
+                          </li>
+                          <li class="last" ng-class="{disabled: (currentPageData) == pagedItemsData.length - 1}">
+                            <a href ng-click="nextPageData()">
+                              <i class="icon-next">
+                                <span class="path1"></span>
+                              </i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  {% endblock %}
+                  </tfoot>
+                </table>
+                {#tabla mobile#}
+                <table
+                  class="consumption-data-table-mobile table-white hide-on-large-only">
+                  <thead>
+                  <tr>
+                    {% for item in table_mobile %}
+                      {% if item.show == 1 %}
+                        {% if item.service_field == 'date_hour' %}
+                          <th scope="col"
+                              ng-click="orderResultsDataM('{{ item.service_field }}', '{{ loop.index }}')">
+                            {{ 'Fecha/Hora'|t }}
+                          </th>
+                        {% else %}
+                          <th scope="col">
+                            {{ item.label }}
+                          </th>
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr
+                    data-ng-repeat="item in pagedItemsDataMobile[currentPageDataMobile] track by $index"
+                    ng-show="pagedItemsDataMobile.length">
+                    <td ng-repeat="(key, value) in item track by $index"
+                        ng-if="key != 'date' && key != 'download'">
+                        <span>
+                          {[{value == null || value == "" ? "No disponible" : value}]}
+                        </span>
+                    </td>
+                  </tr>
+                  <tr ng-show="pagedItemsDataMobile.length==0">
+                    <td colspan="12" id="nofoundop">
+                      {{ 'No hay información disponible para las fechas seleccionadas. Por favor intenta con un rango de fechas diferentes'|t }}
+                    </td>
+                  </tbody>
+                  <tfoot>
+                  <td colspan="12">
+                    <div ng-if="pagedItemsDataMobile.length > 1" class="pagination">
+                      <ul class="pagination">
+                        <li class="firts"
+                            ng-class="{disabled: currentPageDataMobile == 0}">
+                          <a href ng-click="prevPageDataM()">
+                            <i class="icon-prev">
+                              <span class="path1"></span>
+                            </i>
+                          </a>
+                        </li>
+                        <li
+                          ng-repeat="n in rangeDataM(pagedItemsDataMobile.length, currentPageDataMobile, currentPageDataMobile + gapDataM) "
+                          ng-class="{active: n == currentPageDataMobile}"
+                          ng-click="setPageDataM()" class="waves-effect">
+                          <a href ng-bind="n + 1">1</a>
+                        </li>
+                        <li class="last"
+                            ng-class="{disabled: (currentPageDataMobile) == pagedItemsDataMobile.length - 1}">
+                          <a href ng-click="nextPageDataM()">
+                            <i class="icon-next">
+                              <span class="path1"></span>
+                            </i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                  </tfoot>
+                </table>
+                {#fin tabla mobile#}
+              </div>
+              <div class="footer-card clearfix">
+                <div class="col s12">
+                  <div class="row informative-section clearfix">
+                    <div class="col s12 m8">
+                      <span
+                        class="informative_text">{{ informative_text }}</span>
+                    </div>
+                    <div class="center-mobile col s12 m4">
+                      <a
+                        class="btn-download-report enterprise-modal-form waves-effect waves-light btn btn-primary segment-click"
+                        data-segment-event="TBO - Descargar reporte consumos - Tx"
+                        data-segment-properties='{"category":"Portafolio de Servicios","label":"Telefonía móvil - Datos - movil","site":"NEW"}'
+                        href="{[{file}]}" download="{{ Reporte_datos }}"
+                        ng-click="downloadFunctionData()">
+                        <i class="prefix-btn icon-download2">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                        </i>
+                        {{ 'DESCARGAR REPORTE'|t }}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}

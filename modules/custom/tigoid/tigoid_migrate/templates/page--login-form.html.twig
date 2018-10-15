@@ -1,0 +1,21 @@
+<div class="wizard-container">
+  <section class="login-form">
+    <span>{{ "Nos encontramos en un proceso de actualización de datos"|t }}</span>
+    <div id="first-step" class="content">
+      <span>{{ "Escoge la opción que mejor te describe"|t }}</span>
+      <div class="actions">
+        <div class="login-wizard" id="tigoid-new-user">{{ link("Usuario nuevo"|t, "route:tigoid.authorize", { 'class':['primary']} ) }}</div>
+        <div class="login-wizard"><input type="button" class="button primary next-step" value="Usuario actual"|t></div>
+      </div>
+    </div>
+     <div id="second-step" class="content">
+      <span>{{ "¿Actualizaste tu cuenta recientemente o la creaste hace menos de 1 semana?"|t }}</span>
+      <div class="actions">
+        <div class="login-wizard" id="tigoid-user-migration">{{ link("Si"|t, "route:tigoid.authorize", { 'class':['primary']} ) }}</div>
+        <div class="login-wizard" id="tigoid-old-user">{{ link("No"|t, "route:user.login", { 'class':['primary']} ) }}</div>
+        <div class="alternative"><input type="button" class="button secundary back" value="Volver"|t></div>
+      </div>
+
+    </div>
+  </section>
+</div>

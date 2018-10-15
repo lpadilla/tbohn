@@ -1,0 +1,127 @@
+services:
+  tbo_billing.bill_payment:
+    class: Drupal\tbo_billing\Services\BillingPaymentService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  tbo_billing.download_pdf:
+    class: Drupal\tbo_billing\Services\BillingDownloadPdfService
+    arguments: ["@tbo_api.client"]
+
+  tbo_billing.repository:
+    class: Drupal\tbo_billing\Repository\BillingRepository
+    arguments: []
+
+  tbo_billing.summary:
+    class: Drupal\tbo_billing\Services\BillingSummaryService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  tbo_billing.current_invoice_logic:
+    class: Drupal\tbo_billing\Services\CurrentInvoiceService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  tbo_billing.delivery:
+    class: Drupal\tbo_billing\Services\BillingDeliveryService
+    arguments: []
+
+  # Add services for block configurations
+
+  # CurrentInvoiceBlock
+  tbo_billing.current_invoice_block:
+    class: Drupal\tbo_billing\Plugin\Config\CurrentInvoiceBlockClass
+    arguments: []
+
+  # ServicePortfolioBlock
+  tbo_billing.service_portfolio_block:
+    class: Drupal\tbo_billing\Plugin\Config\ServicePortfolioBlockClass
+    arguments: []
+
+  tbo_billing.service_portfolio_block_logic:
+    class: Drupal\tbo_billing\Services\ServicePortfolioService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  tbo_billing.service_portfolio_block_logic_api_batch:
+    class: Drupal\tbo_billing\Services\ServicePortfolioServiceBatch
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client", "@current_user"]
+
+  ## Domiciliation - PaymentDomiciliationBlock
+  tbo_billing.payment_domiciliation_block:
+    class: Drupal\tbo_billing\Plugin\Config\Block\PaymentDomiciliationBlockClass
+    arguments: ["@tbo_api.client", "@tbo_core.audit_log_service"]
+
+  tbo_billing.payment_domiciliation_rest:
+    class: Drupal\tbo_billing\Services\PaymentDomiciliationRestService
+    arguments: ["@tbo_general.tbo_config", "@tbo_api.client", "@tbo_core.audit_log_service", "@tbo_billing.payment_domiciliation"]
+
+  tbo_billing.payment_domiciliation:
+    class: Drupal\tbo_billing\Services\PaymentDomiciliationService
+    arguments: ["@tbo_general.tbo_config", "@tbo_api.client"]
+
+  ## Domiciliation - AddCreditCardBlock
+  tbo_billing.add_credit_card_block:
+    class: Drupal\tbo_billing\Plugin\Config\Block\AddCreditCardBlockClass
+    arguments: []
+
+  tbo_billing.add_card_rest:
+    class: Drupal\tbo_billing\Services\AddCardRestService
+    arguments: ["@tbo_api.client", "@tbo_core.audit_log_service", "@tbo_billing.payment_domiciliation"]
+
+  #Domiciliation - SchedulePaymentForm logic
+  tbo_billing.schedule_payment_form:
+    class: Drupal\tbo_billing\Plugin\Config\Form\SchedulePaymentFormClass
+    arguments: ["@tbo_api.client", "@tbo_billing.payment_domiciliation", "@tbo_core.audit_log_service", "@tbo_mail.send"]
+
+  #InvoicePdfController
+  tbo_billing.service_invoice_pdf_controller:
+    class: Drupal\tbo_billing\Plugin\Config\InvoicePdfControllerClass
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  # Set up invoice delivery
+  tbo_billing.set_up_invoice_delivery_block:
+    class: Drupal\tbo_billing\Plugin\Config\Block\SetUpInvoiceDeliveryBlockClass
+    arguments: []
+
+  tbo_billing.set_up_invoice_delivery_rest:
+    class: Drupal\tbo_billing\Services\SetUpInvoiceDeliveryRestService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  # InvoiceHistoryBlock
+  tbo_billing.invoice_history_block:
+    class: Drupal\tbo_billing\Plugin\Config\Block\InvoiceHistoryBlockClass
+    arguments: []
+
+  tbo_billing.invoice_history_rest:
+    class: Drupal\tbo_billing\Services\InvoiceHistoryRestService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  # MultipleInvoicePaymentBlock
+  tbo_billing.multiple_invoice_payment_block:
+    class: Drupal\tbo_billing\Plugin\Config\MultipleInvoicePaymentBlockClass
+    arguments: []
+
+  tbo_billing.multiple_invoice_rest:
+    class: Drupal\tbo_billing\Services\MultipleInvoiceRestService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  #MultipleResponsePaymentController
+  tbo_billing.service_multiple_payment_controller:
+    class: Drupal\tbo_billing\Plugin\Config\MultiplePaymentResponseControllerClass
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  #BillingPaymentController
+  tbo_billing.service_billing_payment_controller:
+    class: Drupal\tbo_billing\Services\Controller\BillingPaymentControllerClass
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client", "@current_user", "@user.private_tempstore"]
+
+  #BillingSummaryBlock
+  tbo_billing.billing_summary_block_class:
+    class: Drupal\tbo_billing\Plugin\Config\Block\BillingSummaryBlockClass
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  tbo_billing.send_billing_sesion_data:
+    class: Drupal\tbo_billing\Services\SendBillingSessionDataRestService
+    arguments: []
+
+  #InvoiceExportPortfolioService
+  tbo_billing.export_portfolio_rest_logic:
+    class: Drupal\tbo_billing\Services\ExportPortfolioRestLogic
+    arguments: ['@tbo_general.tbo_config', '@tbo_api.client', '@current_user', '@tbo_mail.send']

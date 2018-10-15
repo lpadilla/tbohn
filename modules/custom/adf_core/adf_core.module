@@ -1,0 +1,394 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_general.module.
+ */
+
+use Box\Spout\Writer\WriterFactory;
+use Box\Spout\Common\Type;
+use Drupal\adf_core\Base\BaseApiCache;
+
+/*
+ * @Param $data
+ *   Data from ExportController
+ */
+function _tbo_get_data_export($data, &$context) {
+
+  //$conecction = \Drupal::database();
+  $context['sandbox']['progress'] = 0;
+  $context['sandbox']['max'] = 0;
+  $context['finished'] = 0;
+  // $headers = '';
+
+  // Export Audit Logs
+  if ($data['export'] == 'audit') {
+    $options_export = '';
+    unset($options_export);
+    $date_format = \Drupal::service('date.formatter');
+    $options_export = $data['logs_data'];
+    $date_config = \Drupal::config('tbo_general.export_config')->get('date_options');
+
+    // Get data
+    $audit_log_service = \Drupal::service('tbo_core.audit_log_service');
+    // value to validate export.
+    $data_query = $audit_log_service->getAuditLogsByFilter($options_export['with_filters']['filters'], $options_export['with_filters']['table_columns'], '', $date_config, TRUE);
+
+    // Set headers
+    foreach ($options_export['fields'] as $key => $value) {
+      $headers[$value['service_field']] = $value['label'];
+    }
+  }
+  elseif ($data['export'] == 'atp-associated-lines') {
+    $options_export = $data['logs_data'];
+    $parameters_associated_lines = $options_export['parameters_associated_lines'];
+    $profile = $parameters_associated_lines['p1'];
+    $contract = $parameters_associated_lines['p2'];
+    // Get data
+    $tempStore = \Drupal::service('user.private_tempstore')->get('tbo_atp');
+    $config_tbo_atp = $tempStore->get('tbo_atp_' . md5($profile . $contract));
+    $size_export = $config_tbo_atp['size'];
+    $data_query = [];
+    if ($size_export == 0) {
+      $data_query = BaseApiCache::get("tbo_atp", 'associated_lines_export_data', array_merge([$profile], [$contract]));
+    }
+    else {
+      for ($i = 0; $i < $size_export; $i++) {
+        $key = $profile . $i;
+        $data = BaseApiCache::get("tbo_atp", 'associated_lines_export_data', array_merge([$key], [$contract]));
+        if (empty($data_query)) {
+          $data_query = $data;
+        }
+        else {
+          $size = count($data);
+          for ($i = 0; $i < $size; $i++) {
+            $data_query[] = $data[$i];
+          }
+        }
+      }
+    }
+
+    $uuid = $parameters_associated_lines['p3'];
+    //Get in session labels to export
+    $tempStore = \Drupal::service('user.private_tempstore')->get('tbo_atp');
+    $labels_export = $tempStore->get('tbo_atp_labels_' . $uuid);
+
+    $headers = [];
+    foreach ($labels_export as $id => $label) {
+      $headers[] = $label;
+    }
+    // Load service associated-lines
+    $service_associated_lines = \Drupal::service('tbo_atp.associated_lines_rest_logic');
+    // Save Audit log
+    $data_log = [
+      'description' => 'Usuario solicita descargar reporte con el detalle de las lineas asociadas al perfil consultado',
+      'detail' => 2,
+    ];
+    $service_associated_lines->saveAuditLog($data_log['description'], $data_log['detail'], $config_tbo_atp['profile'], $config_tbo_atp['contract']);
+    // Save track segment
+    $service_associated_lines->saveSegmentTrack('TBO - Descargar Líneas de Perfil - Tx', $config_tbo_atp['contract'] . ' - movil');
+  }
+
+  // Save and continue the process
+  $context['results']['data'] = $data_query;
+  $context['results']['headers'] = $headers;
+  $context['finished'] = 1;
+  if (empty($data_query)) {
+    $context['results']['empty'] = 1;
+  }
+  else {
+    $context['results']['empty'] = 0;
+  }
+
+}
+
+/**
+ * @param $data
+ */
+function _tbo_export_data($data, &$context) {
+  unset($_SESSION['export_download']);
+  $_SESSION['export_download'] = [];
+  if ($context['results']['empty'] == 0) {
+    $user = \Drupal::currentUser();
+    $time = date('Y-m-d');
+
+    //Batch $vars
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['current_number'] = 0;
+    $context['sandbox']['max'] = 0;
+    $context['finished'] = 0;
+    $context['message'] = "";
+    $context['message'] = t('Exportando Filas...');
+    $context['results']['count'] = 0;
+    $context['results']['total'] = count($context['results']['data']);
+
+    $type = $data['type'];
+    $data_export = $context['results']['data'];
+    $data_headers = $context['results']['headers'];
+    $context['sandbox']['max'] = count($data_export);
+
+    //$vars to export
+    $type = ($type == 'xls') ? 'xlsx' : $type;
+    $dir = \Drupal::service('stream_wrapper_manager')->getViaUri('public://private/')->realpath();
+
+    $file_name = $data['export'] . '-' . $time . $user->id() . '.' . $type;
+    $path = $dir . '/' . $file_name;
+    $header = '';
+
+    //Get pattern to format_date
+    $config_service = \Drupal::service('tbo_general.tbo_config');
+    $date_format = $config_service->getConfig('region', 'format_date');
+    $dateFormatStorage = \Drupal::service('entity.manager')->getStorage('date_format');
+    $load_format = $dateFormatStorage->load($date_format);
+    $pattern = $load_format->getPattern();
+
+    // txt export
+    if ($type == 'txt') {
+
+      $file = fopen($path, 'w');
+      $header = 'text/plain';
+
+      //Write data if export is in format txt or csv
+      foreach ($data_export as $key => $value) {
+        foreach ($data_headers as $header => $value_header) {
+          fwrite($file, $value_header . "\r\n");
+          if ($header === 'created') {
+            $data_export[$key][$header] = \Drupal::service('date.formatter')->format($data_export[$key][$header], 'custom', $pattern, NULL, NULL);
+          }
+          if ($data['export'] === 'atp-associated-lines') {
+            fwrite($file, $data_export[$key][$header] . "\r\n");
+          }
+          else {
+            fwrite($file, $data_export[$key][$header] . "\r\n");
+          }
+        }
+        if ($data['export'] === 'atp-associated-lines') {
+          fwrite($file, "---------------------------------\r\n");
+        }
+        else {
+          fwrite($file, "---------------------------------\r\n");
+        }
+        $context['sandbox']['progress']++;
+        $context['message'] = t('Exportando información %procces de %max', array('%procces' => $context['sandbox']['progress'], '%max' => $context['sandbox']['max']));
+        if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
+          $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+        }
+      }
+
+      if (fclose($file)) {
+        $context['results']['file_success'] = TRUE;
+      }
+      else {
+        $context['results']['file_success'] = FALSE;
+      }
+
+    }
+
+    // Export for xlsx and csv formats
+    if ($type == 'xlsx' || $type == 'csv') {
+      $writer = ($type == 'xlsx') ? WriterFactory::create(Type::XLSX) : WriterFactory::create(Type::CSV);
+      $writer->openToFile($path);
+      if ($type == 'xlsx') {
+        $header = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        $writer->getCurrentSheet()->setName($data['export']);
+      }
+
+      if ($type == 'csv') {
+        $header = 'text/csv';
+        $writer->setFieldDelimiter(';');
+      }
+
+      $writer->addRow($data_headers);
+
+      if (isset($data_export)) {
+        foreach ($data_export as $key => $value) {
+          if ($data['export'] != 'atp-associated-lines') {
+            $value['created'] = \Drupal::service('date.formatter')->format($value['created'], 'custom', $pattern, NULL, NULL);
+          }
+          $writer->addRow($value);
+          $context['sandbox']['progress']++;
+          $context['message'] = t('Exportando información %procces de %max', array('%procces' => $context['sandbox']['progress'], '%max' => $context['sandbox']['max']));
+        }
+      }
+
+      if ($writer->close()) {
+        $context['results']['file_success'] = TRUE;
+      }
+      else {
+        $context['results']['file_success'] = FALSE;
+      }
+    }
+    $_SESSION['export_download']['path'] = $path;
+    $_SESSION['export_download']['file_name'] = $file_name;
+    $_SESSION['export_download']['header_doc'] = $header;
+    $_SESSION['export_download']['empty'] = 0;
+  }
+  else {
+    $_SESSION['export_download']['empty'] = TRUE;
+  }
+
+  // Add session var.
+  $tempstore = \Drupal::service('user.private_tempstore')->get('adf_core');
+  $tempstore->set('adf_core_download', $_SESSION['export_download']);
+
+  //batch save data
+  $context['results']['header_doc'] = $header;
+  $context['results']['path'] = $path;
+  $context['results']['file_name'] = $file_name;
+  $context['finished'] = 1;
+  $context['results']['empty'] = $_SESSION['export_download']['empty'];
+}
+
+/*
+ * @param $success
+ * @param $results
+ * @param $operations
+ */
+function _tbo_general_export_batch_finished($success, $results, $operations) {
+  if ($results['empty'] != 0) {
+    drupal_set_message('No hay información para exportar', 'status');
+  }
+}
+
+/**
+ * Download audit log.
+ *
+ * @param $data
+ *    The download data.
+ * @param $context
+ *    The batch context.
+ */
+function _tbo_export_audit_log($data, &$context) {
+  // Export Audit Logs
+  // Declare vars.
+  $headers = [];
+
+  $options_export = $data['logs_data'];
+  $date_config = \Drupal::config('tbo_general.export_config')->get('date_options');
+
+  // Get data
+  $audit_log_service = \Drupal::service('tbo_core.audit_log_service');
+  $data_query = $audit_log_service->getAuditLogsByFilter($options_export['with_filters']['filters'], $options_export['with_filters']['table_columns'], '', $date_config, TRUE);
+
+  // Set headers
+  foreach ($options_export['fields'] as $key => $value) {
+    $headers[$value['service_field']] = $value['label'];
+  }
+
+  // Count result.
+  $count_register = count($data_query);
+  if ($count_register > 0) {
+    $user = \Drupal::currentUser();
+    $time = date('Y-m-d');
+
+    //Batch $vars
+    $context['sandbox']['progress'] = 1;
+    $context['sandbox']['current_number'] = 0;
+    $context['sandbox']['current_id'] = 0;
+    $context['finished'] = 1;
+    $context['message'] = "";
+    $context['message'] = t('Exportando Filas...');
+    $context['results']['count'] = 0;
+    $context['results']['total'] = $count_register;
+
+    $type = $data['type'];
+    $data_export = $data_query;
+    $data_headers = $headers;
+    $context['sandbox']['max'] = count($data_query);
+
+    //$vars to export
+    $type = ($type == 'xls') ? 'xlsx' : $type;
+    $dir = \Drupal::service('stream_wrapper_manager')->getViaUri('public://private/')->realpath();
+
+    $file_name = $data['export'] . '-' . $time . $user->id() . '.' . $type;
+    $path = $dir . '/' . $file_name;
+    $header = '';
+
+    //Get pattern to format_date
+    $config_service = \Drupal::service('tbo_general.tbo_config');
+    $date_format = $config_service->getConfig('region', 'format_date');
+    $dateFormatStorage = \Drupal::service('entity.manager')->getStorage('date_format');
+    $load_format = $dateFormatStorage->load($date_format);
+    $pattern = $load_format->getPattern();
+
+    // txt export
+    if ($type == 'txt') {
+
+      $file = fopen($path, 'w');
+      $header = 'text/plain';
+
+      //Write data if export is in format txt or csv
+      foreach ($data_export as $key => $value) {
+        foreach ($data_headers as $header => $value_header) {
+          fwrite($file, $value_header . "\r\n");
+          if ($header === 'created') {
+            $data_export[$key][$header] = \Drupal::service('date.formatter')->format($data_export[$key][$header], 'custom', $pattern, NULL, NULL);
+          }
+          fwrite($file, $data_export[$key][$header] . "\r\n");
+        }
+
+        fwrite($file, "---------------------------------\r\n");
+        $context['sandbox']['progress']++;
+        $context['message'] = t('Exportando información %procces de %max', array('%procces' => $context['sandbox']['progress'], '%max' => $context['sandbox']['max']));
+        if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
+          $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+        }
+      }
+
+      if (fclose($file)) {
+        $context['results']['file_success'] = TRUE;
+      }
+      else {
+        $context['results']['file_success'] = FALSE;
+      }
+    }
+
+    if ($type == 'xlsx' || $type == 'csv') {
+      $writer = ($type == 'xlsx') ? WriterFactory::create(Type::XLSX) : WriterFactory::create(Type::CSV);
+      $writer->openToFile($path);
+      if ($type == 'xlsx') {
+        $header = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        $writer->getCurrentSheet()->setName($data['export']);
+      }
+
+      if ($type == 'csv') {
+        $header = 'text/csv';
+        $writer->setFieldDelimiter(';');
+      }
+
+      $writer->addRow($data_headers);
+
+      if (isset($data_export)) {
+        foreach ($data_export as $key => $value) {
+          $value['created'] = \Drupal::service('date.formatter')->format($value['created'], 'custom', $pattern, NULL, NULL);
+          $writer->addRow($value);
+          $context['sandbox']['progress']++;
+          $context['message'] = t('Exportando información %procces de %max', array('%procces' => $context['sandbox']['progress'], '%max' => $context['sandbox']['max']));
+        }
+      }
+
+      if ($writer->close()) {
+        $context['results']['file_success'] = TRUE;
+      }
+      else {
+        $context['results']['file_success'] = FALSE;
+      }
+    }
+
+    $_SESSION['export_download']['path'] = $path;
+    $_SESSION['export_download']['file_name'] = $file_name;
+    $_SESSION['export_download']['header_doc'] = $header;
+    $_SESSION['export_download']['empty'] = 0;
+
+    // Add session var.
+    $tempstore = \Drupal::service('user.private_tempstore')->get('adf_core');
+    $tempstore->set('adf_core_download', $_SESSION['export_download']);
+
+    //batch save data
+    $context['results']['header_doc'] = $header;
+    $context['results']['path'] = $path;
+    $context['results']['file_name'] = $file_name;
+    $context['finished'] = 1;
+    $context['results']['empty'] = $_SESSION['export_download']['empty'];
+  }
+}

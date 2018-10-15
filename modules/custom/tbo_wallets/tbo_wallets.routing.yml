@@ -1,0 +1,11 @@
+
+tbo_wallets.wallets_config_form:
+  path: '/admin/config/tbo-wallets/config-form'
+  defaults:
+    _form: '\Drupal\tbo_wallets\Form\WalletsConfigForm'
+    _title: 'WalletsConfigForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+

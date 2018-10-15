@@ -1,0 +1,157 @@
+<div id="box-create-account" class="block-card block-form-account form-custom">
+  <div class="box-body">
+   <div class="row">
+     <div class="col s12">
+       <div class="card clearfix white">
+         <div class="col s12">
+           <a href="{{ form.url_return }}">
+             <span class="return_icon prefix icon-left">
+                <span class="path1"></span>
+             </span>
+           </a>
+           <div class="form-create-account" data-ng-create-account>
+
+              {{ form.form_build_id }}
+              {{ form.form_token }}
+              {{ form.form_id }}
+
+              <div class="row mb0">
+                <div class="col s12">
+                  <h1>{{ form.title }}</h1>
+                  <div class="help-color">
+                    <div class="field-document-type col s2 m1 l1">
+                      <i class="prefix icon-info-cyan">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                      </i>
+                  </div>
+                    <div class="col s10 m11 l11">
+                    <p>{{ form.help|raw }}</p>
+                    </div>
+                </div>
+              </div>
+
+              <!-- Field document type and Field document number -->
+              <div class="items input-field col s12 m12 l12">
+                <!-- Field document type -->
+                <div class="field-document-type col s3 m2 l2">
+                  <i class="prefix icon-id-cyan">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </i>
+                  {{ form.document_type }}
+                </div>
+
+                <!-- Field document number -->
+                <div class="field-document-number col s9 m10 l10">
+                  {{ form.document_number }}
+                </div>
+              </div>
+
+              <!-- Field contract number and Field referent payment -->
+              <div class="col s12 m12 l12">
+                <p id="service-help">{{ form.service_help }}</p>
+              </div>
+
+              <div class="items input-field col s12 m12 l12">
+                <!-- Field document type -->
+                <div class="field-document-type col s12 m6 l6">
+                  <i class="prefix icon-id-cyan">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </i>
+                  {{ form.service_type }}
+                </div>
+
+                <!-- Field referent payment -->
+                <div ng-show="service_type=='mobile'" class="field-referent-payment col s12 m6 l6 margin-top-mov">
+                  <i class="prefix icon-contracts-cyan">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </i>
+                  {{ form.referent_payment }}
+                </div>
+
+                <!-- Field contract number -->
+                <div ng-show="service_type=='fixed'" class="field-contract-number col s12 m6 l6 margin-top-mov">
+                  <i class="prefix icon-contracts-cyan">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </i>
+                  {{ form.contract_number }}
+                </div>
+              </div>
+
+              <!-- Terms -->
+              <div class="col s12 m12 l12">
+                <p id="terms" class="center-align">{{ form.terms|raw }}.</p>
+              </div>
+
+              <!-- Button -->
+              <div class="buttons-wrapper col s12 m12 l12 center-align">
+                {{ form.submit }}
+              </div>
+
+              <!-- Tutorial -->
+              <div class="col s12 m12 l12">
+                <p id="tutorial" class="center-align">{{ form.tutorial|raw }}.</p>
+              </div>
+
+              <!-- Modal modalMobile -->
+              <div id="modalMobile" class="modal">
+                <div class="modal-content">
+                  <h2 class="title-modal">{{ form.modalMobile.title }}</h2>
+                  <div class="content">{{ form.modalMobile.content }}</div>
+                </div>
+                <div class="modal-footer">
+                  <div class="input-field col s12">
+                     <a href="#" class="right modal-action modal-close waves-effect waves-light btn btn-primary">CERRAR</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Modal modalFixed -->
+              <div id="modalFixed" class="modal">
+                <div class="modal-content">
+                  <h2 class="title-modal">{{ form.modalFixed.title }}</h2>
+                  <div class="content">{{ form.modalFixed.content }}</div>
+                </div>
+                <div class="modal-footer">
+                  <div class="input-field col s12">
+                     <a href="#" class="right modal-action modal-close waves-effect waves-light btn btn-primary">CERRAR</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Modal modalTerms -->
+              <div id="modalTerms" class="modal">
+                <div class="modal-content">
+                  <h2 class="title-modal">{{ form.modalTerms.title }}</h2>
+                  <div class="content">{{ form.modalTerms.content }}</div>
+                </div>
+                <div class="modal-footer">
+                  <div class="input-field col s12">
+                     <a href="#" class="right modal-action modal-close waves-effect waves-light btn btn-primary">CERRAR</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Modal modalTutorial -->
+              <div id="modalTutorial" class="modal">
+                <div class="modal-content">
+                  <h2 class="title-modal">{{ form.modalTutorial.title }}</h2>
+                  <div class="content">{{ form.modalTutorial.content }}</div>
+                </div>
+                <div class="modal-footer">
+                  <div class="input-field col s12">
+                     <a href="#" class="right modal-action modal-close waves-effect waves-light btn btn-primary">CERRAR</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

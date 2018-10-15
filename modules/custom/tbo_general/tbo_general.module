@@ -1,0 +1,563 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_general.module.
+ */
+
+use Drupal\file\Entity\File;
+use Drupal\user\Entity\Role;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Component\Utility\Unicode;
+use Drupal\Core\Block\BlockPluginInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_general_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_general module.
+    case 'help.page.tbo_general':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Modulo con todas las funciones transverales a los demas modulos de tbo') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ * Incluye la directiva de angular la etiqueta HTML.
+ */
+function tbo_general_preprocess_html(&$variables) {
+  $variables['html_attributes']['data-ng-app'] = 'tboApp';
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_general_theme($existing, $type, $theme, $path) {
+  return [
+    'tbo_general' => [
+      'template' => 'tbo-general',
+      // layout_plugin expects the theme hook to be declared with this:
+      'render element' => 'content',
+      // 'path' => '/templates/field',.
+    ],
+    'tbo_modal' => [
+      'template' => 'tbo-modal',
+      'render element' => 'content',
+    ],
+    'company_selector' => [
+      'variables' => [
+        'data' => [],
+        'uuid' => [],
+        'class' => [],
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--company-selector',
+    ],
+    'test_export' => [
+      'template' => 'test_export',
+    ],
+    'block__card_base' => [
+      'template' => 'block--card-base',
+      'render element' => 'content',
+    ],
+    'general_logo' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'logo' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--logo',
+    ],
+    'general_copyright' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'copyright' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--copyright',
+    ],
+    'card_base_example' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--card-base-example',
+    ],
+    'edit_user_login' => [
+      'render element' => 'form',
+      'template' => 'form--login-user',
+    ],
+    'card_launcher' => [
+      'variables' => [
+        'directive' => NULL,
+        'uuid' => NULL,
+        'class' => NULL,
+        'launcher' => NULL,
+        'categoryExist' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--launcher',
+    ],
+    'page_title_custom' => [
+      'variables' => [
+        'uuid' => NULL,
+        'title' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--page-title-custom',
+    ],
+    'logo_copy_site_block' => [
+      'variables' => [
+        'config' => NULL,
+        'uuid' => NULL,
+      ],
+      'template' => 'block--logo-copy-site',
+    ],
+    'social_networks_site_block' => [
+      'variables' => [
+        'config' => NULL,
+        'uuid' => NULL,
+      ],
+      'template' => 'block--social-networks-site',
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for administration toolbar templates.
+ *
+ * Default template: toolbar.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - element: An associative array containing the properties and children of
+ *     the tray. Properties used: #children, #attributes and #bar.
+ */
+function tbo_general_preprocess_toolbar(&$variables) {
+  $element = $variables['element'];
+
+  // Prepare the toolbar attributes.
+  $variables['attributes'] = $element['#attributes'];
+  $variables['toolbar_attributes'] = new Attribute($element['#bar']['#attributes']);
+  $variables['toolbar_heading'] = $element['#bar']['#heading'];
+
+  // Prepare the trays and tabs for each toolbar item as well as the remainder
+  // variable that will hold any non-tray, non-tab elements.
+  $variables['trays'] = [];
+  $variables['tabs'] = [];
+  $variables['remainder'] = [];
+  foreach (Element::children($element) as $key) {
+    // Early rendering to collect the wrapper attributes from
+    // ToolbarItem elements.
+    if (!empty($element[$key])) {
+      Drupal::service('renderer')->render($element[$key]);
+    }
+    // Add the tray.
+    if (isset($element[$key]['tray'])) {
+      $attributes = [];
+      if (!empty($element[$key]['tray']['#wrapper_attributes'])) {
+        $attributes = $element[$key]['tray']['#wrapper_attributes'];
+      }
+      $variables['trays'][$key] = [
+        'links' => $element[$key]['tray'],
+        'attributes' => new Attribute($attributes),
+      ];
+      if (array_key_exists('#heading', $element[$key]['tray'])) {
+        $variables['trays'][$key]['label'] = $element[$key]['tray']['#heading'];
+      }
+    }
+
+    $roles = \Drupal::currentUser()->getRoles();
+    if (in_array('administrator', $roles) || in_array('super_admin', $roles) || in_array('tigo_admin', $roles)) {
+      // Add the tab.
+      if (isset($element[$key]['tab'])) {
+        $attributes = [];
+        // Pass the wrapper attributes along.
+        if (!empty($element[$key]['#wrapper_attributes'])) {
+          $attributes = $element[$key]['#wrapper_attributes'];
+        }
+
+        $variables['tabs'][$key] = [
+          'link' => $element[$key]['tab'],
+          'attributes' => new Attribute($attributes),
+        ];
+      }
+    }
+
+    // Add other non-tray, non-tab child elements to the remainder variable for
+    // later rendering.
+    foreach (Element::children($element[$key]) as $child_key) {
+      if (!in_array($child_key, ['tray', 'tab'])) {
+        $variables['remainder'][$key][$child_key] = $element[$key][$child_key];
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_user_logout().
+ */
+function tbo_general_user_logout($account) {
+  // Save audit log.
+  $service = \Drupal::service('tbo_core.audit_log_service');
+  $service->loadName();
+
+  $name = $service->getName();
+
+  $data = [
+    'companyName' => $_SESSION['company']['name'],
+    'companyDocument' => $_SESSION['company']['nit'],
+    'companySegment' => isset($data['companySegment']) ? $data['companySegment'] : 'segmento',
+    'event_type' => 'Cuenta',
+    'description' => 'Usuario cierra sesión',
+    'details' => 'Usuario ' . $name . ' cierra sesión en el sitio',
+    'old_value' => 'No aplica',
+    'new_value' => 'No aplica',
+  ];
+
+  \Drupal::service('tbo_core.audit_log_service')->insertGenericLog($data);
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function tbo_general_form_menu_link_content_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  $attributes = \Drupal::config('menu_link_attributes.config')->get('attributes') ?: [];
+  if (!isset($attributes['doubleSpan'])) {
+    $attributes['doubleSpan'] = [];
+  }
+  if (!isset($attributes['roles'])) {
+    $attributes['roles'] = [];
+  }
+  $menu_link = $form_state->getFormObject()->getEntity();
+  $menu_link_options = $menu_link->link->first()->options ?: [];
+  $menu_link_attributes = isset($menu_link_options['attributes']) ? $menu_link_options['attributes'] : [];
+
+  $form['options']['attributes'] = [
+    '#type' => 'details',
+    '#title' => t('Attributes'),
+    '#weight' => -2,
+    '#tree' => TRUE,
+  ];
+
+  $config_path = Url::fromRoute('menu_link_attributes.config')->toString();
+  $referrer_path = parse_url(\Drupal::request()->headers->get('referer'))['path'];
+  $coming_from_config = $config_path == $referrer_path;
+
+  // Open <details> element if coming from config page.
+  if ($coming_from_config) {
+    $form['options']['attributes']['#open'] = TRUE;
+  }
+
+  $destination = \Drupal::destination()->getAsArray();
+  $config_path = Url::fromRoute('menu_link_attributes.config', [], ['query' => $destination])->toString();
+
+  if (count($attributes)) {
+    $form['options']['attributes']['#description'] = '<small>' . t('Manage available attributes <a href="@config">here</a>.', ['@config' => $config_path]) . '</small>';
+  }
+  else {
+    $form['options']['attributes']['help'] = [
+      '#markup' => t('Manage available attributes <a href="@config">here</a>.', ['@config' => $config_path]),
+    ];
+  }
+
+  $autofocus = FALSE;
+
+  // Se obtienen todos los roles del sistema.
+  $roles = Role::loadMultiple();
+  unset($roles['anonymous']);
+  unset($roles['administrator']);
+  foreach ($roles as $key => $value) {
+    $options[$key] = $value->get('label');
+  }
+
+  // Iterate all defined attributes and create text field for them.
+  foreach ($attributes as $attribute => $info) {
+    // Provide default label / description for attributes.
+    if (empty($info['label'])) {
+      $info['label'] = str_replace('-', ' ', Unicode::ucfirst($attribute));
+    }
+    if (empty($info['description'])) {
+      $info['description'] = t('Enter value for <code>@attribute</code> attribute.', ['@attribute' => $attribute]);
+    }
+
+    if ($attribute == 'doubleSpan') {
+      $form['options']['attributes'][$attribute] = [
+        '#type' => 'checkbox',
+        '#title' => t('Icono doble span'),
+        '#default_value' => isset($menu_link_attributes[$attribute]) ? $menu_link_attributes[$attribute] : 0,
+      ];
+    }
+    elseif ($attribute == 'roles') {
+      $form['options']['attributes'][$attribute] = [
+        '#type' => 'checkboxes',
+        '#title' => t('Roles'),
+        '#options' => $options,
+        '#default_value' => isset($menu_link_attributes[$attribute]) ? $menu_link_attributes[$attribute] : 0,
+      ];
+    }
+    else {
+      // Determine type based on options field.
+      $type = !empty($info['options']) ? 'select' : 'textfield';
+
+      $form['options']['attributes'][$attribute] = [
+        '#type' => $type,
+        '#title' => $info['label'],
+        '#description' => $info['description'],
+        '#default_value' => isset($menu_link_attributes[$attribute]) ? $menu_link_attributes[$attribute] : '',
+      ];
+
+      // Fill options if select list.
+      if ($type == 'select') {
+        $form['options']['attributes'][$attribute]['#empty_option'] = t('- Select -');
+        $form['options']['attributes'][$attribute]['#options'] = $info['options'];
+      }
+
+      // Add "autofocus" attribute for first attribute input field
+      // if coming from config page.
+      if ($coming_from_config && !$autofocus) {
+        $form['options']['attributes'][$attribute]['#attributes'] = ['autofocus' => 'autofocus'];
+        $autofocus = TRUE;
+      }
+    }
+  }
+
+  $form['actions']['submit']['#submit'][] = 'tbo_general_menu_link_content_form_submit';
+}
+
+/**
+ * Submit function for menu add / edit form.
+ */
+function tbo_general_menu_link_content_form_submit($form, FormStateInterface $form_state) {
+  $menu_link = $form_state->getFormObject()->getEntity();
+  $options = ['attributes' => $form_state->getValue('attributes')];
+  $menu_link_options = $menu_link->link->first()->options;
+  $menu_link->link->first()->options = array_merge($menu_link_options, $options);
+  $menu_link->save();
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function tbo_general_form_search_block_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  $form['#action'] = Url::fromRoute('tbo_general.search_b2b')->toString();
+  $form['keys']['#required'] = TRUE;
+  $form['keys']['#attributes']['placeholder'] = \Drupal::config('tbo_general.search_b2b_config_form')->get('placeholder');
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function tbo_general_preprocess_form(&$variables) {
+  if ($variables['element']['#form_id'] == 'search_block_form') {
+    if (\Drupal::config('tbo_general.search_b2b_config_form')->get('new_tag')) {
+      $variables['attributes']['target'] = '_blank';
+    }
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function tbo_general_form_menu_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form['id']['#default_value'] == 'account') {
+    $form['attributes'] = [
+      '#type' => 'details',
+      '#title' => t('Configuraciones adicionales'),
+      '#weight' => -1,
+      '#tree' => TRUE,
+      '#open' => TRUE,
+    ];
+
+    $config = \Drupal::config('system.menu.account');
+    $form['attributes']['show_edit'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Mostrar el boton de editar cuenta'),
+      '#default_value' => $config->get('show_edit'),
+    ];
+
+    $form['attributes']['options'] = [
+      '#type' => 'table',
+      '#header' => [t('Path editar cuenta, Ejemplo /editar-cuenta'), t('Class'), t('Icono doble span')],
+    ];
+
+    $form['attributes']['options'][0]['url_details'] = [
+      '#type' => 'textfield',
+      '#default_value' => $config->get('url_details'),
+      '#size' => '40',
+    ];
+
+    $form['attributes']['options'][0]['class'] = [
+      '#type' => 'textfield',
+      '#default_value' => $config->get('class'),
+      '#size' => '40',
+    ];
+
+    $form['attributes']['options'][0]['is_double_span'] = [
+      '#type' => 'checkbox',
+      '#default_value' => $config->get('is_double_span'),
+      '#size' => '40',
+    ];
+
+    $folder = 'public://users';
+    file_prepare_directory($folder, FILE_CREATE_DIRECTORY);
+
+    $form['attributes']['default_image'] = [
+      '#type' => 'managed_file',
+      '#title' => t('Avatar'),
+      '#default_value' => $config->get('default_image'),
+      '#description' => t('Imagen por defecto para los usuarios, Por favor ingrese una imagen de formato PNG, JPEG, SVG y medidas minimas 43X43 px'),
+      '#upload_location' => 'public://users',
+      '#upload_validators' => [
+        'file_validate_extensions' => ['png jpg svg'],
+        'file_validate_image_resolution' => [$maximum_dimensions = 0, $minimum_dimensions = '43x43'],
+      ],
+    ];
+
+    $form['actions']['submit']['#submit'][] = 'tbo_general_form_menu_form_submit';
+  }
+
+}
+
+/**
+ * Submit function for menu add / edit form.
+ */
+function tbo_general_form_menu_form_submit($form, FormStateInterface $form_state) {
+  $data = $form_state->getValue('attributes');
+  // Save data menu.
+  $menu = $form_state->getFormObject()->getEntity();
+  $menu->save();
+
+  // Save config.
+  $config = \Drupal::service('config.factory')->getEditable('system.menu.account');
+  $config->set('show_edit', $data['show_edit']);
+  $config->set('url_details', $data['options'][0]['url_details']);
+  $config->set('class', $data['options'][0]['class']);
+  $config->set('is_double_span', $data['options'][0]['is_double_span']);
+  $config->set('default_image', $data['default_image']);
+  setFileAsPermanent($data['default_image']);
+  $config->save();
+}
+
+/**
+ * Method to save file permanenty in the database.
+ *
+ * @param string $fid
+ *   File id.
+ */
+function setFileAsPermanent($fid) {
+  if (is_array($fid)) {
+    $fid = array_shift($fid);
+  }
+
+  $file = File::load($fid);
+
+  // If file doesn't exist return.
+  if (!is_object($file)) {
+    return;
+  }
+
+  // Set as permanent.
+  $file->setPermanent();
+
+  // Save file.
+  $file->save();
+
+  // Add usage file.
+  \Drupal::service('file.usage')->add($file, 'tbo_general', 'tbo_general', 1);
+}
+
+/**
+ * Override template_preprocess_table()
+ * Prepares variables for table templates.
+ *
+ * Default template: table.html.twig.
+ */
+function tbo_general_preprocess_table(&$variables) {
+  if (isset($variables['attributes']['id']) && $variables['attributes']['id'] == 'menu-overview') {
+    foreach ($variables['rows'] as $key => $row) {
+      foreach ($row['cells'] as $key_cell => $cell) {
+        if (isset($cell['content']['1']['#url'])) {
+          if (!$cell['content']['1']['#url']->isExternal()) {
+            $name = FALSE;
+            try {
+              $name = $cell['content']['1']['#url']->getRouteName();
+            }
+            catch (\Exception $e) {
+            }
+            if ($name == 'tbo_user.emulate_session_bits') {
+              $row['attributes']->addClass('hidden');
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Function tbo_general_form_user_login_alter(array &$form, FormStateInterface $form_state, $form_id) {
+ * echo 'funciona';
+ * }.
+ */
+function tbo_general_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case 'user_login_form':
+      $message = t('Bienvenido');
+      $message2 = t('Ingrese con su nombre de usuario');
+      $form['message'] = $message;
+      $form['message2'] = $message2;
+      $form['actions']['submit']['#value'] = t('CONTINUAR');
+      $form['actions']['submit']['#attributes'] = ['class' => ['disabled']];
+      $form['name']['#title'] = t('Nombre de usuario');
+      $form['name']['#attributes'] = ['ng-model' => 'user', 'ng-change' => 'validateLoginForm()'];
+      $form['pass']['#title'] = t('Clave');
+      $form['pass']['#attributes'] = ['ng-model' => 'pass', 'ng-change' => 'validateLoginForm()'];
+      $form['#attached']['library'] = 'tbo_general/login-form';
+      $form['#theme'] = 'edit_user_login';
+      break;
+  }
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function tbo_general_preprocess_page(&$vars) {
+  $twig = \Drupal::service('twig');
+  $logo_url = $GLOBALS['base_url'] . theme_get_setting('logo.url');
+  $twig->addGlobal('logo_url', $logo_url);
+}
+
+/**
+ * Implements hook_block_build_alter().
+ */
+function tbo_general_block_build_alter(array &$build, $block) {
+  // Se agrega cache nula para el menu de cuenta de usario.
+  if ($block->getConfiguration()['id'] == 'system_menu_block:account') {
+    $build['#cache'] = ['max-age' => 0];
+  }
+
+  // Se agrega cache nula para el menu de cuenta de navegacion.
+  if ($block->getConfiguration()['id'] == 'system_menu_block:main-menu') {
+    $build['#cache'] = ['max-age' => 0];
+  }
+}

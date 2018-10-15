@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_emulate_hn.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_general_hn_theme(){
+  return [                
+    'general_social' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'logo' => NULL,
+      ],
+      'template' => 'block--social',
+    ],
+    'tbo_general_hn' => [
+      'template' => 'tbo-general-hn',
+      // layout_plugin expects the theme hook to be declared with this:
+      'render element' => 'content',    ],
+     'block__card_base_hn' => [
+      'template' => 'block--card-base-hn',
+      'render element' => 'content',
+    ],
+  ];
+}

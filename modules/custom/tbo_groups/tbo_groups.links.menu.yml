@@ -1,0 +1,12 @@
+# Define the menu links for this module
+
+entity.tbo_group.collection:
+  title: 'Content Entity Example: Groups Listing'
+  route_name: entity.tbo_group.collection
+  description: 'List Groups'
+  weight: 10
+tbo_group.admin.structure.settings:
+  title: Group Settings
+  description: 'Configure Group entity'
+  route_name:  tbo_groups.group_settings
+  parent: system.admin_structure

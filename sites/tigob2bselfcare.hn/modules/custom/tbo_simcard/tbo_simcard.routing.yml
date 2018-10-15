@@ -1,0 +1,9 @@
+
+tbo_simcard.change_simcard_form:
+  path: '/tbo_simcard/form/change_simcard'
+  defaults:
+    _form: '\Drupal\tbo_simcard\Form\ChangeSimcardForm'
+    _title: 'Change Simcard'
+  requirements:
+    _access: 'TRUE'
+  

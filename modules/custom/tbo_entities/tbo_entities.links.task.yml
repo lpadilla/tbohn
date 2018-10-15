@@ -1,0 +1,181 @@
+# Company entity routing definition
+company_entity.settings_tab:
+  route_name: company_entity.settings
+  title: 'Settings'
+  base_route: company_entity.settings
+
+entity.company_entity.canonical:
+  route_name: entity.company_entity.canonical
+  base_route: entity.company_entity.canonical
+  title: 'View'
+
+entity.company_entity.edit_form:
+  route_name: entity.company_entity.edit_form
+  base_route: entity.company_entity.canonical
+  title: 'Edit'
+
+entity.company_entity.delete_form:
+  route_name:  entity.company_entity.delete_form
+  base_route:  entity.company_entity.canonical
+  title: Delete
+  weight: 10
+
+# Company user role entity routing definition
+company_user_relations.settings_tab:
+  route_name: company_user_relations.settings
+  title: 'Settings'
+  base_route: company_user_relations.settings
+
+entity.company_user_relations.canonical:
+  route_name: entity.company_user_relations.canonical
+  base_route: entity.company_user_relations.canonical
+  title: 'View'
+
+entity.company_user_relations.edit_form:
+  route_name: entity.company_user_relations.edit_form
+  base_route: entity.company_user_relations.canonical
+  title: 'Edit'
+
+entity.company_user_relations.delete_form:
+  route_name:  entity.company_user_relations.delete_form
+  base_route:  entity.company_user_relations.canonical
+  title: Delete
+  weight: 10
+
+# Invitation access entity routing definition
+invitation_access_entity.settings_tab:
+  route_name: invitation_access_entity.settings
+  title: 'Settings'
+  base_route: invitation_access_entity.settings
+
+entity.invitation_access_entity.canonical:
+  route_name: entity.invitation_access_entity.canonical
+  base_route: entity.invitation_access_entity.canonical
+  title: 'View'
+
+entity.invitation_access_entity.edit_form:
+  route_name: entity.invitation_access_entity.edit_form
+  base_route: entity.invitation_access_entity.canonical
+  title: 'Edit'
+
+entity.invitation_access_entity.delete_form:
+  route_name:  entity.invitation_access_entity.delete_form
+  base_route:  entity.invitation_access_entity.canonical
+  title: Delete
+  weight: 10
+
+# Company user relations routing definition
+company_user_relations.settings_tab:
+  route_name: company_user_relations.settings
+  title: 'Settings'
+  base_route: company_user_relations.settings
+
+entity.company_user_relations.canonical:
+  route_name: entity.company_user_relations.canonical
+  base_route: entity.company_user_relations.canonical
+  title: 'View'
+
+entity.company_user_relations.edit_form:
+  route_name: entity.company_user_relations.edit_form
+  base_route: entity.company_user_relations.canonical
+  title: 'Edit'
+
+entity.company_user_relations.version_history:
+  route_name: entity.company_user_relations.version_history
+  base_route: entity.company_user_relations.canonical
+  title: 'Revisions'
+
+entity.company_user_relations.delete_form:
+  route_name:  entity.company_user_relations.delete_form
+  base_route:  entity.company_user_relations.canonical
+  title: Delete
+  weight: 10
+
+# Wifi channel routing definition
+wifi_channel.settings_tab:
+  route_name: wifi_channel.settings
+  title: 'Settings'
+  base_route: wifi_channel.settings
+
+entity.wifi_channel.canonical:
+  route_name: entity.wifi_channel.canonical
+  base_route: entity.wifi_channel.canonical
+  title: 'View'
+
+entity.wifi_channel.edit_form:
+  route_name: entity.wifi_channel.edit_form
+  base_route: entity.wifi_channel.canonical
+  title: 'Edit'
+
+entity.wifi_channel.delete_form:
+  route_name:  entity.wifi_channel.delete_form
+  base_route:  entity.wifi_channel.canonical
+  title: Delete
+  weight: 10
+
+
+# Wifi security type entity routing definition
+wifi_security_type_entity.settings_tab:
+  route_name: wifi_security_type_entity.settings
+  title: 'Settings'
+  base_route: wifi_security_type_entity.settings
+
+entity.wifi_security_type_entity.canonical:
+  route_name: entity.wifi_security_type_entity.canonical
+  base_route: entity.wifi_security_type_entity.canonical
+  title: 'View'
+
+entity.wifi_security_type_entity.edit_form:
+  route_name: entity.wifi_security_type_entity.edit_form
+  base_route: entity.wifi_security_type_entity.canonical
+  title: 'Edit'
+
+entity.wifi_security_type_entity.delete_form:
+  route_name:  entity.wifi_security_type_entity.delete_form
+  base_route:  entity.wifi_security_type_entity.canonical
+  title: Delete
+  weight: 10
+# Notification entity routing definition
+notification_entity.settings_tab:
+  route_name: notification_entity.settings
+  title: 'Settings'
+  base_route: notification_entity.settings
+
+entity.notification_entity.canonical:
+  route_name: entity.notification_entity.canonical
+  base_route: entity.notification_entity.canonical
+  title: 'View'
+
+entity.notification_entity.edit_form:
+  route_name: entity.notification_entity.edit_form
+  base_route: entity.notification_entity.canonical
+  title: 'Edit'
+
+entity.notification_entity.delete_form:
+  route_name:  entity.notification_entity.delete_form
+  base_route:  entity.notification_entity.canonical
+  title: Delete
+  weight: 10
+
+# Notification detail entity routing definition
+notification_detail_entity.settings_tab:
+  route_name: notification_detail_entity.settings
+  title: 'Settings'
+  base_route: notification_detail_entity.settings
+
+entity.notification_detail_entity.canonical:
+  route_name: entity.notification_detail_entity.canonical
+  base_route: entity.notification_detail_entity.canonical
+  title: 'View'
+
+entity.notification_detail_entity.edit_form:
+  route_name: entity.notification_detail_entity.edit_form
+  base_route: entity.notification_detail_entity.canonical
+  title: 'Edit'
+
+entity.notification_detail_entity.delete_form:
+  route_name:  entity.notification_detail_entity.delete_form
+  base_route:  entity.notification_detail_entity.canonical
+  title: Delete
+  weight: 10
+

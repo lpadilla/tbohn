@@ -1,0 +1,9 @@
+services:
+  selfcare_gtm:
+    class: Drupal\selfcare_gtm\SelfcareGtmService
+    arguments: []
+  selfcare_gtm.pushTag:
+    class: Drupal\selfcare_gtm\EventSubscriber\SelfcareGtmPushTagSuscriber
+    arguments: []
+    tags:
+      - { name: event_subscriber }

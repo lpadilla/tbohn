@@ -1,0 +1,45 @@
+{% extends 'block__card_base.html.twig' %}
+
+
+{% block header_data %}
+<div class="change-simcard" {{ directive }} ng-cloak ng-init="uuiidd='{{ uuid }}'">
+<div class="title-simcard">Cambiar Sim</div>
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+  {% block other_content %}
+
+    {% if config.label_display == 'visible' %}
+      <h2 class="title-card">{{ config.label }}</h2>
+    {% endif %}
+
+    <div class="billing-shipping clearfix" >
+      
+
+    <div class="modal-content">
+      {% block modal_element %}
+        {{ form }}
+        <!-- Modal Trigger -->
+        <button data-target="modal1" class="btn modal-trigger">Enviar</button>
+      {% endblock %}
+    </div>
+
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4>Confirmar</h4>
+          <p>Esta seguro que desea aplicar los cambios solicitados a su cuenta?</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-gray btn ">Cancelar</a>
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn btn-default ">Aceptar</a>
+        </div>
+      </div>
+
+  {% endblock %}
+
+
+
+  

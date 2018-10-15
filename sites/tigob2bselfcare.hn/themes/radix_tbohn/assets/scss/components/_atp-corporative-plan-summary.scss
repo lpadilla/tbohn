@@ -1,0 +1,60 @@
+.atp-corporative-plan-summary {
+  display: flex;
+  align-items: center;
+  transition: all .4s ease-in-out;
+  @media #{$small-and-down} {
+    flex-direction: column;
+  }
+  .label {
+    color: $gray3-tigo;
+    font-weight: 400;
+    font-size: 12px;
+    margin: 0;
+  }
+  .ligth-f {
+    font-weight: 300;
+  }
+  .sm-font, .sm-font span {
+    @media #{$small-and-down} {
+      font-size: 12px;
+    }
+  }
+  strong {
+    font-weight: 400;
+  }
+  &-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-width: 180px;
+    .title-icon {
+      min-width: 45px;
+    }
+    &.col.ml-0 {
+      margin-left: 0;
+      @media #{$medium-and-up} {
+        margin-bottom: 0;
+      }
+    }
+    h2 {
+      color: $blue-tigo;
+      font-size: 24px;
+      font-weight: 400;
+      margin: 15px 0;
+    }
+  }
+  &-data {
+    display: flex;
+  }
+  &-buttons {
+    text-align: right;
+    .input-field {
+      display: flex;
+      padding-right: 0;
+      justify-content: flex-end;
+      @media #{$small-and-down} {
+        display: flex;
+      }
+    }
+  }
+}

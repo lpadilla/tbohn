@@ -1,0 +1,5 @@
+entity.audit_log_entity.add_form:
+  route_name: entity.audit_log_entity.add_form
+  title: 'Add Audit log entity'
+  appears_on:
+    - entity.audit_log_entity.collection

@@ -1,0 +1,244 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_content_table %}
+  <div class="hidden">
+    {% for category in categories %}
+      {{ category }}
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block other_content_data_card %}
+  <div class="card-block desdeaca" infinite-scroll="loadMore()" infinite-scroll-distance="1">
+    {% if title %}
+      <h5 class="title-front hide-on-med-and-down">
+        {{ title }}
+      </h5>
+    {% endif %}
+
+    {% if fields.client_name %}
+      <h3 ng-if="nameClient">
+        {[{ nameClient }]} - {{ 'ESTE ES SU PLAN'|t }}
+      </h3>
+    {% endif %}
+
+    <div ng-repeat="(key, value) in invoices track by $index" ng-init="parentIndex = $index">
+      <div class="row {% if margin %}{% if margin.show_margin_internal_card == false %} mb-0 {% endif %}{% endif %}" ng-repeat="invoice in value track by $index">
+        <div class="col s12">
+          <div class="card white clearfix atp-consumption_detail">
+            <!-- Open card content -->
+            <div class="atp-consumption_detail-title col s12 m12 l4 ml-0 row">
+              {% if fields.image %} {% set fields = fields|slice(1) %}
+              <div class="title-icon">
+                <div class="card-icon">
+                  <i class="prefix icon-businessuser-cyan">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </i>
+                </div>
+              </div>
+              {% endif %}
+              <div class="title-content">
+                {% for field in fields %}
+                  {% if field.position == 'left' %}
+                    {# Add class #}
+                    {% if (field.class_field == "12-columns") %}
+                      {% set class_field = 'col s12 m12' %}
+                    {% elseif (field.class_field == "11-columns") %}
+                      {% set class_field = 'col s11 m11' %}
+                    {% elseif (field.class_field == "10-columns") %}
+                      {% set class_field = 'col s10 m10' %}
+                    {% elseif (field.class_field == "9-columns") %}
+                      {% set class_field = 'col s9 m9' %}
+                    {% elseif (field.class_field == "8-columns") %}
+                      {% set class_field = 'col s8 m8' %}
+                    {% elseif (field.class_field == "7-columns") %}
+                      {% set class_field = 'col s7 m7' %}
+                    {% elseif (field.class_field == "6-columns") %}
+                      {% set class_field = 'col s6 m6' %}
+                    {% elseif (field.class_field == "5-columns") %}
+                      {% set class_field = 'col s5 m5' %}
+                    {% elseif (field.class_field == "4-columns") %}
+                      {% set class_field = 'col s4 m4' %}
+                    {% elseif (field.class_field == "3-columns") %}
+                      {% set class_field = 'col s3 m3' %}
+                    {% elseif (field.class_field == "2-columns") %}
+                      {% set class_field = 'col s2 m2' %}
+                    {% elseif (field.class_field == "1-columns") %}
+                      {% set class_field = 'col s1 m1' %}
+                    {% endif %}
+
+                    {% if field.service_field == 'linesAmount_profile' %}
+                      <div class="{{ class_field }}">
+                        <p class="label">{[{invoice.linesAmount_profile}]} {{ field.label }}</p>
+                      </div>
+                    {% endif %}
+                    {% if field.service_field == 'name_profile' %}
+                      <div class="{{ class_field }}">
+                        <h2><strong>{[{ invoice.name_profile }]}</strong></h2>
+                      </div>
+                    {% endif %}
+                    {% if field.service_field == 'billingAccount_profile' %}
+                      <div class="{{ class_field }} hide-on-small-and-down">
+                        <p class="label ligth-f">
+                          <strong>{{ field.label }}:</strong>
+                          {[{invoice.billingAccount_profile}]}
+                        </p>
+                      </div>
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+            <div class="atp-consumption_detail-data show-on-medium-and-up hide-on-med-and-down col s12 m12 l3">
+              {% for field in columns_rigth %}
+                {% if field.position == 'right' %}
+                  {# Add class #}
+                  {% if (field.class_field == "12-columns") %}
+                    {% set class_data = 'col s12 m12' %}
+                  {% elseif (field.class_field == "11-columns") %}
+                    {% set class_data = 'col s11 m11' %}
+                  {% elseif (field.class_field == "10-columns") %}
+                    {% set class_data = 'col s10 m10' %}
+                  {% elseif (field.class_field == "9-columns") %}
+                    {% set class_data = 'col s9 m9' %}
+                  {% elseif (field.class_field == "8-columns") %}
+                    {% set class_data = 'col s8 m8' %}
+                  {% elseif (field.class_field == "7-columns") %}
+                    {% set class_data = 'col s7 m7' %}
+                  {% elseif (field.class_field == "6-columns") %}
+                    {% set class_data = 'col s6 m6' %}
+                  {% elseif (field.class_field == "5-columns") %}
+                    {% set class_data = 'col s5 m5' %}
+                  {% elseif (field.class_field == "4-columns") %}
+                    {% set class_data = 'col s4 m4' %}
+                  {% elseif (field.class_field == "3-columns") %}
+                    {% set class_data = 'col s3 m3' %}
+                  {% elseif (field.class_field == "2-columns") %}
+                    {% set class_data = 'col s2 m2' %}
+                  {% elseif (field.class_field == "1-columns") %}
+                    {% set class_data = 'col s1 m1' %}
+                  {% endif %}
+                  <div class="{{ class_data }}">
+                    <p class="label ligth-f">{{ field.label }} </p>
+                    <strong>{[{ invoice.{{ field.service_field }} }]}</strong>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="atp-consumption_detail-data mobile-data show-on-small hide-on-med-and-up">
+              {% for field in columns_rigth %}
+                {% if field.class_mobile %}
+                  {# Add class mobile #}
+                  {% if (field.class_mobile == "12-columns") %}
+                    {% set class_data_mobile = 'col s12' %}
+                  {% elseif (field.class_mobile == "11-columns") %}
+                    {% set class_data_mobile = 'col s11' %}
+                  {% elseif (field.class_mobile == "10-columns") %}
+                    {% set class_data_mobile = 'col s10' %}
+                  {% elseif (field.class_mobile == "9-columns") %}
+                    {% set class_data_mobile = 'col s9' %}
+                  {% elseif (field.class_mobile == "8-columns") %}
+                    {% set class_data_mobile = 'col s8' %}
+                  {% elseif (field.class_mobile == "7-columns") %}
+                    {% set class_data_mobile = 'col s7' %}
+                  {% elseif (field.class_mobile == "6-columns") %}
+                    {% set class_data_mobile = 'col s6' %}
+                  {% elseif (field.class_mobile == "5-columns") %}
+                    {% set class_data_mobile = 'col s5' %}
+                  {% elseif (field.class_mobile == "4-columns") %}
+                    {% set class_data_mobile = 'col s4' %}
+                  {% elseif (field.class_mobile == "3-columns") %}
+                    {% set class_data_mobile = 'col s3' %}
+                  {% elseif (field.class_mobile == "2-columns") %}
+                    {% set class_data_mobile = 'col s2' %}
+                  {% elseif (field.class_mobile == "1-columns") %}
+                    {% set class_data_mobile = 'col s1' %}
+                  {% endif %}
+                  <div class="{{ class_data_mobile }}">
+                    <p class="label ligth-f">{{ field.label }} </p>
+                    <strong>{[{ invoice.{{ field.service_field }} }]}</strong>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <!—- close card content -—>
+            <!-- Open Card button -->
+            <div class="atp-consumption_detail-buttons col s12 m12 l4">
+              <div class="col input-field s12">
+                {% if buttons.detail.show %}
+                  <a name="{{ uuid }}" {% if buttons.detail.active %} id="atp-profile-details-{{ uuid }}-{[{$index}]}" ng-click="showDetail($event, invoice.name_profile, invoice.billingAccount_profile)" {% else %} disabled {% endif %} class="waves-effect waves-light btn btn-second collapse">
+                    {{ buttons.detail.label }}
+                  </a>
+                {% endif %}
+                {% if buttons.show_lines.show %}
+                  <a ng-if="invoice.linesAmount_profile != 0" {% if buttons.show_lines.active %} href="{{ buttons.show_lines.url }}?p1={[{invoice.id_profile}]}&p2={[{contract_profile}]}" class="waves-effect waves-light btn btn-primary segment-click"
+                    data-segment-event="TBO - Ver Líneas Perfil cuenta ATP - Consulta"
+                    data-segment-properties='{ "category":"Arma tu plan Business", "label":"{[{invoice.billingAccount_profile}]} - movil", "site":"NEW"}' {% else %} disabled class="waves-effect waves-light btn btn-primary" {% endif %}>
+                    {{ buttons.show_lines.label }}
+                  </a>
+                  <a ng-if="invoice.linesAmount_profile == 0" disabled class="waves-effect waves-light btn btn-primary">
+                    {{ buttons.show_lines.label }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+            <!—Close card button—>
+            <div class="clear"></div>
+          </div>
+          {% if columns_details %}
+            <div class="atp-profile-details atp-profile-details-{{ uuid }}-{[{$index}]} card">
+              {% for detail_profile in columns_details %}
+                {% if (detail_profile.class_field == "12-columns") %}
+                  {% set new_class = 's12 m12' %}
+                {% elseif (detail_profile.class_field == "11-columns") %}
+                  {% set new_class = 's11 m11' %}
+                {% elseif (detail_profile.class_field == "10-columns") %}
+                  {% set new_class = 's10 m10' %}
+                {% elseif (detail_profile.class_field == "9-columns") %}
+                  {% set new_class = 's9 m9' %}
+                {% elseif (detail_profile.class_field == "8-columns") %}
+                  {% set new_class = 's8 m8' %}
+                {% elseif (detail_profile.class_field == "7-columns") %}
+                  {% set new_class = 's7 m7' %}
+                {% elseif (detail_profile.class_field == "6-columns") %}
+                  {% set new_class = 's6 m6' %}
+                {% elseif (detail_profile.class_field == "5-columns") %}
+                  {% set new_class = 's5 m5' %}
+                {% elseif (detail_profile.class_field == "4-columns") %}
+                  {% set new_class = 's4 m4' %}
+                {% elseif (detail_profile.class_field == "3-columns") %}
+                  {% set new_class = 's3 m3' %}
+                {% elseif (detail_profile.class_field == "2-columns") %}
+                  {% set new_class = 's2 m2' %}
+                {% elseif (detail_profile.class_field == "1-columns") %}
+                  {% set new_class = 's1 m1' %}
+                {% endif %}
+                {% if detail_profile.service_field == 'serviceCollection_profile' %}
+                  <div class="col {{ new_class }} s12 left-detail">
+                    <p class="label">{{ detail_profile.label }}</p>
+                    <p ng-if="invoice.serviceCollection_profile.length == 0">
+                      {{ 'No se encontraron servicios/ planes asociados al perfil ingresado'|t }}
+                    </p>
+                    <ul class="row">
+                      <li class="col" ng-repeat="detail in invoice.serviceCollection_profile track by $index"  ng-init="parentIndex = $index">
+                        <p class="detail-title"><strong>{[{ detail.type }]}: </strong></p>
+                        <p>{[{ detail.description }]}</p>
+                      </li>
+                    </ul>
+                  </div>
+                {% endif %}
+                {% if detail_profile.service_field == 'description_profile' %}
+                  <div class="col {{ new_class }} s12 right-detail">
+                    <p class="label">{{ detail_profile.label }}</p>
+                    <p>{[{ invoice.description_profile }]}</p>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

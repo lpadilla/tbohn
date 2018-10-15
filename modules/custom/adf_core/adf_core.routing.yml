@@ -1,0 +1,20 @@
+adf_core.export_data:
+  path: 'adf_core/export/{type}/{export}/{reload}/{uuid}'
+  defaults:
+    _controller: '\Drupal\adf_core\Controller\ExportController::exportData'
+  requirements:
+    _permission: 'access content'
+
+adf_core.download_export_data:
+  path: 'adf_core/download/export/{export}'
+  defaults:
+    _controller: '\Drupal\adf_core\Controller\ExportController::downloadExportData'
+  requirements:
+    _permission: 'access content'
+
+adf_core.download_public:
+  path: '/adf_core/download-example/{file_name}/{directory}'
+  defaults:
+    _controller: '\Drupal\adf_core\Controller\ExportController::downloadPublic'
+  requirements:
+    _permission: 'access content'

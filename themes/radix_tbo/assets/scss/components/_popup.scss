@@ -1,0 +1,22 @@
+
+.popup-medium{
+  @media #{$medium-and-up}{
+    width: 400px;
+    top:100px !important;
+  }
+
+
+}
+
+@media #{$medium-and-up}{
+  .delete-margin{
+    margin: 0 !important;
+  }
+
+}
+.margin-botton-15{
+  margin-bottom: 15px;
+}
+.margin-rigth-10{
+  margin-right: 10px;
+}

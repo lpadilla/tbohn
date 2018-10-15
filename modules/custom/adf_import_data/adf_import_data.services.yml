@@ -1,0 +1,16 @@
+services:
+  adf_import.import_service:
+    class: Drupal\adf_import_data\Services\MassiveImportService
+    arguments: ["@file.usage"]
+
+  adf_import.export_service:
+    class: Drupal\adf_import_data\Services\MassiveExportService
+    arguments: []
+
+  adf_import.get_import_logic:
+    class: Drupal\adf_import_data\Services\GetImportLogicService
+    arguments: []
+
+  adf_import.import_data_form_config_class:
+    class: Drupal\adf_import_data\Services\AdfImportDataFormConfigClass
+    arguments: []

@@ -1,0 +1,85 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+  <div class="wifi-channel-change card-block">
+    <div class="box-body">
+      
+      {% if title.label_display == 'visible' %}
+        <h5 class="title-front">
+          {{ title.label }}
+        </h5>
+      {% endif %}
+      
+      <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+        <div class="col s12">
+          
+          {% block other_content_data_card %}
+            <div class="card white clearfix">
+              <div class="col s12">
+                
+                {% block other_content %}
+                  <div id="ChangeWifiChannel" class="change-wifi-channel">
+                    {% if fields.block_title.show %}
+                      <h2 class="title-card">{{ fields.block_title.label }}</h2>
+                    {% endif %}
+                    <div class="modal-content">
+                      <form>
+                        <div class="row">
+                          {% for field in fields %}
+                            {% if field.service_field == 'wifi_channel' and field.show %}
+                              <div class="input-field content-row col m6 s12">
+                                <select id="{{ field.identifier }}"
+                                        data-ng-model="{{ field.identifier }}"
+                                        ng-init="{{ field.identifier }}='seleccione'">
+                                  <option value="seleccione">{{ 'Seleccione el canal de la red' | t }}</option>
+                                  
+                                  {% for key, value in field.options %}
+                                    <option value="{{ key }}">{{ value }}</option>
+                                  {% endfor %}
+                                </select>
+                                <label>{{ field.label }}</label>
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                        
+                        <div class="row">
+                          <div class="col s12 m12 card-action">
+                            {% for button in buttons %}
+                              {% if button.show %}
+                                <a
+                                  {% if button.service_field == 'action_card_change_wifi_channel' %}
+                                    class="right waves-effect waves-light btn btn-primary"
+                                    id="btn-cambiar-canal"
+                                    ng-click="changeWifiChannel(wifi_channel)"
+                                  {% else %}
+                                    id="btn-cancelar-canal"
+                                    class="right waves-effect waves-light btn btn-second"
+                                    ng-click="cancelChangeWifiChannel()"
+                                  {% endif %}
+                                  
+                                  {% if button.active == false %}
+                                disabled
+                                  {% endif %}>{{ button.label }}
+                                </a>
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                {% endblock %}
+              
+              </div>
+            </div>
+          {% endblock %}
+        
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

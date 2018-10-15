@@ -1,0 +1,16 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+<div class="page-title-custom card-block">
+  <div class="box-body">
+    {% if title.label_display == 'visible' %}
+    <h5 class="title-front">
+      {{ title.label }}
+    </h5>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

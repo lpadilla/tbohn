@@ -1,0 +1,21 @@
+services:
+  # User Repository.
+  tbo_user_tools.repository:
+    class: Drupal\tbo_user_tools\Repository\UserRepository
+    arguments: []
+
+  # User Route Subscriber.
+  tbo_user_tools.route_subscriber:
+    class: Drupal\tbo_user_tools\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+
+  # UserCancelAlterForm
+  tbo_user_tools.user_cancel_alter_form:
+    class: Drupal\tbo_user_tools\Plugin\Config\Form\UserCancelAlterConfigFormClass
+    arguments: []
+
+  # UserCancelAlterForm
+  tbo_user_tools.user_multiple_cancel_alter_form:
+    class: Drupal\tbo_user_tools\Plugin\Config\Form\UserMultipleCancelConfigFormClass
+    arguments: []

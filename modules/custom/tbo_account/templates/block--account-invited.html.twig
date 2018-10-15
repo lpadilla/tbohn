@@ -1,0 +1,79 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_data %}
+{% endblock %}
+
+  {% block filters %}
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+{% block other_content_data %}
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m12 l12">
+        <div class="block block--logintigoid login-invited card">
+          {% if data_invited.type == 'invited' %}
+            <h4 class="block__title">
+              {% trans %}
+              HOLA {{ data_invited.name|placeholder }}
+              {% endtrans %}
+            </h4>
+
+            <div class="block__content">
+              <p>
+                {% trans %}
+                Un administrador lo ha invitado a administrar la empresa
+                {% endtrans %}
+                <span>
+                  {{ data_invited.name_company }}
+                </span>
+              </p>
+              <p>
+                {% trans %}
+                Este enlace le permitira conectarse una unica vez
+                {% endtrans %}
+              </p>
+              <div class="actions invitado">
+                <a href="/invitado/{{ data_invited.token }}/TRUE"
+                   class="waves-effect waves-light btn btn-primary">
+                  {% trans %}
+                  CONTINUAR
+                  {% endtrans %}
+                </a>
+              </div>
+            </div>
+          {% elseif data_invited.type == 'send_verified' %}
+            <h4 class="block__title activar">
+              {% trans %}
+              Active su cuenta
+              {% endtrans %}
+            </h4>
+            <div class="block__content">
+              <p>{% trans %}Hemos enviado un mensaje a{% endtrans %}</p>
+              <p class="email">{{ data_invited.email }}</p>
+            </div>
+            <div>
+              <p>
+                {% trans %}
+                Recuerde revisar su correo electrónico para validar su cuenta y
+                completar el registro.
+                {% endtrans %}
+              </p>
+            </div>
+            <div class="actions reenviar">
+              <a href="{{ url_resend }}"
+                 class="waves-effect waves-light btn btn-primary">
+                {% trans %}
+                REENVIAR
+                {% endtrans %}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

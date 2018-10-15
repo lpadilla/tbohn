@@ -1,0 +1,77 @@
+
+.col-lineas,.col-contract,.col-deuda{
+	float: left;left:auto;
+}
+
+.col-contract{
+	width: 15%;
+}
+.col-lineas{
+	width: 15%;
+}
+.col-admin{
+	float: right;
+	width: 15%;
+	padding-top: 5px;
+}
+.col-deuda{
+	width: 20%;
+}
+.col-ver-lineas{
+	width: 26%; float:right; font-size:16px;padding-top: 5px;text-align: right;
+}
+.verlineas-a{
+	font-size: 17px !important;text-transform: uppercase; margin-right: 30px !important;
+}
+.adminlineas{
+	font-size: 17px !important;text-transform: uppercase;
+}
+.del-up{
+	font-weight: 450;
+}
+.invoice-content{
+	min-height: 88px;
+}
+
+.exportar-contract{
+	float:right; color:#00377B; font-weight: 400; font-size:17px;
+}
+.numcontract{
+	font-size:17px;
+}
+
+.block-contracts{
+	width: 100% !important;
+	padding: 0% 2%;
+}
+
+.block-width-inicial{
+	padding: 16px 16px 0 0 !important;
+}
+
+.block-facturacion-summary-message{
+	padding: 0% 4%;
+}
+
+@media only screen and (max-width: 500px){
+	.col-contract{
+		width: 85%;
+		height: 50px;
+	}
+	.col-lineas{
+		width: 22%;
+	}
+	.col-admin{
+		display: none;
+	}
+	.col-deuda{
+		width: 35%;
+	}
+	.col-ver-lineas{
+		font-size:14px;
+		width: 40%;
+	}
+	.verlineas-a{
+		font-size: 14px !important;
+	}
+}

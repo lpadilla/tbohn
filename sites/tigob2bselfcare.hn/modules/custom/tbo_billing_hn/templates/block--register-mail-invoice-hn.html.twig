@@ -1,0 +1,58 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block filters %}
+{% endblock %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+  <div class="card-block block-invoice" infinite-scroll="loadMore()" infinite-scroll-distance="1">
+    <div class="box-body">
+      <h5 class="title-front hide-on-med-and-down"></h5>      
+      <div class="row billing-shipping clearfix radius">
+        <div class="col s12 m12">
+          <div class=" col s2 m2">
+            <div class="left card-icon-invoice"> 
+              <span>
+                <i class="prefix icon-mailing-cyan mg-left">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>                
+              </span>
+            </div>
+          </div>
+          <div class=" col s10 m10">         
+            <div class="row-field input-card clearfix pad-tb"> 
+              <div  class="col s12 m12 l12">
+                <p class="data-invoices">Datos de facturación</p>
+              </div>
+              <div  class="col s12 m12 l12">
+                <div  class="col s2 m2 l2">
+                  <p class="p-fact">Facturación: </p>
+                </div>
+                <div  class="col s10 m10 l10">
+                  <p class="p-text">Impresa</p>
+                </div>
+              </div>  
+              <div  class="col s12 m12 l12">
+                <div  class="col s2 m2 l2">
+                  <p class="p-fact">Dirección: </p>
+                </div>
+                <div  class="col s10 m10 l10">
+                  <p class="p-text">Zip continental, La Lima Cortes entre Campos 2 y Casanave</p>
+                </div>
+              </div> 
+              <div  class="col s12 m12 l12">
+                <span class="replace">Reemplace su factura impresa por una versión eletrónica y ayuda a conservar el medio ambiente</span>
+              </div> 
+              <div class="pad-right">
+                <button class="right mg-top waves-effect waves-light btn btn-primary" type="submit">RECIBA SU FACTURA DIGITAL</button>
+              </div>        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

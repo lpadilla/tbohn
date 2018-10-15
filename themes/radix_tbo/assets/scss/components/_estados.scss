@@ -1,0 +1,98 @@
+//estados con circulo delante
+
+.entregado-est-c{
+  min-width: 200px;
+  color:$activo;
+  &:before{
+    content: "..";
+    background: $activo;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    font-size: 1px;
+    margin-right: 5px;
+
+  }
+}
+
+.anulado-est-c{
+  min-width: 200px;
+  color:$red-status-detail;
+  &:before{
+    content: "..";
+    background: $red-status-detail;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    font-size: 1px;
+    margin-right: 5px;
+
+  }
+}
+.cancel-est-c{
+  min-width: 200px;
+  color:$red-status-detail;
+  &:before{
+    content: "..";
+    background: $red-status-detail;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    font-size: 1px;
+    margin-right: 5px;
+
+  }
+}
+.abierto-est-c{
+  min-width: 200px;
+  color:$yellow-status-detail;
+  &:before{
+    content: "..";
+    background: $yellow-status-detail;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    font-size: 1px;
+    margin-right: 5px;
+
+  }
+}
+.cerrado-est-c{
+  min-width: 200px;
+  color:$green-status-detail;
+  &:before{
+    content: "..";
+    background: $green-status-detail;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    font-size: 1px;
+    margin-right: 5px;
+
+  }
+}
+//estados sin el circulo delante
+.cerrado-est{
+  color: $green-status-detail;
+  font-weight: 400;
+  font-size: 16px;
+  padding-top: 5px;
+}
+.cancel-est{
+  color: $red-status-detail;
+  font-weight: 400;
+  font-size: 16px;
+  padding-top: 5px;
+}
+.abierto-est{
+  color: $yellow-status-detail;
+  font-weight: 400;
+  font-size: 16px;
+  padding-top: 5px;
+}
+

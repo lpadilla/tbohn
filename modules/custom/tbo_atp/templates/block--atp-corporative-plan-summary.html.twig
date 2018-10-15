@@ -1,0 +1,129 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block header_data %}
+<div {{ directive }} ng-cloak ng-init="uuid='{{ uuid }}'">
+{% endblock %}
+
+{% block other_content_data_card %}
+  {% if val_atp != 'no_atp_aviable' %}
+  <div class="card-block" ng-cloak>
+    <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+      <div class="col s12">
+        <div class="card white clearfix atp-corporative-plan-summary">
+          <div class="atp-corporative-plan-summary-title col s12 m4 l4 ml-0 row">
+            <div class="title-icon">
+              <div class="card-icon">
+                <i class="prefix icon-specialservices-cyan">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>
+              </div>
+            </div>
+            <div class="title-content">
+              {% if fields.total_value %}
+                <div>
+                  <p class="label">{{ fields.total_value.label }}</p>
+                </div>
+                <div>
+                  <h2>
+                    <strong>{[{ totalValuePlan }]}</strong>
+                  </h2>
+                </div>
+              {% endif %}
+              <!-- Esta parte se añade únicamente en desktop, pues su layout es diferente a la de móvil -->
+              <!-- inicio -->
+              <div class="show-on-medium-and-up hide-on-med-and-down">
+                <p class="label">
+                  {% if fields.services_amount %}
+                    <span class="label ligth-f">
+                      <strong>{{ fields.services_amount.label }}:</strong>
+                      <span>{[{ servicesAmountPlan }]}</span>
+                    </span>
+                  {% endif %}
+                  {% if fields.associated_lines %}
+                    <span class="label ligth-f">
+                      <strong>, {{ fields.associated_lines.label }}:</strong>
+                      <span>{[{ linesAmountPlan }]}</span>
+                    </span>
+                  {% endif %}
+                </p>
+              </div>
+              <!-- fin -->
+            </div>
+          </div>
+
+          <!-- Esta parte se añade únicamente en Mobile, pues su layout es diferente a la de móvil -->
+          <!-- inicio -->
+          <div class="col s12 show-on-small hide-on-med-and-up">
+            <div class="row">
+              <div class="col s12">
+
+                {% if fields.services_amount %}
+                  <span class="label ligth-f sm-font">
+                    <strong>&nbsp;{{ fields.services_amount.label }}:</strong>
+                    <span>{[{ servicesAmountPlan }]}</span>
+                  </span>
+                {% endif %}
+
+                {% if fields.associated_lines %}
+                  <span class="label ligth-f sm-font">
+                    <strong>&nbsp;{{ fields.associated_lines.label }}:</strong>
+                    <span>{[{ linesAmountPlan }]}</span>
+                  </span>
+                {% endif %}
+
+                {% if fields.profiles %}
+                  <span class="label ligth-f sm-font">
+                    <strong>&nbsp;{{ fields.profiles.label }}:</strong>
+                    <span>{[{ profilesCount }]}</span>
+                  </span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <!-- fin -->
+          <div class="atp-corporative-plan-summary-data col s12 m6 l6">
+            <div class="col s5 m5">
+              {% if fields.billing_cycle %}
+                <p class="label ligth-f sm-font">{{ fields.billing_cycle.label }} </p>
+                <strong>{[{ cycle }]}</strong>
+              {% endif %}
+            </div>
+            <div class="col s5 m5">
+              {% if fields.minimum_rank %}
+                <p class="label ligth-f sm-font">{{ fields.minimum_rank.label }} </p>
+                <strong>{[{ minimumRank }]}</strong>
+              {% endif %}
+            </div>
+            <div class="col s5 m5">
+              {% if fields.maximum_rank %}
+                <p class="label ligth-f">{{ fields.maximum_rank.label }} </p>
+                <strong>{[{ maximumRank }]}</strong>
+              {% endif %}
+            </div>
+            <div class="col m2 show-on-medium-and-up hide-on-med-and-down">
+              {% if fields.profiles %}
+                <p class="label ligth-f sm-font">{{ fields.profiles.label }} </p>
+                <strong>{[{ profilesCount }]}</strong>
+              {% endif %}
+            </div>
+          </div>
+          <div class="atp-corporative-plan-summary-buttons col s12 m2 l3 ">
+            <div class="input-field">
+              <a name="{{ uuid }}" class="waves-effect waves-light btn btn-primary collapse segment-click btn-atp-detail-plan"
+                data-segment-event="TBO - Detalle cuenta ATP - Consulta"
+                data-segment-properties='{"category":"Arma tu Plan Business", "label" : "{[{ contractCorProfiles }]} - movil" }'
+                ng-click="saveAuditLog('{{ url_details }}?p1=');">
+                {{ "DETALLE DEL PLAN"|t }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}

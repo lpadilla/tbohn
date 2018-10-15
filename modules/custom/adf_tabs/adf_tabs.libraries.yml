@@ -1,0 +1,9 @@
+card_menu_tab_library:
+  version: 1.x
+  js:
+    js/directive/menu_tab.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo

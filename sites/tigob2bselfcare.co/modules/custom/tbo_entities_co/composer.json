@@ -1,0 +1,14 @@
+{
+  "name": "drupal/tbo_entities_co",
+  "type": "drupal-module",
+  "description": "My Awesome Module",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/tbo_entities_co",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/tbo_entities_co",
+    "source": "http://cgit.drupalcode.org/tbo_entities_co"
+  },
+  "require": { }
+}

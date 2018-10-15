@@ -1,0 +1,4 @@
+services:
+  tbo_wallets.wallets_config_form_class:
+    class: Drupal\tbo_wallets\Plugin\Config\Form\WalletsConfigFormClass
+    arguments: []

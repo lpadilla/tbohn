@@ -1,0 +1,103 @@
+{% extends 'block__card_base_bo.html.twig' %}
+
+{% block filters_modal_content %}
+  <div class="row">
+    <div class="input-field col s6 m6 l8">
+        {% if title %}
+          <h5 class="title-core">{{ title }}</h5>
+        {% endif %}
+    </div>
+    <div class="input-field col s6 m6 l4">
+      <a class="right waves-effect btn user-modal-form btn-primary" href="#{{ modal.href }}">
+          {{ modal.label }}
+      </a>
+    </div>
+  </div>
+  <!-- Modal Structure -->
+  <div id="{{ modal.href }}" class="modal" data-ng-complete-enter>
+    <h2>{{ 'Crear Usuario'|t }}</h2>
+    <div class="modal-content">
+        {% block modal_element %}
+            {{ form }}
+        {% endblock %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block header_content_filters_card_detail %}
+    {% block filter_header_form %}
+      <form data-ng-submit="filterTable()">
+    {% endblock %}
+  <div class="row">
+      {% block for_filters %}
+          {% for filter in filters %}
+              {{ widgets.validate_style( filter.label, filter, filter.class) }}
+          {% endfor %}
+      {% endblock %}
+  </div>
+    {% block validate_filters %}
+        {% if filters is not empty %}
+          <div class="row">
+            <div class="col input-field s12 m12 l12">
+              <button class="right waves-effect btn btn-primary" type="submit">{{'Consultar'|trans}}</button>
+              <input type="reset" value="limpiar" class="right btn btn-clear click-filter-reset">
+            </div>
+          </div>
+        {% endif %}
+    {% endblock %}
+  </form>
+{% endblock %}
+
+{% block modal %}
+{% endblock %}
+
+{% block table_head %}
+  <tr>
+      {% for tfield in fields %}
+        <th ng-click="reverseTable();">{{ tfield.label }}</th>
+      {% endfor %}
+  </tr>
+{% endblock %}
+
+{% block table_body %}
+  <tr ng-repeat="(key, value) in pagedItems[currentPage]">
+      {% for field in fields %}
+        <td>
+            {% if field.service_field == 'status' %}
+
+            <div class="row">
+              <div class="switch">
+                <label>                  
+                  <input type="checkbox" id="{[{ key }]}" value="{[{ value.status }]}" ng-checked="value.checkVal" ng-click="disableAdmin(key, value.companies, value.uid, value.companies , value.status, value.full_name);"/>
+                  <span class="lever"></span>
+                  <label for="{[{ key }]}"></label>
+               </label>
+             </div>
+            </div>
+              </td>
+            {% elseif field.service_field == 'assign_enterprise' %}
+              <a ng-if="value.status==1" href="{{ url_config }}/{[{ value.uid }]}">{{ 'Reasignar Empresa'|t }}</a>
+            {% else %}
+              {[{ value.{{ field.service_field }} }]}
+            {% endif %}
+        </td>
+      {% endfor %}
+  </tr>
+{% endblock %}
+
+{% block other_content_data %}
+  <div id="modal"></div>
+  <!-- Modal Structure status -->
+  <div id="showDisableMessage" class="modal users-tigo-admin">
+    <div class="modal-content">
+      <h2 class="title">{{ 'Desactivar Tigo Admin'|t }}</h2>
+      <p>{{ 'El usuario Tigo Admin que desea desactivar tiene empresas asociadas a él. Para desactivarlo debe reasignar las empresas a otro usuario Tigo Admin. ¿Desea reasignar las empresas a otro usuario Tigo admin?'|t }}</p>
+    </div>
+    <div class="modal-footer">
+      <div class="form-wrapper-button">
+        <a href="{{ url_config }}/{[{ id_user_tigo_admin }]}" id="confirm" class="right waves-effect btn btn-primary">{{ 'Reasignar'|t }}</a>
+        <a href="#" class="modal-action modal-close right waves-effect btn btn-second" ng-click="cancelModal()">{{'Cancelar'|trans}}</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,109 @@
+tbo_billing.billing_select_options_form:
+  path: '/tbo_billing/form/billing_select_options'
+  defaults:
+    _form: '\Drupal\tbo_billing\Form\BillingSelectOptionsForm'
+    _title: 'BillingSelectOptionsForm'
+  requirements:
+    _access: 'TRUE'
+
+tbo_billing.billing_select_options_form:
+  path: '/tbo_billing/form/billing_select_button'
+  defaults:
+    _form: '\Drupal\tbo_billing\Form\BillingTypeSelectButton'
+    _title: 'BillingTypeSelectButton'
+  requirements:
+    _access: 'TRUE'
+
+tbo_billing.load_detaill_invoice_controller_payment:
+  path: '/tbo_billing/payment/{contractId}/{invoiceId}'
+  defaults:
+    _controller: '\Drupal\tbo_billing\Controller\LoadDetailInvoiceController::payment'
+    _title: 'load'
+  requirements:
+    _permission: 'access content'
+
+tol.billing_movil_payment:
+  path: '/tbo/billing/payment/movil'
+  defaults:
+    _controller: '\Drupal\tbo_billing\Controller\PaymentController::redirectionMovil'
+    _title: 'Pago de Factura'
+  requirements:
+    _custom_access: '\Drupal\tbo_billing\Controller\PaymentController::access'
+  options:
+    no_cache: TRUE
+
+tbo_billing.update_billing_delivery_status:
+  path: '/tbo_billing/form/update_billing_delivery_status'
+  defaults:
+    _form: '\Drupal\tbo_billing\Form\UpdateBillingDeliveryStatus'
+    _title: 'UpdateBillingDeliveryStatus'
+  requirements:
+    _access: 'TRUE'
+
+tbo_billing.bill_download_pdf:
+  path: '/tbo_billing/download/{contractNumber}/{type}/{param}'
+  defaults:
+    _controller: '\Drupal\tbo_billing\Controller\InvoicePdfController::generate'
+    _title: ''
+  requirements:
+    _custom_access: '\Drupal\tbo_billing\Controller\InvoicePdfController::access'
+
+
+tbo_billing.bill_payment_token:
+  path: '/tbo_billing/payment/{type}/{contractId}/{invoiceRef}/{monto}/{fecha}/{msisdn}'
+  defaults:
+    _controller: '\Drupal\tbo_billing\Controller\BillingPaymentController::payment'
+    _title: ''
+  requirements:
+    _permission: 'access content'
+
+
+tbo_billing.bill_payment_response_movil:
+  path: '/pagos/movil/co/respuesta'
+  defaults:
+    _controller: '\Drupal\tbo_billing\Controller\BillingPaymentController::tigoGateway'
+    _title: ''
+  requirements:
+    _permission: 'access content'
+
+tbo_billing.bill_payment_response_fijo:
+  path: '/pagos/fijo/co/respuesta'
+  defaults:
+    _controller: '\Drupal\tbo_billing\Controller\BillingPaymentController::uneGateway'
+    _title: ''
+  requirements:
+    _permission: 'access content'
+
+tbo_billing.bill_payment_cancel_fijo:
+  path: '/pagos/fijo/co/cancelado'
+  defaults:
+    _controller: '\Drupal\tbo_billing\Controller\BillingPaymentController::cancelUneGateway'
+    _title: ''
+  requirements:
+    _permission: 'access content'
+
+tbo_billing.bill_payment_settings:
+  path: '/admin/config/tbo_billing_payment/settings'
+  defaults:
+    _form: '\Drupal\tbo_billing\Form\BillingPaymentSettings'
+    _title: 'BillingPaymentSettings'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+tbo_billing.summary_log_controller_registerEvent:
+  path: '/tbo_billing/summary/{event}'
+  defaults:
+    _controller: '\Drupal\tbo_billing\Controller\SummaryLogController::registerEvent'
+    _title: 'registerEvent'
+  requirements:
+    _permission: 'access content'
+
+tbo_billing.multiple_payment_response:
+  path: '/tbo_billing/payment/multiple'
+  defaults:
+    _controller: '\Drupal\tbo_billing\Controller\MultiplePaymentResponseController::generate'
+    _title: ''
+  requirements:
+    _custom_access: '\Drupal\tbo_billing\Controller\MultiplePaymentResponseController::access'

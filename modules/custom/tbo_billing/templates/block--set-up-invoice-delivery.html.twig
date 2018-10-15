@@ -1,0 +1,267 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block modal %}
+  <!-- Modal with data structure -->
+  <div id="modalFormDeliveryStatus-{{ uuid }}" class="modal modalFormDeliveryStatus">
+    <div class="modal-content">
+      {% if modal.data.modal_title.show %}
+        <h2 class="title-modal">{{ modal.data.modal_title.label }}</h2>
+      {% endif %}
+
+      <form id="form-delivery-{{ uuid }}" name="billing-delivery-form" {% if modal.environment == 'movil' %} ng-submit="sendInvoiceDeliveryMobile()" {% else %} ng-submit="sendInvoiceDeliveryFixed()" {% endif %}>
+       <div class="row">
+          <div class="col s12">
+            {% if modal.data.modal_label.show %}
+              <p class="recibir-lbl">{{ modal.data.modal_label.label }}</p>
+            {% endif %}
+          </div>
+          <div class="col input-field s12">
+            {% if modal.data.modal_digital.show %}
+              <div class="digital-options-chk">
+                <input ng-if="suggestions[0].show_invoice_billing == 'digital' || suggestions[0].show_invoice_billing == 'ambas'"
+                      type="checkbox" class="filled-in" id="digital-{{ uuid }}" name="digital-{{ uuid }}" ng-model="digital_checked"
+                      ng-init='digital_checked=true' ng-click='checkedDigital(digital_checked)' {% if modal.data.modal_digital.active == false %} disabled="disabled" {% endif %}/>
+                <input ng-if="suggestions[0].show_invoice_billing != 'digital' && suggestions[0].show_invoice_billing != 'ambas'"
+                      type="checkbox" class="filled-in" id="digital-{{ uuid }}" name="digital-{{ uuid }}" ng-model="digital_checked"
+                      ng-click='checkedDigital(digital_checked)' {% if modal.data.modal_digital.active == false %} disabled="disabled" {% endif %}/>
+                <label for="digital-{{ uuid }}">{{ modal.data.modal_digital.label }}</label>
+              </div>
+            {% endif %}
+          </div>
+
+           {% if modal.data.modal_digital.show %}
+          {# Validar si es mobile y si esta seleccionada la factura digital #}
+          <div ng-if="(environment_set_up == 'movil' && suggestions[0].show_invoice_billing == 'digital') || (environment_set_up == 'movil' && suggestions[0].show_invoice_billing == 'ambas')" id="digital-options-{{ uuid }}" ng-show="digital_checked" class="ng-hide col input-field s12">
+            <div class="">
+              <input ng-if="suggestions[0].show_invoice_billing == 'digital' || suggestions[0].show_invoice_billing == 'ambas'" id="mail" type="email" class="validate"
+                     ng-value="suggestions[0].email" {% if modal.environment == 'movil' %} disabled="disabled" {% else %} ng-model="mail_model" {% endif %} required {% if modal.data.modal_digital.active == false %} disabled="disabled" {% endif %}>
+              <input ng-if="suggestions[0].show_invoice_billing != 'digital' && suggestions[0].show_invoice_billing != 'ambas'" id="mail" type="email" class="validate"
+                     ng-value="suggestions[0].email" {% if modal.environment == 'movil' %} disabled="disabled" {% else %} ng-model="mail_model" {% endif %}>
+              <label for="mail" class="active">Correo electronico</label>
+            </div>
+          </div>
+
+          <div ng-if="environment_set_up == 'fijo'" id="digital-options-{{ uuid }}" ng-show="digital_checked" class="ng-hide col input-field s12">
+            <div class="">
+              <input ng-if="suggestions[0].show_invoice_billing == 'digital' || suggestions[0].show_invoice_billing == 'ambas'" required id="mail" type="email" class="validate"
+                     ng-value="suggestions[0].email" ng-model="mail_model" ng-change="updateMail(mail_model)" {% if modal.data.modal_digital.active == false %} disabled="disabled" {% endif %}>
+              <input ng-if="suggestions[0].show_invoice_billing != 'digital' && suggestions[0].show_invoice_billing != 'ambas'" id="mail" type="email" class="validate"
+                     ng-value="suggestions[0].email" ng-model="mail_model" ng-change="updateMail(mail_model)" {% if modal.data.modal_digital.active == false %} disabled="disabled" {% endif %}>
+              <label for="mail" class="active">Correo electronico</label>
+            </div>
+          </div>
+          {% endif %}
+
+          <div class="col input-field s12">
+            {% if modal.data.modal_impresa.show %}
+              <div class="printed-options-chk">
+                <input ng-if="suggestions[0].show_invoice_billing == 'impresa' || suggestions[0].show_invoice_billing == 'ambas'"
+                   type="checkbox" class="filled-in" id="impresa-{{ uuid }}"
+                   name="impresa-{{ uuid }}" {% if modal.environment == 'movil' and modal.data.modal_impresa.active %} ng-model="printed_checked" ng-init="printed_checked=true" ng-click='checkedPrinter(printed_checked)' {% elseif modal.environment == 'fijo' and modal.data.modal_impresa.active %} ng-model="printed_checked_disable" ng-init="printed_checked_disable=true" disabled="disabled" {% else %}
+                   disabled="disabled" {% endif %} />
+                <input ng-if="suggestions[0].show_invoice_billing != 'impresa' && suggestions[0].show_invoice_billing != 'ambas'"
+                    type="checkbox" class="filled-in" id="impresa-{{ uuid }}"
+                    name="impresa-{{ uuid }}" {% if modal.environment == 'movil' and modal.data.modal_impresa.active %} ng-model="printed_checked" ng-click='checkedPrinter(printed_checked)' {% elseif modal.environment == 'fijo' and modal.data.modal_impresa.active %} ng-model="printed_checked_disable" ng-init="printed_checked_disable=true" disabled="disabled" {% else %}
+                    disabled="disabled" {% endif %} />
+                <label for="impresa-{{ uuid }}">{{ modal.data.modal_impresa.label }}</label>
+              </div>
+            {% endif %}
+          </div>
+
+          {% if modal.data.modal_impresa.show %}
+          {# Validar si es mobile y si esta seleccionada la factura impresa #}
+          <div ng-if="(environment_set_up == 'movil' && suggestions[0].show_invoice_billing == 'impresa') || (environment_set_up == 'movil' && suggestions[0].show_invoice_billing == 'ambas')" id="printed-options-{{ uuid }}" ng-show="printed_checked" class="ng-hide clearfix">
+            <div class="col input-field s12">
+              <input id="address" type="text" class="validate" ng-model="address_model" disabled="disabled" ng-value="suggestions[0].address">
+              <label for="address" class="active">Dirección</label>
+            </div>
+            <div class="col input-field s12">
+              <input id="city" type="text" class="validate" ng-model="city_model" disabled="disabled" ng-value="suggestions[0].city">
+              <label for="city" class="active">Ciudad</label>
+            </div>
+          </div>
+
+          <div ng-if="environment_set_up == 'fijo'" id="printed-options-{{ uuid }}" ng-show="printed_checked" class="ng-hide clearfix">
+            <div class="col input-field s12">
+              <input id="address" type="text" class="validate" ng-model="address_model" disabled="disabled" ng-value="suggestions[0].address">
+              <label for="address" class="active">Dirección</label>
+            </div>
+            <div class="col input-field s12">
+              <input id="city" type="text" class="validate" ng-model="city_model" disabled="disabled" ng-value="suggestions[0].city">
+              <label for="city" class="active">Ciudad</label>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if modal.data.modal_detail.show %}
+            {% if modal.environment == 'movil' %}
+              <div class="factura-detallada clearfix">
+                <div class="col input-field s6">
+                  <p class="txtdtalle-bill">{{ modal.data.modal_detail.label }}</p>
+                </div>
+                <div class="col input-field s3">
+                  <input ng-if="suggestions[0].invoiceDetailOption == 'DETAIL'" type="radio" class="with-gap"   id="is_detail-{{ uuid }}"
+                         name="groupdetail" {% if modal.environment == 'movil' and modal.data.modal_impresa.active %} ng-model="details_model" ng-value="detail" ng-init='details_model=detail' ng-click="changeDetail('DETAIL')" {% elseif modal.environment == 'fijo' and modal.data.modal_impresa.active %} ng-model="details_model_disable" ng-value="summary" disabled="disabled" {% else %}
+                    disabled="disabled" {% endif %} />
+                  <input ng-if="suggestions[0].invoiceDetailOption != 'DETAIL'" type="radio" class="with-gap"
+                         id="is_detail-{{ uuid }}"
+                         name="groupdetail" {% if modal.environment == 'movil' and modal.data.modal_impresa.active %} ng-model="details_model" ng-click="changeDetail('DETAIL')" {% elseif modal.environment == 'fijo' and modal.data.modal_impresa.active %} ng-model="details_model_disable" disabled="disabled" {% else %}
+                    disabled="disabled" {% endif %} />
+                  <label for="is_detail-{{ uuid }}">Si</label>
+                </div>
+                <div class="col input-field s3">
+                  <input ng-if="suggestions[0].invoiceDetailOption != 'DETAIL'" type="radio" class="with-gap"
+                         id="is_not_detail-{{ uuid }}"
+                         name="groupdetail" {% if modal.environment == 'movil' and modal.data.modal_impresa.active %} ng-model="details_model_no" ng-value="summary" ng-init='details_model_no=summary' ng-click="changeDetail('SUMMARY')" {% elseif modal.environment == 'fijo' and modal.data.modal_impresa.active %} ng-model="summary_model_disable" ng-value="summary" ng-init='summary_model_disable=summary' disabled="disabled" {% else %}
+                    disabled="disabled" {% endif %} />
+                  <input ng-if="suggestions[0].invoiceDetailOption == 'DETAIL'" type="radio" class="with-gap"
+                         id="is_not_detail-{{ uuid }}"
+                         name="groupdetail" {% if modal.environment == 'movil' and modal.data.modal_impresa.active %} ng-model="details_model_no" ng-click="changeDetail('SUMMARY')" {% elseif modal.environment == 'fijo' and modal.data.modal_impresa.active %} ng-model="details_model_disable" disabled="disabled" {% else %}
+                    disabled="disabled" {% endif %} />
+                  <label for="is_not_detail-{{ uuid }}">No</label>
+                </div>
+              </div>
+            {% endif %}
+          {% endif %}
+
+          {# Add preloading to pop up #}
+          <div class="preloadingContainer preloading-set-up" style="display: block;">
+          <div class="preloadingData" style="display: flex;">
+            <svg class="spinner" width="100%" height="100%" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+              <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+            </svg>
+          </div>
+        </div>
+
+          {# Add terms and condition #}
+          <div class="col input-field s12">
+            {% if buttons.terms_condition.show %}
+              <p class="condiciones">Al presionar ACEPTAR estas aceptando las <a href="{{ buttons.terms_condition.url }}" target="_blank">condiciones</a> del
+                servicio</p>
+            {% endif %}
+          </div>
+          <div class="actions col input-field s12">
+            {% if buttons.modal_accept.show %}
+              <button {% if buttons.modal_accept.active %} class="right waves-effect waves-light btn btn-primary send-conf" type="submit"
+              {% else %} disabled {% endif %}>
+                {{ buttons.modal_accept.label }}
+              </button>
+            {% endif %}
+            {% if buttons.modal_cancel.show %}
+              <a name="{{ uuid }}" {% if buttons.modal_cancel.active %} id="close-set-up-invoice" ng-click="reset($event)" class="right modal-close waves-effect waves-light btn btn-second" {% else %} disabled {% endif %} >{{ buttons.modal_cancel.label }}</a>
+            {% endif %}
+          </div>
+       </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+{% block table %}
+{% endblock %}
+
+{% block other_content_data %}
+{% endblock %}
+
+{% block data %}
+  {% set class = 'm3' %}
+    <div class="billing-shipping clearfix" data-ng-repeat="billing in suggestions track by $index">
+      {% for field in fields %}
+        {% if ("12-columns" in field.class) %}
+          {% set class = 'm12' %}
+        {% elseif ("11-columns" in field.class) %}
+          {% set class = 'm11' %}
+        {% elseif ("10-columns" in field.class) %}
+          {% set class = 'm10' %}
+        {% elseif ("9-columns" in field.class) %}
+          {% set class = 'm9' %}
+        {% elseif ("8-columns" in field.class) %}
+          {% set class = 'm8' %}
+        {% elseif ("7-columns" in field.class) %}
+          {% set class = 'm7' %}
+        {% elseif ("6-columns" in field.class) %}
+          {% set class = 'm6' %}
+        {% elseif ("5-columns" in field.class) %}
+          {% set class = 'm5' %}
+        {% elseif ("4-columns" in field.class) %}
+          {% set class = 'm4' %}
+        {% elseif ("3-columns" in field.class) %}
+          {% set class = 'm3' %}
+        {% elseif ("2-columns" in field.class) %}
+          {% set class = 'm2' %}
+        {% elseif ("1-columns" in field.class) %}
+          {% set class = 'm1' %}
+        {% endif %}
+
+        <div class="col s12  {{ class }}">
+          <div class="row-field input-card clearfix">
+            {% if field.service_field == 'title' %}
+              {% if field.label is not empty %}
+                <h2 class="title-card">{{ field.label }}</h2>
+              {% endif %}
+            {% elseif field.service_field == 'show_invoice_billing' %}
+              {% if field.label is not empty %}
+               <div  class="col s6 m6 l6">
+                <p class="subtitle-card">{{ field.label }}</p>
+               </div>
+              {% endif %}
+              <div  class="col s6 m6 l6">
+                <p class="outstanding">{[{ billing.label }]}</p>
+              </div>
+            {% elseif field.service_field == 'show_invoice_informative_text' %}
+              <div class="col s12 m12 l12">
+                 <p ng-if="billing.show_invoice_billing != 'digital' && billing.show_invoice_billing != 'ambas'"
+                  class="note-bill">{{ field.value }}</p>
+               </div>
+            {% elseif field.service_field == 'show_invoice_address' %}
+              <div ng-if="billing.show_invoice_billing == 'ambas' || billing.show_invoice_billing == 'impresa'">
+                {% if field.label is not empty %}
+                 <div  class="col s6 m6 l6">
+                   <p class="subtitle-card">{{ field.label }}</p>
+                 </div>
+                {% endif %}
+                <div  class="col s6 m6 l6">
+                   <p class="outstanding">{[{ billing.{{ field.service_field }} }]}</p>
+                </div>
+              </div>
+            {% elseif field.service_field == 'show_invoice_email' %}
+              <div ng-if="billing.show_invoice_billing == 'ambas' || billing.show_invoice_billing == 'digital'">
+                {% if field.label is not empty %}
+                 <div  class="col s6 m6 l6">
+                   <p class="subtitle-card">{{ field.label }}</p>
+                 </div>
+                {% endif %}
+                <div  class="col s6 m6 l6">
+                  <p class="outstanding">{[{ billing.{{ field.service_field }} }]}</p>
+                </div>
+              </div>
+            {% elseif field.service_field != 'show_invoice_address' and field.service_field != 'show_invoice_city' %}
+              {% if field.label is not empty %}
+              <div  class="col s6 m6 l6">
+                <p class="subtitle-card">{{ field.label }}</p>
+              </div>
+              {% endif %}
+              <div  class="col s6 m6 l6">
+                <p class="outstanding">{[{ billing.{{ field.service_field }} }]}</p>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+
+      <div class="form-wrapper-button">
+        <div class="col input-field s12">
+        {% if buttons.action_card_update.show %}
+          <a ng-if="billing.show_invoice_billing == 'digital' || billing.show_invoice_billing == 'ambas'" {% if buttons.action_card_update.active %} href="#modalFormDeliveryStatus-{{ uuid }}" {% else %} disabled {% endif %} class="right waves-effect waves-light btn btn-primary">
+            {{ buttons.action_card_update.label }}
+          </a>
+        {% endif %}
+        {% if buttons.action_card_get.show %}
+          <a ng-if="billing.show_invoice_billing != 'digital' && billing.show_invoice_billing != 'ambas'" {% if buttons.action_card_get.active %} href="#modalFormDeliveryStatus-{{ uuid }}" {% else %} disabled {% endif %} class="right waves-effect waves-light btn btn-primary">
+            {{ buttons.action_card_get.label }}
+          </a>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+{% endblock %}

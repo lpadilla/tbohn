@@ -1,0 +1,7 @@
+name: TBO Core
+type: module
+description: TBO Core
+core: 8.x
+package: TBO
+dependencies:
+  - tbo_general

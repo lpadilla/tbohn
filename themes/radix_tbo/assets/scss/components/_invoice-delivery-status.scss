@@ -1,0 +1,119 @@
+.invoice-delivery-status {
+  padding: 20px;
+
+  .modal-content {
+    h2 {
+      color: $blue-tigo;
+      font-weight: 300;
+      font-size: 24px;
+    }
+
+    form {
+      display: initial;
+    }
+
+    .recibir-lbl {
+      color: $text-label;
+      font-weight: 300;
+      font-size: 12px;
+    }
+
+    .digital-options-chk,
+    .printed-options-chk {
+      label {
+        color: $text-input;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 1.4;
+      }
+
+      [type="checkbox"].filled-in:checked + label:after {
+        border: 2px solid $blue-tigo;
+        background-color: $blue-tigo;
+      }
+    }
+
+    #digital-options,
+    #printed-options {
+      .input-field {
+        label {
+          position: initial;
+          color: $text-label;
+          font-weight: 300;
+          font-size: 12px;
+          transform: initial;
+        }
+
+        input {
+          padding-left: 0;
+          height: auto;
+          border-bottom: 0;
+          color: $text-input;
+          font-weight: 400;
+          font-size: 14px;
+        }
+      }
+    }
+
+    #printed-options {
+      div:nth-child(2) {
+        .input-field { margin: 0; }
+      }
+    }
+
+    .factura-detallada {
+      p {
+        display: inline-block;
+
+        &:nth-child(1),
+        &:nth-child(2) { margin-right: 20px; }
+
+        label { padding-left: 25px; }
+
+        [type="radio"] + label:before,
+        [type="radio"] + label:after {
+          margin: 2px;
+          width: 20px;
+          height: 20px;
+          border: 2px solid $blue-tigo;
+        }
+        [type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:after { background-color: $blue-tigo; }
+      }
+    }
+
+    .condiciones {
+      margin-bottom: 30px;
+      font-size: 12px;
+
+      a { color: $blue-tigo; }
+    }
+
+    .actions {
+      text-align: right;
+
+      a:first-child { margin-right: 30px; }
+
+      a {
+        color: $blue-tigo;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .label,
+  .data {
+    color: $blue-tigo;
+    font-size: 14px;
+  }
+
+  .label { font-weight: 500; }
+
+  .data { font-weight: 400; }
+
+  .ctn-btn {
+    margin-top: 10px;
+    text-align: right;
+
+    a { margin: 0; }
+  }
+}

@@ -1,0 +1,91 @@
+
+{#
+/**
+ * @file
+ * Template for a form element.
+ */
+#}
+
+{% if disabled == NULL and type != 'radio'%}
+{% set classes = [
+'input-field col s12 m6 l6',
+'form-group',
+'form-type-' ~ type|clean_class,
+'form-item-' ~ name|clean_class,
+title_display not in ['after', 'before'] ? 'form-no-label',
+disabled == 'disabled' ? 'form-disabled form-item-disabled',
+type == 'checkbox' ? 'checkbox',
+type == 'radio' ? 'radio',
+type == 'date prefix' ? 'col m6',
+] %}
+{% set description_classes = [
+'help-block',
+description_display == 'invisible' ? 'visually-hidden',
+] %}
+{% else %}
+    {% set classes = [
+    'input-field col s12 m12 l12',
+    'form-group',
+    'form-type-' ~ type|clean_class,
+    'form-item-' ~ name|clean_class,
+    title_display not in ['after', 'before'] ? 'form-no-label',
+    disabled == 'disabled' ? 'form-disabled form-item-disabled',
+    type == 'checkbox' ? 'checkbox',
+    type == 'radio' ? 'radio',
+    type == 'date' ? 'col m6',
+    ] %}
+    {% set description_classes = [
+    'help-block',
+    description_display == 'invisible' ? 'visually-hidden',
+    ] %}
+{% endif %}
+<div{{ attributes.addClass(classes) }}>
+    {% if (type == 'textfield' or type == 'email' or type == 'tel' or type == 'select' or type == "file") %}
+        {% if disabled == 'disabled' %}
+            {{ children }}
+
+            {{ label }}
+        {% else %}
+            {{ children }}
+            {{ label }}
+        {% endif %}
+    {% else %}
+
+        {% if label_display in ['before', 'invisible'] %}
+            {{ label }}
+        {% endif %}
+
+
+        {% if prefix is not empty %}
+            {{ prefix }}
+        {% endif %}
+
+        {% if description_display == 'before' and description.content %}
+            <div{{ description.attributes }}>
+                {{ description.content }}
+            </div>
+        {% endif %}
+
+        {{ children }}
+
+        {% if suffix is not empty %}
+            {{ suffix }}
+        {% endif %}
+
+        {% if label_display == 'after' %}
+            {{ label }}
+        {% endif %}
+
+        {% if errors %}
+            <div class="form-item--error-message">
+                {{ errors }}
+            </div>
+        {% endif %}
+
+        {% if description_display in ['after', 'invisible'] and description.content %}
+            <p{{ description.attributes.addClass(description_classes) }}>
+                {{ description.content }}
+            </p>
+        {% endif %}
+    {% endif %}
+</div>

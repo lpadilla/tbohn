@@ -1,0 +1,137 @@
+sms_balance:
+  js:
+    js/directive/sms_balance.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+sms_consumption_history:
+  js:
+    js/directive/sms_consumption_history.js: {}
+    js/directive/consumption_filters.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+    - core/jquery.ui.datepicker
+
+consumption-detail-data:
+  version: 1.x
+  js:
+    js/directive/consumption_detail_data.js: {}
+    js/directive/consumption_filters.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+consumption-filters:
+  version: 1.x
+  js:
+    js/directive/consumption_filters.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+card_mobile_call_history:
+  version: 1.x
+  js:
+    js/directive/mobile_call_history.js: {}
+    js/directive/consumption_filters.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+    - core/jquery.ui.datepicker
+
+card_mobile_call_history_chart:
+  version: 1.x
+  js:
+    js/directive/mobile_call_history_chart.js: {}
+    js/directive/consumption_filters.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+    - core/jquery.ui.datepicker
+
+check-mobile-details-usage:
+  version: 1.x
+  js:
+    js/directive/check_mobile_details_usage.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+    ../tbo_general/js/<liveValidationsForm></liveValidationsForm>.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+check-mobile-usage:
+  version: 1.x
+  js:
+    js/directive/check_mobile_usage.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+    ../tbo_general/js/liveValidationsForm.js: {}
+    ../tbo_general/js/<liveValidationsForm></liveValidationsForm>.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+card_mobile_call_history_chart:
+  version: 1.x
+  js:
+    js/directive/mobile_call_history_chart.js: {}
+    js/directive/consumption_filters.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+    - core/jquery.ui.datepicker
+
+fixed_consumption_histogram:
+  version: 1.x
+  js:
+    js/directive/fixed_consumption_histogram.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+fixed_consumption_daily:
+  version: 1.x
+  js:
+    js/directive/fixed_consumption_daily.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+historical-consumption-per-month:
+  version: 1.x
+  js:
+    js/directive/historical_consumption_per_month.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+fixed_consumption_data:
+  version: 1.x
+  js:
+    js/directive/fixed_consumption_data.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo

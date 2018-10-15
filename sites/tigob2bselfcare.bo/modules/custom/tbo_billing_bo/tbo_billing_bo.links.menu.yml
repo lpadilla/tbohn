@@ -1,0 +1,6 @@
+tbo_billing_bo.tbo_billing_payment_settings:
+  title: 'TBO Facturas Bolivia'
+  route_name: tbo_billing_bo.bill_payment_settings
+  description: 'Menu for billing configuration for BO'
+  parent: system.admin_config_system
+  weight: 99

@@ -1,0 +1,359 @@
+.modal{
+  /* overflow: hidden;*/
+  background-color: $color-popUp;
+  @media #{$medium-and-down}{
+    width: 86%;
+  }
+  .messages{
+    .close{
+      top: 4px;
+    }
+  }
+  .modal-content{
+    padding: 24px 14px 0;
+    @media #{$large-and-up}{
+      padding: 24px 24px 0;
+    }
+    .messages-popup{
+      &.alert-success{
+        overflow: hidden;
+        .icon-success{
+          float: left;
+          width: 34px;
+          height: 40px;
+          margin-top: 9px;
+          .path1, .path2{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+          }
+
+        }
+        .txt-alert{
+          float: left;
+          width: 80%;
+          // margin: 6px 0 0 16px;
+          margin: 6px 0 0 14px;
+
+          p{
+            color:#9CC553;
+            font-size: 14px;
+            line-height: 20px;
+            margin:0 0 1px 20px;
+          }
+        }
+      }
+    }
+    p.recibir-lbl{
+      font-size: 11px;
+      line-height: 11px;
+      color:#A8AAB1;
+      margin: 4px 0 0;
+      font-weight: $regular;
+    }
+    .txtdtalle-bill{
+      margin: 5px 0 0 0;
+      font-size: 11px;
+
+    }
+    p.condiciones{
+      font-size: 11px;
+      line-height: 13px;
+      color:#879AB8;
+      margin-top: 0;
+      a{
+        color:$blue-tigo;
+        font-size: 11px;
+        line-height: 13px;
+
+      }
+    }
+    article{
+      padding: 0 !important;
+    }
+    .label{
+      color:#A8AAB1;
+      font-weight: $regular;
+      font-size: 14px;
+      line-height: 14px;
+      font-family: "Roboto", sans-serif;
+      float: left;
+    }
+    .input{
+      color:#2E2F37;
+      font-weight: $regular;
+      font-size: 14px;
+      line-height: 14px;
+      font-family: "Roboto", sans-serif;
+      float: right;
+    }
+
+  }
+  form{
+    overflow: hidden;
+    .row{
+      .form-item{
+        &.form-wrapper-button{
+          //margin: 0;
+          .button{
+            //margin-bottom: 0;
+          }
+        }
+      }
+      .tags-wrapper{
+        #suggestions{
+          position: relative;
+          top:0;
+        }
+      }
+    }
+    .input-field .select-wrapper + label{
+      top: -8px;
+    }
+    #edit-cards{
+      margin-bottom: 20px;
+    }
+  }
+  .modal-footer{
+    background-color: $color-popUp;
+    margin-bottom: 24px;
+    padding: 0 24px 0;
+    .input-field{
+      // padding: 0;
+    }
+  }
+  &.users-tigo-admin{
+    max-width: 400px;
+    .title {
+      margin-bottom: 25px;
+      padding: 0;
+      color: #00377B;
+      font-weight: 300;
+      font-size: 20px;
+    }
+
+  }
+  &.popup-my-cards,
+  &#external-delete-card, &.external-delete-card,
+  &#popup-schedule-payment, &.popup-schedule-payment{
+    max-width: 326px;
+    .modal-content{
+      padding-bottom: 0;
+      .form-manage-credit-cards{
+        margin: 10px 5px 10px 5px;
+      }
+    }
+    .modal-footer{
+      padding: 0px 29px;
+    }
+  }
+  &#popup-schedule-payment, &.popup-schedule-payment{
+    .modal-content{
+      padding-bottom: 24px;
+      h2.title{
+        margin-top: 23px;
+        font-size: 24px;
+        line-height: 24px;
+        font-weight: $regular;
+      }
+    }
+    .modal-footer{
+      display: none;
+    }
+  }
+  &#modalReasignar, &.modalReasignar{
+    max-width: 370px;
+    .modal-content{
+      padding-bottom: 24px;
+    }
+  }
+  &#modalFormDeliveryStatus, &.modalFormDeliveryStatus{
+    max-width: 300px;
+  }
+  &.modal-help{
+    max-width: 572px;
+    .modal-content{
+      overflow: hidden;
+      .show_mobile{
+        display: block;
+        @media #{$large-and-up}{
+          display: none;
+        }
+      }
+      .show_desktop{
+        display: none;
+        @media #{$large-and-up}{
+          display: block;
+        }
+      }
+      .img-card{
+        width: 100%;
+        text-align: center;
+        img{
+          width: 100%;
+          height: auto;
+          max-width: 233px;
+        }
+      }
+      h3{
+        font-size: 14px;
+        line-height: 14px;
+        color:$blue-tigo;
+        margin: 10px 0;
+        padding: 0;
+        display: none;
+        @media #{$large-and-up}{
+          display: block;
+        }
+
+      }
+      p.description-card{
+        word-break: break-all;
+        margin-top: 6px;
+      }
+    }
+  }
+  &.share-balance, &.confirm-share-balance{
+    max-width: 464px;
+    .box-current-balance{
+      p.text-current{
+        margin-bottom: 1px;
+        span.label-current, span.value-current{
+          font-weight: $medium;
+          font-size: 14px;
+          line-height: 14px;
+          color:$blue-tigo;
+          display: inline-block;
+        }
+        span.value-current{
+          font-weight: $regular;
+        }
+      }
+      p.date-update{
+        color:#879AB8;
+        font-size: 11px;
+        line-height: 11px;
+        font-weight: $regular;
+        margin-top: 0;
+      }
+    }
+    .actions{
+      text-align: right;
+    }
+    .box-destination{
+      margin: 20px 0 20px;
+    }
+    .box-destination-balance{
+      padding-bottom: 3px;
+      .col{
+        margin-bottom: 3px;
+      }
+      .line{
+        border-bottom: 1px solid #8B99B6;
+        clear: both;
+        margin: 0 0.75rem;
+      }
+    }
+    .box-result{
+      margin: 12px 0;
+      .label, .input{
+        font-weight: $medium;
+        color:$blue-tigo;
+      }
+    }
+  }
+}
+
+/*** modal con drupal ***/
+.ui-dialog{
+  border: none;
+  -webkit-box-shadow: #666 0px 2px 24px;
+  -moz-box-shadow: #666 0px 2px 24px;
+  box-shadow: #666 0px 2px 24px;
+  max-width: 96%;
+  left: 50%;
+  transform: translate(-50%);
+  -webkit-transform: translate(-50%);
+  @media #{$large-and-up} {
+    transform: none;
+    -webkit-transform: none;
+  }
+  .ui-widget-header{
+    background: white;
+    border: none;
+    padding: 24px 24px 24px;
+    .ui-dialog-title{
+      font-family: "Roboto", sans-serif;
+      color:$blue-tigo;
+      font-weight: 300;
+      font-size: 24px;
+      line-height: 24px;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .ui-dialog-content{
+    position: relative;
+    padding: 0 24px 24px;
+    .modal-content{
+      margin: 0;
+      height: 100%;
+      position: relative;
+      p{
+        color:$color-text;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 24px;
+        margin: 0;
+        padding: 0;
+      }
+      .form-wrapper-button{
+        text-align: center;
+        margin-top: 20px;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        a{
+          /* font-family: "Roboto", sans-serif;
+           color:white;
+           font-size: 14px;
+           line-height: 14px;
+           margin-bottom: 0;*/
+        }
+      }
+    }
+  }
+  .modal_history{
+    //height: auto !important;
+    max-height: 235px !important;
+    overflow: hidden !important;
+    .row{
+      margin-bottom: 0px;
+
+      .date{
+        margin: 25px 0 22px 0;
+      }
+      h6{
+        color:#A6A8AF;
+        font-size: 11px;
+        line-height: 11px;
+        font-weight: $regular;
+      }
+      p{
+        color:#6F747E;
+        font-size: 14px;
+        line-height: 14px;
+        margin: 0;
+      }
+      .modal-footer{
+        margin: 20px 0 0;
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+.ui-widget-overlay{
+  background: #000;
+  opacity: 0.5;
+}

@@ -1,0 +1,83 @@
+{% import "tbo_general_bo.html.twig" as widgets %}
+<div class="wrapper-create" data-ng-companies-manage ng-cloak ng-init="uuid='{{ uuid }}'">
+  <div class="box-body">
+    <div class="row">
+      <div class="input-field col s12">
+        {% if title %}
+          <h5 class="title-core">{{ title }}</h5>
+        {% endif %}
+        <h5 class="title-core">{{'Empresas asociadas por tigo admin'|trans}}</h5>
+      </div>
+    </div>
+  </div>
+  <div class="box-body card-block">
+    <div class="row">
+      <div class="col s12">
+        <div class="card gray-card clearfix">
+          <div class="col s12">
+            <!-- Form Filters -->
+            <form data-ng-submit="filterCompanies()">
+              <div class="row">
+                {% for filter in filters %}
+                  {{ widgets.validate_style( filter.label, filter, filter.class) }}
+                {% endfor %}
+              </div>
+              {% if filters is not empty %}
+               <div class="row">
+                 <div class="col input-field s12">
+                   <button class="right waves-effect btn btn-primary" type="submit">{{'Consultar'|trans}}</button>
+                   <input type="reset" value="limpiar" class="right btn btn-clear click-filter-reset">
+                 </div>
+               </div>
+              {% endif %}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-body card-block">
+    <div class="row">
+      <div class="col s12 m12 l12">
+        <div class="card white clearfix">
+          <div class="col s12">
+            <table class="responsive-table">
+              <thead>
+              <tr>
+                {% for header in headers_table %}
+                  <th scope="col" ng-click="orderReverse('{{ header.service_field }}');"> {{ header.label }}</th>
+                {% endfor %}
+              </tr>
+              </thead>
+              <tbody>
+              <tr data-ng-repeat="compani in pagedItems[currentPage]">
+                <td ng-repeat="(key, enterprise) in compani">
+                  <div ng-if="key == 'status' || key == 'company_status'" class="regular-cell">
+                    {[{enterprise == 1 ? 'Activo' : 'Inactivo'}]}
+                  </div>
+                  <div ng-if="key != 'status' && key != 'company_status'" class="regular-cell">
+                    {[{enterprise == null || enterprise == "" ? "No disponible" : enterprise}]}
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <td colspan="{{ headers_table|length }}">
+                <!-- Get paginate -->
+                {{ widgets.paginate() }}
+              </td>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Structure -->
+  <div id="modalFormEnterprise" class="modal">
+    <div class="modal-content">
+      {{ form }}
+    </div>
+  </div>
+  <div id="modal"></div>
+</div>

@@ -1,0 +1,49 @@
+.path--batch{
+  header{
+    .hambuger-menu{
+      background-image:url('../images/logo.svg');
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 72px !important;
+      height: 40px !important;
+      margin-top: 5px;
+      .material-icons{
+        display: none;
+      }
+    }
+    .user-menu{
+      display: none;
+    }
+  }
+  .wrapper-page{
+    main{
+      padding-left: 0;
+      .tbo_main_menu{
+        display: none;
+      }
+      .container{
+        .progress{
+          height: inherit;
+          #updateprogress{
+            .progress__track{
+              border: 1px solid #707681;
+              background-color: #E2E3E5;
+              .progress__bar{
+                background-color: $blue-tigo;
+                height: 14px;
+              }
+            }
+            .progress__label{}
+            .progress__description{
+              margin-top: 10px;
+              color:$color-text;
+              font-size: 14px;
+              line-height: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

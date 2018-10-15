@@ -1,0 +1,9 @@
+adf_rest_api.adf_rest_api_settings_form:
+  path: '/admin/config/adf/restapisettings'
+  defaults:
+    _form: '\Drupal\adf_rest_api\Form\AdfRestApiSettingsForm'
+    _title: 'Configuracion global Adf Servicios REST'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

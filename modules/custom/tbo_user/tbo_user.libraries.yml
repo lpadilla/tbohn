@@ -1,0 +1,9 @@
+emulate-session:
+  version: 1.x
+  js:
+    js/directive/emulate_session.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo

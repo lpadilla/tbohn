@@ -1,0 +1,5 @@
+name: 'Tbo Lines'
+type: module
+description: 'Tbo Lines'
+core: 8.x
+package: TBO

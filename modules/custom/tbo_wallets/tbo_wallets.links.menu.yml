@@ -1,0 +1,6 @@
+tbo_wallets.wallets_config_form:
+  title: 'Configuración billeteras GETBALLANCEINFO'
+  route_name: tbo_wallets.wallets_config_form
+  description: 'Configuración bllleteras para manejo de saldos'
+  parent: system.admin_config_system
+  weight: 99

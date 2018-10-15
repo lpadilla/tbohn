@@ -1,0 +1,91 @@
+{% extends 'block__card_base.html.twig' %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+  {% block other_content_data %}
+    <div class="card-block">
+      <div class="row">
+        <div class="col s12">
+          {% block other_content_data_card %}
+            {% block other_content %}
+              <!-- Modal Structure -->
+              <div id="modalFormEnterprise" class="modal">
+                <div class="modal-content">
+                  {{ content }}
+                </div>
+              </div>
+
+              <div class="block-category-services card clearfix">
+                <div class="header col s12">
+                  <div class="col icon">
+                    <span class="icon-services">
+                      <span class="path1"></span>
+                      <span class="path2"></span>
+                    </span>
+                  </div>
+                  <div class="description col s10 m10">
+                    <span class="title">{{ label }}</span>
+                    <div class="description-value">
+                      {{ description.value|raw }}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="categories s12 col">
+                  <div class="category" ng-repeat="(key, category) in category_services track by $index">
+                    <div ng-if="category_with_service(category.parameter) == '0'">
+                      {# popup de invitacion #}
+                      <a ng-href="/invitation"
+                         class="modalcustomtwo segment-click"
+                         data-segment-event-alt="TBO - Visualizar Popup"
+                         data-segment-properties-alt='{"category":"Dashboard","label":"Popup {[{ category.label }]}","site":"NEW"}'
+                         data-segment-event="TBO - Seleccionar servicio - Consulta"
+                         data-segment-properties='{"category":"Dashboard","label":"{[{ category.label }]} - {[{category.type_category}]}","site":"NEW"}'
+                         ng-click="getDataInvitationPopup($event, key)">
+                        <img src="{[{ category.icon_url }]}"/>
+                        <span>{[{ category.label }]}</span>
+                      </a>
+                    </div>
+                    <div ng-if="category_with_service(category.parameter) == '1'">
+                      {# redirect a la pagina de servicios con filtro #}
+                      <a ng-href="/tbo_billing/summary/service?redirect={{ actions['action_0']['path_link'] }}&category={[{category.parameter}]}&type={[{category.type_category}]}"
+                         data-segment-event="TBO - Seleccionar servicio - Consulta"
+                         data-segment-properties='{"category":"Dashboard","label":"{[{ category.label }]} - {[{category.type_category}]}","site":"NEW"}'
+                         class="modalcustomtwo segment-click">
+                        <img src="{[{ category.icon_url }]}"/>
+                        <span>{[{ category.label }]}</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="buttons">
+                  {% for action in actions %}
+                    <a class="waves-light waves-effect btn btn-primary segment-click"
+                       data-segment-event="TBO - Todos tus servicios - Consulta"
+                       data-segment-properties='{"category":"Dashboard","label":"Ingresar zona servicios","site":"NEW"}'
+                       href="/tbo_billing/summary/briefcase?redirect={{ action.path_link }}">{{ action.label }}</a>
+                  {% endfor %}
+                </div>
+              </div>
+              <div id="modal" class="invitation-modal"></div>
+              <div id="modalForm" data-category="{[{ select_category }]}"></div>
+            {% endblock %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+    {# Add preloading to pop up #}
+    <div class="preloadingContainer preloading-category-services">
+      <div class="preloadingData" style="display: flex;">
+        <svg class="spinner" width="100%" height="100%" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+          <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+        </svg>
+      </div>
+    </div>
+    <style>
+      .preloading-category-services {
+        display: none !important;
+      }
+    </style>
+  {% endblock %}

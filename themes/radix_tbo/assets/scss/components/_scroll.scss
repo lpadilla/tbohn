@@ -1,0 +1,23 @@
+.scroll-content {overflow:auto;}
+
+.scroll-content::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.scroll-content::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.scroll-content::-webkit-scrollbar-track {
+  background: #fafafa;
+}
+
+.scroll-content {
+  overflow: auto;
+  scrollbar-face-color: #c1c1c1;
+  scrollbar-track-color: #fff;
+  scrollbar-arrow-color: #fff;
+  scrollbar-highlight-color: #c1c1c1;
+  -ms-scrollbar-base-color: transparent;
+}

@@ -1,0 +1,111 @@
+detalle_ver_producto_fijo:
+  version: 1.x
+  js:
+    js/directive/detalle_ver_producto_fijo.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+change_wifi_pass:
+  version: 1.x
+  js:
+    js/directive/change_wifi_pass.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+change_wifi_net_name:
+  version: 1.x
+  js:
+    js/directive/change_wifi_net_name.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+change_wifi_dmz:
+  version: 1.x
+  js:
+    js/directive/change_wifi_dmz.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+change_sim_card:
+  version: 1.x
+  js:
+    js/directive/change_sim_card.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+change_wifi_channel:
+  version: 1.x
+  js:
+    js/directive/change_wifi_channel.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+change_security_type:
+  version: 1.0
+  js:
+    js/directive/change_security_type.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+query_pqrs:
+  version: 1.x
+  js:
+    js/directive/query_pqrs.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+    - tigoapi_batch/tigoapi.batch
+    - core/drupal.dialog
+
+block_sim:
+  version: 1.0
+  js:
+    js/directive/block_sim.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+query_technical_support:
+  version: 1.x
+  js:
+    js/directive/query_technical_support.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+notification:
+  version: 1.x
+  js:
+    js/directive/notification.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo

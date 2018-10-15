@@ -1,0 +1,23 @@
+<!-- Show logo social -->
+{% if fields.logo %}	
+	{% if logo.show  %}
+		<a href="{{ logo.url }}" title="{{logo.name}}" rel="home" class="navbar-brand">
+		   <img src="{{ logo.src }}" alt="Home" class="social-logo">
+		</a>
+	{% endif %}
+ 	{% if logo.show2  %}
+		<a href="{{ logo.url2 }}" title="{{logo.name2}}" rel="home" class="navbar-brand">
+	    	<img src="{{ logo.src2 }}" alt="Home" class="social-logo">
+		</a>
+  	{% endif %}
+  	{% if logo.show3  %}
+		<a href="{{ logo.url3 }}" title="{{logo.name3}}" rel="home" class="navbar-brand">
+	    	<img src="{{ logo.src3 }}" alt="Home" class="social-logo">
+		</a>
+  	{% endif %}  	
+{% endif %}
+
+{% if secondfield.logo %}
+
+	
+{% endif %} 

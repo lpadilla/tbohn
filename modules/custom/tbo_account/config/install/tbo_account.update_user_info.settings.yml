@@ -1,0 +1,7 @@
+title_instructions: 'Actualizar datos.'
+instructions: 'Por favor actualice sus datos para recibir soporte sobre las transacciones realizadas en el portal.'
+terms_title: 'Términos y condiciones'
+terms_text: 'Al presionar GUARDAR está aceptando los <a target="@target" href="@link" >términos y condiciones</a>.'
+terms_node: 0
+show_popup: 1
+url: ''

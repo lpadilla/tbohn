@@ -1,0 +1,18 @@
+.card-tbo{
+  padding: 20px 25px 17px 20px;
+  h4{
+    font-size: 18px;
+    color: $color_title;
+    margin: 0;
+  }
+  .card-content{
+    padding: 22px 0 0 8px;
+  }
+}
+
+.icon-list{
+  &:before{
+    @include iconos-material('tigouneico','\e96b', 16px, bold);
+    color:$cyan-tigo;
+  }
+}

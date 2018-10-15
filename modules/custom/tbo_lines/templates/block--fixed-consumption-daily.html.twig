@@ -1,0 +1,191 @@
+{% extends 'block__card_base.html.twig' %}
+
+  {% block filters %}
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+{% block other_content_data %}
+    <div class="card-block  wrapper-fixed-consumption-daily">
+      <div class="box-body">
+        <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+          <div class="col s12">
+            <div class="card white-card clearfix">
+              <div class="header-card clearfix">
+                <div class="col s12">
+                  <h3 class="title-card2 hide-on-med-and-down">{{ title }}</h3>
+                  <h3 class="title-card2 hide-on-large-only">{{ 'Consumos:'|t }} {[{dateMobileTitle}]}</h3>
+                </div>
+              </div>
+              <div class="box-filter clearfix">
+                <div class="col s12">
+                  <form>
+                    <div class="row">
+                      {% for filter in filters %}
+                      {% if filter.show == 1 %}
+                        <div class="input-field {{ filter.class }}">
+                          <select data-ng-model="{{ filter.service_field}}" ng-change="changeResource()" ng-init="minutes_type = 'local_minutes'">
+                            <option value="local_minutes">{{ 'Minutos Locales'|t }}</option>
+                            <option value="minutes_nal_UNE">{{ 'Minutos nacionales UNE'|t }}</option>
+                            <option value="minutes_nal_others">{{ 'Minutos nacionales otros'|t }}</option>
+                            <option value="minutes_internal">{{ 'Minutos internacionales'|t }}</option>
+                          </select>
+                          <label>{{ filter.label }}</label>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="col s12">
+                <table
+                  class="fixed-consumption-daily-table table-white hide-on-med-and-down">
+                  <thead>
+                  <tr>
+                    {% for item in table %}
+                      {% if item.show == 1 %}
+                        <th scope="col" {% if item.service_field == 'hour' %} ng-click="orderResultsDaily('{{ item.service_field }}', '{{ loop.index }}')"{% endif %} >{{ item.label }} <span class="icon-order {{ item.service_field }}"></span></th>
+                      {% endif %}
+                    {% endfor %}
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr
+                    data-ng-repeat="item in pagedItemsDaily[currentPageDaily] track by $index"
+                    ng-show="pagedItemsDaily.length">
+                    <td ng-repeat="(key, value) in item track by $index" ng-if="key != 'timestamp'">
+                        <span>
+                          {[{value == null || value == "" ? "No disponible" : value}]}
+                        </span>
+                    </td>
+                  </tr>
+                  <tr ng-show="pagedItemsDaily.length == 0">
+                    <td colspan="12" id="nofoundop">
+                      {{ 'No hay información disponible para el recurso seleccionado. Por favor intenta con un recurso diferente.'|t }}
+                    </td>
+                  </tr>
+                  </tbody>
+                  <tfoot>
+                  {% block table_foot %}
+                    <td colspan="12">
+                      <div ng-if="pagedItemsDaily.length > 1" class="pagination">
+                        <ul class="pagination center-align-tigo">
+                          <li class="firts"
+                              ng-class="{disabled: currentPageDaily == 0}">
+                            <a href ng-click="prevPageDaily()">
+                              <i class="icon-prev">
+                                <span class="path1"></span>
+                              </i>
+                            </a>
+                          </li>
+                          <li
+                            ng-repeat="n in rangeDaily(pagedItemsDaily.length, currentPageDaily, currentPageDaily + gapDaily) "
+                            ng-class="{active: n == currentPageDaily}"
+                            ng-click="setPageDaily()" class="waves-effect">
+                            <a href ng-bind="n + 1">1</a>
+                          </li>
+                          <li class="last"
+                              ng-class="{disabled: (currentPageDaily) == pagedItemsDaily.length - 1}">
+                            <a href ng-click="nextPageDaily()">
+                              <i class="icon-next">
+                                <span class="path1"></span>
+                              </i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  {% endblock %}
+                  </tfoot>
+                </table>
+                {#tabla mobile#}
+                <table
+              class="fixed-consumption-daily-table-mobile table-white hide-on-large-only {% if active_columns_mobile > 3 %}responsive-table {% endif %}">
+                  <thead>
+                  <tr>
+                    {% for item in table_mobile %}
+                      {% if item.show == 1 %}
+                        <th scope="col" {% if item.service_field == 'hour' %} ng-click="orderResultsDailyM('{{ item.service_field }}', '{{ loop.index }}')"{% endif %} >{{ item.label }} <span class="icon-order {{ item.service_field }}"></span></th>
+                      {% endif %}
+                    {% endfor %}
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr
+                    data-ng-repeat="item in pagedItemsDailyMobile[currentPageDailyMobile] track by $index"
+                    ng-show="pagedItemsDailyMobile.length">
+                    <td ng-repeat="(key, value) in item track by $index" ng-if="key != 'timestamp'">
+                        <span>
+                          {[{value == null || value == "" ? "No disponible" : value}]}
+                        </span>
+                    </td>
+                  </tr>
+                  <tr ng-show="pagedItemsDailyMobile.length==0">
+                    <td colspan="12" id="nofoundop">
+                      {{ 'No hay información disponible para el recurso seleccionado. Por favor intenta con un recurso diferente.'|t }}
+                    </td>
+                  </tbody>
+                  <tfoot>
+                  <td colspan="12">
+                    <div ng-if="pagedItemsDailyMobile.length > 1"
+                         class="pagination">
+                      <ul class="pagination">
+                        <li class="firts"
+                            ng-class="{disabled: currentPageDailyMobile == 0}">
+                          <a href ng-click="prevPageDailyM()">
+                            <i class="icon-prev">
+                              <span class="path1"></span>
+                            </i>
+                          </a>
+                        </li>
+                        <li
+                          ng-repeat="n in rangeDailyM(pagedItemsDailyMobile.length, currentPageDailyMobile, currentPageDailyMobile + gapDailyM) "
+                          ng-class="{active: n == currentPageDailyMobile}"
+                          ng-click="setPageDailyM()" class="waves-effect">
+                          <a href ng-bind="n + 1">1</a>
+                        </li>
+                        <li class="last"
+                            ng-class="{disabled: (currentPageDailyMobile) == pagedItemsDailyMobile.length - 1}">
+                          <a href ng-click="nextPageDailyM()">
+                            <i class="icon-next">
+                              <span class="path1"></span>
+                            </i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                  </tfoot>
+                </table>
+                {#fin tabla mobile#}
+              </div>
+              <div class="footer-card clearfix">
+                <div class="col s12">
+                  <div class="row informative-section clearfix">
+                    <div class="col s12 m8">
+                      <span
+                        class="informative_text">{{ informative_text }}</span>
+                    </div>
+                    <div class="center-mobile col s12 m4">
+                      <a
+                        class="btn-download-report enterprise-modal-form waves-effect waves-light btn btn-primary segment-click"
+                        data-segment-event="TBO - Descargar reporte consumos - Tx"
+                        data-segment-properties='{"category":"Portafolio de Servicios","label":"Telefonía - diario - fijo","site":"NEW"}'
+                        href="{[{fileDaily}]}" ng-click="logDailyDownload()">
+                        <i class="prefix-btn icon-download2">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                        </i>
+                        {{ download_label }}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

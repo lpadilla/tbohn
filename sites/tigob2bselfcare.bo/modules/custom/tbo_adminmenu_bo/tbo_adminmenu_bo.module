@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_adminmenu_bo.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_adminmenu_bo_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_cards module.
+    case 'help.page.tbo_adminmenu_bo':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Tbo BO Admin Empresa menu') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_adminmenu_bo_theme() {
+  return [
+    'admin_empresa_menu' => [
+      'variables' => [
+        'data' => []
+      ],
+      'template' => 'block--admin-empresa-menu',
+      
+    ],
+    
+  ];
+}

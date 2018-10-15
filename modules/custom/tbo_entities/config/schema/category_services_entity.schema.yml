@@ -1,0 +1,27 @@
+tbo_entities.category_services_entity.*:
+  type: config_entity
+  label: 'Categoria de servicios config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    icon:
+      type: string
+      label: 'icon'
+    url:
+      type: string
+      label: 'url'
+    invitation_popup:
+      type: string
+      label: 'invitation_popup'
+    type_category:
+      type: string
+      label: 'type'
+    parameter:
+      type: string
+      label: 'parameter'
+    uuid:
+      type: string

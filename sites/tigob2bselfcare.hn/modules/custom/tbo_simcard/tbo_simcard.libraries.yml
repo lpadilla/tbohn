@@ -1,0 +1,4 @@
+tbo_simcard:
+  version: 1.x
+  js:
+    js/tbo_simcard.js: {}

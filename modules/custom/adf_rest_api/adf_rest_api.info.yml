@@ -1,0 +1,7 @@
+name: adf_rest_api
+type: module
+description: Adf Rest Api
+core: 8.x
+package: ADF
+dependencies:
+  - adf_core

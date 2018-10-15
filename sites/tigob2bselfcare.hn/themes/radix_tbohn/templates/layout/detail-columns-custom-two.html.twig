@@ -1,0 +1,36 @@
+<div class="layout-tbo">
+  <div class="box-body">
+    {% if content.header %}
+      <div class="top-region row mb0">
+        <div class="col s12">
+         {{ content.header }}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if content.one_column or content.two_column %}
+      <div class="center-region">
+        <div class="row">
+          {% if content.one_column %}
+            <div class="left-region col s12 l6">
+              {{ content.one_column }}
+            </div>
+          {% endif %}
+          {% if content.two_column %}
+            <div class="right-region col s12 l6">
+              {{ content.two_column }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if content.bottom %}
+      <div class="bottom-region row">
+        <div class="col s12">
+          {{ content.bottom }}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>

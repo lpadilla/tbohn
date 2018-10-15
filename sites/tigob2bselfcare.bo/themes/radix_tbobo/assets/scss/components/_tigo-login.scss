@@ -1,0 +1,104 @@
+.main-authentication {
+  position: relative;
+  .main-top{
+    //display: none;
+  }
+  .container{
+    @media #{$large-and-up}{
+      padding-left: 0;
+    }
+    .box-container{
+      @media #{$large-and-up}{
+        max-width: 100%;
+        width: 100%;
+        border: none;
+      }
+    }
+  }
+}
+
+header{
+  .row{
+    .unlocked{
+      max-width: 310px;
+      margin: 0 auto;
+      @media #{$medium-and-up}{
+        max-width: 100%;
+      }
+      .block--radix-tbo-branding{
+        a{
+          display: -webkit-box;
+          display: -moz-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          img{
+            max-width: 68px;
+            width: 100%;
+            height: auto;
+            @media #{$large-and-up} {
+              max-width: 70px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.tigo-login {
+  max-width: 310px;
+  margin:35px auto 0;
+  @media #{$large-and-up} {
+    padding: 0;
+    max-width: 360px;
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    margin: 0 0 0 -177px;
+  }
+  .card {
+    padding: 0;
+    transition: none;
+    width: 100%;
+    margin: 0;
+    border: none;
+    @include box-shadow(0px,0px,0px,0, transparent, true);
+    @media #{$large-and-up} {
+      padding: 20px 20px 25px;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+
+    }
+    > h4.block__title {
+      padding: 0;
+      margin:0 0 10px 0;
+      font-size: 24px;
+      line-height: 24px;
+      color:$blue-tigo;
+      font-weight: $light;
+      text-transform: capitalize;
+    }
+    .actions{
+      margin-bottom: 35px;
+      p{
+        margin: 0;
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+    .links {
+      .btn-second{
+        margin-right: 9px;
+        padding: 11px 13px;
+        margin-bottom: 0;
+      }
+      .btn-primary{
+        padding: 11px 13px;
+        @media #{$large-and-up} {
+          min-width: 143px;
+        }
+        margin-bottom: 0;
+      }
+    }
+  }
+
+}

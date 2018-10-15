@@ -1,0 +1,105 @@
+
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+  <div class="card-block block-contracts" infinite-scroll="loadMore()" infinite-scroll-distance="1">
+    <div class="box-body block-contracts" >
+      <h5 class="title-front hide-on-med-and-down">
+        {[{ title }]}       
+      </h5> <div class="upcard" >{{title}}</div>
+
+      <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+        <div class="col s12">
+          {%set longitud = invoices|length %} 
+          {% set count = 0 %}
+              
+          
+          
+          
+            <div ng-repeat="invoices in invoices" class="card clearfix white invoice-content block-width-inicial">
+              <div class="col s12 m12 l12 xl8 content block-contracts">
+                <div class="box-bill col row s12">
+                  <div class="column-left col s12 m12 l4 xl5 block-contracts" >
+                    <div class="left card-icon">
+                      <i class="prefix" ng-class="title == 'FACTURA DE SERVICIOS FIJOS' ? 'icon-business-cyan' : 'icon-mobilephone-cyan'">
+                      
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                      </i>
+                    </div>             
+                   
+                   
+
+                    {% for field in fields %}
+                                        
+                        {% if field.service_field == 'contract' %}
+                        <div class='col-contract' >
+                          
+                          <p class='title-card numcontract' >{[{invoices.contract}]}</p>
+                        </div> 
+                        {% endif %}
+
+                        {% if field.service_field == 'lines' %}
+                        <div class='col-lineas' >
+                          <p class="del-bottom">{{ field.title }}</p>
+                          <p class="del-up" > {[{invoices.lineas}]}</p>
+                        </div> 
+                        {% endif %}
+                        {% if field.service_field == 'contract_expired' %}
+                        <div class="col-deuda" >
+                          <p class="del-bottom" >{{ field.title }}</p>
+
+                          
+                          <p ng-if="invoices.deuda != ''" class="del-up" > 
+                          {[{invoices.deuda}]}
+                          </p>
+                          <p ng-if="invoices.deuda == ''" class="del-up" > 
+                          n/d
+                          </p>
+
+                         
+                        </div> 
+                        {% endif %}
+                        
+                        {% if field.service_field == 'planes_lines' and field.show == 1 %}
+                        <div class="col-ver-lineas" >
+                          <p ><a class='title-card verlineas-a' href='/{{url_balance}}?flag={[{invoices.flag}]}&num_contract={[{invoices.num_contract}]}'>{{ field.label }}</a></p>                         
+                        </div> 
+                        {% endif %}
+                        
+                        {% if field.service_field == 'manage' and field.show == 1 %}
+
+                          <div class='col-admin'>
+                            <p ><a class='title-card adminlineas'  href='/{{url_balance}}?flag={[{invoices.flag}]}&d=a&num_contract={[{invoices.num_contract}]}'>{{ field.title }}</a></p>
+                           
+                          </div> 
+                        {% endif %}
+                      
+                    {% endfor %}
+
+                  </div>
+                  
+                </div>
+              </div> 
+
+              <div class="clear"></div> 
+            </div>
+
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Para mostrar opcion de exportar -->
+  {% if export == 1 %}
+  <div class="block-contracts" >
+  <a href='{{url}}' class='exportar-contract' >
+    {{title_exportar}}
+    </a>
+  </div>
+  {% endif %}
+{% endblock %}

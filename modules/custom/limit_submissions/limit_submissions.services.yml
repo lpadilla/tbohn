@@ -1,0 +1,4 @@
+services:
+  limit_submissions_service:
+    class: Drupal\limit_submissions\LimitSubmissionsService
+    arguments: []

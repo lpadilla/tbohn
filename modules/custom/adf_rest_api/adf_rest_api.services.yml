@@ -1,0 +1,4 @@
+services:
+  adf_rest_api.client:
+    class: Drupal\adf_rest_api\AdfRestApiClient
+    arguments: []

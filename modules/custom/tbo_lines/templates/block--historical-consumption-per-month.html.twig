@@ -1,0 +1,198 @@
+{% extends 'block__card_base.html.twig' %}
+
+  {% block filters %}
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+  {% block other_content_data %}
+    <div class="card-block  wrapper-fixed-consumption-per-month {{ class }}">
+      <div class="box-body">
+        <div class="row">
+          <div class="col s12">
+            <div class="card white clearfix">
+              <div class="header-card clearfix">
+                <div class="col s12">
+                  <h3 class="title-card2">{{ title_card }}</h3>
+                </div>
+              </div>
+              <div class="col s12 card-content">
+                <div class="informative-section clearfix hide-on-large-only">
+                  <div class="informative_text">
+                    <i class="prefix icon-info-cyan"><span class="path1"></span><span class="path2"></span></i>
+                   <div class="txt-informative">{{ informative_text_mobile }}</div>
+                  </div>
+                </div>
+                <table
+                  class="consumption-month-table table-white hide-on-med-and-down">
+                  <thead>
+                  <tr>
+                    {% for item in table %}
+                      {% if item.show == 1 %}
+                        <th
+                          scope="col" {% if item.service_field == 'date' %} ng-click="orderResultsMonth('{{ item.service_field }}', '{{ loop.index }}')"{% endif %} >{{ item.label }}
+                          <span
+                            class="icon-order {{ item.service_field }}"></span>
+                        </th>
+                      {% endif %}
+                    {% endfor %}
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr
+                    data-ng-repeat="item in pagedItemsMonth[currentPageMonth] track by $index"
+                    ng-show="pagedItemsMonth.length">
+                    <td ng-repeat="(key, value) in item track by $index"
+                        ng-if="key != 'timestamp'">
+                      <span ng-if="key!= 'date'">
+                          {[{value == null || value == "" ? "0" : value}]}
+                      </span>
+                      <a ng-if="key == 'date'"
+                         href="{{ url_daily }}?month={[{item.timestamp}]}"
+                         class="segment-click"
+                         data-segment-event="TBO - Visualizar histórico consumos - Consulta"
+                         data-segment-properties='{"category":"Portafolio de Servicios","label":"Telefonía - diario - fijo","site":"NEW"}'>{[{value
+                        == null || value == "" ? "No disponible" : value}]}</a>
+                    </td>
+                  </tr>
+                  <tr ng-show="pagedItemsMonth.length == 0">
+                    <td colspan="12" id="nofoundop">
+                      {{ 'No hay información disponible.'|t }}
+                    </td>
+                  </tr>
+                  </tbody>
+                  <tfoot>
+                  {% block table_foot %}
+                    <td colspan="12">
+                      <div ng-if="pagedItemsMonth.length > 1" class="pagination">
+                        <ul class="pagination center-align-tigo">
+                          <li class="firts"
+                              ng-class="{disabled: currentPageMonth == 0}">
+                            <a href ng-click="prevPageMonth()">
+                              <i class="icon-prev">
+                                <span class="path1"></span>
+                              </i>
+                            </a>
+                          </li>
+                          <li
+                            ng-repeat="n in rangeMonth(pagedItemsMonth.length, currentPageMonth, currentPageMonth + gapMonth) "
+                            ng-class="{active: n == currentPageMonth}"
+                            ng-click="setPageMonth()" class="waves-effect">
+                            <a href ng-bind="n + 1">1</a>
+                          </li>
+                          <li class="last"
+                              ng-class="{disabled: (currentPageMonth) == pagedItemsMonth.length - 1}">
+                            <a href ng-click="nextPageMonth()">
+                              <i class="icon-next">
+                                <span class="path1"></span>
+                              </i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  {% endblock %}
+                  </tfoot>
+                </table>
+                {#tabla mobile#}
+                <table
+                  class="consumption-month-table-mobile table-white hide-on-large-only {% if active_columns_mobile > 3 %}responsive-table {% endif %}">
+                  <thead>
+                  <tr>
+                    {% for item in table_mobile %}
+                      {% if item.show == 1 %}
+                        <th
+                          scope="col" {% if item.service_field == 'date' %} ng-click="orderResultsMonthM('{{ item.service_field }}', '{{ loop.index }}')"{% endif %}>
+                          {{ item.label }}
+                          <span
+                            class="icon-order {{ item.service_field }}"></span>
+                        </th>
+                      {% endif %}
+                    {% endfor %}
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr
+                    data-ng-repeat="item in pagedItemsMonthMobile[currentPageMonthMobile] track by $index"
+                    ng-show="pagedItemsMonthMobile.length">
+                    <td ng-repeat="(key, value) in item track by $index"
+                        ng-if="key != 'timestamp'">
+                        <span ng-if="key!= 'date'">
+                          {[{value == null || value == "" ? "0" : value}]}
+                      </span>
+                      <a ng-if="key == 'date'"
+                         href="{{ url_daily }}?month={[{item.timestamp}]}">
+                        {[{value == null || value == "" ? "No disponible" :
+                        value}]}
+                      </a>
+                    </td>
+                  </tr>
+                  <tr ng-show="pagedItemsMonthMobile.length==0" id="nofoundop">
+                    <td colspan="12" class="nofoundop">
+                      <span>{{ 'No hay información disponible.'|t }}</span>
+                    </td>
+                  </tbody>
+                  <tfoot>
+                  <td colspan="12">
+                    <div ng-if="pagedItemsMonthMobile.length > 1"
+                         class="pagination">
+                      <ul class="pagination">
+                        <li class="firts"
+                            ng-class="{disabled: currentPageMonthMobile == 0}">
+                          <a href ng-click="prevPageMonthM()">
+                            <i class="icon-prev">
+                              <span class="path1"></span>
+                            </i>
+                          </a>
+                        </li>
+                        <li
+                          ng-repeat="n in rangeMonthM(pagedItemsMonthMobile.length, currentPageMonthMobile, currentPageMonthMobile + gapMonthM) "
+                          ng-class="{active: n == currentPageMonthMobile}"
+                          ng-click="setPageMonthM()" class="waves-effect">
+                          <a href ng-bind="n + 1">1</a>
+                        </li>
+                        <li class="last"
+                            ng-class="{disabled: (currentPageMonthMobile) == pagedItemsMonthMobile.length - 1}">
+                          <a href ng-click="nextPageMonthM()">
+                            <i class="icon-next">
+                              <span class="path1"></span>
+                            </i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                  </tfoot>
+                </table>
+                {#fin tabla mobile#}
+              </div>
+              <div class="footer-card clearfix">
+                <div class="col s12">
+                  <div class="informative-section clearfix">
+                    <div class="col s12 m8">
+                      <span
+                        class="informative_text">{{ informative_text }}</span>
+                    </div>
+                    <div class="center-mobile col s12 m4">
+                      <a
+                        class="btn-download-report enterprise-modal-form waves-effect waves-light btn btn-primary segment-click"
+                        data-segment-event="TBO - Descargar reporte consumos - Tx"
+                        data-segment-properties='{"category":"Portafolio de Servicios","label":"Telefonía - mensual - fijo","site":"NEW"}'
+                        href="{[{fileMonth}]}" download="{{ Reporte_datos }}"
+                        ng-click="downloadFunctionMonth()">
+                        <i class="prefix-btn icon-download2">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                        </i>
+                        {{ download_label }}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}

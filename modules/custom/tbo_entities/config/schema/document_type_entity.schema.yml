@@ -1,0 +1,15 @@
+tbo_entities.document_type_entity.*:
+  type: config_entity
+  label: 'Tipo de documento config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    abb_doc_type:
+      type: string
+      label: 'abb_doc_type'
+    uuid:
+      type: string

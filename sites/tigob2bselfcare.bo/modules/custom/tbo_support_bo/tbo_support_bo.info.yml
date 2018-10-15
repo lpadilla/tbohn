@@ -1,0 +1,5 @@
+name: tbo_support_bo
+type: module
+description: Tbo - support - Bo
+core: 8.x
+package: Custom

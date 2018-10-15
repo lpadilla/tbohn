@@ -1,0 +1,140 @@
+current-invoice:
+  version: 1.x
+  js:
+    js/directive/current_invoice.js: {}
+    js/invoices_history_custom.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+    ../tbo_general/js/appServices.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+    - core/jquery.ui.effects.shake
+
+invoices-history:
+  version: 1.x
+  js:
+    ../tbo_general/js/materializeInit.js: {}
+    js/directive/invoices_history.js: {}
+    js/invoices_history_custom.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - core/drupal.dialog
+    - tbo_general/angular.tbo
+    - selfcare_angular/tigoapi.batch
+
+invoice-delivery-status:
+  version: 1.x
+  js:
+    js/directive/invoice_delivery_status.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupalSettings
+      - tbo_general/angular.tbo
+
+mobile-invoice-delivery-status:
+  version: 1.x
+  js:
+    js/directive/mobile_invoice_delivery_status.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupalSettings
+      - tbo_general/angular.tbo
+
+billing-summary:
+  version: 1.x
+  js:
+    js/directive/billing_summary.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupalSettings
+      - tbo_general/angular.tbo
+
+set-up-invoice-delivery:
+  version: 1.x
+  js:
+    js/directive/set_up_invoice_delivery.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupalSettings
+      - tbo_general/angular.tbo
+
+service-portfolio:
+  version: 1.x
+  js:
+    js/directive/service_portfolio.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupalSettings
+      - tbo_general/angular.tbo
+      - tigoapi_batch/tigoapi.batch
+
+service-summary:
+  version: 1.x
+  js:
+    js/directive/service_summary.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupalSettings
+      - tbo_general/angular.tbo
+
+billing-summary-fixed:
+  version: 1.x
+  js:
+    js/directive/billing_summary_fixed.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupalSettings
+      - tbo_general/angular.tbo
+
+payment-domiciliation:
+  js:
+    js/directive/payment_domiciliation.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupalSettings
+      - tbo_general/angular.tbo
+      - core/drupal.dialog
+
+add-credit-card:
+  version: 1.x
+  js:
+    js/directive/add_credit_card.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+    ../tbo_general/js/liveValidationsForm.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupalSettings
+      - tbo_general/angular.tbo
+      - core/drupal.dialog
+
+manage-credit-cards:
+  version: 1.x
+  js:
+    js/directive/manage_credit_cards.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupalSettings
+      - tbo_general/angular.tbo
+      - core/drupal.dialog
+
+multiple-invoice-payment:
+  version: 1.x
+  js:
+    js/directive/multiple_invoice_payment.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+    ../tbo_general/js/appServices.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo

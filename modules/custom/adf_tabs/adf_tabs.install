@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the adf tags module.
+ */
+
+/**
+ * Implements hook_schema().
+ *
+ * The database tests use the database API which depends on schema
+ * information for certain operations on certain databases.
+ * Therefore, the schema must actually be declared in a normal module
+ * like any other, not directly in the test file.
+ */
+function adf_tabs_schema() {
+  $schema['menu_item_adf_tabs'] = [
+    'description' => 'Basic afd tags table for the database item menu.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => 'Undefined',
+      ],
+      'block_id' => [
+        'type' => 'varchar_ascii',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'binary' => TRUE,
+      ],
+      'block_config' => [
+        'type' => 'blob',
+        'not null' => TRUE,
+        'size' => 'big',
+      ],
+      'category' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => 'Undefined',
+      ],
+      'to_show' => [
+        'type' => 'int',
+        'not null' => FALSE,
+        'size' => 'normal',
+      ],
+      'status' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'normal',
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'normal',
+        'default' => '0',
+      ],
+      'id_menu' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'normal',
+      ],
+      'order_by' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'normal',
+      ],
+      'link' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  return $schema;
+}

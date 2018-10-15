@@ -1,0 +1,67 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+  <div class="card-block" ng-if="environment != 'fijo'">
+    <div class="box-body">
+      <div class="col s12">
+        <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+          <div class="col s12">
+            {% block other_content_data_card %}
+              <div class="card white clearfix sms-balance">
+                {% block other_content %}
+                  {% if fields.in_title.show %}
+                    <div class="header-card clearfix">
+                      <div class="col s12">
+                        <h3 class="title-card2">
+                          {{ fields.in_title.label }}
+                        </h3>
+                      </div>
+                    </div>
+                  {% endif %}
+                  <div class="sms-wrapper">
+                    {% for value in sms %}
+                      {% if value.show %}
+                        <div class="sms-contaniner">
+                          <div class="sms-icon">
+                            <span class="prefix icon-sms-cyan">
+                              <span class="path1"></span>
+                              <span class="path2"></span>
+                            </span>
+                          </div>
+                          <div class="sms-details">
+                            <div class="top">
+                              <h6 class="sms-title">
+                                {{ value.label }}
+                              </h6>
+                              <p class="sms-value">
+                                {[{ sms_{{ value.prefix }} }]}
+                              </p>
+                            </div>
+                            <div class="bottom">
+                              <div class="sms-status" style="background-color:{{ value.color }};"></div>
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+
+                  {% if buttons.consumptions_history.show %}
+                    <div class="col s12 m12 card-action">
+                      <a class="right waves-effect waves-light btn btn-second" href="{{ buttons.consumptions_history.url }}">
+                        {{ buttons.consumptions_history.label }}
+                      </a>
+                    </div>
+                  {% endif %}
+                {% endblock %}
+              </div>
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

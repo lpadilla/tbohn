@@ -1,0 +1,43 @@
+tbo_services.change_sim_settings:
+  path: '/admin/config/tbo_services/settings'
+  defaults:
+    _form: '\Drupal\tbo_services\Form\ConfigVendorChangeSimForm'
+    _title: 'ConfigVendorChangeSimForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+tbo_services.manage_pqrs:
+  path: '/change/pqrs/{option}/{url}'
+  defaults:
+    _controller: '\Drupal\tbo_services\Controller\ManagePqrsController::redirectPqrs'
+    _title: 'Redirect Pqrs'
+  requirements:
+    _permission: 'access content'
+
+tbo_services.notification_form:
+  path: '/admin/config/tbo_services/notification'
+  defaults:
+    _form: '\Drupal\tbo_services\Form\NotificationForm'
+    _title: 'NotificationForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+tbo_services.notifications_settings:
+  path: '/admin/config/notifications_settings'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Configuración de Notificaciones'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+JMSJobQueueBundle:
+  resource: "@JMSJobQueueBundle/Controller/"
+  type: annotation
+  prefix: /admin/jobs
+

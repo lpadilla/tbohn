@@ -1,0 +1,22 @@
+{#
+/**
+ * @file wifi_channel.html.twig
+ * Default theme implementation to present Wifi channel data.
+ *
+ * This template is used when viewing Wifi channel pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_wifi_channel()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('wifi_channel') }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</div>

@@ -1,0 +1,43 @@
+<div class="tigo-login">
+  <div class="block-card block-form-loggin form-custom" data-ng-login-form ng-cloak>
+    <div class="box-body">
+      <div class="row">
+        <div class="col s12">
+          <div class="card clearfix white">
+            <div class="col s12">
+              <h1 class="center-align">¡{{ form.message }}!</h1>
+              <p class="center-align">{{ form.message2 }}</p>
+              {{ form.form_build_id }}
+              {{ form.form_token }}
+              {{ form.form_id }}
+
+              {{ form.error_msgs }}
+
+              <div class="field-user-name items input-field col s12 m12 l12">
+                <i class="prefix icon-user-cyan">
+                  <span class="path1"></span>
+                </i>
+                {{ form.name }}
+                <!-- Modal Trigger -->
+              </div>
+              <div class="field-user-pass items input-field col s12 m12 l12">
+                <i class="prefix icon-password-cyan">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>
+                {{ form.pass }}
+                
+                <!-- Modal Trigger -->
+              </div>
+
+              <div
+                class="buttons-wrapper input-field col s12 m12 l12 center-align">
+                {{ form.actions }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

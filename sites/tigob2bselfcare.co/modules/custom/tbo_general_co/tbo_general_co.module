@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_general_co.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_general_co_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_general_co module.
+    case 'help.page.tbo_general_co':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Tbo general para Colombia') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function tbo_general_co_page_attachments_alter(array &$page) {
+  $current_path = \Drupal::service('path.current')->getPath();
+
+  if ($current_path != '/factura-actual') {
+    $page['#attached']['html_head'][] = [
+      [
+        '#type' => 'html_tag',
+        '#tag' => 'script',
+        '#attributes' => [
+          'type' => 'text/javascript',
+          'src' => 'https://tigoid-cdn.tigocloud.net/misc/ZD/JS/zd_reg_co_b2b_chat.min.js',
+        ],
+      ],
+      'temporary',
+    ];
+  }
+}

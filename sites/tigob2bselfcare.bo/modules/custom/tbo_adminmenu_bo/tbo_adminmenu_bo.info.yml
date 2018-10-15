@@ -1,0 +1,8 @@
+name: TBO MENU ADMIN EMPRESA BO
+type: module
+description: Modulo para menú dinamico admin de tbo Bolivia
+core: 8.x
+package: TBO
+dependencies:
+  - tbo_general
+  

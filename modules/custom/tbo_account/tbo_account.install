@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_account.install.
+ */
+
+/**
+ * Install config values for "Update user info" form.
+ */
+function tbo_account_update_8001() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('tbo_account.update_user_info.settings');
+  $config->set('title_instructions', 'Actualizar datos.');
+  $config->set('instructions', 'Por favor actualice sus datos para recibir soporte sobre las transacciones realizadas en el portal');
+  $config->set('terms_title', 'Términos y condiciones');
+  $config->set('terms_text', "Al presionar GUARDAR está aceptando los <a target=\"_blank\" href=\"@link\" >términos y condiciones</a>.");
+  $config->set('terms_node', FALSE);
+  $config->set('show_popup', TRUE);
+  $config->save(TRUE);
+}

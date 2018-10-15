@@ -1,0 +1,21 @@
+tigoid.tigoid_settings_form:
+  title: 'TigoID settings'
+  route_name: tigoid.tigoid_settings_form
+  description: 'A description for the menu entry'
+  parent: system.admin_config_system
+  weight: 99
+
+tigo_id.account:
+  weight: 9
+  menu_name: alternative-mobile-menu
+  class: Drupal\tigoid\Plugin\Menu\TigoidMenuLink
+
+tigo_menu.logout:
+  weight: 10
+  menu_name: alternative-mobile-menu
+  class: Drupal\tigoid\Plugin\Menu\LoginLogoutSelfcareMenuLink
+
+tigo_menu.logout2:
+  weight: 10
+  menu_name: account
+  class: Drupal\tigoid\Plugin\Menu\LoginLogoutSelfcareMenuLink

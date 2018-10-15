@@ -1,0 +1,67 @@
+services:
+  # SearchByProfileBlock
+  tbo_atp.search_profile_block_logic:
+    class: Drupal\tbo_atp\Plugin\Config\Block\SearchByProfileBlockClass
+    arguments: []
+
+  tbo_atp.search_profile_rest_logic:
+    class: Drupal\tbo_atp\Services\Rest\SearchByProfileService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  tbo_atp.search_profile_alter_path:
+    class: Drupal\tbo_atp\EventSubscriber\SearchByProfileEventSubscriber
+    tags:
+      - { name: 'event_subscriber' }
+
+  # ContractFilter
+  tbo_atp.contract_filter_block_logic:
+    class: Drupal\tbo_atp\Plugin\Config\Block\AtpContractFilterBlockClass
+    arguments: []
+
+  tbo_atp.contract_filter_rest_logic:
+    class: Drupal\tbo_atp\Services\Rest\AtpContractFilterService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client", "@adf_segment"]
+
+  tbo_atp.appointment_invoice_service:
+    class: Drupal\tbo_atp\Services\AppointmentInvoiceService
+    arguments: []
+
+  # AssociatedLinesBlockClass
+  tbo_atp.associated_lines_block_logic:
+    class: Drupal\tbo_atp\Plugin\Config\Block\AssociatedLinesBlockClass
+    arguments: []
+
+  tbo_atp.associated_lines_rest_logic:
+    class: Drupal\tbo_atp\Services\Rest\AssociatedLinesService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  # AtpCorporativePlanSummaryBlock
+  tbo_atp.atp_corporative_plan_summary_block:
+    class: Drupal\tbo_atp\Plugin\Config\Block\AtpCorporativePlanSummaryBlockClass
+    arguments: []
+
+  tbo_atp.atp_corporative_plan_summary_block_logic:
+    class: Drupal\tbo_atp\Services\Rest\AtpCorporativePlanSummaryService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  tbo_atp.service_atp_login_controller:
+    class: Drupal\tbo_atp\Services\AtpLoginControllerService
+    arguments: ["@tbo_api.client", "@current_user"]
+
+  #CorporativeProfiles
+  tbo_atp.corporative_profiles_block_logic:
+    class: Drupal\tbo_atp\Plugin\Config\Block\CorporativeProfilesBlockClass
+    arguments: []
+
+  tbo_atp.corporative_profiles_rest_logic:
+    class: Drupal\tbo_atp\Services\Rest\CorporativeProfilesService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  tbo_atp.general_service:
+    class: Drupal\tbo_atp\Services\AtpGeneralService
+    arguments: ["@tbo_api.client"]
+
+  #Tbo ATP configuration
+  tbo_atp.config_form_logic:
+    class: Drupal\tbo_atp\Plugin\Config\Form\TboAtpFormConfigClass
+    arguments: []

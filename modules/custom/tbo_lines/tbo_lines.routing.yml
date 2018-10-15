@@ -1,0 +1,9 @@
+tbo_lines.consumptions_filtres:
+  path: '/admin/config/tbo_lines/consumption_filters'
+  defaults:
+    _form: '\Drupal\tbo_lines\Form\ConsumptionsFiltersFormConfig'
+    _title: 'TBO Lines - Configuración de filtros'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

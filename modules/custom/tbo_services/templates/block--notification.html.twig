@@ -1,0 +1,164 @@
+{% extends 'block__card_base.html.twig' %}
+{% block header_content_table %}{% endblock %}
+
+{% block other_content_data %}
+
+  <!-- Open button download -->
+  <div  ng-class="quantity_notification ? '' : 'hidden' " ng-click="sendNotification(0,0)">
+    <div id="notification-show" class="image-header notif-img margin_top_50 dropdown-button">
+      <a>
+        <p class="num-notif"> {[{ quantity_notification }]} </p>
+        <i class="prefix icon-notifications-cyan">
+          <span class="path1"></span>
+          <span class="path2"></span>
+        </i>
+      </a>
+    </div>
+  </div>
+
+
+  <div id="not_dropdown" class="scroll-content">
+    <ul class="nav">
+      <li class="not-title">
+        <strong class="field__label">{{ 'Alertas y Notificaciones'|t }}</strong>
+      </li>
+      <li class="not-cant">
+        <p class="not-block"> {[{ quantity_notification }]} </p>
+        {{ 'Alertas'|t }}
+      </li>
+      {% set counter = 0 %}
+      {% for notification in fields %}
+        {% set counter = counter + 1 %}
+        <div class="row" id="notification_{{ counter }}">
+          <div class="card white clearfix invoice-content">
+            <div class="col s3 m2 l2 field-type-image ">
+              <img src="{{ image }}" class="w-img-notif">
+            </div>
+            <div class="col s9 m10 l10 field-type-text">
+              {% if notification['verified_account'] %}
+                <div ng-if="without_verified == 1">
+                  {{ notification['text']|raw }}
+                </div>
+                <div ng-if="without_verified == 0">
+                  {{ config_modal_last_send_email['informative_text']|raw }}
+                </div>
+              {% else %}
+                {{ notification['text']|raw }}
+              {% endif %}
+            </div>
+            <div class="col s12 m12 l12 title-invoice-type">
+              {% if notification['button']['show'] %}
+                <div class="right-orientation-up">
+                  <div class=" input-field ">
+                    {% set notification_id = notification['notification_id'] %}
+                    {% if notification['verified_account'] %}
+                      <a ng-if="without_verified == 1" ng-init="without_verified = 1" href="#"
+                         ng-click="sendNotification('{{ uuid }}', '{{ notification_id }}', 1, 0, $event)"
+                         id="verified_account" name="verified_account"
+                         class="waves-effect waves-light btn btn-second collapse right-orientation segment-click" data-segment-event="TBO - Opciones de Alertas"
+                         data-segment-properties='{"category":"Dashboard","label":"{{ notification['button']['text'] }} - {{ environment}}"}'>
+                        {{ notification['button']['text'] }}
+                      </a>
+                      <a ng-if="without_verified == 0" ng-init="without_verified = 0" href="#"
+                         class="waves-effect waves-light btn btn-second collapse right-orientation"
+                         ng-click="hiddenNotification('{{ counter }}')">
+                        {{ config_modal_last_send_email['buttons']['accept']['label'] }}
+                      </a>
+                    {% else %}
+                      <a
+                        href="{{ notification['button']['url'] }}" {% if notification['button']['target_blank'] %} target="_blank" {% endif %} {% if notification['button']['click_remove'] and notification['update_data'] == 0 %} ng-click="sendNotification('{{ uuid }}', '{{ notification_id }}', 0, '{{ counter }}', $event)" {% endif %} data-segment-event="TBO - Opciones de Alertas"
+                        data-segment-properties='{"category":"Dashboard","label":"{{ notification['button']['text'] }} - {{ environment}}"}'
+                        class="waves-effect waves-light btn btn-second collapse right-orientation segment-click">
+                        {{ notification['button']['text'] }}
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+
+        </div>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- </div>-->
+  {# Los modales a abrir segun sea necesario. #}
+  {% if config_init_modal %}
+    <a id="verified_account_init" href="#modal-verified-account"></a>
+    <div id="modal-verified-account" class="modal w-notification">
+      <div class="modal-content">
+        <div class="image center">
+          <img src="{{ config_init_modal['image'] }}" alt="" style="width: 50px;">
+        </div>
+        <div class="text center">
+          {{ config_init_modal['informative_text']['value']|raw }}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="input-field col s12 center">
+          {% set notification_id = config_init_modal['notification_id'] %}
+          {% for key, button in config_init_modal['buttons'] %}
+            {% if button['show'] %}
+              {% if key == 'verify_account' %}
+                <a
+                  href="#" {% if button['active'] == 1 %} ng-click="sendNotification('{{ uuid }}', '{{ notification_id }}', 1, 0, $event)" data-segment-event="TBO - Verificar mi Cuenta - TX"
+                  data-segment-properties='{"category":"Dashboard","label":"{{ button['label'] }} - {{ environment}}"}' {% endif %}
+                  class="modal-action modal-close waves-effect waves-light btn-primary segment-click" {% if button['active'] == 0 %} disabled="disabled" {% endif %}>
+                  {{ button['label'] }}
+                </a>
+              {% else %}
+                <a href="#"
+                   class="modal-action {% if button['active'] %} modal-close segment-click {% endif %} waves-effect waves-light btn-second" {% if button['active'] == 0 %} disabled="disabled" {% else %} data-segment-event="TBO - Verificar mi Cuenta - TX"
+                  data-segment-properties='{"category":"Dashboard","label":"{{ button['label'] }} - {{ environment}}"}' {% endif %}>
+                  {{ button['label'] }}
+                </a>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {% if config_modal_last_send_email %}
+    <a id="last_send_verified" href="#modal-last_send-verified"></a>
+    <div id="modal-last_send-verified" class="modal w-notification">
+      <div class="modal-content">
+        <div class="image center">
+          <img src="{{ config_modal_last_send_email['image'] }}" alt="" style="width: 50px;">
+        </div>
+        <div class="text center">
+          {{ config_modal_last_send_email['informative_text']|raw }}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="input-field col s12 center">
+          {% if config_modal_last_send_email['buttons']['accept']['show'] %}
+            {% set button = config_modal_last_send_email['buttons']['accept'] %}
+            <a href="#"
+               class="modal-action {% if button['active'] %} modal-close {% endif %} waves-effect waves-light btn btn-primary" {% if button['active'] == 0 %} disabled="disabled" {% endif %}
+               style="float: none !important;">
+              {{ button['label'] }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {# Add error message #}
+  <div>
+    <div class="messages-only" style="display: none;">
+      <button type="button" class="close prefix icon-x-cyan" data-dismiss="alert" aria-hidden="true">
+        <span class="path1"></span><span class="path2"></span>
+      </button>
+      <div class="text-alert">
+        <div class="icon-alert">
+          <span class="icon-1"></span>
+          <span class="icon-2"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

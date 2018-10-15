@@ -1,0 +1,5 @@
+name: selfcare_gtm
+type: module
+description: Google Tag Manager
+core: 8.x
+package: Selfcare

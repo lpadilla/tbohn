@@ -1,0 +1,128 @@
+{% extends 'block__card_base_hn.html.twig' %}
+
+{% block header_content_table %}
+<div class="card-block">
+  <div class="box-body">
+    <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+      <div class="col s12">
+        {% block header_content_table_card %}
+        <div class="card white clearfix">
+          <div class="col s12">
+            <h2 class="title-card">{{ title_view }}</h2>
+            {% endblock %}
+            {% if fields is not empty %}
+              {% block table %}
+                <table class="responsive-table">
+                  <thead>
+                  {% block table_head %}
+                    <tr>
+                      {% for header in headers_table %}
+                        <th scope="col"
+                            ng-click="orderReverse();"> {% if header.identifier == 'contractId' %} {{ title_colum }} {% else %} {{ header.label }} {% endif %}
+                        </th>
+                      {% endfor %}
+                    </tr>
+                  {% endblock %}
+                  </thead>
+                  <tbody>
+                  {% block table_body %}
+                    <tr data-ng-repeat=" (key, compani) in pagedItems[currentPage] track by compani.invoiceId  | orderBy:predicate:reverse">
+                      {% for column in fields %}
+                        {% if column.service_field == 'contractId' and environment == 'fijo' %}
+                          <td> {[{compani.invoiceId }]}</td>
+                        {% else %}
+                          <td> {[{compani.{{ column.service_field }} }]}</td>
+                        {% endif %}
+                      {% endfor %}
+                      {% if opions_enable %}
+                        <td>
+                          <a class='dropdown-{[{$index+1}]} dropdown-button material-icons medium' href="#!"
+                             ng-attr-data-activates="dropdown-{[{$index+1}]}"
+                             ng-mouseover="getSimilar($index)"
+                             ng-mouseleave="resetOver()"
+                             ng-attr-data-activates="dropdown-{[{$index+1}]}" ng-if="!compani.noPdf"> <span>
+                              <i class="prefix icon-pdf">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                              </i>                             
+                            </span> 
+                          </a>
+                            
+                            
+
+                          <ul id="dropdown-{[{$index+1}]}" class='dropdown-content'>
+                            <li ng-if="compani.status == 'Pagada' && result == 'fijo'">
+                              <a ng-href="/tbo_billing/payment/{[{compani.contractId}]}/{[{compani.invoiceId}]}"
+                                 class="modalcustomtwo"
+                                 ng-click="myFunc($event ,'/tbo_billing/payment/' + compani.contractId + '/' + compani.invoiceId)">
+										              <span>
+										                <i class="prefix icon-bill-cyan">
+										                	<span class="path1"></span>
+										                  <span class="path2"></span>
+										                </i>
+										               <p>
+										                 {{ 'Ver detalle'|t }}
+										               </p>
+										              </span>
+                              </a>
+                            </li><!-- Dropdown Trigger -->
+                            <li ng-if="environment == 'movil'">
+                              <a ng-href="/tbo_billing/download/{[{ compani.contractOfSendDetails }]}/{[{ environment }]}/{[{ compani.invoiceNumber }]}"
+                                 target="_blank" class="modalcustomtwo">
+											            <span>
+											               <i class="prefix icon-pdf-cyan">
+											                <span class="path1"></span>
+											                <span class="path2"></span>
+											              </i>
+											              <p>
+											                {{ 'Descargar PDF'|t }}
+											              </p>
+											            </span>
+                              </a><!-- Dropdown Trigger -->
+                            </li>
+                            <li ng-if="environment == 'fijo'">
+                              <a ng-href="/tbo_billing/download/{[{compani.contractId}]}/fijo/{[{compani.billDate}]}"
+                                 target="_blank" class="modalcustomtwo material-icons dp48">
+											              <span>
+											                <i class="prefix icon-pdf-cyan">
+											                  <span class="path1"></span>
+											                  <span class="path2"></span>
+											                </i>
+											                <p>
+											                  {{ 'Descargar PDF'|t }}
+											                </p>
+											              </span>
+                              </a><!-- Dropdown Trigger -->
+                            </li>
+                          </ul>
+                        </td>
+                      {% endif %}
+                    </tr>
+                  {% endblock %}
+                  </tbody>
+                  <tfoot>
+                  {% block table_foot %}
+                    <td colspan="{{ fields|length }}">
+                      {% block paginate %}
+                        <!-- Get paginate  -->
+                        {{ widgets.paginate() }}
+                      {% endblock %}
+                    </td>
+                  {% endblock %}
+                  </tfoot>
+                </table>
+              {% endblock %}
+            {% endif %}
+            {% block data %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block other_content_data %}
+  <div id="modal_history" class="modal-customs modal_history"></div>
+{% endblock %}

@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_user.module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_user_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_user module.
+    case 'help.page.tbo_user':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Module for users tbo') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_user_theme() {
+  return [
+    'emulate_session' => [
+      'variables' => [
+        'uuid' => NULL,
+        'title_view' => NULL,
+        'form_config' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'directive' => NULL,
+        'title' => NULL,
+        'class' => NULL,
+        'margin' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--emulate-session',
+    ],
+    'unmasquerade' => [
+      'variables' => [
+        'role' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--unmasquerade-session',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_FORM_ID_alter().
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function tigoid_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['actions']['submit']['#attributes']['class'][] = 'btn-primary';
+}

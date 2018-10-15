@@ -1,0 +1,271 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_account.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_account_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_account module.
+    case 'help.page.tbo_account':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Tbo Management') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_account_theme($existing, $type, $theme, $path) {
+  return [
+    'companies_list' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'form' => NULL,
+        'modal' => [],
+        'title' => NULL,
+        'class' => NULL,
+        'margin' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--companies-list',
+    ],
+    'users_list' => [
+      'variables' => [
+        'uuid' => NULL,
+        'config' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'directive' => NULL,
+        'title' => NULL,
+        'class' => NULL,
+        'margin' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--users-list',
+    ],
+    'manage_company' => [
+      'variables' => [
+        'uuid' => NULL,
+        'filters' => NULL,
+        'fields' => NULL,
+        'class' => NULL,
+        'margin' => NULL,
+        'title' => NULL,
+        'directive' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--manage-company',
+    ],
+    'tigo_admin_list' => [
+      'variables' => [
+        'uuid' => NULL,
+        'config' => NULL,
+        'filters' => NULL,
+        'fields' => NULL,
+        'form' => NULL,
+        'directive' => NULL,
+        'class' => NULL,
+        'modal' => NULL,
+        'title' => NULL,
+        'margin' => NULL,
+        'url_config' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--tigo-admin-list',
+    ],
+    'account_invited' => [
+      'variables' => [
+        'url_resend' => NULL,
+        'class' => NULL,
+        'uuid' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--account-invited',
+    ],
+    'tigo_admin_list_companies' => [
+      'variables' => [
+        'uuid' => NULL,
+        'filters' => NULL,
+        'headers_table' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--tigo-admin-list-companies',
+    ],
+    're_assing_business_between_users_tigo_admin' => [
+      'variables' => [
+        'uuid' => NULL,
+        'config' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'usrtigo' => NULL,
+        'lsttigos' => NULL,
+        'directive' => NULL,
+        'class' => NULL,
+        'title' => NULL,
+        'margin' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--re-assign-business-between-users-tigo-admin',
+    ],
+    'category_services' => [
+      'variables' => [
+        'uuid' => NULL,
+        'fields' => NULL,
+        'config' => NULL,
+        'url' => NULL,
+        'directive' => NULL,
+        'label' => NULL,
+        'description' => NULL,
+        'button_text' => NULL,
+        'button_url' => NULL,
+        'actions' => NULL,
+        'icon_url' => NULL,
+        'class' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--category-services',
+    ],
+    'invitation_popup' => [
+      'variables' => [
+        'uuid' => NULL,
+        'fields' => NULL,
+        'popup' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--invitation-popup',
+    ],
+    'import_masive_enterprise' => [
+      'variables' => [
+        'directive' => NULL,
+        'uuid' => NULL,
+        'class' => NULL,
+        'buttons' => NULL,
+        'file_input' => NULL,
+        'select' => NULL,
+        'title' => NULL,
+        'form' => NULL,
+        'file' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--import-data',
+    ],
+    'log_masive_enterprise' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'filters' => NULL,
+        'fields' => NULL,
+        'title' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--import-data-log',
+    ],
+    'form_create_account' => [
+      'render element' => 'form',
+      'template' => 'form--create-account',
+    ],
+    'autocreate_account' => [
+      'variables' => [
+        'form' => NULL,
+        'uuid' => NULL,
+        'class' => NULL,
+        'id' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--autocreate-account',
+    ],
+    'form_edit_user' => [
+      'render element' => 'form',
+      'template' => 'form--edit-user',
+    ],
+    'create_user' => [
+      'variables' => [
+        'uuid' => NULL,
+        'config' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'form' => NULL,
+        'modal' => [],
+        'directive' => NULL,
+        'title' => NULL,
+        'class' => NULL,
+        'margin' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--create-user',
+    ],
+    'download_contract_daily' => [
+      'variables' => [
+        'uuid' => NULL,
+        'uuid2' => NULL,
+        'config' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'form' => NULL,
+        'modal' => [],
+        'directive' => NULL,
+        'title' => NULL,
+        'validation' => NULL,
+        'class' => NULL,
+        'margin' => NULL,
+        'titlePopup' => NULL,
+        'description' => NULL,
+        'titleDocument' => NULL,
+        'titleResource' => NULL,
+        'cancelBottom' => NULL,
+        'initChat' => NULL,
+        'select' => NULL,
+        'buttons' => NULL,
+        'textInform' => NULL,
+        'buttons_modal' => NULL,
+        'place_holder' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--download-contract',
+    ],
+    'form_update_user_info' => [
+      'render element' => 'form',
+      'template' => 'form--update-user-info',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function tbo_account_preprocess_page(&$vars) {
+  $twig = \Drupal::service('twig');
+  $roles = $vars['user']->getRoles();
+
+  if (in_array('authenticated', $roles) && count($roles) <= 1) {
+    $twig->addGlobal('show_create_account', TRUE);
+  }
+  else {
+    $twig->addGlobal('show_create_account', FALSE);
+  }
+}
+
+/**
+ *
+ */
+function tbo_account_user_logout($account) {
+  $roles = $account->getRoles();
+  if (in_array('authenticated', $roles) && count($roles) <= 1) {
+    setcookie('logout_no_role', 'logout', time() + 3600, '/');
+    $_COOKIE['logout_no_role'] = 'logout';
+  }
+}

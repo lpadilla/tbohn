@@ -1,0 +1,132 @@
+{% extends 'block__card_base.html.twig' %}
+
+  {% block filters %}
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+  {% block other_content_data %}
+    <div>
+      <div class="messages-only" style="display: none;">
+        <button type="button" class="close prefix icon-x-cyan" data-dismiss="alert" aria-hidden="true">
+          <span class="path1"></span><span class="path2"></span>
+        </button>
+        <div class="text-alert">
+          <div class="icon-alert">
+            <span class="icon-1"></span>
+            <span class="icon-2"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-block  wrapper-check-mobile-usage" ng-class="{true: 'no-post', false: 'post'}[ type_service != 'POS']" ng-init="total_operacion={{ fields.costo_operacion.label }};total_operacion_con_formato='{{ data.costo_operacion }}';valor_minimo={{ data.valor_minimo_a_compartir_sin_formato }};valor_maximo={{ data.valor_maximo_a_compartir_sin_formato }}" >
+      <div class="box-body segment-send" >
+        <div class="row">
+          <div class="col s12 m12 l6">
+            <div class="card card-white clearfix">
+              <div class="col s12 content">
+                <div class="user-options ct01_dropdown">
+                  {% if (
+                        buttons.boton_primario.show == '1' or
+                        buttons.servicios_de_valor_agregado.show == '1' or
+                        buttons.tigo_te_presta.show == '1' or
+                        buttons.mensajes_multimedia.show == '1'
+                    )
+                  %}
+                    <a class="js-dropdown-button" ng-click="showContent($event)" >
+                      <i class="dots-icon">
+                        <span></span>
+                      </i>
+                    </a>
+                    <ul class="js-dropdown-content">
+                      {% if buttons.boton_primario.show == '1' %}<li class="hide-on-large-only"><a {% if buttons.boton_primario.active == '1' %} href="#modal1" {% endif %} class="ng-scope modal-trigger segment-click {% if buttons.boton_primario.active == '1' %}active{% else %}inactive{% endif %}" ng-click="borrarEnModal()" data-segment-event="TBO - Opciones de Saldos" data-segment-properties='{"category":"Portafolio de Servicios","label":"Compartir Saldo - movil","site":"NEW"}' >{{ data.boton_primario_movil|t }}</a></li>{% endif %}
+                      {% if buttons.servicios_de_valor_agregado.show == '1' %}<li><a {% if buttons.servicios_de_valor_agregado.active == '1' %} href="{{ buttons.servicios_de_valor_agregado.url }}" {% endif %} class="{% if buttons.boton_primario.active == '1' %}active{% else %}inactive{% endif %}" >{{ buttons.servicios_de_valor_agregado.label|t }}</a></li>{% endif %}
+                      {% if buttons.tigo_te_presta.show == '1' %}<li><a {% if buttons.tigo_te_presta.active == '1' %} href="{{ buttons.tigo_te_presta.url }}" {% endif %} class="{% if buttons.boton_primario.active == '1' %}active{% else %}inactive{% endif %}">{{ buttons.tigo_te_presta.label|t }}</a></li>{% endif %}
+                      {% if buttons.mensajes_multimedia.show == '1' %}<li><a {% if buttons.mensajes_multimedia.active == '1' %} href="{{ buttons.mensajes_multimedia.url }}" {% endif %} class="{% if buttons.boton_primario.active == '1' %}active{% else %}inactive{% endif %}">{{ buttons.mensajes_multimedia.label|t }}</a></li>{% endif %}
+                    </ul>
+                  {% endif %}
+                </div>
+                {% if config.label_display %}<div class="col s12"><h2 class="title-card">{{ config.label }}</h2></div>{% endif %}
+                <div class="column-left col s6 l12">
+                  <img class="icon-admin hide-on-med-and-down" src="{{ data.image_icon }}" alt="">
+                  <p class="label">{{ 'Valor de la factura'|t }}</p>
+                  <h2 class="valor-factura ng-binding">{[{ valor_en_saldo }]}</h2>
+                </div>
+                <div class="card-action col s5 l12">
+                  {% if buttons.boton_primario.show == '1' %}
+                    <a class="waves-effect waves-light btn btn-second hide-on-med-and-down segment-click ng-scope modal-trigger" data-segment-event="TBO - Opciones de Saldos" data-segment-properties='{"category":"Portafolio de Servicios","label":"Compartir Saldo - movil","site":"NEW"}' ng-click="borrarEnModal()" {% if buttons.boton_primario.active == '1' %} href="#modal1" {% endif %} >{{ buttons.boton_primario.label }}</a>
+                  {% endif %}
+                  {% if buttons.boton_secundario.show == '1' %}
+                    <a class="waves-effect waves-light btn btn-primary ng-scope segment-click" data-segment-event="TBO - Opciones de Saldos" data-segment-properties='{"category":"Portafolio de Servicios","label":"Recargar - movil","site":"NEW"}' {% if buttons.boton_secundario.active == '1' %} href="{{ buttons.boton_secundario.url }}" {% endif %} >{{ buttons.boton_secundario.label }}</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <!-- Modal - Cargar datos para compartir -->
+            <div id="modal1" class="modal share-balance trasnfer-balance">
+              <div class="modal-content">
+                {% if fields.compartir_saldo.show == '1' %}<h2 class="title-modal">{{ fields.compartir_saldo.label|t }}</h2>{% endif %}
+                <p>{% trans %}Transfiera desde <span class="">{{ data.valor_minimo_a_compartir }}</span> hasta <span>{{ data.valor_maximo_a_compartir }} </span> pesos a otras líneas Tigo desde una línea prepago o cuenta control{% endtrans %}</p>
+                <div class="box-current-balance">
+                  <p class="text-current"><span class="label-current">Saldo actual: </span> <span class="value-current">{[{ valor_en_saldo }]}</span></p>
+                  <p class="date-update">Actualizado: {[{ fecha_actualizado }]}</p>
+                </div>
+                <form  autocomplete="off" >
+                  <div class="row">
+                    <div class="input-field col s12 m12 l6">
+                      <input id="monto" type="text" ng-model="monto" ng-keyup="validateMonto()" ng-change="validateMonto()" ng-blur="validateFormat()" ng-focus="recuperarValor()"  autocomplete="off">
+                      {% if fields.monto_a_compartir.show == '1' %}<label for="address">{{ fields.monto_a_compartir.label|t }}</label>{% endif %}
+                      <p class="error"></p>
+                    </div>
+                    <div class="input-field col s12 m12 l6">
+                      <input id="phone" name="phone" type="text" ng-model="phone" ng-keyup="validatePhone()" ng-change="validatePhone()" ng-blur="onBlurPhone()" autocomplete="off" >
+                      {% if fields.numero_del_destinatario.show == '1' %}<label for="phone">{{ fields.numero_del_destinatario.label|t }}</label>{% endif %}
+                      <p class="error error-phone">{{ 'Número de celular invalido'|t }}</p>
+                    </div>
+                    <div class="actions col input-field s12">
+                      <a class="waves-effect waves-light btn btn-second ng-scope modal-close" h>{{ 'Cancelar'|t }}</a>
+                      <a class="waves-effect waves-light btn btn-primary segment-click ng-scope modal-close modal-trigger" href="#modal2" ng-click="antesDeMostrarMensajeDeConfirmar()" ng-class="{true:'', false:'disabled'}[status_button == 1]">{{ 'Compartir'|t }}</a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- :Modal -->
+            <!-- Verificar Modal -->
+            <div id="modal2" class="modal confirm-share-balance trasnfer-balance">
+              <div class="modal-content">
+                {% if fields.confirmar_la_transferencia.show == '1' %}<h2 class="title-modal">{{ fields.confirmar_la_transferencia.label|t }}</h2>{% endif %}
+                <div class="row">
+                  <div class="col s12 clearfix box-destination">
+                    {% if fields.numero_del_destino.show == '1' %}<div class="label">{{ fields.numero_del_destino.label|t }}</div>{% endif %}
+                    <div class="input">{[{ phone }]}</div>
+                  </div>
+                  <div class="box-destination-balance clearfix">
+                    <div class="col s12">
+                      {% if fields.valor_a_transferir.show == '1' %}<div class="label">{{ fields.valor_a_transferir.label|t }}</div>{% endif %}
+                      <div class="input">{[{ total_transaccion }]}</div>
+                    </div>
+                    <div class="col s12">
+                      {% if fields.costo_de_la_operacion.show == '1' %}<div class="label">{{ fields.costo_de_la_operacion.label|t }}</div>{% endif %}
+                      <div class="input">{[{ total_operacion_con_formato }]}</div>
+                    </div>
+                    <div class="line"></div>
+                  </div>
+                  <div class="box-result col s12 clearfix">
+                    {% if fields.total_de_la_transacción.show == '1' %}<div class="label">{{ fields.total_de_la_transacción.label|t }}</div>{% endif %}
+                    <div class="input">{[{ monto }]}</div>
+                  </div>
+                  <div class="actions col input-field s12">
+                    <a class="waves-effect waves-light btn btn-second ng-scope modal-close" href="#modal1">{{ 'Cancelar'|t }}</a>
+                    <a class="waves-effect waves-light btn btn-primary segment-click ng-scope modal-close" href="" ng-click="realizarTransferencia()" >{{ 'Confirmar'|t }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}

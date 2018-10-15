@@ -1,0 +1,32 @@
+{% extends 'block__card_base.html.twig' %}
+{% block header_content_table%}{% endblock %}
+
+{% block other_content_data_card %}
+  {% if block_options.block_border %}
+    {% set class_card = class_card~" white" %}
+	{% endif %}
+  {% if block_options.block_without_border %}
+    {% set class_card = class_card~" card-no-border"%}
+  {% endif %}
+  {% if block_options.block_transparent_movil %}
+    {% set class_card = class_card~" card-transparent" %}
+  {% endif %}
+	<div class="card {{ class_card }} clearfix">
+		<div class="col s12">
+  {% block other_content %}
+	  <div class="return">
+		  {% if fields.icon.show == '1' %}
+			  <a class="return-arrow" href="{{ url }}">
+				  <span class="{{ fields.icon.service_field }} prefix icon-left"><span class="path1"></span></span>
+			  </a>
+		  {% endif %}
+		  {% if fields.text.show == '1' %}
+			  <a class="return-text" href="{{ url }}{[{parameterOpcional}]}">
+          {{ fields.text.label }}
+			  </a>
+		  {% endif %}
+	  </div>
+  {% endblock %}
+		</div>
+	</div>
+{% endblock %}

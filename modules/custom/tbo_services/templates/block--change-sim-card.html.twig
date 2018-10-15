@@ -1,0 +1,157 @@
+{% extends 'block__card_base.html.twig' %}
+{% block header_content_table %}{% endblock %}
+{% block other_content_data %}
+	<div class="simcard-change card-block">
+		<div class="box-body">
+			{% if title.label_display == 'visible' %}
+				<h5 class="title-front">
+					{{ title.label }}
+				</h5>
+			{% endif %}
+			<div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+				<div class="col s12">
+					{% block other_content_data_card %}
+						<div class="card white clearfix">
+							<div class="col s12">
+								{% block other_content %}
+									<div id="ChangeSimCard" class="change-sim-card">
+										<h2 class="title-card">{{ fields.in_title.label }}</h2>
+										<form>
+											{% for field in fields %}
+												{% if field.service_field == 'description' %}
+													<div class="row">
+														<div class="col description">
+															<p>
+																{{ field.label }}
+															</p>
+														</div>
+													</div>
+													<div class="row">
+													{% elseif field.service_field == 'change_field' %}
+														<div class="input-field content-row col m6 s12">
+															{{ widgets.password_to_confirm(field.label, field, field) }}
+														</div>
+													{% elseif field.service_field == 'confirm_change' %}
+														<div class="input-field content-row col m6 s12">
+															<p>
+																<input class="filled-in" type="checkbox" id="{{ field.service_field }}" ng-model="confirm_change" ng-click="val_confirm(confirm_change)">
+																<label for="{{ field.service_field }}">{{ field.label }}</label>
+															</p>
+														</div>
+													</div>
+												{% endif %}
+											{% endfor %}
+											<div class="row">
+												<div class="col s12 m12 card-action">
+													{% for button in buttons %}
+														<a
+															{% if button.service_field == 'action_card_change' %}
+															class="right waves-effect waves-light btn btn-primary"
+															id="Cambiar"
+															ng-disabled="state_button"
+															ng-click="change_sim(new_sim)"
+															{% else %}
+															id="Cancelar"
+															class="right waves-effect waves-light btn btn-second"
+															ng-click="clearFieldsSim()"
+															{% endif %}
+															{% if button.active == 0 %}
+															disabled
+															{% endif %}>{{ button.label }}</a>
+													{% endfor %}
+												</div>
+											</div>
+										</form>
+										<div id="modal-change-sim" class="modal">
+											<div class="modal-content">
+												<div class="messages clearfix prefix {[{ class_modal }]}">
+													<div class="text-alert">
+														<div class="icon-alert">
+															<span class="icon-1"></span>
+															<span class="icon-2"></span>
+														</div>
+														<div class="txt-message">
+															<p class="contenText">{[{ state_modal }]}</p>
+														</div>
+													</div>
+												</div>
+												<div class="col modal-wrapper">
+													<div class="row">
+														{% set field_control = 0 %}
+														{% set bool_control = true %}
+														{% for pop_field in pop_up_fields if bool_control %}
+															{% if pop_field.show == 1 %}
+																<div class="col {{ loop.index == 1 ? 'm6 s12' : 'm3 s6' }}">
+																	<p class="label margin-change-sim">
+																		{[{
+																		{{ pop_field.service_field }}.label }]}
+																	</p>
+																	<p class="label bold">
+																		{[{
+																		{{ pop_field.service_field }}.data }]}
+																	</p>
+																</div>
+															{% endif %}
+															{% set field_control = field_control + 1 %}
+															{% if field_control == 3 %}
+																{% set bool_control = false %}
+															{% endif %}
+														{% endfor %}
+													</div>
+													<div class="row modal-data">
+														{% set field_control = 0 %}
+														{% set bool_control = true %}
+														{% for pop_field in pop_up_fields if bool_control %}
+															{% if field_control > 2 and pop_field.show == 1 %}
+																<div class="col s12">
+																		<p class="col m3 s6 margin-change-sim margin-0">
+																			{[{
+																			{{ pop_field.service_field }}.label }]}
+																		</p>
+																		<p class="col m9 s6 pull-left-20 margin-0">
+																			{[{
+																			{{ pop_field.service_field }}.data }]}
+																		</p>
+																</div>
+															{% endif %}
+															{% set field_control = field_control + 1 %}
+															{% if field_control == 7 %}
+																{% set bool_control = false %}
+															{% endif %}
+														{% endfor %}
+													</div>
+													<hr>
+													<div class="row modal-details">
+														{% set field_control = 0 %}
+														{% for pop_field in pop_up_fields %}
+															{% if field_control > 6 and pop_field.show == 1 %}
+																<div class="col s12 m12">
+																	<p class="label margin-change-sim">
+																		{[{
+																		{{ pop_field.service_field }}.label }]}
+																	</p>
+																	<p class="label bold margin-0">
+																		{[{
+																		{{ pop_field.service_field }}.data }]}
+																	</p>
+																</div>
+															{% endif %}
+															{% set field_control = field_control + 1 %}
+														{% endfor %}
+													</div>
+												</div>
+											</div>
+											<div class="row modal-footer">
+												<a href="#!" class="modal-action modal-close waves-effect waves-green btn btn-primary">{{ 'Aceptar'|t }}</a>
+											</div>
+										</div>
+									</div>
+								{% endblock %}
+							</div>
+						</div>
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

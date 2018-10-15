@@ -1,0 +1,107 @@
+
+<!--box-emulate-session-->
+<div class="account_dropdown_wrapper">
+        <a class="dropdown-button " data-activates="account_dropdown">
+
+			<span  class="name"> {{ data.username }} </span>   
+			
+          {% if enterprise is not empty %}
+            <span {% if enterprise|length > 10 %} class="enterprise shadow" data-position="top" data-delay="50" data-tooltip="{{ enterprise }}" {% else %} class="enterprise" {% endif %}>{% if enterprise|length > 55 %} {{ enterprise[0:54] }} {% else %} {{ enterprise }} {% endif %}</span>
+          {% endif %}
+          <i class="prefix icon-user-cyan">
+            <span class="path1"></span>
+          </i>
+        </a>
+      </div>
+
+<div class="admin-menu-area dropdown-content menu-useraccount" id="account_dropdown">
+	<div class="profile">
+		{% if data.username %}
+		<canvas class="circleinitialsmenu foto" title="{{ data.username|slice(0,25) }}" data-userid="{{ empresa.company_id }}"></canvas>
+        {% endif %}
+
+		<div class="titulo-admin">
+
+				{% if data.username|length > 20 %}
+				<div class="tooltipped name shadow nombre-admin" data-position="top" data-delay="50" data-color="white" data-tooltip="{{ data.username }}" ><span class="data-name">{{data.username}}</span></div>
+			   {% else %}  				
+			   <div class="nombre-admin">{{data.username}}</div>
+			   {% endif %}
+
+
+			{% for emp in data.companie_user %}
+			<div class="nombre-company">{{emp.name}}</div>
+			{% endfor %}
+		</div>
+
+	</div>
+	<div class="opciones-usuario">
+		<div class="admin-cuenta"><a ></a></div>
+		{% for emp in data.companie_user %}
+		<div class="correo" {% if data.companies|length ==0 %} style="border-bottom: solid 1.5px #e4e4e4;" {% endif %} >{{emp.mail}}</div>
+		{% endfor %}
+	</div>
+
+	{% if data.companies %}
+		<!-- si tiene mas de una compañia a administrar -->
+		<div class="cintillo">{{'Cambiar Cuenta'|trans}}</div>
+	{% endif %}
+
+	{% for empresa in data.companies %}
+	<div class="lista-emp">		
+		{% if empresa.name %}
+ 			<canvas class="circleinitialsmenu foto" title="{{ empresa.name|slice(0,25) }}" data-userid="{{ empresa.company_id }}"></canvas>
+    {% endif %}	
+		<div class="titulo-admin">
+			<div class="admin-cuenta"><a href="tbo_emulate_bo/selector/{{empresa.company_id}}">{{empresa.name}}</a></div>
+			<div class="correo"></div>
+		</div>
+	</div>
+	{% endfor %}
+	{% if data.show==1 %}
+	<div class="area-action" ><a href="{{data.url}}" >{{data.etiqueta}}</a></div>
+	{% endif %}
+	<div class="area-action" ><a href="/user/logout" >Cerrar Sesion</a></div>
+</div>
+
+<div class="admin-menu-area side-nav menu-useraccount" id="slide-out">
+	<div class="profile">
+		{% if data.username %}
+		<canvas class="circleinitialsmenu foto" title="{{ data.username|slice(0,25) }}" data-userid="{{ empresa.company_id }}"></canvas>
+        {% endif %}		
+		<div class="titulo-admin">			
+			<div class="nombre-admin">{{data.username}}</div>
+			{% for emp in data.companie_user %}
+			<div class="nombre-company">{{emp.name}}</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="opciones-usuario">
+		<div class="admin-cuenta"><a >Administrar Cuenta</a></div>
+		{% for emp in data.companie_user %}
+		<div class="correo" {% if data.companies|length ==0 %} style="border-bottom: solid 1.5px #e4e4e4;" {% endif %} >{{emp.mail}}</div>
+		{% endfor %}
+	</div>
+	
+	{% if data.companies %}
+		<!-- si tiene mas de una compañia a administrar -->
+		<div class="cintillo">Cambiar Cuenta</div>
+	{% endif %}
+
+	{% for empresa in data.companies %}
+	<div class="lista-emp">		
+		{% if empresa.name %}
+ 			<canvas class="circleinitialsmenu foto" title="{{ empresa.name|slice(0,25) }}" data-userid="{{ empresa.company_id }}"></canvas>
+    {% endif %}
+    	<div class="titulo-admin">
+			<div class="admin-cuenta"><a href="tbo_emulate_bo/selector/{{empresa.company_id}}">{{empresa.name}}</a></div>
+			<div class="correo" ></div>
+		</div>
+	</div>
+	{% endfor %}
+
+	{% if data.show==1 %}
+	 <div class="area-action" ><a href="{{data.url}}" >{{data.etiqueta}}</a></div>
+	{% endif %}
+	<div class="area-action" ><a href="/user/logout" >Cerrar Sesion</a></div>
+</div>

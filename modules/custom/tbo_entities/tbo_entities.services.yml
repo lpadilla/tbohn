@@ -1,0 +1,12 @@
+services:
+  tbo_entities.entities_service:
+    class: Drupal\tbo_entities\Services\EntitiesService
+    arguments: []
+
+  tbo_entities.transacction_category_form_class:
+    class: Drupal\tbo_entities\Plugin\Config\Form\TransacctionCategoryFormClass
+    arguments: []
+
+  tbo_entities.transaction_category_delete_form_class:
+    class: Drupal\tbo_entities\Plugin\Config\Form\TransacctionCategoryDeleteFormClass
+    arguments: []

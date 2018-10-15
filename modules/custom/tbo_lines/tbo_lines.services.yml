@@ -1,0 +1,140 @@
+services:
+  tbo_lines.consumption_detail_data_block_class:
+    class: Drupal\tbo_lines\Plugin\Config\Block\ConsumptionDetailDataBlockClass
+    arguments: []
+
+  tbo_lines.consumption_detail_data_rest_logic:
+    class: Drupal\tbo_lines\Services\ConsumptionDetailDataRestLogic
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client", "@current_user"]
+
+  tbo_lines.consumption_detail_data_download_rest_logic:
+    class: Drupal\tbo_lines\Services\ConsumptionDetailDataDownloadRestLogic
+    arguments: ["@tbo_general.tbo_config"]
+
+  tbo_lines.sms_balance_block_class:
+    class: Drupal\tbo_lines\Plugin\Config\Block\SmsBalanceBlockClass
+    arguments: []
+
+  tbo_lines.sms_balance_rest_logic:
+    class: Drupal\tbo_lines\Services\SmsBalanceRestLogic
+    arguments: ['@tbo_api.client', '@current_user']
+
+  tbo_lines.sms_consumption_history_block_class:
+    class: Drupal\tbo_lines\Plugin\Config\Block\SmsConsumptionHistoryBlockClass
+    arguments: []
+
+  tbo_lines.sms_consumption_history_rest_logic:
+    class: Drupal\tbo_lines\Services\SmsConsumptonHistoryRestLogic
+    arguments: ['@tbo_api.client', '@current_user']
+
+  tbo_lines.consumptions_filters_form_class:
+    class: Drupal\tbo_lines\Plugin\Config\Form\ConsumptionsFiltersFormConfigClass
+    arguments: []
+
+  tbo_lines.consumption_filter_service:
+    class: Drupal\tbo_lines\Services\ConsumptionDatesService
+    arguments: []
+
+  tbo_lines.consumption_filter_logic:
+    class: Drupal\tbo_lines\Services\ConsumptionFilterRestLogic
+    arguments: ["@current_user"]
+
+  tbo_lines.mobile_call_history_block:
+    class: Drupal\tbo_lines\Plugin\Config\Block\MobileCallHistoryBlockClass
+    arguments: []
+
+  tbo_lines.mobile_call_history_chart_block:
+    class: Drupal\tbo_lines\Plugin\Config\Block\MobileCallHistoryChartBlockClass
+    arguments: []
+
+  tbo_lines.mobile_call_history_rest:
+    class: Drupal\tbo_lines\Services\MobileCallHistoryRestLogic
+    arguments: ["@tbo_api.client", "@current_user"]
+
+  tbo_lines.mobile_call_history_chart_rest:
+    class: Drupal\tbo_lines\Services\MobileCallHistoryChartRestLogic
+    arguments: ["@tbo_api.client","@current_user"]
+
+  tbo_lines.mobile_call_history_plan_rest:
+    class: Drupal\tbo_lines\Services\MobileCallHistoryPlanRestLogic
+    arguments: ["@tbo_api.client","@current_user"]
+
+  tbo_line.call_history_rest_logic:
+    class: Drupal\tbo_lines\Services\CallHistoryLogRestLogic
+    arguments: ["@current_user"]
+
+  tbo_lines.line_info_rest_logic:
+    class: Drupal\tbo_lines\Services\LineInfoRestLogic
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client", "@current_user"]
+
+  tbo_lines.fixed_consumption_histogram_block_class:
+    class: Drupal\tbo_lines\Plugin\Config\Block\FixedConsumptionHistogramBlockClass
+    arguments: []
+
+  tbo_lines.fixed_consumption_details_rest_logic:
+    class: Drupal\tbo_lines\Services\FixedConsumptionDetailsRestLogic
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client", "@current_user"]
+
+  tbo_lines.fixed_consumption_daily_block_class:
+    class: Drupal\tbo_lines\Plugin\Config\Block\FixedConsumptionDailyBlockClass
+    arguments: []
+
+  tbo_lines.fixed_consumption_download_rest_logic:
+    class: Drupal\tbo_lines\Services\FixedConsumptionDownloadRestLogic
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client", "@current_user"]
+
+  tbo_lines.historical_consumption_per_month_block_class:
+    class: Drupal\tbo_lines\Plugin\Config\Block\HistoricalConsumptionPerMonthBlockClass
+    arguments: []
+
+  tbo_lines.historical_consumption_per_month_rest_logic:
+    class: Drupal\tbo_lines\Services\HistoricalConsumptionPerMonthRestLogic
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client", "@current_user"]
+
+  tbo_lines.historical_consumption_per_month_download_rest_logic:
+    class: Drupal\tbo_lines\Services\HistoricalConsumptionPerMonthDownloadRestLogic
+    arguments: ["@tbo_general.tbo_config"]
+
+  tbo_lines.fixed_consumption_data_block_class:
+    class: Drupal\tbo_lines\Plugin\Config\Block\FixedConsumptionDataBlockClass
+    arguments: []
+
+  tbo_lines.call_history_filter_date:
+    class: Drupal\tbo_lines\Services\CallHistoryDateService
+    arguments: []
+
+  tbo_lines.check_mobile_usage_block:
+    class: Drupal\tbo_lines\Plugin\Config\Block\CheckMobileUsageBlockClass
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  tbo_lines.check_mobile_details_usage_block:
+    class: Drupal\tbo_lines\Plugin\Config\Block\CheckMobileDetailsUsageBlockClass
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  tbo_lines.check_mobile_details_usage_rest:
+    class: Drupal\tbo_lines\Services\CheckMobileDetailsUsageService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client","@tbo_core.audit_log_service"]
+
+  tbo_lines.check_mobile_details_logs_button_usage_rest:
+    class: Drupal\tbo_lines\Services\CheckMobileDetailsLogsButtonUsageService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client","@tbo_core.audit_log_service"]
+
+  tbo_lines.check_mobile_usage_rest:
+    class: Drupal\tbo_lines\Services\CheckMobileUsageService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client","@tbo_core.audit_log_service"]
+
+  tbo_lines.check_mobile_usage_cancel_transfer_rest:
+    class: Drupal\tbo_lines\Services\CheckMobileUsageCancelTranferService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client","@tbo_core.audit_log_service"]
+
+  tbo_lines.transfer_balance_rest:
+    class: Drupal\tbo_lines\Services\TransferBalanceMobileService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client","@tbo_core.audit_log_service"]
+
+  tbo_lines.consumption_balance_rest_logic:
+    class: Drupal\tbo_lines\Services\ConsumptionBalanceRestLogic
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client", "@current_user"]
+
+  tbo_lines.validate_and_mask_currency:
+    class: Drupal\tbo_lines\Services\ValidateAndMaskCurrencyService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]

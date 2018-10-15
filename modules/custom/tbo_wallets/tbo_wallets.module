@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_wallets.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_wallets_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_wallets module.
+    case 'help.page.tbo_wallets':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Manejo de billeteras para saldos') . '</p>';
+      return $output;
+
+    default:
+  }
+}

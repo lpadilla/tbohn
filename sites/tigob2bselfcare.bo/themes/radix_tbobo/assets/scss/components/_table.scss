@@ -1,0 +1,274 @@
+table.multiple-payment-table{
+  outline: none;
+  &:focus {
+    outline: 0px;
+  }
+}
+
+table {
+  &.multiple-payment-table, &.table-white {
+    thead tr {
+      th {
+        span.icon-order{
+          width: 20px;
+          height: 14px;
+          display: inline-block;
+          text-align: center;
+          position: relative;
+          cursor: pointer;
+          &:before{
+            content: '';
+            position: absolute;
+            left: 4px;
+            top:6px;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            line-height: 0;
+          }
+          &.icon-arrow-down{
+            &:before{
+              border-left: 6px solid transparent;
+              border-right: 6px solid transparent;
+              border-top: 6px solid $cyan-tigo;
+            }
+          }
+          &.icon-arrow-up{
+            &:before{
+              border-left: 6px solid transparent;
+              border-right: 6px solid transparent;
+              border-bottom: 6px solid $cyan-tigo;
+            }
+          }
+        }
+        &.sortable-th {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  &.table-white {
+    .icon-order {
+      pointer-events: none;
+    }
+  }
+}
+main {
+  table.responsive-table {
+    outline: none;
+    @media #{$large-and-up} {
+      table-layout: fixed;
+    }
+    thead{
+      width: 34%;
+      @media #{$medium-and-up} {
+        width: 30%;
+      }
+      @media #{$large-and-up} {
+        width: 100%;
+        border-bottom: 1px solid #879ab8;
+      }
+      tr {
+        @media #{$medium-and-down}{
+          padding-right: 5px;
+        }
+        th {
+          font-size: 14px;
+          line-height: 14px;
+          font-weight: 500;
+          color:$blue-tigo;
+          height: 72px;
+          word-wrap: break-word;
+          @media #{$large-and-up} {
+            word-wrap: break-word;
+            height: 100%;
+            text-align: left;
+            padding: 15px 10px;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        @media #{$large-and-up} {
+          border-bottom: 1px solid #879ab8;
+        }
+        &#nofoundop{
+          border-bottom: none;
+          .nofoundop{
+            span{}
+          }
+        }
+        td {
+          height: 72px;
+          color:$gray-tigo;
+          font-size: 14px;
+          line-height: 16px;
+          font-weight: $regular;
+          text-align: left;
+          vertical-align: top;
+          word-wrap: break-word;
+          @media #{$large-and-up} {
+            height: 100%;
+            text-align: left;
+            word-wrap: break-word;
+            padding: 15px 10px;
+          }
+          > div{
+            color:$gray-tigo;
+            font-size: 14px;
+            line-height: 16px;
+            font-weight: $regular;
+          }
+          ul.block{
+            margin: 0;
+            li{
+              display: inline-block;
+              margin-right: 10px;
+              color:$gray-tigo;
+              font-size: 14px;
+              line-height: 16px;
+              font-weight: $regular;
+              @media #{$large-and-up} {
+                display: block;
+                margin: 0 0 5px 0;
+                word-wrap: break-word;
+              }
+            }
+          }
+          .input-field{
+            margin: 0;
+            .filled-in + label{
+              width: 20px;
+              padding: 0;
+              margin-top: 0;
+              top: 0;
+              left: 0;
+              margin-left: 12px;
+            }
+            .select-wrapper{
+              margin-top: -15px;
+              margin-bottom: 0;
+            }
+            label{
+              //top:0;
+            }
+          }
+          a{
+            display: block;
+            .icon-bin{
+              width: 20px;
+              display: block;
+              position: relative;
+              .path1, .path2{
+                color:$cyan-tigo;
+              }
+            }
+
+          }
+        }
+      }
+    }
+    tfoot{
+      @media #{$medium-and-down}{
+        display: block;
+      }
+      tr{
+        @media #{$medium-and-down}{
+          display: block;
+        }
+        td{
+          @media #{$medium-and-down}{
+            display: block;
+          }
+          .input-field{
+             ul.pagination{
+               margin: 9px 0 32px 0;
+               @media #{$large-and-up}{
+                 margin-bottom: 0;
+               }
+             }
+          }
+        }
+      }
+    }
+    &:focus {
+      outline: 0px;
+    }
+    thead tr th::before {
+     display: none;
+    }
+  }
+}
+
+table.table-white{
+  thead tr, tbody tr{
+    border-bottom: 1px solid $color-border-table-white;
+    td, th{
+      padding: 15px 10px;
+    }
+  }
+  thead{
+    tr{
+      th{
+        font-family: "Roboto", sans-serif;
+        color:$blue-tigo;
+        font-weight: $bold;
+        font-size: 14px;
+        line-height: 14px;
+        word-wrap: break-word;
+        height: 100%;
+        text-align: left;
+        span.icon-order{
+          width: 20px;
+          height: 14px;
+          display: inline-block;
+          text-align: center;
+          position: relative;
+          cursor: pointer;
+          &:before{
+            content: '';
+            position: absolute;
+            left: 4px;
+            top:6px;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            line-height: 0;
+          }
+          &.icon-arrow-down{
+            &:before{
+              border-left: 6px solid transparent;
+              border-right: 6px solid transparent;
+              border-top: 6px solid $cyan-tigo;
+            }
+          }
+          &.icon-arrow-up{
+            &:before{
+              border-left: 6px solid transparent;
+              border-right: 6px solid transparent;
+              border-bottom: 6px solid $cyan-tigo;
+            }
+          }
+        }
+      }
+    }
+  }
+  tbody tr td{
+    span{
+      font-family: "Roboto", sans-serif;
+      color:$gray-tigo;
+      font-weight: $regular;
+      font-size: 14px;
+      line-height: 14px;
+      word-wrap: break-word;
+    }
+  }
+}
+table.consumption-data-table{
+  tfoot{
+    ul.pagination{
+      text-align: center;
+    }
+  }
+}

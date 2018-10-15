@@ -1,0 +1,16 @@
+html[xmlns*=""] body.toolbar-tray-open.toolbar-vertical.toolbar-fixed {
+  margin-left: 0 !important;
+  @media (min-width: 600px) and (max-width: 992px) {
+    margin-left: 0 !important;
+  }
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+input[type=password]::-ms-reveal,
+input[type=password]::-ms-clear,
+input[type=text]::-ms-reveal,
+input[type=text]::-ms-clear{
+  display: none;
+}

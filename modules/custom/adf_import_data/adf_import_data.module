@@ -1,0 +1,159 @@
+<?php
+
+/**
+ * @file
+ * Contains adf_import_data.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function adf_import_data_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the adf_import_data module.
+    case 'help.page.adf_import_data':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Adf Import data') . '</p>';
+      return $output;
+
+    default:
+  }
+
+  // Function _log_massive_get_data($params, &$context) {
+  //    $context['results']['empty'] = 0;
+  //    $user = Drupal::currentUser();
+  //    $context['sandbox']['progress'] = 0;
+  //    $context['sandbox']['max'] = 0;
+  //    $context['finished'] = 0;
+  //    $service = \Drupal::service('adf_import.import_service');
+  //    $cant = $service->countAllRecord();
+  //    $data_query = $service->getDataLog($params['conditions'], 0, $cant);
+  //    $context['results']['data'] = $data_query;
+  //    $context['results']['cantElement'] = $cant;
+  //    $context['results']['headers'] = $params['headers'];
+  //    $context['finished'] = 1;
+  //    if (empty($data_query)) {
+  //      $context['results']['empty'] = 1;
+  //    }
+  //
+  //
+  //  }
+  //
+  //  function _log_massive_export_data($params, &$context) {
+  //
+  //    if ($context['results']['empty'] == 0) {
+  //      $user = \Drupal::currentUser();
+  //      $time = date('Y-m-d');
+  //      $context['sandbox']['progress'] = 0;
+  //      $context['sandbox']['current_number'] = 0;
+  //      $context['sandbox']['max'] = $context['results']['cantElement'];
+  //      $context['finished'] = 0;
+  //      $context['message'] = t('Exportando Filas...');
+  //
+  //      $type = $params['type'];
+  //      $data_export = $context['results']['data'];
+  //      $data_headers = $context['results']['headers'];
+  //
+  //
+  //      $dir = \Drupal::service('stream_wrapper_manager')
+  //        ->getViaUri('public://private/')
+  //        ->realpath();
+  //
+  //      $file_name = $params['file_name'] . '-' . $time . $user->id() . '.' . $type;
+  //      $path = $dir . '/' . $file_name;
+  //      $header = '';
+  //
+  //      if ($type == 'txt') {
+  //
+  //        $file = fopen($path, 'w');
+  //        $header = 'text/plain';
+  //        $file_header = implode(' ', $data_headers);
+  //        fwrite($file, $file_header . "\r\n");
+  //        foreach ($data_export as $row) {
+  //          $line = "";
+  //          foreach ($row as $key_row => $val_row) {
+  //            $line .= $val_row . ';';
+  //          }
+  //          $line = substr($line, 0, -1);
+  //          fwrite($file, $line . "\r\n");
+  //          $context['sandbox']['progress']++;
+  //          $context['message'] = t('Exportando información %procces de %max', [
+  //            '%procces' => $context['sandbox']['progress'],
+  //            '%max' => $context['sandbox']['max'],
+  //          ]);
+  //          if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
+  //            $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
+  //          }
+  //        }
+  //
+  //        if (fclose($file)) {
+  //          $context['results']['file_success'] = TRUE;
+  //        }
+  //        else {
+  //          $context['results']['file_success'] = FALSE;
+  //        }
+  //
+  //      }
+  //
+  //      // Export for xlsx and csv formats
+  //      if ($type == 'xlsx' || $type == 'csv') {
+  //        $writer = ($type == 'xlsx') ? WriterFactory::create(Type::XLSX) : WriterFactory::create(Type::CSV);
+  //        $writer->openToFile($path);
+  //
+  //        if ($type == 'xlsx') {
+  //          $header = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+  //          $writer->getCurrentSheet()->setName($params['file_name']);
+  //        }
+  //
+  //        if ($type == 'csv') {
+  //          $header = 'text/csv';
+  //          $writer->setFieldDelimiter(';');
+  //        }
+  //
+  //        $writer->addRow($data_headers);
+  //        foreach ($data_export as $row) {
+  //          $element_row = [];
+  //          foreach ($row as $key_row => $row_val) {
+  //            $element_row[] = $row_val;
+  //          }
+  //          $writer->addRow($element_row);
+  //          $context['sandbox']['progress']++;
+  //          $context['message'] = t('Exportando información %procces de %max', [
+  //            '%procces' => $context['sandbox']['progress'],
+  //            '%max' => $context['sandbox']['max'],
+  //          ]);
+  //        }
+  //
+  //        if ($writer->close()) {
+  //          $context['results']['file_success'] = TRUE;
+  //        }
+  //        else {
+  //          $context['results']['file_success'] = FALSE;
+  //        }
+  //      }
+  //
+  //      $_SESSION['export_download']['path'] = $path;
+  //      $_SESSION['export_download']['file_name'] = $file_name;
+  //      $_SESSION['export_download']['header_doc'] = $header;
+  //      $_SESSION['export_download']['empty'] = FALSE;
+  //    }
+  //    else {
+  //      $_SESSION['export_download']['empty'] = TRUE;
+  //    }
+  //    //batch save data
+  //    $context['results']['header_doc'] = $header;
+  //    $context['results']['path'] = $path;
+  //    $context['results']['file_name'] = $file_name;
+  //    $context['finished'] = 1;
+  //    $context['results']['empty'] = $_SESSION['export_download']['empty'];
+  //  }
+  //
+  //  function _log_massive_batch_finished($success, $results, $operations) {
+  //    if ($results['empty'] != 0) {
+  //      drupal_set_message('No hay información para exportar', 'status');
+  //    }
+  //  }.
+}

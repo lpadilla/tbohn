@@ -1,0 +1,10 @@
+entity.menu_tab_entity.add_form:
+  route_name: entity.menu_tab_entity.add_form
+  title: 'Add Menu tab entity'
+  appears_on:
+    - entity.menu_tab_entity.collection
+entity.item_menu_tab_entity.add_form:
+  route_name: entity.item_menu_tab_entity.add_form
+  title: 'Add Item menu tab entity'
+  appears_on:
+    - entity.item_menu_tab_entity.collection

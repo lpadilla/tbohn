@@ -1,0 +1,17 @@
+services:
+  tbo_core.audit_log_service:
+    class: Drupal\tbo_core\Services\AuditLogService
+    arguments: ["@tbo_api.client"]
+
+  tbo_core.repository:
+    class: Drupal\tbo_core\Repository\CoreRepository
+    arguments: []
+
+  # SystemLogsBlock
+  tbo_core.system_logs_block:
+    class: Drupal\tbo_core\Plugin\Config\Block\SystemLogsBlockClass
+    arguments: []
+
+  tbo_core.system_logs_rest:
+    class: Drupal\tbo_core\Services\Rest\AuditLogsRestService
+    arguments: []

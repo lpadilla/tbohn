@@ -1,0 +1,70 @@
+{% extends 'block__card_base.html.twig' %}
+{% block header_content_table %}{% endblock %}
+{% block other_content_data %}
+  <div class="card-block">
+    <div class="box-body">
+      {% if title.label_display == 'visible' %}
+        <h5 class="title-front">
+          {{ title.label }}
+        </h5>
+      {% endif %}
+      <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+        <div class="col s12">
+          {% block other_content_data_card %}
+            <div class="card white clearfix">
+              <div class="col s12">
+                {% block other_content %}
+                  <div id="change-wifi-net-name" class="change-wifi-settings">
+                    <h2 class="title-card">{{ fields.block_title.label }}</h2>
+                    <div class="modal-content">
+                      <form>
+                        <div class="row">
+                          {% for field in fields %}
+                            {% if field.input_type == "label"%}
+                              {% set classLabel =  'col s12 m6' %}
+                              {% if field.class == '12-columns' %}
+                                {% set classLabel = 'col s12 m12' %}
+                              {% endif %}
+                              <div class="{{ classLabel }}">
+                                <p>{{ field.label }}</p>
+                              </div>
+                            {% elseif field.input_type == 'text' %}
+                              {{ widgets.validate_style(field.label, field, field.class) }}
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                        <div class="row">
+                          <div class="col s12 m12 card-action">
+                          {% for button in buttons %}
+                            {% if button.show %}
+                              <a
+                                {% if button.service_field == 'action_card_change' %}
+                                  class="right waves-effect waves-light btn btn-primary"
+                                  id="cambiar-netname"
+                                  ng-disabled="state_button"
+                                  ng-click="changeNetName(netname)"
+                                {% else %}
+                                  id="cancelar-netname"
+                                  class="right waves-effect waves-light btn btn-second"
+                                  ng-click="clearFieldsNetName()"
+                                {% endif %}
+                                {% if button.active == 0 %}
+                                  disabled
+                                {% endif %}>{{ button.label }}
+                              </a>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                {% endblock %}
+              </div>
+            </div>
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

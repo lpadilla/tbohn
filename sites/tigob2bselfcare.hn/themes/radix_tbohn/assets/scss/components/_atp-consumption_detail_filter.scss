@@ -1,0 +1,86 @@
+.atp-consumption_detail_filter {
+  &-top {
+      display: flex;
+      align-items: center;
+        @media #{$small-and-down} {
+          flex-direction: column;
+        }
+    .input-field {
+      .select-wrapper {
+        margin-bottom: 0;
+        .select-dropdown {
+          margin: -10px 0 -15px;
+        }
+      }
+    }
+    &-title {
+      @media #{$small-and-down} {
+        display: flex;
+        justify-content: space-between;
+      }
+      h3 {
+        font-size: 18px;
+        @media #{$small-and-down} {
+          font-weight: 400;
+        }
+      }
+      .colapsable {
+        text-align: center;
+        align-self: center;
+        height: 45px;
+        width: 45px;
+        .path1:before {
+          transition: transform 0.3s ease-in-out;
+        }
+        &.collapsed {
+          .path1:before {
+            transform: rotate(-180deg);
+          }
+        }
+      }
+    }
+    &-buttons {
+      text-align: right;
+      padding-right: 0 !important;
+      @media #{$small-and-down} {
+        padding: 0 0 10px !important;
+        align-self: flex-end;
+      }
+      .btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 0;
+      }
+      @media #{$small-and-down} {
+        padding-bottom: 15px;
+      }
+    }
+    &-filter {
+      margin: 0;
+      @media #{$small-and-down} {
+        align-self: baseline;
+      }
+    }
+    .colapsable-content {
+      display: flex;
+      align-items: center;
+      @media #{$small-and-down} {
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.4s linear;
+      }
+      .input-field {
+        @media #{$small-and-down} {
+          margin: 0 0 20px;
+          left: -0.75rem;
+        }
+      }
+      &.expanded {
+        max-height: 100vh;
+        overflow: visible;
+      }
+    }
+  }
+}

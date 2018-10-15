@@ -1,0 +1,125 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% import "tbo_general.html.twig" as widgets %}
+
+{% block header_data %}
+{% endblock %}
+
+{% block filters %}
+{% endblock %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+{% endblock %}
+
+{% block message_exception %}
+{% endblock %}
+
+{% block end %}
+{% endblock %}
+
+{% block top_other_content %}
+  <div class="card invoice-delivery-status" data-ng-invoice-delivery-status ng-cloak ng-init="uuid='{{ uuid }}'">
+    <div>
+      <!-- Modal Structure -->
+      <div id="modalFormDeliveryStatus" class="modal">
+        <div class="modal-content">
+          <h2>Datos de facturación</h2>
+          <form name="billing-delivery-form" ng-submit="configureBill()">
+            <div class="recibir-lbl">Recibir esta factura:</div>
+            <div class="digital-options-chk">
+              <p>
+                <input type="checkbox" id="digital" class="filled-in" ng-model="digital_checked"/>
+                <label for="digital">Digital</label>
+              </p>
+            </div>
+            
+            <div id="digital-options" ng-show="digital_checked" class="ng-hide">
+              <div>
+                <div class="input-field">
+                  <label for="mail">Correo electronico</label>
+                  <input id="mail" type="email" class="validate" ng-model="mail_model">
+                </div>
+              </div>
+            </div>
+            
+            <div class="printed-options-chk">
+              <p>
+                <input type="checkbox" id="impresa" class="filled-in" ng-model="printed_checked" checked="checked"/>
+                <label for="impresa">Impresa</label>
+              </p>
+            </div>
+            
+            <div id="printed-options" ng-show="printed_checked" class="ng-hide">
+              <div>
+                <div class="input-field">
+                  <label for="address">Dirección</label>
+                  <input id="address" type="text" class="validate" ng-model="address_model" disabled="disabled">
+                </div>
+              </div>
+              
+              <div>
+                <div class="input-field">
+                  <label for="city">Ciudad</label>
+                  <input id="city" type="text" class="validate" ng-model="city_model" disabled="disabled">
+                </div>
+              </div>
+            </div>
+            
+            {% set details = config['show_invoice_include_details'] %}
+            {% if details.show == 1 %}
+              <div class="factura-detallada">
+                <p>Factura detallada</p>
+                <p>
+                  <input name="details" type="radio" id="details_si" class="with-gap" ng-model="details_si_model"/>
+                  <label for="details_si">Si</label>
+                </p>
+                <p>
+                  <input name="details" type="radio" id="details_no" class="with-gap" ng-model="details_no_model"/>
+                  <label for="details_no">No</label>
+                </p>
+              </div>
+            {% endif %}
+            
+            <p class="condiciones">Al presionar ACEPTAR estas aceptando las <a herf="#">condiciones</a> del servicio</p>
+            <div class="actions">
+              <a class="modal-close">CANCELAR</a>
+              <button class="btn-submit" type="submit">ACEPTAR</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <div ng-repeat="item in invoice_delivery_status['{{ uuid }}'].fields">
+        
+        {{ widgets.two_columns_card( '{[{ item.label }]}' , '{[{ item.value }]}', '40', '60', '{[{ item.class }]}' ) }}
+      
+      </div>
+      
+      <div ng-if="invoice_delivery_status['{{ uuid }}'].config.show_button_edit_invoice_electronic === 1">
+        {% set link_actions = [] %}
+        {% set link_actions = link_actions|merge([{ 'url': config.path_active_invoice_delivery_status, 'label': 'Modificar'|t, 'data_link_action' : 'Alter electronic invoice'|t, 'class' : 'secundary' }]) %}
+        
+        {{ widgets.link_actions(link_actions) }}
+      </div>
+      <div ng-if="invoice_delivery_status['{{ uuid }}'].config.show_button_active_invoice_electronic === 1">
+        
+        {% if config.invoice_delivery_status_block_description %}
+          {{ config.invoice_delivery_status_block_description.value|raw }}
+        {% endif %}
+        
+        {% if config.show_button_active_invoice_electronic %}
+          <div class="ctn-btn">
+            <a class="waves-effect waves-light btn enterprise-modal-form" href="#modalFormDeliveryStatus">Reciba su
+              factura digital</a>
+          </div>
+        {% endif %}
+      
+      </div>
+    </div>
+  
+  
+  </div>
+{% endblock %}

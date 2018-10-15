@@ -1,0 +1,5 @@
+services: 
+  # SystemLogsHnBlock
+  tbo_core_hn.system_logs_block_hn:
+    class: Drupal\tbo_core_hn\Plugin\Config\Block\SystemLogsHnBlockClass
+    arguments: []

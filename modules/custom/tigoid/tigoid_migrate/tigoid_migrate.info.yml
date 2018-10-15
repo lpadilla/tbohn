@@ -1,0 +1,7 @@
+name: tigoid_migrate
+type: module
+description: Asistente de migracion de cuentas Drupal a TigoID
+core: 8.x
+package: TigoID
+dependencies:
+  - tigoid

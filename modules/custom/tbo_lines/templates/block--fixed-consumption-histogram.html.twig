@@ -1,0 +1,46 @@
+ {% extends 'block__card_base.html.twig' %}
+
+  {% block filters %}
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+{% block other_content_data %}
+  <div class="card-block  wrapper-fixed-consumption-histogram {{ class }}">
+    <div class="box-body">
+      <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+        <div class="col s12">
+          <div class="card card-white clearfix">
+            <div class="header-card clearfix">
+              <div class="col s12">
+                <h3 class="title-card2"> {{ 'Histórico de consumos'|t }}</h3>
+                <p class="subtitle-card">{{ 'Último trimestre'|t }}</p>
+              </div>
+            </div>
+            <div class="col s12">
+              <div class="box-graphic-histogram">
+                <h6 class="voice-chart-label">{[{yAxisLabelFixedChart}]}</h6>
+                <canvas id="bar" class="chart chart-bar"
+                        chart-data="dataFixed"
+                        chart-labels="labelsFixed"
+                        chart-series="seriesFixed"
+                        chart-colors="colorsFixed"
+                        chart-options="chartOptionsF"
+                        chart-dataset-override="datasetOverrideFixed">
+                </canvas>
+              </div>
+            </div>
+            <div class="footer-card clearfix hide-on-med-and-down">
+              <div class="col s12">
+                <div class="informative-section clearfix">
+                  <span class="informative_text">{{ 'Los datos presentados son una referencia de consumos. Pueden variar dependiendo de la hora de generación del reporte.'|t }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

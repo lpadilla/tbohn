@@ -1,0 +1,7 @@
+tbo_user.emulate_session_bits:
+  path: '/tbo_user/emulate/{user}'
+  defaults:
+    _controller: '\Drupal\tbo_user\Controller\EmulateSession::emulateSession'
+    _title: 'emulateSession'
+  requirements:
+    _permission: 'access content'

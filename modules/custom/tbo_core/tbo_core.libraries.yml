@@ -1,0 +1,10 @@
+logs:
+  version: 1.x
+  js:
+    js/directive/auditlogs_list.js: {}
+    js/logs_config.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo

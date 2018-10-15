@@ -1,0 +1,64 @@
+region:
+  currency_sign: $
+  decimal_separator: ','
+  thousand_separator: .
+  position_currency_sing: '0'
+  decimal_numbers: '2'
+  format_date: fallback
+  # format_update: html_datetime
+billing:
+  options:
+    billing__options__active_tab: ''
+  download_pdf_attempts: '2'
+  alert_due_days: '5'
+lines:
+  validate_otp: 1
+  add_lines: 1
+  validate_document: 1
+  plantypes_validate_document:
+    plan_hibrido: plan_hibrido
+    pospago: pospago
+    prepago: 0
+units:
+  units:
+    call:
+      service_category: 'Minutos'
+      service_values: 'Minutos, Segundos'
+      decimals_separator: .
+      thousands_separator: ','
+      decimal_numbers: '2'
+    sms:
+      service_category: 'sms'
+      service_values: 'Mensajes, Sms'
+      decimals_separator: .
+      thousands_separator: ','
+      decimal_numbers: '2'
+    data:
+      service_category: 'Datos'
+      service_values: 'Gb, Mb, Kb, GB'
+      decimals_separator: .
+      thousands_separator: ','
+      decimal_numbers: '2'
+    money:
+      service_category: 'Dinero'
+      service_values: '$, SV'
+      decimals_separator: .
+      thousands_separator: ','
+      decimal_numbers: '2'
+  queued_packs: 0
+  core_balance_id: ''
+  exclude_core_balance: 1
+  events:
+    from_months_limit: 1
+    from_days_limit: 0
+    to_days_limit: 1
+    total_days_limit: 15
+    format_event_date: ''
+    format_length_field: ''
+  services:
+    nonexistent_behavior: 'NONEXISTENT_HIDE'
+  transfer_balance:
+    min_transfer: 501
+    max_transfer: 100000
+    fee_transfer: 0
+active_tab: edit-region

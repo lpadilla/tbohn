@@ -1,0 +1,54 @@
+.historical-invoice {
+  td {
+    position: relative;
+  }
+  .prefix .path1, .prefix .path2 {
+    margin-top: 0;
+  }
+  .dropdown-icon {
+    p {
+      margin: 5px 0 0 30px;
+    }
+  }
+  .js-dropdown-content {
+    top: 10px;
+    right: 110px;
+    @media #{$extra-large-and-up} {
+      right: 0;
+    }
+    @media #{$medium-and-down} {
+      top: auto;
+      right: 0;
+      left: 0;
+      bottom: 60px;
+    }
+  }
+  .data {
+    padding: 22px 20px;
+    h4 {
+     margin: 0px 0 24px;
+    }
+    table {
+      thead {
+        tr {
+          th {
+            @media #{$medium-and-up}{
+              max-width: 209px;
+              width: 20%;
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          td {
+            @media #{$medium-and-up} {
+              max-width: 209px;
+              width: 20%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

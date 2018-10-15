@@ -1,0 +1,6 @@
+tbo_account.tbo_billing_payment_settings:
+  title: 'TBO Facturas'
+  route_name: tbo_billing.bill_payment_settings
+  description: 'Menu for billing configuration'
+  parent: system.admin_config_system
+  weight: 99

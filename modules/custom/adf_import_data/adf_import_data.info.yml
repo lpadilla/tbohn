@@ -1,0 +1,5 @@
+name: adf_import_data
+type: module
+description: Adf Import data
+core: 8.x
+package: ADF

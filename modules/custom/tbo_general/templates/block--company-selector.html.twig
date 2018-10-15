@@ -1,0 +1,55 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_data %}
+<div>
+  {% endblock %}
+
+  {% block filters %}
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+  {% block modal %}
+  {% endblock %}
+
+  {% block top_other_content %}
+  {% endblock %}
+
+  {% block other_content_data %}
+    <div class="container-selector-company">
+      <h1 class="page-title center-align">{{ 'Selecciona una cuenta'|t }}</h1>
+      <div class="cuentas">
+        {% for item in data.companies %}
+          <a class="company-ctn segment-click"
+             data-segment-event="TBO - Seleccionar"
+             data-segment-properties='{"category":"Login","label":"Empresa","site":"NEW"}'
+             href="/tbo_general/selector/{{ item.company_id }}">
+            <div class="company-container clearfix valign-wrapper">
+              {% if data.avatar.avatar %}
+                <div class="wrapper-image">
+                  <img src="{{ data.avatar.src }}">
+                </div>
+              {% endif %}
+              <div class="company-info">
+                {% if data.company.name %}
+                  <div
+                    class="company-info-name"> {{ item.name|slice(0,25) }} </div>
+                {% endif %}
+                {% if data.company.mail %}
+                  <div
+                    class="company-info-mail"> {{ item.mail|slice(0,25) }} </div>
+                {% endif %}
+              </div>
+              <span class="arrow"></span>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+      <a class="action"
+         href="{{ data.load_more.url }}">{{ data.load_more.label }}</a>
+    </div>
+  {% endblock %}
+
+  {% block message_exception %}
+  {% endblock %}

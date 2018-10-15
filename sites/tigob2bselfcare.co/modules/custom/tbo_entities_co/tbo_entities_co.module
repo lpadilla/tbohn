@@ -1,0 +1,96 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_entities_co.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Database\Database;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_entities_co_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_entities_co module.
+    case 'help.page.tbo_entities_co':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('My Awesome Module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Add new fields to user entity
+ * Implements hook_entity_base_field_info().
+ */
+function tbo_entities_co_entity_base_field_info(EntityTypeInterface $entity_type) {
+  $fields = [];
+
+  if ($entity_type->id() == 'company_entity') {
+    $fields['cod_uni'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Codigo unico'))
+      ->setDescription(t('Codigo unico de identificación.'))
+      ->setSettings([
+        'max_length' => 20,
+        'text_processing' => 0,
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'integer',
+        'weight' => -2,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'integer_textfield',
+        'weight' => -2,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+  }
+
+  return $fields;
+}
+
+/**
+ * Implements hook_entities_entity_base_field_info_alter().
+ * Add field to database.
+ *
+ * @param $fields
+ * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
+ */
+function tbo_entities_co_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+  $schema = Database::getConnection()->schema();
+
+  // Add field unique identification code.
+  if (!$schema->fieldExists('company_entity_field_data', 'cod_uni')) {
+    $spec = [
+      'type' => 'int',
+      'length' => 20,
+      'description' => "Codigo unico",
+      'not null' => FALSE,
+    ];
+    $schema->addField('company_entity_field_data', 'cod_uni', $spec);
+  }
+}
+
+/**
+ *
+ */
+function tbo_entities_co_form_tbo_general_form_settings_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  $config = \Drupal::config('tbo_general.settings');
+  $form['region']['dv'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Activar digito de verificación (crear empresa)'),
+    '#default_value' => $config->get('region')['dv'],
+  ];
+
+  return $form;
+}

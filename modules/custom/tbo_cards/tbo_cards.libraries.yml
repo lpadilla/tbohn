@@ -1,0 +1,8 @@
+billing:
+  version: 1.x
+  js:
+    js/directive/billing.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tigoapi_batch/tigoapi.batch

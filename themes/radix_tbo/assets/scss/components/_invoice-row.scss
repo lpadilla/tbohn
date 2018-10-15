@@ -1,0 +1,682 @@
+.block{
+  >h4.block__title{
+    display: none;
+  }
+}
+
+.title-invoice-type {
+  margin:0;
+  padding: 30px 0 36px 0;
+  display: none;
+  @media #{$large-and-up} {
+    display: block;
+  }
+}
+
+
+#block-card{
+  .wrapper-card{
+    margin-bottom: 18px;
+    > .row{
+      @media #{$large-and-up} {
+        margin: 0;
+      }
+      > .col{
+        @media #{$large-and-up} {
+          padding: 0;
+        }
+      }
+    }
+    .box-body{
+      .invoice-row{
+        padding-top: 20px;
+        >.row{
+          margin-bottom: 0;
+        }
+      }
+    }
+    .address, .title-card {
+      color: $gray4-tigo;
+      font-weight: $medium;
+      font-size: 14px;
+      line-height: 14px;
+      margin: 0 0 13px 0; /*** elimnino 15px se margin top ****/
+    }
+  }
+}
+
+.box-body{
+  @media #{$large-and-up} {
+    width: 90%;
+    margin: 0 auto;
+  }
+  @media #{$extra-large-and-up} {
+    width: 93%;
+  }
+
+}
+main{
+  .page-box{
+     //padding: 0 0.75rem;
+  }
+}
+
+.card-block{
+  .invoice-row{
+    >.row{
+      margin-bottom: 0;
+    }
+  }
+  .address, .title-card {
+    color: $gray4-tigo;
+    font-weight: $medium;
+    font-size: 14px;
+    line-height: 14px;
+    margin: 20px 0 13px 0;
+  }
+}
+
+.card {
+  padding: 20px 10px 20px 10px;
+  position: relative;
+  margin: 0;
+  border-bottom: 1px solid $color-line-card;
+
+  .title-card2{
+    font-size: 18px;
+    line-height: 18px;
+    color:$gray2-tigo;
+    font-weight: $regular;
+    padding: 0;
+    margin: 4px 0 0 0;
+  }
+  .icon-admin{
+    float: left;
+    max-width: 40px;
+    height: auto;
+    margin-right: 6px;
+  }
+
+  &.gray-card{
+    background: $grey-filter;
+    padding-top: 0;   /**** esto debe general ***/
+    .select-wrapper{
+      &:before{
+        background: url("../images/degrade05.png") top left no-repeat;
+      }
+      span.caret{
+        background: $grey-filter;
+      }
+    }
+  }
+  &.blue-card{
+    background-color: $blue-tigo;
+    border-bottom: none;
+    @include box-shadow(0px,0px,0px,0, transparent, true);
+    padding: 14px 0;
+  }
+  &.card-no-border{
+    border: none;
+    @include box-shadow(0px,0px,0px,0, transparent, true);
+    .return{
+      margin: 0;
+    }
+  }
+  &.card-transparent{
+    background-color: transparent;
+  }
+
+  .title-card{
+    font-size: 18px;
+    line-height: 18px;
+    color:$blue-tigo;
+    margin: 0 0 23px 0;
+    font-weight: $medium;
+  }
+
+  &.no-padding-card {
+    padding: 0;
+  }
+
+  .header-card{
+    border-bottom: 1px solid #8B99B6;
+    padding-bottom: 17px;
+    p.subtitle-card{
+      color:#707680;
+      font-weight: $regular;
+      text-transform: lowercase;
+      margin: 3px 0 0 0;
+    }
+
+  }
+  .card-content{
+    .informative-section{
+      overflow: hidden;
+      margin-bottom: 20px;
+      .informative_text{
+        display: block;
+        font-size: 12px;
+        line-height: 16px;
+        color:$text-description;
+        margin: 0;
+        .prefix{
+          float: left;
+          width: 24px;
+          height: 50px;
+          margin-right: 10px;
+          .path1, .path2{
+            margin-top: 5px;
+          }
+        }
+        .txt-informative{
+          float: left;
+          max-width: 86%;
+          p{
+            font-size: 12px;
+            line-height: 16px;
+            color:$text-description;
+          }
+        }
+      }
+      .center-mobile{
+        @media #{$medium-and-down}{
+          text-align: center;
+        }
+        .btn-download-report{
+          line-height: 20px !important;
+          margin: 0 !important;
+          @media #{$large-and-up}{
+            float: right;
+          }
+        }
+      }
+    }
+  }
+  .footer-card{
+    border-top: 1px solid #8B99B6;
+    padding-top: 20px;
+    .informative-section{
+      overflow: hidden;
+      .informative_text{
+        display: block;
+        font-size: 12px;
+        line-height: 16px;
+        color:$text-description;
+        margin-bottom: 20px;
+        .prefix{
+          float: left;
+          width: 24px;
+          height: 50px;
+          margin-right: 10px;
+          .path1, .path2{
+            margin-top: 5px;
+          }
+        }
+      }
+      .center-mobile{
+        @media #{$medium-and-down}{
+          text-align: center;
+        }
+        .btn-download-report{
+          line-height: 20px !important;
+          margin: 0 !important;
+          @media #{$large-and-up}{
+            float: right;
+          }
+        }
+      }
+    }
+  }
+  .box-filter{
+    padding: 10px 0;
+    .row{
+      margin-bottom: 0;
+    }
+  }
+
+  h1{
+    text-align: center;
+    font-weight: $light;
+  }
+
+  .input-card{
+    p{
+      margin: 0 0 23px 0;
+    }
+
+  }
+  p.subtitle-card{
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: $bold;
+    color:$blue-tigo;
+    float: left;
+    padding-left: 0;
+  }
+  p.outstanding{
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: $regular;
+    color:$blue-tigo;
+    float: left;
+    text-transform: capitalize;
+    width: 100%;
+    word-wrap: break-word;
+  }
+  p.note{
+    margin-top: 0;
+  }
+  p.note-bill{
+    font-size: 16px;
+    font-weight: $regular;
+    line-height: 24px;
+    width: 100%;
+    word-wrap: break-word;
+    margin: 0;
+  }
+  .content{
+    padding: 0;
+    .box-bill{
+      padding: 0;
+      margin: 0;
+      /*** para validar **/
+      .alerta {
+        background-color: transparent !important;
+        font-weight: 400;
+        font-size: 14px;
+        padding: 0;
+
+        .path1,
+        .path2 { position: relative; }
+
+        &.red {
+          color: $red-alerta;
+
+          .icon-info .path1:before {
+            @include iconos-material('tigouneico', '\e960', 1.3em, bold);
+            position: absolute;
+            top: -1px;
+            color: $red-alerta;
+          }
+
+          .icon-info .path2:before {
+            @include iconos-material('tigouneico', '\e961', 1.3em, bold);
+            position: absolute;
+            top: -1px;
+            color: $red-alerta;
+          }
+        }
+
+        &.green {
+          color: $green-alerta;
+          .icon-info{
+            &::before {
+              color: #707682;
+              top: -1px;
+              color: $green-alerta;
+              font-size: 1.3em;
+              position: absolute;
+            }
+          }
+
+          .icon-info .path1:before {
+            @include iconos-material('tigouneico', '\e960', 1.3em, bold);
+            position: absolute;
+            top: -1px;
+            color: $green-alerta;
+          }
+
+          .icon-info .path2:before {
+            @include iconos-material('tigouneico', '\e961', 1.3em, bold);
+            position: absolute;
+            top: -1px;
+            color: $green-alerta;
+          }
+        }
+
+        @media #{$large-and-up} { left: 23%; }
+      }
+    }
+
+    .card-icon {
+      margin: 0px 14px 0 0px;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      background: #e1e2e4;
+      border-radius: 50%;
+      position: relative;
+      .prefix{
+        .path1,
+        .path2{
+          width: 24px;
+          margin-top: 9px;
+          margin-left: auto;
+          margin-right: auto;
+          left: 0;
+          right: 0;
+          &:before {
+            color: $gray-tigo;
+            font-weight: normal;
+          }
+        }
+      }
+      &.icon-service{
+        position: relative;
+        &:before{
+          display: none;
+        }
+        .path1,
+        .path2{
+          left: 9px;
+          top: -7px;
+          &:before {
+            color: $gray-tigo;
+            font-weight: normal;
+          }
+        }
+        > div{
+          &:before {
+            content: '';
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 0;
+            top:0;
+            background-color: #E0E1E3;
+            @include radiosRedondos(20px);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            padding-top: 7px;
+          }
+        }
+      }
+    }
+
+    .column-left {
+      //padding: 0;
+      .box-border{
+        border-bottom: 2px solid #8B99B6;
+        overflow: hidden;
+        padding-bottom: 14px;
+        @media #{$large-and-up}{
+          border: none;
+          padding: 0;
+        }
+        .box-txt{
+          display: inline-block;
+        }
+      }
+      .label {
+        color: $gray3-tigo;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 12px;
+        margin: 0 0 12px 0;
+        display: inline-block;
+      }
+      h3{
+        color: $blue-tigo;
+        font-weight:$regular;
+        font-size: 18px;
+        line-height: 12px;
+        margin: 0 0 12px 0;
+        padding: 0;
+        display: inline-block;
+      }
+      .info{
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        line-height: 12px;
+        position: relative;
+        padding-left: 22px;
+        &:before{
+         // @include iconos-material('tigouneico','\e957', 82px, bold);
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          margin: 0;
+          left: -31px;
+          top: -18px;
+          line-height: 9px;
+        }
+        &.service-status-active{
+          color:$activo;
+          &:before{
+            content: "..";
+            background: $activo;
+            width: 10px;
+            height: 10px;
+            display: inline-block;
+            border-radius: 50%;
+            font-size: 0;
+            position: absolute;
+            left: 6px;
+            top: 1px;
+
+          }
+        }
+        &.service-status-inactive{
+          color:$inactive;
+          &:before{
+            background: $inactive;
+            width: 10px;
+            height: 10px;
+            display: inline-block;
+            border-radius: 50%;
+            font-size: 0;
+            position: absolute;
+            left: 6px;
+            top: 1px;
+          }
+        }
+        &.service-status-discontinued{
+          color:$discontinued;
+          &:before{
+            background: $discontinued;
+            width: 10px;
+            height: 10px;
+            display: inline-block;
+            border-radius: 50%;
+            font-size: 0;
+            position: absolute;
+            left: 6px;
+            top: 1px;
+          }
+        }
+      }
+      .valor-factura {
+        margin: 0 0 24px;
+        color: $blue-tigo;
+        font-size: 24px;
+        line-height: 24px;
+        font-weight: $medium;
+
+        @media #{$large-and-up} { margin: 0 0 15px; }
+      }
+      .fecha-factura {
+        margin: 0 0 8px;
+        padding: 0;
+
+        @media #{$large-and-up} { left: 23%; }
+      }
+    }
+    .column-right {
+      padding: 0;
+      margin-top: 22px;
+      @media #{$large-and-up} {
+        padding: 0 0.75rem;
+      }
+      .card-content-right{
+        text-align: center;
+        .box-align{
+          text-align: left;
+          display: inline-block;
+        }
+        &:first-child{
+          text-align: left;
+        }
+        &:last-child{
+          text-align: right;
+        }
+      }
+      .label {
+        margin: 0 0 5px;
+        color: $text-label;
+        font-weight: 300;
+        font-size: 11px;
+        line-height: 11px;
+        word-break: break-all
+
+      }
+      .info {
+        margin: 0;
+        color: #717580;
+        font-weight: 300;
+        font-size: 14px;
+        word-break: break-all
+      }
+
+    }
+  }
+  .card-action {
+    margin-top: 20px;
+    text-align: right;
+    border: 0;
+    padding: 0 0.75rem;
+    .label {
+      color: $gray3-tigo;
+      font-weight: 300;
+      font-size: 16px;
+    }
+    .alerta {
+      background-color: transparent !important;
+      font-weight: 400;
+      font-size: 14px;
+
+      .path1,
+      .path2 { position: relative; }
+
+      &.red {
+        color: $red-alerta;
+        .icon-info .path1:before {
+          position: absolute;
+          top: -1px;
+          color: $red-alerta;
+          content: "\e960";
+          font-size: 1.3em;
+        }
+
+        .icon-info .path2:before {
+          position: absolute;
+          top: -1px;
+          color: $red-alerta;
+          content: "\e961";
+          font-size: 1.3em;
+        }
+      }
+
+      &.green {
+        color: $green-alerta;
+        .icon-info::before {
+          position: absolute;
+          top: -1px;
+          color: $green-alerta;
+          font-size: 1.3em;
+        }
+
+        .icon-info .path1:before {
+          position: absolute;
+          top: -1px;
+          color: $green-alerta;
+          content: "\e960";
+          font-size: 1.3em;
+        }
+
+        .icon-info .path2:before {
+          position: absolute;
+          top: -1px;
+          color: $green-alerta;
+          content: "\e961";
+          font-size: 1.3em;
+        }
+      }
+    }
+
+    .links {
+      color: $blue-tigo !important;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    .btn{
+      margin: 0;
+    }
+
+    .efecto-btn{
+      display: inline-block;
+    }
+
+    .btn-action {
+      margin-bottom: 0;
+    }
+    .detalle-factura {
+      color: $alert-success;
+      font-weight: 400;
+      font-size: 14px;
+      padding: 11px 20px;// se anexa los mismos margenes que tienen los botones -ver factura actaul -
+    }
+  }
+  .user-options {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    padding: 0;
+    margin: 0;
+    max-width: 24px;
+    width: 100%;
+    a.dropdown-button{
+      display: block;
+      background: url("../images/ic_more_vert_black.svg") top center no-repeat;
+      width: 100%;
+      height: 25px;
+      margin: 0;
+
+      &.desktop{
+        display: none;
+        @media #{$large-and-up} {
+          display: block;
+        }
+      }
+      &.mobile{
+        display: block;
+        @media #{$large-and-up} {
+          display: none;
+        }
+      }
+    }
+    ul.dropdown-content{
+      top: 30px !important;
+      &.active{
+        top: 30px !important;
+        @media #{$large-and-up} {
+          top: 0 !important;
+        }
+      }
+      li{
+        &:hover{
+          background-color: #E5E9F0;
+        }
+      }
+    }
+  }
+  &.gray-noborder-transparent-on-mobile-card {
+    background: $grey-filter;
+    border: none;
+    @media #{$medium-and-down} {
+      background: transparent;
+      box-shadow: none;
+    }
+  }
+}

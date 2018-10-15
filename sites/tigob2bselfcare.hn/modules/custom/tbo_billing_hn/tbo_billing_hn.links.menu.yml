@@ -1,0 +1,6 @@
+tbo_account_hn.tbo_billing_payment_settings:
+  title: 'TBO Facturas Honduras'
+  route_name: tbo_billing_hn.bill_payment_settings
+  description: 'Menu for billing configuration for HN'
+  parent: system.admin_config_system
+  weight: 99

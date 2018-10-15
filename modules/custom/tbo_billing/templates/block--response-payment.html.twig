@@ -1,0 +1,24 @@
+<div class="messages clearfix messages--success alert {{ data.class }}">
+  <button type="button" class="close prefix icon-x-cyan" data-dismiss="alert"
+          onclick="closeMessage()" aria-hidden="true">
+    <span class="path1"></span>
+    <span class="path2"></span>
+  </button>
+  <div class="text-alert">
+    <div class="icon-alert">
+      <span class="icon-1"></span>
+      <span class="icon-2"></span>
+    </div>
+    <div class="txt-message">
+      <p>{{ data.title }}</p>
+      <p>{{ data.body }}</p>
+    </div>
+  </div>
+  {% if data.url %}
+    {% if data.action != 0 %}
+     {# <a class="txt-message" ng-click="paymentProcess()">{% trans %} REINTENTAR {% endtrans %}</a> #}
+    {% else %}
+      {#<a class="txt-message" href="{{ data.url }}">{% trans %} REINTENTAR {% endtrans %}</a>#}
+    {% endif %}
+  {% endif %}
+</div>

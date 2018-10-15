@@ -1,0 +1,119 @@
+.messages--factura {
+  padding: 15px 1.75em 15px 3em !important;
+
+  @media only screen and (max-width: $medium-screen) {
+    padding: 15px .75em 15px 1.5em !important;
+  }
+
+  .close {
+    position: initial !important;
+    float: right;
+    padding: 0;
+
+    &:before {
+      margin: 0 !important;
+      padding: 0;
+      font-size: 30px !important;
+      line-height: 1.5 !important;
+    }
+  }
+
+  .text-alert {
+    overflow: auto;
+
+    .icon-alert { top: 10px !important; }
+
+    .ctn-mensaje {
+      position: relative;
+      display: inline-block;
+      min-width: 185px;
+      max-width: 1040px;
+      width: 80%;
+
+      @media only screen and (max-width: $small-screen) {
+        width: 75%;
+      }
+
+      h3 {
+        float: left;
+        margin: 0 0 10px;
+        color: white;
+        font-weight: 400;
+        font-size: 14px;
+      }
+
+      p {
+        float: left;
+        clear: left;
+        font-size: 14px;
+      }
+
+      a {
+        float: right;
+        clear: initial;
+        margin-top: 10px;
+        color: white;
+        font-size: 14px;
+      }
+    }
+  }
+
+  &.pago-exitoso {
+    background-color: $alert-success;
+
+    .icon-alert {
+      .icon-1 {
+        &:before {
+          @include iconos-material('tigouneico','\e928', 30px, bold);
+        }
+      }
+      .icon-2 {
+        &:before {
+          @include iconos-material('tigouneico','\e929', 30px, bold);
+        }
+      }
+    }
+  }
+
+  &.pago-pendiente {
+    background-color: $yellow2-tigo;
+
+    .icon-alert {
+      .icon-1 {
+        &:before {
+          @include iconos-material('tigouneico','\e904', 30px, bold);
+        }
+      }
+      .icon-2 {
+        &:before {
+          @include iconos-material('tigouneico','\e905', 30px, bold);
+        }
+      }
+    }
+  }
+
+  &.pago-rechazado {
+    background-color: $alert-danger;
+
+    .icon-alert {
+      .icon-1 {
+        &:before {
+          @include iconos-material('tigouneico','\e9f3', 30px, bold);
+        }
+      }
+      .icon-2 {
+        &:before {
+          @include iconos-material('tigouneico','\e9f4', 30px, bold);
+        }
+      }
+    }
+  }
+}
+
+.mensaje-error {
+  color: $alert-danger;
+}
+
+.mensaje-estado {
+  color: $alert-success;
+}

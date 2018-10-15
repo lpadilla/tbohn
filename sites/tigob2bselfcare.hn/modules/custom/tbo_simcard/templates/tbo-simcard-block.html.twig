@@ -1,0 +1,20 @@
+<div class="card-block">
+    <div class="row">
+        <div class="col s12">
+            <div class="card clearfix">
+                {{ form }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalConfirm" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>{{ 'Confirmación'|trans }}</h4>
+        <p>{{ '¿Desea aplicar los cambios solicitados a su cuenta?'|trans }}</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" id="submitBtn" data-target="{{ formName }}" class="modal-action modal-close waves-effect waves-green btn-flat btn btn-primary">{{  'Aceptar'|trans}}</a>
+        <a href="#!" id="cancelBtn" class="modal-action modal-close waves-effect waves-green btn-flat btn-second ">{{ 'Cancelar'|trans }}</a>
+    </div>
+</div>

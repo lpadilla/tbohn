@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Contains selfcare_gtm.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function selfcare_gtm_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the selfcare_gtm module.
+    case 'help.page.selfcare_gtm':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Google Tag Manager') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/*
+function selfcare_gtm_page_attachments(array &$page) {
+$page['#attached']['library'][] = 'selfcare_gtm/selfcare.gtm';
+if( isset($_SESSION['gtm_event']) ){
+$page['#attached']['drupalSettings']['gtm'] = $_SESSION['gtm_event'];
+unset($_SESSION['gtm_event']);
+}
+}*/

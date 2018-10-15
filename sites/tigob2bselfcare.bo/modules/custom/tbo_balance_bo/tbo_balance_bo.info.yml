@@ -1,0 +1,5 @@
+name: tbo_balance_bo
+type: module
+description: Tbo - balance - Bo
+core: 8.x
+package: Custom

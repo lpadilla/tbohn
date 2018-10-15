@@ -1,0 +1,9 @@
+{% extends 'tbo_modal.html.twig' %}
+{% block print_message %}
+    {{ message }}
+{% endblock %}
+{% block button %}
+    <a href="{{ path('tbo_account.manage_companies_message_confirm', {'type':type, 'clientId': clientId, 'name': name, 'pathname': pathname, 'state': state_change, 'confirm': TRUE}) }}" id="confirm" class="right create-account waves-effect waves-light btn btn-primary">{{ button }}</a>
+    <a href="#" id="btnDone" class="right waves-effect waves-light btn btn-second">Cancelar</a>
+{% endblock %}
+

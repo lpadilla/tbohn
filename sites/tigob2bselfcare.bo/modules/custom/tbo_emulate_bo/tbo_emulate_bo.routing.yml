@@ -1,0 +1,15 @@
+tbo_emulate_bo.emulate_session_hello:
+  path: '/tbo_emulate_bo/emulate/{user}'
+  defaults:
+    _controller: '\Drupal\tbo_emulate_bo\Controller\EmulateSessionBo::emulateSessionBo'
+    _title: 'emulateSessionBo'
+  requirements:
+    _permission: 'access content'
+
+tbo_emulate_bo.company_selector_controller_companySelector:
+  path: '/tbo_emulate_bo/selector/{uid}'
+  defaults:
+    _controller: '\Drupal\tbo_emulate_bo\Controller\CompanySelectorControllerBo::companySelectorBo'
+    _title: 'Selecciona una cuenta'
+  requirements:
+    _permission: 'access content'

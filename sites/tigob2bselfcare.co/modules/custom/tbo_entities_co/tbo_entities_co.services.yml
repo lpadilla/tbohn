@@ -1,0 +1,4 @@
+services:
+  tbo_entities_co.miscellany:
+    class: Drupal\tbo_entities_co\Services\TboEntitiesCoService
+    arguments: []

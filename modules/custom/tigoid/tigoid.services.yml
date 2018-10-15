@@ -1,0 +1,37 @@
+services:
+  tigoid.user:
+    class: Drupal\tigoid\TigoidUser
+    arguments: ["@database"]
+
+  tigoid.route_subscriber:
+    class: Drupal\tigoid\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+
+  tigoid.repository:
+    class: Drupal\tigoid\Repository\TigoidRepository
+    arguments: []
+
+  tigoid.authorization_controller:
+    class: Drupal\tigoid\Services\Controller\AuthorizationControllerService
+    arguments: []
+
+  tigoid.login_handler:
+    class: Drupal\tigoid\Services\Controller\LoginHandlerControllerService
+    arguments: []
+
+  tigoid.redirect_controller:
+    class: Drupal\tigoid\Services\Controller\RedirectControllerService
+    arguments: ['@plugin.manager.openid_connect_client.processor', '@request_stack', '@logger.factory', '@current_user']
+
+  tigoid.settings_config_form:
+    class: Drupal\tigoid\Plugin\Config\Form\SettingsFormClass
+    arguments: []
+
+  tigoid.login_block_class:
+    class: Drupal\tigoid\Plugin\Config\Block\LoginBlockClass
+    arguments: []
+
+  tigoid.open_id_connect_client:
+    class: Drupal\tigoid\Plugin\Config\OpenIDConnectClient\TigoIdClass
+    arguments: ['@http_client', '@request_stack']

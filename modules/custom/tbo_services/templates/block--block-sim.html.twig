@@ -1,0 +1,213 @@
+{% extends 'block__card_base.html.twig' %}
+{% block header_content_table %}{% endblock %}
+{% block other_content_data %}
+  <div class="card-block">
+    <div class="box-body">
+      {% if title.label_display == 'visible' %}
+        <h5 class="title-front">
+          {{ title.label }}
+        </h5>
+      {% endif %}
+      <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+        <div class="col s12">
+          {% block other_content_data_card %}
+            <div class="card white clearfix">
+              <div class="col s12">
+                {% block other_content %}
+                  <div id="block-sim" class="block-sim-settings">
+                    <h2 class="title-card">{{ fields.block_title.label }}</h2>
+                    <div class="modal-content">
+                      <form ng-init="msisdn = {{ msisdn }}; reasonBlockSim = '{{ reason }}'; ">
+                        <div class="row">
+                          {% if fields.description.show %}
+                            <div class="col s12 m12 l12">
+                              <p>{{ fields.description.label }}<br>{{ fields.description.imsi }}</p>
+                            </div>
+                          {% endif %}
+                          {% for field in fields %}
+                            {% if field.show %}
+                              {% if field.service_field == 'rdb_lost' %}
+                                <div class="input-field col s12 m12 l12 form-type-radio radio">
+                                  <input class="with-gap" type="radio" id="mobile" ng-model='reasonBlockSim' value='lost' {% if disabled %}disabled{% endif %}>
+                                  <label for="mobile">{{ field.label }}</label>
+                                </div>
+                              {% endif %}
+                              {% if field.service_field == 'rdb_stole' %}
+                                <div class="input-field col s12 m12 l12 form-type-radio radio">
+                                  <input class="with-gap" type="radio" id="fixed" ng-model='reasonBlockSim' value='stole' {% if disabled %}disabled{% endif %}>
+                                  <label for="fixed">{{ field.label }}</label>
+                                </div>
+                              {% endif %}
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                        <div class="row">
+                          <div class="col s12 m7">
+                            <div class="hide-down margin-30">
+                              <p class="condiciones" style="font-size: 11px">
+                                {{ terms.description }}
+                                {% if terms.show %}
+                                  {% if terms.open_modal %}
+                                    <a style="font-size: 11px" {% if disabled == false %}href="#terms"{% endif %}> {{ terms.label }}</a>
+                                  {% else %}
+                                    <a style="font-size: 11px" {% if disabled == false %}href="{{ terms.url }}" {% endif %}target="{{ terms.target }}"> {{ terms.label }}</a>
+                                  {% endif %}
+                                {% endif %}
+                              </p>
+                            </div>
+                            <div class="hide-up margin-30">
+                              <p class="condiciones" style="font-size: 11px">
+                                {{ termsMovile.description }}
+                                {% if termsMovile.show %}
+                                  {% if termsMovile.open_modal %}
+                                    <a style="font-size: 11px" {% if disabled == false %}href="#terms-movile"{% endif %}> {{ termsMovile.label }}</a>
+                                  {% else %}
+                                    <a style="font-size: 11px" {% if disabled == false %}href="{{ termsMovile.url }}" {% endif %}target="{{ termsMovile.target }}"> {{ termsMovile.label }}</a>
+                                  {% endif %}
+                                {% endif %}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="col s12 m5 card-action">
+                            {% for button in buttons %}
+                              {% if button.show %}
+                                <a
+                                  {% if button.service_field == 'action_card_accept' %}
+                                    class="right waves-effect waves-light btn btn-primary"
+                                    {% if disabled == false %}
+                                      ng-disabled="stateButtonBlockSim"
+                                    {% endif %}
+                                    ng-click="blockSim()"
+                                  {% else %}
+                                    class="right waves-effect waves-light btn btn-second"
+                                    ng-click="clearFieldsBlockSim()"
+                                  {% endif %}
+                                  {% if (button.active == 0) or (disabled) %}
+                                    disabled
+                                  {% endif %}>{{ button.label }}</a>
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                {% endblock %}
+              </div>
+            </div>
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal term -->
+  <div id="terms" class="modal">
+    <div class="modal-content">
+      <h2 class="title-modal">{{ terms.label }}</h2>
+      <div class="condiciones-politicas">{{ render }}</div>
+    </div>
+    <div class="modal-footer">
+      <div class="input-field col s12">
+        <a href="#!" class="right modal-action modal-close waves-effect waves-light btn btn-primary">{{ 'CERRAR' }}</a>
+      </div>
+    </div>
+  </div>
+  <!-- Modal term -->
+  <div id="terms-movile" class="modal">
+    <div class="modal-content">
+      <h2 class="title-modal">{{ termsMovile.label }}</h2>
+     <div class="condiciones-politicas">{{ renderMovile }}</div>
+    </div>
+    <div class="modal-footer">
+      <div class="input-field col s12">
+        <a href="#!" class="right modal-action modal-close waves-effect waves-light btn btn-primary">{{ 'CERRAR' }}</a>
+      </div>
+    </div>
+  </div>
+  <!-- Modal term -->
+  <div id="block-sim-confirm" class="modal">
+    <div class="modal-content">
+      <div class="messages clearfix prefix {[{ class_modal }]}">
+        <div class="text-alert">
+          <div class="icon-alert">
+            <span class="icon-1"></span>
+            <span class="icon-2"></span>
+          </div>
+          <div class="txt-message">
+            <p class="contenText">{[{ state_modal }]}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col modal-wrapper margin-top-10">
+        <div class="row">
+          {% set field_control = 0 %}
+          {% set bool_control = true %}
+          {% for pop_field in pop_up_fields if bool_control %}
+            {% if pop_field.show == 1 %}
+              <div class="col {{ loop.index == 1 ? 'm6 s12' : 'm3 s6' }}">
+                <p class="label margin-block-sim margin-0">
+                  {[{
+                  {{ pop_field.service_field }}.label }]}
+                </p>
+                <p class="label bold margin-0">
+                  {[{
+                  {{ pop_field.service_field }}.data }]}
+                </p>
+              </div>
+            {% endif %}
+            {% set field_control = field_control + 1 %}
+            {% if field_control == 3 %}
+              {% set bool_control = false %}
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="row modal-data">
+          {% set field_control = 0 %}
+          {% set bool_control = true %}
+          {% for pop_field in pop_up_fields if bool_control %}
+            {% if field_control > 2 and pop_field.show == 1 %}
+              <div class="col s12 m12">
+                  <p class="col m4 s6 margin-0">
+                    {[{
+                    {{ pop_field.service_field }}.label }]}
+                  </p>
+                  <p class="col m8 s6 pull-left-20 margin-0">
+                    {[{
+                    {{ pop_field.service_field }}.data }]}
+                  </p>
+              </div>
+            {% endif %}
+            {% set field_control = field_control + 1 %}
+            {% if field_control == 7 %}
+              {% set bool_control = false %}
+            {% endif %}
+          {% endfor %}
+        </div>
+        <hr>
+        <div class="row modal-details">
+          {% set field_control = 0 %}
+          {% for pop_field in pop_up_fields %}
+            {% if field_control > 6 and pop_field.show == 1 %}
+              <div class="col s12 m12">
+                <p class="label margin-block-sim col s12 m12">
+                  {[{
+                  {{ pop_field.service_field }}.label }]}
+                </p>
+                <p class="label bold margin-0 col s12 m12">
+                  {[{
+                  {{ pop_field.service_field }}.data }]}
+                </p>
+              </div>
+            {% endif %}
+            {% set field_control = field_control + 1 %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="input-field col s12">
+        <a href="#!" class="right modal-action modal-close waves-effect waves-light btn btn-primary">{{ 'ACEPTAR' }}</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

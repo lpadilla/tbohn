@@ -1,0 +1,410 @@
+.report{
+	color: #000;
+	font-size: 14px; 
+	font-weight: 700;
+	padding-left: 0px;
+}
+span.counter_0 {
+    font-size: 14px !important;
+    color: #a8abb2 !important;
+    font-weight: 500 !important;
+}
+span.counter_1 {
+    padding-top: 10px !important;
+    color: black !important;
+    font-size: 20px !important;
+}
+
+span.counter_2 {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #A6B9D1 !important;
+}
+
+span.counter_3 {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #A6B9D1 !important;
+    margin-bottom: 4px !important;
+}
+li.li_0 {
+    padding-top: 17px;
+}
+li.li_1 {
+    padding-top: 10px;
+}
+.return-arrow{
+	color:#00377B;
+}
+
+.arrow_tf{
+	margin-left: -50px!important;
+    margin-top: 3px!important;
+}
+.ulop{
+	color: #00377b!important;
+	font-weight: bold!important; 
+}
+.options-active{
+	height: 30px;
+	background-color: #E4EBF3;	
+}
+.options-active>span{
+	color:#00377b;
+	font-weight: 400;
+	padding-top: 10px;
+}
+.sub-menu>li{
+	border-bottom: 1px solid #E0E1E3;
+	min-height: 45px;
+	padding-top: 10px;
+	padding-left: 30px;
+}
+.card.no-pad{
+    padding-top: 0 !important;
+}
+
+.no-pad-top{
+	padding-top: 0 !important;
+}
+.no-padi{
+	padding: 0 !important;
+}
+.pad-top{
+	padding-top: 20px;
+}
+.no-toppad{
+    margin-top: -15PX !important;
+}
+
+.no-top{
+	padding: 0 !important;
+}
+
+.infor{
+	margin-top:0px;
+}
+.no-mar{
+	margin: 0 !important;
+}
+h2.telefonia.movil{
+	margin: 8px 0px 5px 0px!important;
+    color: #00377B;
+    font-size: 18px !important;
+    line-height: 24px;
+    font-weight: 400;
+}
+.movil{
+	font-size:18px !important;
+	margin-bottom:5px;
+}
+hr.saldos-hr{
+	border-top: 1px solid #8c8b8b; 
+	margin-top: 180px;
+}
+hr.saldos-hr-detail{
+	border-top: 1px solid #8c8b8b; 
+	margin-top: 300px;
+}
+h2.detalles{
+	font-size:18px;
+	color:#00377b;
+	font-weight:400;
+}
+span.consultar{
+	font-size:14px;
+	color:#a8abb2;
+	font-weight:500;
+}
+
+span.update-tf{
+	font-size:12px;
+	color:#a8abb2;
+	font-weight:400;
+}
+h2.saldo-principal{
+	font-size:22px;
+	color:#00377b;
+	font-weight:400;
+}
+span.amount-principal{
+	font-size:24px;
+	font-weight:bold;
+	color:#00377b;
+}
+
+ul.infor >li>span:first-child{
+	font-size: 22px;
+	color: #00377b;
+	font-weight: 700;
+}
+ul.infor>li:nth-child(2)>span, ul.infor>li:nth-child(5)>span{
+	font-size: 12px;	
+	font-weight: 500;
+	color: #A6B9D1;
+}
+ul.infor >li:nth-child(3)>span{
+	font-size: 14px;
+	color: #a8abb2;
+	font-weight: 500;
+}
+ul.infor >li:nth-child(3){
+	padding-top: 10px;
+}
+
+ul.infor >li:nth-child(4)>span{
+	padding-top: 10px;
+	color: black;
+	font-size: 20px;
+}
+ul.infor >li:nth-child(4){
+	padding-top: 10px;
+}
+h3.saldos-date{
+	font-size: 14px;
+	color: #a8abb2;
+	font-weight: bold;
+	padding-top: 0px;
+}
+
+ul.up-date >li:first-child>span{
+	font-size: 11px;
+	font-weight: 500;
+	color: #00377b;
+}
+
+ul.up-date >li:nth-child(2)>span{
+	font-size: 12px;
+	font-weight: 500;
+	color: #A6B9D1;
+}
+
+.no-box{
+	box-shadow: none !important;
+}
+.spc{
+	border: 1px solid rgba(0,0,0,0.14);
+    margin-top: 20px !important;
+}
+
+
+
+style="border-left: 1px solid #8B99B6; border-top: 1px solid #8B99B6;
+
+@media only screen and (min-width: 1201px)
+.box-body {
+    width: 90% !important;
+}
+
+.bord-left{
+	border-left: 1px solid #E0E1E3;
+}
+
+.no-sides-pad{
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+
+
+span.detalles{
+	font-size:18px;
+	color:#00377b;
+	font-weight:400;
+}
+
+li.three {
+	padding-top: 60px;	
+}
+li.five {
+	padding-top: 30px;	
+}
+span.amount-tf{
+	font-size:18px;
+	font-weight:bold;
+	color:#00377b;
+}
+
+.card .content .column-left .box-border {
+    border-bottom: none !important;
+}
+
+@media only screen and (max-width: 425px){
+	#modalConfirm{
+		width: 75%!important;
+	}
+}
+
+@media only screen and (min-width: 426px) and (max-width: 1024px){
+	#modalConfirm{
+		width: 50%!important;
+	}
+}
+
+@media only screen and (min-width: 1025px){
+	#modalConfirm{
+		width: 30%!important;
+	}
+}
+
+.btn-default{
+	background-color: white!important;
+	color: #00377B!important;
+}
+
+.right{
+	float: right;
+}
+
+div.total_tf{
+	border-top: 1px solid #8c8b8b; 
+}
+
+div.no-pad-lr{
+	padding-left: 0px!important;
+	padding-right: 0px!important;
+}
+
+.bold{
+	font-weight: bold;
+}
+.mg-bt{
+	margin-bottom: 20px;
+}
+
+#edit-amount::-webkit-input-placeholder {
+ 	font-size: 18px!important;
+}
+#edit-amount::-moz-placeholder { 
+ 	font-size: 18px!important;
+}
+
+#edit-amount::-ms-input-placeholder { 
+	font-size: 18px!important;
+}
+
+#edit-number::-webkit-input-placeholder {
+ 	font-size: 18px!important;
+}
+#edit-number::-moz-placeholder {
+ 	font-size: 18px!important;
+}
+
+#edit-number::-ms-input-placeholder { 
+	font-size: 18px!important;
+}
+
+
+div.form-item-amount>label{
+	font-size:14px!important;
+	color:#a8abb2!important;
+}
+
+/* TABS */
+
+.current{
+	display: none;
+}
+
+div.form-item-amount{
+	max-width: 250px!important;
+    margin-left: 30px!important;
+}
+
+div.form-item-number{
+	max-width: 250px!important;
+    margin-left: 30px!important;
+}
+
+i.material-icons.linea {  
+    float: left;
+    width: 0px;
+}
+.column-left.col.s7.m6.l3.xl3.linea {
+    margin-top: -8px;
+}
+
+i.material-icons.linea {
+    float: left;
+    width: 0px;
+    margin-top: 12px;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.input-field.col.s12.no-mar {
+    margin-left: 19px;
+    padding-left: 27px;
+}
+
+input.select-dropdown{
+	font-size: 14px!important;
+}
+
+.select-wrapper ul.select-dropdown li span{
+	font-size: 14px!important;
+}
+
+form .input-field label:not(.label-icon).active {
+    color: #a8abb2!important;
+}
+
+#num-dest-md{
+	padding-left: 22px!important;
+	padding-right: 0px!important;
+}
+
+form.balances-form>.row>#suggestions{
+display: none !important;	
+}
+
+div.form-item-amount>div.select-wrapper form-select form-control>label{
+	color: #a8abb2!important;
+}
+
+
+
+
+
+
+
+
+
+/* Service Agent */
+p.agent-title-p{
+	font-size: 12px;
+}
+span.agent-span{
+	display: block;
+	font-size: 14px;
+	font-weight:500;
+}
+
+div.pd-top{
+	padding-top: 33px;
+}
+
+div.no-pad-left{
+	padding-left: 0px !important;
+}
+
+div.agent-section{
+	padding-top: 20px;
+}
+
+div.agent-title{
+	margin-bottom: 40px;
+    font-size: 16px;
+}
+a.agent-enviar-mail{
+	font-weight: 500;
+    font-size: 16px;
+    color: #00377B;
+}
+a.enterprise-modal-form.waves-effect.btn.btn-primary{
+	display: none;
+}
+
+div.pd-top-mail{
+	padding-top: 20px !important;
+}
+
+/* End Service Agent */

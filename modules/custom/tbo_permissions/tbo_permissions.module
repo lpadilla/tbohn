@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_permissions.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_permissions_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_permissions module.
+    case 'help.page.tbo_permissions':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Cards Access Permissions') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_permissions_theme() {
+  return [
+    'admin_cards_access' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'form' => NULL,
+        'modal' => [],
+        'title' => NULL,
+        'class' => NULL,
+        'margin' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--admin-cards-access',
+    ],
+    'consult_companies_blocked_card' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'form' => NULL,
+        'modal' => [],
+        'title' => NULL,
+        'class' => NULL,
+        'margin' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--consult-companies-blocked-card',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_cron().
+ */
+function tbo_permissions_cron() {
+  $dailyReportService = \Drupal::service('tbo_permissions.daily_report_service');
+  $dailyReportService->generateAndSendDailyReport();
+}

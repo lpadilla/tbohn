@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_mail.install.
+ */
+
+/**
+ * Install default values for "Update user info" mail settings.
+ */
+function tbo_mail_update_8001() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('tbo_mail.settings');
+  $values = [
+    'subject' => 'Actualización datos de cuenta',
+    'body' => [
+      'value'  => "<p>Hola,</p>\r\n\r\n<p>Se han actualizado los datos de la cuenta asociada al correo [tbo_mail:enterprise]</p>\r\n\r\n<p><a href=\"[site:url]\">[site:url-brief]</a></p>\r\n\r\n<p>Gracias,</p>\r\n\r\n<p>[site:name]</p>\r\n",
+      'format' => 'full_html',
+    ],
+  ];
+  $config->set('update_user_info', $values);
+  $config->save(TRUE);
+}

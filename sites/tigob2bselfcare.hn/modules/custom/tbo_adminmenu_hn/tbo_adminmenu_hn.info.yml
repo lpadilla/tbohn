@@ -1,0 +1,7 @@
+name: TBO MENU ADMIN EMPRESA HN
+type: module
+description: Modulo para menú dinamico de tbo Honduras
+core: 8.x
+package: TBO
+dependencies:
+  - tbo_general

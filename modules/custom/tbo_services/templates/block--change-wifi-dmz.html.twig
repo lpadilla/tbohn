@@ -1,0 +1,75 @@
+{% extends 'block__card_base.html.twig' %}
+{% block header_content_table %}{% endblock %}
+{% block other_content_data %}
+  <div class="card-block">
+    <div class="box-body">
+      {% if title.label_display == 'visible' %}
+        <h5 class="title-front">
+          {{ title.label }}
+        </h5>
+      {% endif %}
+      <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+        <div class="col s12">
+          {% block other_content_data_card %}
+            <div class="card white clearfix">
+              <div class="col s12">
+                {% block other_content %}
+                  <div id="change-wifi-dmz" class="change-wifi-settings">
+                    <h2 class="title-card">{{ fields.block_title.label }}</h2>
+                    <div class="modal-content">
+                      <form>
+                        {% for field in fields %}
+                          {% if field.service_field == "label" %}
+                            <div class="row">
+                              <div class="col description">
+                                <p>
+                                  {{ field.label }}
+                                </p>
+                              </div>
+                            </div>
+                          {% elseif field.service_field == 'wifi_dmz' %}
+                            <div class="row">
+                              <div class="input-field content-row col m6 s12">
+                                {{ widgets.password_to_confirm(field.label, field, field) }}
+                              </div>
+                          {% elseif field.service_field == 'description' %}
+                            <div class="col s12 m12">
+                                <p>{{ field.label }}</p>
+                              </div>
+                            </div>
+                          {% endif %}
+                        {% endfor %}
+                        <div class="row">
+                          <div class="col s12 m12 card-action">
+                            {% for button in buttons %}
+                              {% if button.show %}
+                                <a
+                                  {% if button.service_field == 'action_card_change' %}
+                                    class="right waves-effect waves-light btn btn-primary"
+                                    id="cambiar-dmz"
+                                    ng-disabled="state_button"
+                                    ng-click="changeWifiDmz(wifi_dmz)"
+                                  {% else %}
+                                    id="cancelar-dmz"
+                                    class="right waves-effect waves-light btn btn-second"
+                                    ng-click="clearFieldsDmz()"
+                                  {% endif %}
+                                  {% if button.active == 0 %}
+                                    disabled
+                                  {% endif %}>{{ button.label }}</a>
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                {% endblock %}
+              </div>
+            </div>
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

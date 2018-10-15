@@ -1,0 +1,75 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+{% if val_atp != 'no_atp_aviable' %}
+<div class="card-block atp-consumption_detail_filter">
+  <div class="box-body">
+    <div class="row {% if not card_margin %} mb-0 {% endif %}">
+      <div class="col s12">
+        {% block other_content_data_card %}
+        <div class="card white clearfix no-padding-card">
+          <div class="atp-consumption_detail_filter-top">
+            {% block other_content %}
+            <div class="col m4 s12 atp-consumption_detail_filter-top-title">
+              <h3>{[{ enterprise_name }]}</h3>
+            </div>
+            <div class="col s12 m8">
+              <div class="col input-field s8 m4  atp-consumption_detail_filter-top-filter">
+                <select  id="contract_filter_{{ uuid }}" ng-model="select" ng-change="change_contract(select);">
+                  <option ng-reload-select="reload();" ng-repeat="(key, value) in contracts" value="{[{ key }]}"  >{[{ value.contract }]}</option>
+                </select>
+                <label>{{ "Contrato"|t }}</label>
+              </div>
+              <div class="col m4 s12"></div>
+              <div class="col m4 s12  atp-consumption_detail_filter-top-buttons">
+                {% if show_btn_account_detail == 1 or show_btn_invoice_detail == 1 %}
+                <div class="user-options">
+                  <a class='js-dropdown-button' ng-click="showContent($event)">
+                    <i class="dots-icon"><span></span></i>
+                  </a>
+
+                    <ul class='js-dropdown-content'>
+                      {% if show_btn_invoice_detail == true %}
+                        <li>
+                          <a class="btn btn-second segment-click"
+                             ng-click="donwloadDetail('{{ download }}');"
+                             data-segment-event="TBO - Descargar factura ATP - Tx"
+                             data-segment-properties='{"category":"Arma tu Plan Business", "label" : "{[{ select_contract.contract }]} - movil" }'>
+                            {{ label_btn_invoice_detail |t }}
+                            <i class="prefix-btn icon-download2">
+                              <span class="path1"></span>
+                              <span class="path2"></span>
+                            </i>
+                          </a>
+                        </li>
+                      {% endif %}
+                      {% if show_btn_account_detail == true %}
+                        <li>
+                          <a class="btn btn-second"
+                             ng-click="donwloadAccountDetail('{{ download }}');">
+                            {{ label_btn_account_detail |t }}
+                            <i class="prefix-btn icon-download2">
+                              <span class="path1"></span>
+                              <span class="path2"></span>
+                            </i>
+                          </a>
+                        </li>
+                      {% endif %}
+                    </ul>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            {% endblock %}
+          </div>
+        </div>
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

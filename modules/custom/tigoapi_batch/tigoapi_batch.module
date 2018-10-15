@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains tigoapi_batch.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tigoapi_batch_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tigoapi_batch module.
+    case 'help.page.tigoapi_batch':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Module to call apis by lots') . '</p>';
+      return $output;
+
+    default:
+  }
+}

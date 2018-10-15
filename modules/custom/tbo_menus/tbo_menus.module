@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_menus.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_menus_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.tbo_menus':
+      $output = '';
+      $output .= '<h3>' . t('Acerca de') . '</h3>';
+      $output .= '<p>' . t('Modulo que permite crear los menús por defecto de ayuda, navegación y alternativo') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_menus_theme() {
+  return [
+    'tbo_menus' => [
+      'template' => 'tbo_menus',
+      'render element' => 'children',
+    ],
+  ];
+}
+
+/**
+ * Define default menu links for the site.
+ *
+ * @return array
+ */
+function tbo_menus_definitions() {
+  $menus = [
+    'help-menu' => ['label' => 'Ayuda TBO', 'description' => 'Menú de ayuda Tigo Business Online'],
+    'main-menu' => ['label' => 'Menú de navegación', 'description' => 'Menú de navegación'],
+    'alternative-menu' => ['label' => 'Menu alternativo ', 'description' => 'Menú alterativo '],
+  ];
+
+  $options = [
+    'help-menu' => [
+      ['title' => 'Preguntas frecuentes', 'link' => ['uri' => 'internal:/']],
+      ['title' => 'Chat', 'link' => ['uri' => 'internal:/']],
+      ['title' => 'Contáctenos', 'link' => ['uri' => 'internal:/']],
+      ['title' => 'Centro de atención', 'link' => ['uri' => 'internal:/']],
+      ['title' => 'Llamar', 'link' => ['uri' => 'internal:/']],
+      ['title' => 'Atención al cliente', 'link' => ['uri' => 'internal:/']],
+    ],
+    'main-menu' => [
+      ['title' => 'Inicio', 'link' => ['uri' => 'internal:/']],
+      ['title' => 'Factura', 'link' => ['uri' => 'internal:/']],
+      ['title' => 'Servicios', 'link' => ['uri' => 'internal:/']],
+      ['title' => 'Quejas, reclamos y recursos', 'link' => ['uri' => 'internal:/']],
+      ['title' => 'Solicitudes y cambios', 'link' => ['uri' => 'internal:/']],
+    ],
+    'alternative-menu' => [
+      ['title' => 'Portabilidad númerica', 'link' => ['uri' => 'internal:/']],
+      ['title' => 'Registra equipos', 'link' => ['uri' => 'internal:/']],
+      ['title' => 'Bloqueo de sim y equipos', 'link' => ['uri' => 'internal:/']],
+    ],
+  ];
+
+  return [$menus, $options];
+}

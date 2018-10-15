@@ -1,0 +1,5 @@
+name: Adf Core
+type: module
+description: Advanced Developer Framework Core
+core: 8.x
+package: ADF

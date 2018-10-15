@@ -1,0 +1,20 @@
+# Audit log entity menu items definition
+entity.audit_log_entity.collection:
+  title: 'Lista de entidades logs de auditoria'
+  route_name: entity.audit_log_entity.collection
+  description: 'Lista de entidades logs de auditoria'
+  parent: tbo_general.content_entities
+  weight: 100
+
+audit_log_entity.admin.structure.settings:
+  title: Audit log entity settings
+  description: 'Configuracion de entidades logs de auditoria'
+  route_name: audit_log_entity.settings
+  parent: tbo_general.entities_settings
+
+tbo_core.audir_log_pager_form_config:
+  title: 'Audit log configuration'
+  route_name: tbo_core.audit_log_pager_form_config
+  description: 'Pager configuration for audit logs block'
+  parent: system.admin_config_system
+  weight: 99

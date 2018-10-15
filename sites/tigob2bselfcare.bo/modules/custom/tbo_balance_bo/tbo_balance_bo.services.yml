@@ -1,0 +1,9 @@
+services:
+  # BalanceBoBlock
+  tbo_balance_bo.balance_bo_block:
+    class: Drupal\tbo_balance_bo\Plugin\Config\Block\BalancesBoBlockClass
+    arguments: []
+
+  tbo_balance_bo.balance_bo_form:
+    class: Drupal\tbo_balance_bo\Form\BalancesBoForm
+    arguments: []

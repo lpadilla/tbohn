@@ -1,0 +1,12 @@
+{% extends 'block__card_base.html.twig' %}
+{% import "tbo_general.html.twig" as widgets %}
+
+{% block header_data %}
+<div class="block-white">
+    {% endblock %}
+
+ {% block header_content_table %}
+{% endblock %}
+{% block other_content %}
+   {{ widgets.select() }}
+{% endblock %}

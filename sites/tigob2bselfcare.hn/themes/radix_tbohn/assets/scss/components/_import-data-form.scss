@@ -1,0 +1,38 @@
+#import-data-form {
+  .row-1,
+  .row-2 {
+    .card-action a {
+      width: 100%;
+      height: auto;
+      line-height: 16px;
+    }
+  }
+
+  .row-3 {
+    .detalle {
+      a { width: 100%; }
+    }
+
+    .tipo-export .input-field {
+      margin-top: 0;
+
+      input.select-dropdown { height: 35px; }
+    }
+  }
+
+  @media #{$large-and-down} {
+    .row-1 .file-field,
+    .row-3 .detalle { margin-bottom: 20px; }
+
+    .row-1 {
+      .btn { width: 100%; }
+
+      .file-path-wrapper { padding-left: 1px; }
+    }
+
+    .row-3 {
+      &,
+      .tipo-export { margin-bottom: 0; }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+two_column_right:
+  label: Two columns custom summary
+  category: TBO Layouts
+  template: templates/layout/two-columns-custom-summary
+  css:
+  regions:
+    top:
+      label: Top
+    fwt:
+      label: Full Width Top
+    left:
+      label: Left content
+    right:
+      label: Right content
+    bottom:
+      label: Bottom
+detail_column_two:
+  label: Two columns custom Detail
+  category: TBO Layouts
+  template: templates/layout/detail-columns-custom-two
+  css:
+  regions:
+    header:
+      label: Top
+    one_column:
+      label: Left content
+    two_column:
+      label: Right content
+    bottom:
+      label: Bottom

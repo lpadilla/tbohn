@@ -1,0 +1,16 @@
+{% extends 'block__card_base.html.twig' %}
+
+  {% block filters %}
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+	{% block other_content_data %}
+	  <div class="logo-copy-content">
+    	<a href="{{config.url_logo}}" title="Home" rel="home" class="navbar-brand">
+    		<img src="{{config.image_src}}" title="Home" rel="home" class="navbar-brand"/>
+    	</a>
+    	<span class="copyrigth">{{config.copyrigth}}</span>
+	  </div>
+	{% endblock %}

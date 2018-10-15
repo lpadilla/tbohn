@@ -1,0 +1,16 @@
+tigoid_migrate.start:
+  path: '/micuenta/actualizar'
+  defaults:
+    _controller: '\Drupal\tigoid_migrate\Controller\MigrateController::startWizard'
+    _title: 'Actualización de datos'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\tigoid_migrate\Controller\MigrateController::access'
+
+tigoid_migrate.login_form:
+  path: '/tidoid_migrate/login'
+  defaults:
+    _controller: '\Drupal\tigoid_migrate\Controller\LoginController::initLogin'
+    _title: 'Estamos mejorando para ti'
+  requirements:
+    _user_is_logged_in: 'FALSE'

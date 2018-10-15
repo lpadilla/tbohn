@@ -1,0 +1,172 @@
+.domiciliation {
+  .data { display: none; }
+
+  .card {
+    .description {
+      // margin-bottom: 40px;
+      // margin-bottom: 25px;
+
+      > p {
+        margin: 0;
+        color: $gray-tigo;
+        // font-weight: 400;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      @media #{$medium-and-up} {
+        display: inline-block;
+        padding-right: 0;
+        // margin: 0 30px 0 0;
+      }
+    }
+
+    .tarjeta {
+      margin-top: 35px;
+
+      .title {
+        color: $blue-tigo;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 1.5;
+        padding-left: 0;
+      }
+
+      .value {
+        display: inline-block;
+        // margin-left: 35px;
+        padding-right: 0;
+
+        @include credit-cards();
+
+        .number {
+          color: $blue-tigo;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 1.5;
+        }
+
+        @media #{$medium-and-up} { padding-left: 0; }
+      }
+
+      @media #{$medium-and-up} {
+        display: inline-block;
+        margin-top: 0;
+        padding-left: 0;
+      }
+    }
+
+    .actions {
+      // margin-top: 20px;
+      text-align: right;
+
+      a:last-child { margin-right: 25px; }
+      a:first-child { margin-right: 0; }
+
+    // @media #{$medium-and-up} { padding: 20px 15px 15px 20px; }
+
+      @media #{$small-and-down} {
+        a:last-child { margin-right: 13px; }
+        a:first-child { margin-right: 0; }
+      }
+    }
+  }
+}
+
+#SchedulePaymentForm, .SchedulePaymentForm {
+  max-width: 320px;
+
+  h2.title-modal { margin-bottom: 15px; }
+
+  @include credit-cards();
+
+  // > .modal-content { padding: 35px 25px; }
+
+  // .title {
+  //   margin-bottom: 20px;
+  //   color: $blue-tigo;
+  //   font-weight: 400;
+  //   font-size: 24px;
+  // }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .schedule-payment-form {
+    .edit-button-wrapper {
+      > a { margin-right: 0; }
+    }
+
+    .form-wrapper-button { text-align: right; }
+  }
+
+  .input-field {
+    // margin: 0 0 15px;
+    // padding: 0;
+
+    // &:last-child { margin: 0; }
+
+    input[type="radio"]:checked + label {
+      &,
+      .number { color: $blue-tigo; }
+    }
+
+    label.option {
+      left: -3px;
+      padding-left: 30px;
+
+      &,
+      > span {
+        color: $gray-tigo;
+        // font-weight: 400;
+        font-size: 16px;
+      }
+    }
+  }
+
+  // #edit-button-wrapper {
+  //   float: right;
+  //   margin-top: 40px;
+  // }
+}
+
+#schedule-payment-form {
+  #edit-cards .option {
+    .visa,
+    .mastercard,
+    .amex,
+    .diners {
+      margin-right: 7px;
+      margin-top: 2px;
+    }
+  }
+}
+
+#external-delete-card,
+#cards-modal {
+  .modal-footer {
+    padding: 0 10px !important;
+    margin: 20px 0 0;
+
+    .modal-close { margin-right: 10px; }
+  }
+}
+
+#cards-modal {
+  #block-card {
+    margin: 0;
+  }
+}
+
+#popup-schedule-payment {
+  @include credit-cards();
+
+  .modal-content {
+    padding-bottom: 0 !important;
+
+    .form-wrapper-button { text-align: right; }
+  }
+}

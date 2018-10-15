@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_emulate_bo.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_general_bo_theme(){
+  return [                
+    'general_social' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'logo' => NULL,
+      ],
+      'template' => 'block--social',
+    ],
+     'tbo_general_bo' => [
+      'template' => 'tbo-general-bo',
+      // layout_plugin expects the theme hook to be declared with this:
+      'render element' => 'content',
+    ],
+     'block__card_base_bo' => [
+      'template' => 'block--card-base-bo',
+      'render element' => 'content',
+    ],
+  ];
+}

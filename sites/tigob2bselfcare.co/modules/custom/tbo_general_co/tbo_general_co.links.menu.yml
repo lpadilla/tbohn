@@ -1,0 +1,6 @@
+tbo_general_co.mobile_payment_url_form:
+  title: 'Configurar url de pago móvil'
+  route_name: tbo_general_co.mobile_payment_url_form
+  description: 'Configuración de la url de pago de servicios móviles'
+  parent: system.admin_config_system
+  weight: 99

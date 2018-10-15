@@ -1,0 +1,42 @@
+services:
+# Admin Cards Access
+  tbo_permissions.admin_cards_access_block:
+    class: Drupal\tbo_permissions\Plugin\Config\Block\AdminCardsAccessBlockClass
+    arguments: []
+
+  tbo_permissions.admin_cards_access_rest:
+    class: Drupal\tbo_permissions\Services\Rest\AdminCardsAccessRestService
+    arguments: []
+
+  tbo_permissions.admin_cards_repository:
+    class: Drupal\tbo_permissions\Repository\AdminCardsAccessRepository
+    arguments: []
+
+  tbo_permissions.tbo_permissions_settings_form_logic:
+    class: Drupal\tbo_permissions\Plugin\Config\Form\TboPermissionsSettingsFormClass
+    arguments: []
+
+  tbo_permissions.daily_report_service:
+    class: Drupal\tbo_permissions\Services\DailyReportService
+    arguments: []
+
+  tbo_permissions.update_permissions_data_logic_controller:
+    class: Drupal\tbo_permissions\Services\Controller\UpdatePermissionsDataLogicController
+    arguments: []
+
+  tbo_permissions.add_install_jobs_form_logic:
+      class: Drupal\tbo_permissions\Plugin\Config\Form\AddInstallJobsFormClass
+      arguments: []
+
+  tbo_permissions.run_scheduled_jobs_form_logic:
+      class: Drupal\tbo_permissions\Plugin\Config\Form\RunScheduledJobsFormClass
+      arguments: []
+
+# Consult Companies with Blocked Card
+  tbo_permissions.consult_companies_blocked_card_block:
+    class: Drupal\tbo_permissions\Plugin\Config\Block\ConsultCompaniesBlockedCardBlockClass
+    arguments: []
+
+  tbo_permissions.consult_companies_blocked_card_rest:
+    class: Drupal\tbo_permissions\Services\Rest\ConsultCompaniesBlockedCardRestService
+    arguments: []

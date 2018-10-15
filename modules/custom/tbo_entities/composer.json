@@ -1,0 +1,14 @@
+{
+  "name": "drupal/tbo_entities",
+  "type": "drupal-module",
+  "description": "Modulo que contiene todas las entidades necesarias para tbo",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/tbo_entities",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/tbo_entities",
+    "source": "http://cgit.drupalcode.org/tbo_entities"
+  },
+  "require": { }
+}

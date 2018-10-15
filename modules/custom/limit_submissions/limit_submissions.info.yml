@@ -1,0 +1,5 @@
+name: Limit submissions
+type: module
+description: Limita la cantidad de envios de un formulario durante un tiempo
+core: 8.x
+package: Custom

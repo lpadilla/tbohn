@@ -1,0 +1,11 @@
+
+tbo_billing_hn.bill_payment_settings:
+  path: '/admin/config/tbo_billing_payment_hn/settings'
+  defaults:
+    _form: '\Drupal\tbo_billing_hn\Form\BillingPaymentHnSettings'
+    _title: 'BillingPaymentHnSettings'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+  

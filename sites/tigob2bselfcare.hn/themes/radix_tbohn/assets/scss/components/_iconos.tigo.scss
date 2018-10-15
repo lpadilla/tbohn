@@ -1,0 +1,3292 @@
+.prefix{
+  &:before{
+    font-family: 'tigouneico';
+    font-style: normal;
+  }
+  .path1, .path2{
+    width: 26px;
+    height: 30px;
+    display: inline-block;
+    margin-top: 15px;
+    position: absolute;
+    float: left;
+    &:before{
+      color: $blue-tigo;
+      display: inline-block;
+      font-family: 'tigouneico';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+      margin-right: 6px;
+    }
+
+  }
+}
+
+.prefix-btn{
+  float: right;
+  width: 26px;
+  height: 20px;
+  position: relative;
+  margin: 0 2px;
+  .path1, .path2 {
+    width: 26px;
+    height: 20px;
+    display: inline-block;
+  }
+  .path2 {
+    position: absolute;
+    left: 0;
+    top:0;
+  }
+
+}
+
+.icon-user {
+  &:before {
+    @include iconos-material('tigouneico', '\e9df', 27px, normal);
+    color: $blue-tigo;
+    margin: 0;
+  }
+}
+
+/***** iconos para los efectos de cerrar y abrir *****/
+
+.icon-down{
+  &:before {
+    @include iconos-material('tigouneico', '\e928', 16px, normal);
+    color: $cyan-tigo;
+    margin: 2px 0 0;
+    float: right;
+  }
+}
+
+.icon-up{
+  &:before {
+    @include iconos-material('tigouneico', '\e92d', 16px, normal);
+    color: $cyan-tigo;
+    margin: 2px 0 0;
+    float: right;
+  }
+}
+
+/***** fin *****/
+
+
+.icon-downside-cyan {
+  .path1 {
+    &:before {
+      @include iconos-material('tigouneico', '\e928', 16px, normal);
+      color: $cyan-tigo;
+      margin: 0;
+    }
+  }
+}
+
+.icon-upside-cyan{
+  .path1 {
+    &:before {
+      @include iconos-material('tigouneico', '\e92d', 16px, bold);
+      color: $cyan-tigo;
+      margin: 0;
+      text-align: center;
+    }
+  }
+}
+
+.icon-password{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico', '\e98c', 27px, normal);
+      margin: 0;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:0;
+    top:1px;
+    &:before {
+      @include iconos-material('tigouneico','\e98d', 24px, normal);
+      text-align: right;
+      width: 100%;
+      margin: 0;
+      color: $cyan-tigo;
+    }
+  }
+}
+//______________
+
+.icon-bill{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico', '\e914', 27px, normal);
+      margin: 0;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:0;
+    top:1px;
+    &:before {
+      @include iconos-material('tigouneico','\e915', 24px, normal);
+      text-align: right;
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+.icon-chart-cyan{
+  .path1{
+    width: 20px;
+    &:before{
+      @include iconos-material('tigouneico','\eb18', 20px, normal);
+      margin: 0;
+    }
+  }
+  .path2 {
+    width: 20px;
+    &:before {
+      @include iconos-material('tigouneico','\eb19', 20px, normal);
+      text-align: right;
+      width: 100%;
+      margin: 0;
+      color:$cyan-tigo;
+    }
+  }
+}
+
+.icon-userok-cyan{
+  .path1{
+    width: 20px;
+    &:before{
+      @include iconos-material('tigouneico','\ebd7', 20px, normal);
+      margin: 0;
+    }
+  }
+  .path2 {
+    width: 20px;
+    &:before {
+      @include iconos-material('tigouneico','\ebd8', 20px, normal);
+      text-align: right;
+      width: 100%;
+      margin: 0;
+      color:$cyan-tigo;
+    }
+  }
+}
+
+.icon-notifications-cyan{
+  .path1{
+    width: 20px;
+    &:before{
+      @include iconos-material('tigouneico','\eb7c', 20px, normal);
+      margin: 0;
+    }
+  }
+  .path2 {
+    width: 20px;
+    &:before {
+      @include iconos-material('tigouneico','\eb7d', 20px, normal);
+      text-align: right;
+      width: 100%;
+      margin: 0;
+      color:$cyan-tigo;
+    }
+  }
+}
+
+.icon-contracts-cyan{
+  .path1{
+    width: 20px;
+    &:before{
+      @include iconos-material('tigouneico','\eb2a', 20px, normal);
+      margin: 0;
+    }
+  }
+  .path2 {
+    width: 20px;
+    &:before {
+      @include iconos-material('tigouneico','\eb2b', 20px, normal);
+      text-align: right;
+      width: 100%;
+      margin: 0;
+      color:$cyan-tigo;
+    }
+  }
+}
+
+
+.icon-specialservices{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e9bd', 26px, normal);
+      margin: 0;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:0;
+    top:1px;
+    &:before {
+      @include iconos-material('tigouneico','\e9be', 22px, normal);
+      text-align: right;
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+.icon-mail{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e975', 23px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:0;
+    top:1px;
+    &:before {
+      @include iconos-material('tigouneico','\e976', 23px, normal);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+.icon-x-cyan {
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\ebea', 23px, bold);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+      color:white;
+    }
+  }
+  .path2 {
+    &:before {
+      @include iconos-material('tigouneico','\ebeb', 23px, bold);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+      color: $cyan-tigo;
+    }
+  }
+}
+
+.icon-x-cyan {
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\ebea', 23px, bold);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+      color:white;
+    }
+  }
+  .path2 {
+    &:before {
+      @include iconos-material('tigouneico','\ebeb', 23px, bold);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+      color: $cyan-tigo;
+    }
+  }
+}
+
+.icon-mobilephone{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e97b', 27px, normal);
+      margin: 0;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:0;
+    bottom:2px;
+    &:before {
+      @include iconos-material('tigouneico','\e97c', 24px, normal);
+      text-align: right;
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+.icon-coveragemap{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e93a', 24px, normal);
+      margin: 0;
+      text-align: center;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:0;
+    bottom:2px;
+    &:before {
+      @include iconos-material('tigouneico','\e93b', 23px, normal);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+.icon-calendar{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e921', 24px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:0;
+    bottom:2px;
+    &:before {
+      @include iconos-material('tigouneico','\e922', 22px, normal);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+.icon-creditcard, .icon-default{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\eb30', 24px, normal);
+
+    }
+  }
+  .path2 {
+    &:before {
+      @include iconos-material('tigouneico','\eb31', 22px, normal);
+      color: $cyan-tigo;
+    }
+  }
+}
+
+.icon-diners{
+  .path1{
+    margin-top: 14px;
+    background-image: url('../images/icon_diners.png');
+    background-position:  top left;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .path2 {
+    display: none;
+  }
+}
+
+.icon-dinersclub{
+  .path1{
+    margin-top: 14px;
+    background-image: url('../images/icon_diners_club.png');
+    background-position:  top left;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .path2 {
+    display: none;
+  }
+}
+
+.icon-visaelectron{
+  .path1{
+    margin-top: 14px;
+    background-image: url('../images/icon_visa_electron.png');
+    background-position:  top left;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .path2 {
+    display: none;
+  }
+}
+
+
+.icon-mastercard{
+  .path1{
+    margin-top: 14px;
+    background-image: url('../images/icon_mastercard.png');
+    background-position:  top left;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .path2 {
+    display: none;
+  }
+}
+
+.icon-visa{
+  .path1{
+    margin-top: 14px;
+    background-image: url('../images/icon-visa.png');
+    background-position:  top left;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .path2 {
+    display: none;
+  }
+}
+
+.icon-visa{
+  .path1{
+    margin-top: 14px;
+    background-image: url('../images/icon-visa.png');
+    background-position:  top left;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .path2 {
+    display: none;
+  }
+}
+
+.icon-amex{
+  .path1{
+    margin-top: 14px;
+    background-image: url('../images/icon_amex.png');
+    background-position:  top left;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .path2 {
+    display: none;
+  }
+}
+
+.icon-bin{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e917', 20px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:1px;
+    bottom:2px;
+    &:before {
+      @include iconos-material('tigouneico','\e918', 18px, normal);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+.icon-success{
+  position: relative;
+  .path1{
+    &:before{
+
+      @include iconos-material('tigouneico','\e90d', 34px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+      color:#9CC553;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:-3px;
+    bottom:0;
+    &:before {
+      @include iconos-material('tigouneico','\e995', 43px, normal);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+      color:#9CC553;
+    }
+  }
+}
+
+.icon-next{
+  display: block;
+  .path1{
+    display: block;
+    &:before{
+      @include iconos-material('tigouneico', '\e903', 19px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+      line-height: 26px;
+    }
+  }
+}
+.icon-prev{
+  display: block;
+ // transform: rotate(180deg);
+  -webkit-transform: rotateY(180deg); /* Chrome, Safari, Opera */
+  -webkit-transform-style: preserve-3d; /* Chrome, Safari, Opera */
+  transform: rotateY(180deg);
+  transform-style: preserve-3d;
+  .path1{
+    display: block;
+    &:before{
+      @include iconos-material('tigouneico', '\e903', 19px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+      line-height: 26px;
+    }
+  }
+}
+
+.form-type-date{
+  position: relative;
+  &:before{
+    @include iconos-material('tigouneico', '\eb15', 24px, normal);
+    position: absolute;
+    right: 0;
+    bottom:21px;
+    text-align: center;
+    width: 30px;
+    margin-right: 0;
+    @media #{$large-and-up} {
+      margin-right: 0.75rem;
+    }
+  }
+  &:after{
+    @include iconos-material('tigouneico', '\eb16', 24px, normal);
+    position: absolute;
+    right: 0;
+    bottom:21px;
+    text-align: center;
+    width: 30px;
+    margin-right: 0;
+    @media #{$large-and-up} {
+      margin-right: 0.75rem;
+    }
+  }
+}
+
+.icon-type{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e9df', 23px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .path2 {
+    display: none;
+  }
+}
+
+.icon-contract{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e937', 23px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:0;
+    top:1px;
+    &:before {
+      @include iconos-material('tigouneico','\e936', 23px, normal);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+.icon-referent{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e98f', 23px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:0;
+    top:1px;
+    &:before {
+      @include iconos-material('tigouneico','\e98e', 23px, normal);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+
+.icon-search-cyan{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\eb9f', 23px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+}
+
+
+.icon-circle{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  margin-right: 11px;
+  .path1{
+    width: 10px;
+    height: 10px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    margin: 0;
+    position: inherit;
+  }
+}
+
+
+.icon-help{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e956', 23px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:0;
+    top:1px;
+    &:before {
+      @include iconos-material('tigouneico','\e957', 23px, normal);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+.icon-id{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e95e', 23px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:0;
+    top:1px;
+    &:before {
+      @include iconos-material('tigouneico','\e95f', 23px, normal);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+.icon-filters-cyan{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\eb42', 23px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .path2 {
+    left: 0;
+    &:before {
+      @include iconos-material('tigouneico','\eb43', 23px, normal);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+      color: $cyan-tigo;
+    }
+  }
+}
+
+
+.icon-download2{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e922', 18px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .path2 {
+    left: 0;
+    &:before {
+      @include iconos-material('tigouneico','\e925', 18px, normal);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+      color: $cyan-tigo;
+    }
+  }
+}
+
+
+
+.icon-hide-cyan{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e93f', 23px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:0;
+    &:before {
+      @include iconos-material('tigouneico','\e941', 23px, normal);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+      color:$cyan-tigo;
+    }
+  }
+}
+
+.icon-download2{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e922', 18px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .path2 {
+    left: 0;
+    &:before {
+      @include iconos-material('tigouneico','\e925', 18px, normal);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+      color: $cyan-tigo;
+    }
+  }
+}
+
+.icon-user-cyan{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\ebd6', 23px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+}
+
+.icon-show-cyan{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\eba9', 23px, normal);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  .path2 {
+    position: absolute;
+    left:0;
+    &:before {
+      @include iconos-material('tigouneico','\eba8', 23px, normal);
+      text-align: center;
+      width: 100%;
+      margin: 0;
+      color:$cyan-tigo;
+    }
+  }
+}
+
+
+.icon-rightside-cyan{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e92b', 19px, $regular);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+}
+
+
+.icon-user-cyan{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\ebd6', 23px, bold);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+}
+
+
+/*
+ Iconos nuevos  25 de agostos
+*/
+
+
+.icon-jump-indigo:before {
+  content: "\ec00";
+  color: $blue-tigo;
+}
+
+.icon-gsm-indigo:before {
+  content: "\ec01";
+  color: $blue-tigo;
+}
+
+.icon-sic-indigo:before {
+  content: "\ec02";
+  color: $blue-tigo;
+}
+
+.icon-seek-indigo:before {
+  content: "\ec04";
+  color: $blue-tigo;
+}
+
+.icon-results:before {
+  content: "\ec06";
+  color: $blue-tigo;
+}
+
+.icon-read-indigo:before {
+  content: "\ec08";
+  color: $blue-tigo;
+}
+
+.icon-ppp-indigo:before {
+  content: "\ec0a";
+  color: $blue-tigo;
+}
+
+.icon-play-indigo:before {
+  content: "\ec0c";
+  color: $blue-tigo;
+}
+
+.icon-pause:before {
+  content: "\ec0d";
+  color: $blue-tigo;
+}
+
+.icon-outlook-indigo:before {
+  content: "\ec0e";
+  color: $blue-tigo;
+}
+
+.icon-premiumlist-indigo:before {
+  content: "\ec11";
+  color: $blue-tigo;
+}
+
+.icon-businessuser-indigo:before {
+  content: "\ec13";
+  color: $blue-tigo;
+}
+
+.icon-beachouse-indigo:before {
+  content: "\ec15";
+  color: $blue-tigo;
+}
+
+.icon-activationsim-indigo:before {
+  content: "\e9fa";
+  color: $blue-tigo;
+}
+
+.icon-addcard-indigo:before {
+  content: "\e9fc";
+  color: $blue-tigo;
+}
+
+.icon-alert-indigo:before {
+  content: "\e9fe";
+  color: $blue-tigo;
+}
+
+.icon-analogtv-indigo:before {
+  content: "\ea00";
+  color: $blue-tigo;
+}
+
+.icon-apps-indigo:before {
+  content: "\ea02";
+  color: $blue-tigo;
+}
+
+.icon-backup-indigo:before {
+  content: "\ea04";
+  color: $blue-tigo;
+}
+
+.icon-balance-indigo:before {
+  content: "\ea06";
+  color: $blue-tigo;
+}
+
+.icon-barcode-indigo:before {
+  content: "\ea08";
+  color: $blue-tigo;
+}
+
+.icon-benefits-indigo:before {
+  content: "\ea0a";
+  color: $blue-tigo;
+}
+
+.icon-bigtheft-indigo:before {
+  content: "\ea0c";
+  color: $blue-tigo;
+}
+
+.icon-bill-indigo:before {
+  content: "\ea0e";
+  color: $blue-tigo;
+}
+
+.icon-bin-indigo:before {
+  content: "\ea11";
+  color: $blue-tigo;
+}
+
+.icon-blockedsim-indigo:before {
+  content: "\ea13";
+  color: $blue-tigo;
+}
+
+.icon-broadband-indigo:before {
+  content: "\ea15";
+  color: $blue-tigo;
+}
+
+.icon-business-indigo:before {
+  content: "\ea17";
+  color: $blue-tigo;
+}
+
+.icon-calendar-indigo:before {
+  content: "\ea1b";
+  color: $blue-tigo;
+}
+
+.icon-call-indigo:before {
+  content: "\ea1d";
+  color: $blue-tigo;
+}
+
+.icon-chart-indigo:before {
+  content: "\ea1e";
+  color: $blue-tigo;
+}
+
+.icon-chat-indigo:before {
+  content: "\ea20";
+  color: $blue-tigo;
+}
+
+.icon-check-indigo:before {
+  content: "\ea22";
+  color: $blue-tigo;
+}
+
+.icon-checkflow-indigo:before {
+  content: "\ea24";
+  color: $blue-tigo;
+}
+
+.icon-claims-indigo:before {
+  content: "\ea26";
+  color: $blue-tigo;
+}
+
+.icon-cloud-wifi-indigo:before {
+  content: "\ea2a";
+  color: $blue-tigo;
+}
+
+.icon-cloudsaas-indigo:before {
+  content: "\ea28";
+  color: $blue-tigo;
+}
+
+.icon-code-indigo:before {
+  content: "\ea2c";
+  color: $blue-tigo;
+}
+
+.icon-conectivity-indigo:before {
+  content: "\ea2d";
+  color: $blue-tigo;
+}
+
+.icon-configuration-indigo:before {
+  content: "\ea2e";
+  color: $blue-tigo;
+}
+
+.icon-contracts-indigo:before {
+  content: "\ea30";
+  color: $blue-tigo;
+}
+
+.icon-country-indigo:before {
+  content: "\ea32";
+  color: $blue-tigo;
+}
+
+.icon-coveragemap-indigo:before {
+  content: "\ea34";
+  color: $blue-tigo;
+}
+
+.icon-creditcard-indigo:before {
+  content: "\ea36";
+  color: $blue-tigo;
+}
+
+.icon-damage-indigo:before {
+  content: "\ea38";
+  color: $blue-tigo;
+}
+
+.icon-datacenter-indigo:before {
+  content: "\ebf1";
+  color: $blue-tigo;
+}
+
+.icon-deco-indigo:before {
+  content: "\ea3a";
+  color: $blue-tigo;
+}
+
+.icon-diagnosis-indigo:before {
+  content: "\ea3c";
+  color: $blue-tigo;
+}
+
+.icon-documents-indigo:before {
+  content: "\ea3e";
+  color: $blue-tigo;
+}
+
+.icon-download-indigo:before {
+  content: "\ea40";
+  color: $blue-tigo;
+}
+
+.icon-extrabalance-indigo:before {
+  content: "\ea42";
+  color: $blue-tigo;
+}
+
+.icon-facebook-indigo:before {
+  content: "\ea44";
+  color: $blue-tigo;
+}
+
+.icon-favorites-indigo:before {
+  content: "\ea46";
+  color: $blue-tigo;
+}
+
+.icon-filters-indigo:before {
+  content: "\ea48";
+  color: $blue-tigo;
+}
+
+.icon-gplus-indigo:before {
+  content: "\ea4a";
+  color: $blue-tigo;
+}
+
+.icon-guidechannels-indigo:before {
+  content: "\ea4c";
+  color: $blue-tigo;
+}
+
+.icon-hdtv-indigo:before {
+  content: "\ea4e";
+  color: $blue-tigo;
+}
+
+.icon-help-indigo:before {
+  content: "\ea50";
+  color: $blue-tigo;
+}
+
+.icon-history-indigo:before {
+  content: "\ea52";
+  color: $blue-tigo;
+}
+
+.icon-home-indigo:before {
+  content: "\ea54";
+  color: $blue-tigo;
+}
+
+.icon-hosting-indigo:before {
+  content: "\ea56";
+  color: $blue-tigo;
+}
+
+.icon-id-indigo:before {
+  content: "\ea58";
+  color: $blue-tigo;
+}
+
+.icon-info-conf-indigo:before {
+  content: "\ea5c";
+  color: $blue-tigo;
+}
+
+.icon-info-indigo:before {
+  content: "\ea5a";
+  color: $blue-tigo;
+}
+
+.icon-interactive-indigo:before {
+  content: "\ea5e";
+  color: $blue-tigo;
+}
+
+.icon-internet-indigo:before {
+  content: "\ea60";
+  color: $blue-tigo;
+}
+
+.icon-key-indigo:before {
+  content: "\ea62";
+  color: $blue-tigo;
+}
+
+.icon-linecenter-indigo:before {
+  content: "\ea64";
+  color: $blue-tigo;
+}
+
+.icon-list-indigo:before {
+  content: "\ea65";
+  color: $blue-tigo;
+}
+
+.icon-loading-indigo:before {
+  content: "\ea67";
+  color: $blue-tigo;
+}
+
+.icon-locked-indigo:before {
+  content: "\ea69";
+  color: $blue-tigo;
+}
+
+.icon-login-indigo:before {
+  content: "\ea6b";
+  color: $blue-tigo;
+}
+
+.icon-logout-indigo:before {
+  content: "\ea6d";
+  color: $blue-tigo;
+}
+
+.icon-mail-indigo:before {
+  content: "\ea6f";
+  color: $blue-tigo;
+}
+
+.icon-mailing-indigo:before {
+  content: "\ea71";
+  color: $blue-tigo;
+}
+
+.icon-measurer-indigo:before {
+  content: "\ea73";
+  color: $blue-tigo;
+}
+
+.icon-mobilephone-indigo:before {
+  content: "\ea75";
+  color: $blue-tigo;
+}
+
+.icon-mobility-indigo:before {
+  content: "\ea77";
+  color: $blue-tigo;
+}
+
+.icon-modem-indigo:before {
+  content: "\ea79";
+  color: $blue-tigo;
+}
+
+.icon-movies-indigo:before {
+  content: "\ea7b";
+  color: $blue-tigo;
+}
+
+.icon-new-indigo:before {
+  content: "\ea7d";
+  color: $blue-tigo;
+}
+
+.icon-news-indigo:before {
+  content: "\ea7f";
+  color: $blue-tigo;
+}
+
+.icon-nointernet-indigo:before {
+  content: "\ea81";
+  color: $blue-tigo;
+}
+
+.icon-notifications-indigo:before {
+  content: "\ea82";
+  color: $blue-tigo;
+}
+
+.icon-package-indigo:before {
+  content: "\ea84";
+  color: $blue-tigo;
+}
+
+.icon-password-indigo:before {
+  content: "\ea86";
+  color: $blue-tigo;
+}
+
+.icon-paymentreference-indigo:before {
+  content: "\ea88";
+  color: $blue-tigo;
+}
+
+.icon-pdf-indigo:before {
+  content: "\ea8a";
+  color: $blue-tigo;
+}
+
+.icon-portability-indigo:before {
+  content: "\ea8c";
+  color: $blue-tigo;
+}
+
+.icon-premium-indigo:before {
+  content: "\ea8e";
+  color: $blue-tigo;
+}
+
+.icon-pricelist-indigo:before {
+  content: "\ea90";
+  color: $blue-tigo;
+}
+
+.icon-products-indigo:before {
+  content: "\ebf3";
+  color: $blue-tigo;
+}
+
+.icon-professionalservices-indigo:before {
+  content: "\ebf5";
+  color: $blue-tigo;
+}
+
+.icon-programmer-indigo:before {
+  content: "\ea92";
+  color: $blue-tigo;
+}
+
+.icon-receipt-indigo:before {
+  content: "\eaf3";
+  color: $blue-tigo;
+}
+
+.icon-recharge-indigo:before {
+  content: "\ea94";
+  color: $blue-tigo;
+}
+
+.icon-register-indigo:before {
+  content: "\ea96";
+  color: $blue-tigo;
+}
+
+.icon-remote-indigo:before {
+  content: "\ea98";
+  color: $blue-tigo;
+}
+
+.icon-reports-indigo:before {
+  content: "\ea9a";
+  color: $blue-tigo;
+}
+
+.icon-request-indigo:before {
+  content: "\ea9c";
+  color: $blue-tigo;
+}
+
+.icon-roaming-indigo:before {
+  content: "\ea9e";
+  color: $blue-tigo;
+}
+
+.icon-savetoschool-indigo:before {
+  content: "\eaa0";
+  color: $blue-tigo;
+}
+
+.icon-search-indigo:before {
+  content: "\eaa2";
+  color: $blue-tigo;
+}
+
+.icon-securemobile-indigo:before {
+  content: "\eaa3";
+  color: $blue-tigo;
+}
+
+.icon-services-indigo:before {
+  content: "\eaa5";
+  color: $blue-tigo;
+}
+
+.icon-sharebalance-indigo:before {
+  content: "\eaa7";
+  color: $blue-tigo;
+}
+
+.icon-shopping-indigo:before {
+  content: "\eaa9";
+  color: $blue-tigo;
+}
+
+.icon-show-indigo:before {
+  content: "\eaab";
+  color: $blue-tigo;
+}
+
+.icon-sic-indigo2:before {
+  content: "\eaad";
+  color: $blue-tigo;
+}
+
+.icon-simplicity-indigo:before {
+  content: "\eaaf";
+  color: $blue-tigo;
+}
+
+.icon-simulatorcoverage-indigo:before {
+  content: "\eab1";
+  color: $blue-tigo;
+}
+
+.icon-sms-indigo:before {
+  content: "\eab3";
+  color: $blue-tigo;
+}
+
+.icon-soscall-indigo:before {
+  content: "\eab5";
+  color: $blue-tigo;
+}
+
+.icon-specialservices-indigo:before {
+  content: "\eab7";
+  color: $blue-tigo;
+}
+
+.icon-statementaccount-indigo:before {
+  content: "\eab9";
+  color: $blue-tigo;
+}
+
+.icon-statistics-indigo:before {
+  content: "\eabb";
+  color: $blue-tigo;
+}
+
+.icon-store-indigo:before {
+  content: "\eabd";
+  color: $blue-tigo;
+}
+
+.icon-technicsupport-indigo:before {
+  content: "\eabf";
+  color: $blue-tigo;
+}
+
+.icon-theft-indigo:before {
+  content: "\eac1";
+  color: $blue-tigo;
+}
+
+.icon-three-call-indigo:before {
+  content: "\eac3";
+  color: $blue-tigo;
+}
+
+.icon-tigoaccount-indigo:before {
+  content: "\eac5";
+  color: $blue-tigo;
+}
+
+.icon-tigolendsyou-indigo:before {
+  content: "\eac7";
+  color: $blue-tigo;
+}
+
+.icon-tigonline-indigo:before {
+  content: "\eac9";
+  color: $blue-tigo;
+}
+
+.icon-time-indigo:before {
+  content: "\eacb";
+  color: $blue-tigo;
+}
+
+.icon-transfercall-indigo:before {
+  content: "\eacd";
+  color: $blue-tigo;
+}
+
+.icon-tv-indigo:before {
+  content: "\eacf";
+  color: $blue-tigo;
+}
+
+.icon-twitter-indigo:before {
+  content: "\ead1";
+  color: $blue-tigo;
+}
+
+.icon-unlocked-indigo:before {
+  content: "\ead3";
+  color: $blue-tigo;
+}
+
+.icon-updating-indigo:before {
+  content: "\ead5";
+  color: $blue-tigo;
+}
+
+.icon-upload-indigo:before {
+  content: "\ead6";
+  color: $blue-tigo;
+}
+
+.icon-user-indigo:before {
+  content: "\ead9";
+  color: $blue-tigo;
+}
+
+.icon-userok-indigo:before {
+  content: "\eada";
+  color: $blue-tigo;
+}
+
+.icon-users-indigo:before {
+  content: "\eadc";
+  color: $blue-tigo;
+}
+
+.icon-usersecurity-indigo:before {
+  content: "\eadd";
+  color: $blue-tigo;
+}
+
+.icon-userwifi-indigo:before {
+  content: "\eadf";
+  color: $blue-tigo;
+}
+
+.icon-userx-indigo:before {
+  content: "\eae1";
+  color: $blue-tigo;
+}
+
+.icon-voice-dara-rates-indigo:before {
+  content: "\eae3";
+  color: $blue-tigo;
+}
+
+.icon-voiceplus-indigo:before {
+  content: "\eae5";
+  color: $blue-tigo;
+}
+
+.icon-waitingcall-indigo:before {
+  content: "\eae7";
+  color: $blue-tigo;
+}
+
+.icon-want-indigo:before {
+  content: "\eae9";
+  color: $blue-tigo;
+}
+
+.icon-wifipass-indigo:before {
+  content: "\eaeb";
+  color: $blue-tigo;
+}
+
+.icon-x-indigo:before {
+  content: "\eaed";
+  color: $blue-tigo;
+}
+
+.icon-xls-indigo:before {
+  content: "\eaef";
+  color: $blue-tigo;
+}
+
+/* esto ya está arriba
+.icon-downside-cyan:before {
+  content: "\e928";
+  color: #213b7a;
+}
+
+
+.icon-upside-cyan:before {
+  content: "\e92d";
+  color: #213b7a;
+}
+
+.icon-rightside-cyan:before {
+  content: "\e92b";
+  color: #213b7a;
+}
+*/
+
+
+
+.icon-rightside-cyan{
+  .path1{
+    &:before{
+      @include iconos-material('tigouneico','\e92b', 19px, $regular);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+}
+
+.icon-advancedsolutions-cyan:before {
+  content: "\e92f";
+  color: #37c846;
+}
+
+.icon-clouddad-cyan:before {
+  content: "\e931";
+  color: #fa7305;
+}
+
+.icon-conectivedad-cyan:before {
+  content: "\e935";
+  color: #aa007a;
+}
+
+.icon-internerdad-cyan:before {
+  content: "\e937";
+  color: #fa7305;
+}
+
+.icon-securitydad-cyan:before {
+  content: "\e939";
+  color: #5a94fb;
+}
+
+.icon-mobiledad-01-cyan:before {
+  content: "\e93b";
+  color: #5a94fb;
+}
+
+.icon-tvdad-cyan:before {
+  content: "\e93d";
+  color: #37c846;
+}
+
+.icon-jump2 {
+  .path1:before {
+    content: "\ec17";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\ec18";
+    color: $blue-tigo;
+  }
+  .path3:before {
+    content: "\ec19";
+    color: $blue-tigo;
+  }
+}
+
+.icon-gsm2 {
+  .path1:before {
+    content: "\ec1a";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\ec1b";
+    color: $cyan-tigo;
+  }
+  .path3:before {
+    content: "\ec1c";
+    color: $cyan-tigo;
+  }
+  .path4:before {
+    content: "\ec1d";
+    color: $blue-tigo;
+  }
+  .path5:before {
+    content: "\ec1e";
+    color: $blue-tigo;
+  }
+}
+
+.icon-select-cyan {
+  .path1:before {
+    content: "\ec1f";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ec20";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-seek-cyan {
+  .path1:before {
+    content: "\ec21";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ec22";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-results-cyan {
+  .path1::before {
+    content: "\ec23";
+    color: $blue-tigo;
+  }
+  .path2::before {
+    content: "\ec24";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-read-cyan {
+  .path1:before {
+    content: "\ec25";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ec26";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-ppp-cyan {
+  .path1:before {
+    content: "\ec27";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ec28";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-play-cyan:before {
+  content: "\ec29";
+  color: $blue-tigo;
+}
+
+.icon-pause-cyan:before {
+  content: "\ec2a";
+  color: $blue-tigo;
+}
+
+.icon-outlook-cyan {
+  .path1:before {
+    content: "\ec2b";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ec2c";
+    color: $cyan-tigo;
+  }
+  .path3:before {
+    content: "\ec2d";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-premiumlist-cyan {
+  .path1:before {
+    content: "\ec2e";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\ec2f";
+    color: $blue-tigo;
+  }
+}
+
+.icon-beachouse-cyan {
+  .path1:before {
+    content: "\ec30";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\ec31";
+    color: $blue-tigo;
+  }
+}
+
+.icon-products-cyan {
+  .path1:before {
+    content: "\ebf9";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\ebfa";
+    margin-left: -1.0380859375em;
+    color: $blue-tigo;
+  }
+}
+
+.icon-professionalservices2 {
+  .path1:before {
+    content: "\ebfb";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebfc";
+    margin-left: -1.0380859375em;
+    color: rgb(41, 171, 226);
+  }
+}
+
+.icon-activationsim-cyan {
+  .path1:before {
+    content: "\eaf4";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eaf5";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-addcard-cyan {
+  .path1:before {
+    content: "\eaf6";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eaf7";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-alert-cyan {
+  .path1:before {
+    content: "\eaf8";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eaf9";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-analogtv-cyan {
+  .path1:before {
+    content: "\eafa";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eafb";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-apps-cyan {
+  .path1:before {
+    content: "\eafc";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eafd";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-backup-cyan {
+  .path1:before {
+    content: "\eafe";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eaff";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-balance-cyan {
+  .path1:before {
+    content: "\eb00";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb01";
+    color: $blue-tigo;
+  }
+}
+
+.icon-barcode-cyan {
+  .path1:before {
+    content: "\eb02";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb03";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-benefits-cyan {
+  .path1:before {
+    content: "\eb04";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb05";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-bigtheft-cyan {
+  .path1:before {
+    content: "\eb06";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb07";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-bill-cyan {
+  .path1:before {
+    content: "\eb08";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb09";
+    color: $cyan-tigo;
+  }
+  .path3:before {
+    content: "\eb0a";
+    color: $blue-tigo;
+  }
+}
+
+.icon-bin-cyan {
+  .path1:before {
+    content: "\eb0b";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb0c";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-blockedsim-cyan {
+  .path1:before {
+    content: "\eb0d";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb0e";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-broadband-cyan {
+  .path1:before {
+    content: "\eb0f";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb10";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-business-cyan {
+  .path1:before {
+    content: "\eb11";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb12";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-businessuser-cyan {
+  .path1:before {
+    content: "\eb13";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb14";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-calendar-cyan {
+  .path1:before {
+    content: "\eb15";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb16";
+    color: $blue-tigo;
+  }
+}
+
+/* está arriba
+.icon-chart-cyan {
+  .path1:before {
+    content: "\eb18";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb19";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-chat-cyan {
+  .path1:before {
+    content: "\eb1a";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb1b";
+    color: rgb(41, 171, 226);
+  }
+  .path3:before {
+    content: "\ea1a";
+    color: rgb(41, 171, 226);
+  }
+  .path4:before {
+    content: "\ead8";
+    color: rgb(41, 171, 226);
+  }
+}
+*/
+
+
+.icon-check-cyan {
+  .path1:before {
+    content: "\eb1c";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb1d";
+    color: $blue-tigo;
+  }
+}
+
+.icon-checkflow-cyan {
+  .path1:before {
+    content: "\eb1e";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb1f";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-claims-cyan {
+  .path1:before {
+    content: "\eb20";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb21";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-cloud-wifi-cyan {
+  .path1:before {
+    content: "\eb24";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb25";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-cloudsaas-cyan {
+  .path1:before {
+    content: "\eb22";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb23";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-code-cyan:before {
+  content: "\eb26";
+  color: $blue-tigo;
+}
+
+.icon-conectivity-cyan:before {
+  content: "\eb27";
+  color: $blue-tigo;
+}
+
+.icon-configuration-cyan {
+  .path1:before {
+    content: "\eb28";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb29";
+    color: $cyan-tigo;
+  }
+}
+
+/*
+.icon-contracts-cyan {
+  .path1:before {
+    content: "\eb2a";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb2b";
+    color: $cyan-tigo;
+  }
+}
+
+*/
+
+.icon-country-cyan {
+  .path1:before {
+    content: "\eb2c";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb2d";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-coveragemap-cyan {
+  .path1:before {
+    content: "\eb2e";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb2f";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-creditcard-cyan {
+  .path1:before {
+    content: "\eb30";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb31";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-damage-cyan {
+  .path1:before {
+    content: "\eb32";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb33";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-datacenter-cyan {
+  .path1:before {
+    content: "\ebf7";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebf8";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-deco-cyan {
+  .path1:before {
+    content: "\eb34";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb35";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-diagnosis-cyan {
+  .path1:before {
+    content: "\eb36";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb37";
+    color: $blue-tigo;
+  }
+}
+
+.icon-documents-cyan {
+  .path1:before {
+    content: "\eb38";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb39";
+    color: $blue-tigo;
+  }
+}
+
+.icon-download-cyan {
+  .path1:before {
+    content: "\eb3a";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb3b";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-extrabalance-cyan {
+  .path1:before {
+    content: "\eb3c";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb3d";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-facebook-cyan {
+  .path1:before {
+    content: "\eb3e";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb3f";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-favorites-cyan {
+  .path1:before {
+    content: "\eb40";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb41";
+    color: $cyan-tigo;
+  }
+}
+
+/* esto ya está arriba
+.icon-filters-cyan {
+  .path1:before {
+    content: "\eb42";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb43";
+    color: $cyan-tigo;
+  }
+}
+*/
+
+.icon-gplus-cyan {
+  .path1:before {
+    content: "\eb44";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb45";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-guidechannels-cyan {
+  .path1:before {
+    content: "\eb46";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb47";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-hdtv-cyan {
+  .path1:before {
+    content: "\eb48";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb49";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-help-cyan {
+  .path1:before {
+    content: "\eb4a";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb4b";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-history-cyan {
+  .path1:before {
+    content: "\eb4c";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb4d";
+    color: $blue-tigo;
+  }
+}
+
+.icon-home-cyan {
+  .path1:before {
+    content: "\eb4e";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb4f";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-hosting-cyan {
+  .path1:before {
+    content: "\eb50";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb51";
+    color: $blue-tigo;
+  }
+}
+
+.icon-id-cyan {
+  .path1:before {
+    content: "\eb52";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb53";
+    color: $blue-tigo;
+  }
+}
+
+.icon-info-conf-cyan {
+  .path1:before {
+    content: "\eb56";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb57";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-info-cyan {
+  .path1:before {
+    content: "\eb54";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb55";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-interactive-cyan {
+  .path1:before {
+    content: "\eb58";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb59";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-internet-cyan {
+  .path1:before {
+    content: "\eb5a";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb5b";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-key-cyan {
+  .path1:before {
+    content: "\eb5c";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb5d";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-linecenter-cyan:before {
+  content: "\eb5e";
+  color: $blue-tigo;
+}
+
+.icon-list-cyan {
+  .path1:before {
+    content: "\eb5f";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb60";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-loading-cyan {
+  .path1:before {
+    content: "\eb61";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb62";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-locked-cyan {
+  .path1:before {
+    content: "\eb63";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb64";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-login-cyan {
+  .path1:before {
+    content: "\eb65";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb66";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-logout-cyan {
+  .path1:before {
+    content: "\eb67";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb68";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-mail-cyan {
+  .path1:before {
+    content: "\eb69";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb6a";
+    color: $blue-tigo;
+  }
+}
+
+.icon-mailing-cyan {
+  .path1:before {
+    content: "\eb6b";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb6c";
+    color: $blue-tigo;
+  }
+}
+
+.icon-measurer-cyan {
+  .path1:before {
+    content: "\eb6d";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb6e";
+    color: $blue-tigo;
+  }
+}
+
+.icon-mobilephone-cyan {
+  .path1:before {
+    content: "\eb6f";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb70";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-mobility-cyan {
+  .path1:before {
+    content: "\eb71";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb72";
+    color: $blue-tigo;
+  }
+  .path3:before {
+    content: "\eb73";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-modem-cyan {
+  .path1:before {
+    content: "\eb74";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ec32";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-movies-cyan {
+  .path1:before {
+    content: "\eb75";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb76";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-new-cyan {
+  .path1:before {
+    content: "\eb77";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb78";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-news-cyan {
+  .path1:before {
+    content: "\eb79";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb7a";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-nointernet-cyan:before {
+  content: "\eb7b";
+  color: $blue-tigo;
+}
+
+/*
+.icon-notifications-cyan {
+  .path1:before {
+    content: "\eb7c";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb7d";
+    color: $cyan-tigo;
+  }
+}
+*/
+
+.icon-package-cyan {
+  .path1:before {
+    content: "\eb7e";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb7f";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-password-cyan {
+  .path1:before {
+    content: "\eb80";
+    color: $blue-tigo
+  }
+  .path2:before {
+    content: "\eb81";
+
+    color: $cyan-tigo;
+  }
+}
+
+
+.icon-paymentreference-cyan {
+  .path1:before {
+    content: "\eb82";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb83";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-pdf-cyan {
+  .path1:before {
+    content: "\eb87";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb88";
+    color: $blue-tigo;
+  }
+}
+
+.icon-portability-cyan {
+  .path1:before {
+    content: "\eb89";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb8a";
+    color: $cyan-tigo;
+  }
+}
+
+
+.icon-premium-cyan {
+  .path1:before {
+    content: "\eb8b";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb8c";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-pricelist-cyan {
+  .path1:before {
+    content: "\eb8d";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb8e";
+    color: $blue-tigo;
+  }
+}
+
+.icon-programmer-cyan {
+  .path1:before {
+    content: "\eb8f";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb90";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-receipt-cyan {
+  .path1:before {
+    content: "\ebef";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebf0";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-recharge-cyan {
+  .path1:before {
+    content: "\eb91";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb92";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-register-cyan {
+  .path1:before {
+    content: "\eb93";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb94";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-remote-cyan {
+  .path1:before {
+    content: "\eb95";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb96";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-reports-cyan {
+  .path1:before {
+    content: "\eb97";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb98";
+    color: $blue-tigo;
+  }
+}
+
+.icon-request-cyan {
+  .path1:before {
+    content: "\eb99";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eb9a";
+    color: $blue-tigo;
+  }
+}
+
+.icon-roaming-cyan {
+  .path1:before {
+    content: "\eb9b";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb9c";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-savetoschool-cyan {
+  .path1:before {
+    content: "\eb9d";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eb9e";
+    color: $cyan-tigo;
+  }
+}
+
+/* esto ya está arriba
+.icon-search-cyan:before {
+  content: "\eb9f";
+  color: $blue-tigo;
+}
+*/
+
+.icon-securemobile-cyan {
+  .path1:before {
+    content: "\eba0";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eba1";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-services-cyan {
+  .path1:before {
+    content: "\eba2";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eba3";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-sharebalance-cyan {
+  .path1:before {
+    content: "\eba4";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\eba5";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-shopping-cyan {
+  .path1:before {
+    content: "\eba6";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\eba7";
+    color: $blue-tigo;
+  }
+}
+
+.icon-sic-cyan {
+  .path1:before {
+    content: "\ebaa";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebab";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-simplicity-cyan {
+  .path1:before {
+    content: "\ebac";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebad";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-simulatorcoverage-cyan {
+  .path1:before {
+    content: "\ebae";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebaf";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-sms-cyan {
+  .path1:before {
+    content: "\ebb0";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebb1";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-soscall-cyan {
+  .path1:before {
+    content: "\ebb2";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebb3";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-specialservices-cyan {
+  .path1:before {
+    content: "\ebb4";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebb5";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-statementaccount-cyan {
+  .path1:before {
+    content: "\ebb6";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebb7";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-statistics-cyan {
+  .path1:before {
+    content: "\ebb8";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\ebb9";
+    color: $blue-tigo;
+  }
+}
+
+.icon-store-cyan {
+  .path1:before {
+    content: "\ebba";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebbb";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-technicsupport-cyan {
+  .path1:before {
+    content: "\ebbc";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebbd";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-theft-cyan {
+  .path1:before {
+    content: "\ebbe";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebbf";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-three-call-cyan {
+  .path1:before {
+    content: "\ebc0";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebc1";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-tigoaccount-cyan {
+  .path1:before {
+    content: "\ebc2";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebc3";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-tigolendsyou-cyan {
+  .path1:before {
+    content: "\ebc4";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebc5";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-tigonline-cyan {
+  .path1:before {
+    content: "\ebc6";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebc7";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-time-cyan {
+  .path1:before {
+    content: "\ebc8";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebc9";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-transfercall-cyan {
+  .path1:before {
+    content: "\ebca";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebcb";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-tv-cyan {
+  .path1:before {
+    content: "\ebcc";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebcd";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-twitter-cyan {
+  .path1:before {
+    content: "\ebce";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebcf";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-unlocked-cyan {
+  .path1:before {
+    content: "\ebd0";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebd1";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-updating-cyan:before {
+  content: "\ebd2";
+  color: $blue-tigo;
+}
+
+.icon-upload-cyan {
+  .path1:before {
+    content: "\ebd3";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\ebd4";
+    color: $blue-tigo;
+  }
+}
+
+/* esto ya está arriba
+.icon-user-cyan:before {
+  content: "\ebd6";
+  color: $blue-tigo;
+}
+
+
+.icon-userok-cyan {
+  .path1:before {
+    content: "\ebd7";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebd8";
+    color: $cyan-tigo;
+  }
+}
+*/
+
+.icon-users-cyan:before {
+  content: "\ebd9";
+  color: $blue-tigo;
+}
+
+.icon-usersecurity-cyan {
+  .path1:before {
+    content: "\ebda";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebdb";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-userwifi-cyan {
+  .path1:before {
+    content: "\ebdc";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebdd";
+    color: $blue-tigo;
+  }
+  .path3:before {
+    content: "\ebd5";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-userx-cyan {
+  .path1:before {
+    content: "\ebde";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebdf";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-voice-dara-rates-cyan {
+  .path1:before {
+    content: "\ebe0";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\ebe1";
+    color: $blue-tigo;
+  }
+}
+
+.icon-voiceplus-cyan {
+  .path1:before {
+    content: "\ebe2";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebe3";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-waitingcall-cyan {
+  .path1:before {
+    content: "\ebe4";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebe5";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-want-cyan {
+  .path1:before {
+    content: "\ebe6";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebe7";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-wifipass-cyan {
+  .path1:before {
+    content: "\ebe8";
+    color: $blue-tigo;
+  }
+  .path2:before {
+    content: "\ebe9";
+    color: $cyan-tigo;
+  }
+}
+
+.icon-xls-cyan {
+  .path1:before {
+    content: "\ebec";
+    color: $cyan-tigo;
+  }
+  .path2:before {
+    content: "\ebed";
+    color: $blue-tigo;
+  }
+}
+
+.icon-left {
+  .path1:before {
+    content: "\e927";
+    color: $blue-tigo;
+  }
+}
+.icon-call-cyan {
+  .path1:before {
+    content: "\eb17";
+    color: $cyan-tigo;
+  }
+}
+
+/* Fondo gris redondo */
+.card-icon {
+  margin: 0px 14px 0 0px;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  background: $gray-border;
+  border-radius: 50%;
+  position: relative;
+  .prefix{
+    .path1,
+    .path2{
+      width: 24px;
+      margin-top: 9px;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      &:before {
+        color: $gray-tigo;
+        font-weight: normal;
+      }
+    }
+  }
+  &.icon-service{
+    position: relative;
+    &:before{
+      display: none;
+    }
+    .path1,
+    .path2{
+      left: 9px;
+      top: -7px;
+      &:before {
+        color: $gray-tigo;
+        font-weight: normal;
+      }
+    }
+    > div{
+      &:before {
+        content: '';
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        left: 0;
+        top:0;
+        background-color: $gray-border;
+        @include radiosRedondos(20px);
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        padding-top: 7px;
+      }
+    }
+  }
+  &.icon-businessuser-cyan, .card-icon.icon-specialservices-cyan {
+    position: relative;
+    &:before{
+      display: none;
+    }
+    .path1,
+    .path2{
+      left: 9px;
+      top: -7px;
+      &:before {
+        font-weight: normal;
+      }
+    }
+    > div{
+      &:before {
+        content: '';
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        left: 0;
+        top:0;
+        background-color: $gray-border;
+        @include radiosRedondos(20px);
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        padding-top: 7px;
+      }
+    }
+  }
+}

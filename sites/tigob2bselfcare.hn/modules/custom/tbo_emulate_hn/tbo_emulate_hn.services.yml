@@ -1,0 +1,14 @@
+services:
+  tbo.user:
+    class: Drupal\tbo_emulate_hn\User
+    arguments: ["@current_user"]
+    
+  # EmulateAdminCompanySessionHn
+  tbo_emulate_hn.emulate_admin_company_session_hn_block:
+    class: Drupal\tbo_emulate_hn\Plugin\Config\Block\EmulateAdminCompanySessionHnBlockClass
+    arguments: []
+    
+  # UnmasqueradeBlock
+  tbo_emulate_hn.unmasquerade_hn_block:
+    class: Drupal\tbo_emulate_hn\Plugin\Config\Block\UnmasqueradeBlockClass
+    arguments: []

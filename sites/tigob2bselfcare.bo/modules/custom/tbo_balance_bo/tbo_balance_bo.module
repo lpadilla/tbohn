@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_balance_bo.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_balance_bo_theme(){
+    return [                
+        'balances_bo' => [
+          'variables' => array(
+            'form' => null,
+            'formName' => null,
+            'directive' => null,
+            'buttons' => null,
+            'class' => null,
+            'form' => null,
+            'attached' => null,
+            'balance' => null,
+            'msisdn' => null,
+            'megas' => null,
+            'fecha' => null,
+            'lineas' => null,
+            'lineas_rel' =>null,
+            'plan' => null,
+            'plan_show' => null,
+            'flag' => null,
+            'linea_principal'=> null,
+            'linea_principal_show'=> null,            
+            'status' => null,
+            'status2' => null,
+            'plan_2' => null,
+            'addons' => null,
+            'telegroup' => null,
+            'plan_2_show' => null,
+            'addons_show' => null,
+            'telegroup_show' => null,
+          ),
+          'template' => 'block--balances-bo',
+        ],
+    ];
+}

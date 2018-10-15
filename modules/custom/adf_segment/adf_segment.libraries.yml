@@ -1,0 +1,9 @@
+adf_segment:
+  header: TRUE
+  js:
+    js/adf_segment_init.js: {}
+    js/adf_segment.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/drupalSettings

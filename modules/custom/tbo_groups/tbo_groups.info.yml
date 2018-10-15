@@ -1,0 +1,9 @@
+name: TBO Group
+type: module
+description: TBO Group Management
+core: 8.x
+package: TBO
+dependencies:
+  - tbo_general
+  - options
+  - entity_reference

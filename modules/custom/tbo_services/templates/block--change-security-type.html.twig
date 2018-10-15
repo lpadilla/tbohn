@@ -1,0 +1,95 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+  <div class="card-block">
+    <div class="box-body">
+      
+      {% if title.label_display == 'visible' %}
+        <h5 class="title-front">
+          {{ title.label }}
+        </h5>
+      {% endif %}
+      
+      <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+        <div class="col s12">
+
+          {% block other_content_data_card %}
+            <div class="card white clearfix">
+              <div class="col s12">
+                
+                {% block other_content %}
+                  <div id="change-wifi-security-type" class="change-wifi-security-type">
+                    {% if fields.block_title.show %}
+                      <h2 class="title-card">{{ fields.block_title.label }}</h2>
+                    {% endif %}
+                    <div class="modal-content">
+                      <form>
+                        <div class="row">
+                          {% for field in fields %}
+                            {% if field.show %}
+                              {% if field.input_type == "label" %}
+                                {% set classLabel =  'col s12 m6' %}
+                                {% if field.class == '12-columns' %}
+                                  {% set classLabel = 'col s12 m12' %}
+                                {% endif %}
+                                
+                                <div class="{{ classLabel }}">
+                                  <p>
+                                    {{ field.label }}
+                                  </p>
+                                </div>
+                              {% elseif field.input_type == 'password' %}
+                                {{ widgets.validate_style(field.label, field, field.class) }}
+                              {% elseif field.service_field == 'security_type' %}
+                                <div class="input-field content-row col m6 s12">
+                                  <select id="{{ field.identifier }}"
+                                          data-ng-model="{{ field.identifier }}"
+                                          ng-change="change_security_type(security_type)"
+                                          ng-init="{{ field.identifier }}='seleccione'">
+                                    <option value="seleccione">{{ field.label }}</option>
+                                   
+                                    {% for key, value in field.options %}
+                                      <option value="{{ key }}">{{ value }}</option>
+                                    {% endfor %}
+                                  </select>
+                                </div>
+                              {% endif %}
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                        <div class="row">
+                          <div class="col s12 m12 card-action">
+                            {% for button in buttons %}
+                              {% if button.show %}
+                                <a
+                                  {% if button.service_field == 'action_card_change_wifi_security_type' %}
+                                    class="right waves-effect waves-light btn btn-primary {% if button.active == false %}disabled{% endif %}"
+                                    id="btn-change-wifi-security-type"
+                                    ng-click="changeSecurityType(new_password)"
+                                  {% else %}
+                                    id="btn-cancel-wifi-security-type"
+                                    class="right waves-effect waves-light btn btn-second"
+                                    ng-click="cancelChangeSecurityTypeRequest()"
+                                  {% endif %}
+                                
+                                >{{ button.label }}
+                                </a>
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                {% endblock %}
+              </div>
+            </div>
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

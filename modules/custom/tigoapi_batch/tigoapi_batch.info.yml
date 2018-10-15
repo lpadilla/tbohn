@@ -1,0 +1,5 @@
+name: tigoapi_batch
+type: module
+description: Module to call apis by lots
+core: 8.x
+package: Tigoapi

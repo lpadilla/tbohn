@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Limit Submissions module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function limit_submissions_uninstall() {
+  $num_deleted = db_delete('limit_submissions')
+    ->execute();
+}

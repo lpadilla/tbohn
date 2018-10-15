@@ -1,0 +1,13 @@
+.box-emulate-session{
+  .data{
+    table.responsive-table{
+      tbody tr td,
+      thead tr th{
+        @media #{$large-and-up} {
+          max-width: 50%;
+          width: 50%;
+        }
+      }
+    }
+  }
+}

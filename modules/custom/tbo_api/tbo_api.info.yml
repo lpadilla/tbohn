@@ -1,0 +1,7 @@
+name: TBO API
+type: module
+description: TBO API
+core: 8.x
+package: TBO
+dependencies:
+  - adf_core

@@ -1,0 +1,20 @@
+tbo_permissions.tbo_permissions_settings_form:
+  title: 'TBO Permissions - Settings'
+  route_name: tbo_permissions.tbo_permissions_settings_form
+  description: 'Configure cards access by company.'
+  parent: system.admin_config_system
+  weight: 99
+
+tbo_permissions.add_install_jobs_form:
+  title: 'TBO Permissions - Add install jobs'
+  route_name: tbo_permissions.add_install_jobs_form
+  description: 'Add install jobs in batches.'
+  parent: system.admin_config_system
+  weight: 99
+
+tbo_permissions.run_scheduled_jobs_form:
+  title: 'TBO Permissions - Run scheduled install jobs'
+  route_name: tbo_permissions.run_scheduled_jobs_form
+  description: 'Run install jobs in batches.'
+  parent: system.admin_config_system
+  weight: 99

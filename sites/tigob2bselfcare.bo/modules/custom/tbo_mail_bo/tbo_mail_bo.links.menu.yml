@@ -1,0 +1,6 @@
+tbo_mail_bo.tbo_mail_bo_settings_form:
+  title: 'Tbo Mail Bo'
+  route_name: tbo_mail_bo.tbo_mail_bo_settings_form
+  description: 'Configure messages to send'
+  parent: system.admin_config_system
+  weight: 99

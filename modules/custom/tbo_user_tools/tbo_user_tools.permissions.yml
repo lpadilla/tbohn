@@ -1,0 +1,4 @@
+access to delete users:
+  title: 'Access to delete users'
+  description: 'Allow access to the delete users view'
+  restrict access: TRUE

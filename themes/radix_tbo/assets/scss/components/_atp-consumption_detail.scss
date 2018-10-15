@@ -1,0 +1,132 @@
+.atp-consumption_detail, .atp-profile-details {
+    .label {
+      color: $gray3-tigo;
+      font-weight: 400;
+      font-size: 12px;
+      margin: 0;
+    }
+    .ligth-f {
+      font-weight: 300;
+    }
+    strong {
+      font-weight: 400;
+    }
+  }
+
+.atp-consumption_detail {
+  display: flex;
+  align-items: center;
+  transition: all .4s ease-in-out;
+    @media #{$small-and-down} {
+      flex-direction: column;
+    }
+  &-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    &.col.ml-0 {
+      margin-left: 0;
+      @media #{$medium-and-up} {
+        margin-bottom: 0;
+      }
+    }
+    h2 {
+      color: $blue-tigo;
+      font-size: 24px;
+      font-weight: 400;
+      margin: 15px 0;
+    }
+  }
+  &-data {
+    display: flex;
+    &.mobile-data {
+      strong {
+        font-size: 13px;
+      }
+    }
+  }
+  &-buttons {
+    text-align: right;
+    .input-field {
+      display: flex;
+      padding-right: 0;
+      justify-content: flex-end;
+      @media #{$small-and-down} {
+        display: flex;
+      }
+    }
+  }
+  ~ .atp-profile-details {
+    position: relative;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    border: none;
+    border-radius: 0 0 3px 3px;
+    transition: all .4s ease-in-out;
+    &.expanded {
+      max-height: 100em;
+      box-shadow: 0 15px 40px $grey-filter;
+    }
+    .left-detail {
+      border-right: 1px solid $grey-filter;
+      ul {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+        li {
+          .detail-title {
+            margin-bottom: 7px;
+          }
+        }
+      }
+      @media #{$small-and-down} {
+        border-right: none;
+        ul {
+          margin: 0;
+          padding-bottom: 20px;
+          border-bottom: 1px solid $grey-filter;
+          li {
+            flex-direction: column;
+            &:not(:last-child) {
+              margin-bottom: 15px;
+            }
+            @media #{$small-and-down} {
+              margin: -0.75rem -0.75rem 10px;
+            }
+          }
+        }
+      }
+      .label {
+        @media #{$small-and-down} {
+          margin: 10px 0 15px 0;
+        }
+      }
+    }
+    .right-detail {
+      .label {
+        @media #{$small-and-down} {
+          margin-bottom: 15px;
+        }
+      }
+    }
+    .left-detail, .right-detail {
+      margin: 20px 0;
+      @media #{$small-and-down} {
+        margin: 15px 0;
+      }
+      li {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 10px;
+        p:not(.detail-title) {
+          margin: 0;
+        }
+      }
+    }
+  }
+  &.expanded {
+    box-shadow: 0 15px 40px $grey-filter;
+  }
+}

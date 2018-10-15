@@ -1,0 +1,52 @@
+services:
+  tbo_account_bo.create_users_bo_form_logic:
+    class: Drupal\tbo_account_bo\Plugin\Config\form\CreateUsersBoFormClass
+    arguments: []
+  
+  # TigoAdminListBoBlock
+  tbo_account_bo.manage_users_tigo_admin_bo_block:
+    class: Drupal\tbo_account_bo\Plugin\Config\Block\TigoAdminListBoBlockClass
+    arguments: []
+
+# CreateCompaniesBlock
+  tbo_account_bo.create_companies_bo_block:
+    class: Drupal\tbo_account_bo\Plugin\Config\Block\CreateCompaniesBoBlockClass
+    arguments: []
+
+  tbo_account_bo.create_companies_form:
+    class: Drupal\tbo_account_bo\Plugin\Config\form\CreateCompanyBoFormClass
+    arguments: []
+
+# service rest
+  tbo_account_bo.create_companies_rest_bo:
+    class: Drupal\tbo_account_bo\Services\Rest\CreateCompaniesRestServiceBo
+    arguments: []
+
+  tbo_account_bo.repository:
+    class: Drupal\tbo_account_bo\Repository\AccountRepositoryBo
+    arguments: []
+
+  tbo_account_bo.create_companies_service:
+    class: Drupal\tbo_account_bo\Services\CreateCompanyServiceBo
+    arguments: ["@tbo_api.client"]
+
+  # Controller
+  tbo_account_bo.tbo_account_controller_service:
+    class: Drupal\tbo_account_bo\Services\Controller\TboAccountBoControllerService
+    arguments: []
+
+# ReAssignBusinessBetweenUsersTigoAdminBoBlock
+  tbo_account_bo.re_assign_business_between_users_tigo_admin_block_bo:
+    class: Drupal\tbo_account_bo\Plugin\Config\Block\ReAssignBusinessBetweenUsersTigoAdminBoBlockClass
+    arguments: []
+
+
+# ManageCompanyBoBlock   
+  tbo_account_bo.manage_company_bo_block:
+    class: Drupal\tbo_account_bo\Plugin\Config\Block\ManageCompanyBoBlockClass
+    arguments: []
+
+# UsersListBoBlock
+  tbo_account_bo.users_list_bo_block:
+    class: Drupal\tbo_account_bo\Plugin\Config\Block\UserListBoBlockClass
+    arguments: []

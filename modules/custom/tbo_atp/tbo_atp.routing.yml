@@ -1,0 +1,17 @@
+tbo_atp.appointment_invoice:
+  path: '/admin/config/tbo_atp/settings'
+  defaults:
+    _form: '\Drupal\tbo_atp\Form\TboAtpFormConfig'
+    _title: 'TBO ATP - Configuraciones'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+tbo_atp.atp_corporative_plan_summary_save_audit_log:
+  path: '/tbo-atp/validate-atp'
+  defaults:
+    _controller: '\Drupal\tbo_atp\Controller\AtpLoginController::validateAtp'
+    _title: ''
+  requirements:
+    _permission: 'access content'

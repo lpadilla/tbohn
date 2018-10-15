@@ -1,0 +1,15 @@
+
+# Adf rest api endpoint entity menu items definition
+entity.adf_rest_api_endpoint_entity.collection:
+  title: 'Adf rest api endpoint entity'
+  route_name: entity.adf_rest_api_endpoint_entity.collection
+  description: 'List Adf rest api endpoint entity (bundles)'
+  parent: system.admin_structure
+  weight: 99
+
+adf_rest_api.adf_rest_api_settings_form:
+  title: 'Adf Rest Api Servicios REST'
+  route_name: adf_rest_api.adf_rest_api_settings_form
+  description: 'Configuracion global Servicios REST'
+  parent: system.admin_config_services
+  weight: 99

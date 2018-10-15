@@ -1,0 +1,265 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_lines.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_lines_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_lines module.
+    case 'help.page.tbo_lines':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Tbo - Lines') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_lines_theme() {
+  return [
+    'sms_balance' => [
+      'variables' => [
+        'fields' => NULL,
+        'sms' => NULL,
+        'buttons' => NULL,
+        'uuid' => NULL,
+        'directive' => NULL,
+        'class' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--sms-balance',
+    ],
+    'sms_consumption_history' => [
+      'variables' => [
+        'fields' => NULL,
+        'uuid' => NULL,
+        'directive' => NULL,
+        'class' => NULL,
+        'report' => NULL,
+        'show_report' => NULL,
+        'margin' => NULL,
+        'filters' => NULL,
+        'buttons' => NULL,
+        'fields_mobile' => NULL,
+        'title' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--sms-consumption-history',
+    ],
+    'consumption_detail_data' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'config' => NULL,
+        'table' => NULL,
+        'filters' => NULL,
+        'class' => NULL,
+        'id' => NULL,
+        'informative_text' => NULL,
+        'format' => NULL,
+        'margin' => NULL,
+        'more' => NULL,
+        'table_mobile' => NULL,
+        'environment' => NULL,
+        'buttons' => NULL,
+        'informative_text_query' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--consumption-detail-data',
+    ],
+    'card_mobile_call_history' => [
+      'variables' => [
+        'fields' => NULL,
+        'filters' => NULL,
+        'uuid' => NULL,
+        'directive' => NULL,
+        'class' => NULL,
+        'report' => NULL,
+        'show_report' => NULL,
+        'margin' => NULL,
+        'show_title' => NULL,
+        'title' => NULL,
+        'buttons' => NULL,
+        'fields_movil' => NULL,
+        'redirect' => NULL,
+        'info_text' => NULL,
+        'plugin_id' => NULL,
+
+      ],
+      'template' => 'block--mobile-call-history',
+    ],
+    'check_mobile_usage' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'image_icon' => NULL,
+        'config' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'class' => NULL,
+        'id' => NULL,
+        'form' => NULL,
+        'title_invoice' => NULL,
+        'address_options' => NULL,
+        'filters_mobile' => NULL,
+        'showoptions' => NULL,
+        'display' => NULL,
+        'checked' => NULL,
+        'margin' => NULL,
+        'more_options' => NULL,
+        'buttons' => NULL,
+        'data' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--check-mobile-usage',
+    ],
+    'check_mobile_details_usage' => [
+      'variables' => [
+        'uuid' => NULL,
+        'icono_voz' => NULL,
+        'icono_datos' => NULL,
+        'icono_sms' => NULL,
+        'directive' => NULL,
+        'config' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'class' => NULL,
+        'id' => NULL,
+        'form' => NULL,
+        'title_invoice' => NULL,
+        'address_options' => NULL,
+        'filters_mobile' => NULL,
+        'showoptions' => NULL,
+        'display' => NULL,
+        'checked' => NULL,
+        'margin' => NULL,
+        'more_options' => NULL,
+        'buttons' => NULL,
+        'data' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--check-mobile-details-usage',
+    ],
+    'card_mobile_call_history_chart' => [
+      'variables' => [
+        'fields' => NULL,
+        'filters' => NULL,
+        'filters_mobile' => NULL,
+        'uuid' => NULL,
+        'directive' => NULL,
+        'class' => NULL,
+        'show_title' => NULL,
+        'title' => NULL,
+        'buttons' => NULL,
+        'title_tab' => NULL,
+        'redirec' => NULL,
+        'text_info' => NULL,
+        'info_text' => NULL,
+        'show_card_enviroment' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--mobile-call-history-chart',
+    ],
+    'fixed_consumption_histogram_data' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'class' => NULL,
+        'config' => NULL,
+        'table' => NULL,
+        'margin' => NULL,
+        'environment' => NULL,
+        'more' => NULL,
+        'productId' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--fixed-consumption-histogram',
+    ],
+    'fixed_consumption_daily' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'class' => NULL,
+        'config' => NULL,
+        'table' => NULL,
+        'margin' => NULL,
+        'environment' => NULL,
+        'more' => NULL,
+        'productId' => NULL,
+        'download_label' => NULL,
+        'table_mobile' => NULL,
+        'hour_format' => NULL,
+        'title' => NULL,
+        'active_columns_mobile' => NULL,
+        'filters' => NULL,
+        'informative_text' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--fixed-consumption-daily',
+    ],
+    'historical_consumption_per_month' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'config' => NULL,
+        'table' => NULL,
+        'filters' => NULL,
+        'class' => NULL,
+        'id' => NULL,
+        'informative_text' => NULL,
+        'informative_text_mobile' => NULL,
+        'download_label' => NULL,
+        'format' => NULL,
+        'margin' => NULL,
+        'more' => NULL,
+        'table_mobile' => NULL,
+        'url_daily' => NULL,
+        'active_columns_mobile' => NULL,
+        'environment' => NULL,
+        'buttons' => NULL,
+        'informative_text_query' => NULL,
+        'title_card' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--historical-consumption-per-month',
+    ],
+    'fixed_consumption_data' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'buttom' => NULL,
+        'class' => NULL,
+        'config' => NULL,
+        'table' => NULL,
+        'margin' => NULL,
+        'environment' => NULL,
+        'more' => NULL,
+        'productId' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--fixed-consumption-data',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_user_logout().
+ */
+function tbo_lines_user_logout($account) {
+  if (isset($_SESSION['files_user'])) {
+    foreach ($_SESSION['files_user'] as $value) {
+      unlink($value);
+    }
+  }
+}

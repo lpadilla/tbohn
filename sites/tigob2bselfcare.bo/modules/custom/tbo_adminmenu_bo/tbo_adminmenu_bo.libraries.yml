@@ -1,0 +1,8 @@
+admin-empresa-menu:
+  version: 1.x
+  js:
+    js/jquery.letterpic.js: {}
+    js/letterpic.config.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings

@@ -1,0 +1,47 @@
+<!-- Template for invoice detail -->
+<script>
+	(function ($) {
+		$("#btnDone").click(function (e) {
+			e.preventDefault();
+			$(this).closest('.ui-dialog-content').dialog('close');
+			$('.modal_history .row').remove();
+			jQuery('.preloading-detail-invoice').css('display', 'block');
+		});
+		$( document ).ready(function() {
+			$('.preloading-detail-invoice').css('display', 'none');
+		});
+	})(jQuery);
+</script>
+{# Add preloading to pop up #}
+<div class="preloadingContainer preloading-detail-invoice" style="display: block;">
+  <div class="preloadingData" style="display: flex;">
+    <svg class="spinner" width="100%" height="100%" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+      <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+    </svg>
+  </div>
+</div>
+<div class="row">
+  <h2 class="title-modal">{{ 'Detalles del pago'|t }}</h2>
+  <div class="content">
+    {% if data is not null %}
+      {% if data.error %}
+        <h6>{{ data.error }}</h6>
+      {% else %}
+        <div class="date">
+          <h6>{{ 'Fecha de pago'|t }}</h6>
+          <p>{{ data.paymentDay }}</p>
+        </div>
+        <div class="method">
+          <h6>{{ 'Metodo de pago'|t }}</h6>
+          <p>{{ data.paymentMethod }} {{ data.bankingEntity }}</p>
+        </div>
+      {% endif %}
+    {% else %}
+        <h4>{{ 'No pudimos obtener el detalle del pago'|t }}</h4>
+    {% endif %}
+  </div>
+  <div class="modal-footer">
+     <a href="#" id="btnDone" class="right waves-effect waves-light btn btn-primary ng-scope">CERRAR</a>
+  </div>
+</div>
+

@@ -1,0 +1,124 @@
+{% extends 'block__card_base_bo.html.twig' %}
+
+
+{% block filters_modal_content %}
+  <div class="row">
+    <div class="input-field col s6 m6 l8">
+      {% if title %}
+        <h5 class="title-core">{{ title }}</h5>
+      {% endif %}
+    </div>
+  </div>
+  
+{% endblock %}
+
+{% block table_head %}
+<div class="card clearfix white back-button">
+    <div class="col s1 m1 l1 xl1 flecha-area">     
+      <a href="/{{url_home}}" class="return-arrow">
+        <i class="small material-icons">arrow_back</i>
+      </a>
+    </div>              
+    <div class="col s11 m11 l11 xl11 arrow_tf">                               
+      <a href="/{{url_home}}" class="report">                 
+        <div class="return2">Regresar</div>
+      </a>
+    </div>
+
+    
+</div>
+<tr>
+    {% for tfield in fields %}
+      <th ng-click="reverseTable();">{{ tfield.label }}</th>
+    {% endfor %}
+    
+  </tr>
+  
+{% endblock %}
+
+
+{% block table_body %}
+  <!-- Start header block -->
+  <div class="card clearfix white invoice-content">
+    <div class="col s12 m12 l12 xl8 content width-100">
+      <div class="box-bill col row s12">
+        <div class="column-left col s12 m12 l4 xl5 width-100">
+          <div class="left card-icon">
+            <i class="prefix" ng-class="title == '{{title_fijos}}' ? 'icon-business-cyan' : 'icon-mobilephone-cyan'">
+              <span class="path1"></span>
+              <span class="path2"></span>
+            </i>
+          </div>                                                                 
+          <div class='col-contract left-auto'>                  
+            <p class='title-card' >{[{summaryContract}]}</p>
+          </div>
+          {% if header_line.show == 1 %}
+            <div class='col-lineas left-auto'>
+              <p class="del-bottom">{{header_line.label}}</p>
+              <p class="del-up"> {[{ cantLine}]}</p>
+            </div>         
+          {% endif %}
+          {% if header_deuda.show == 1 %}
+            <div class="col-deuda left-auto">
+              <p class="del-bottom">{{header_deuda.label}}</p>
+              <p class="del-up" >{{money}} {[{ summaryDeuda }]}</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div> 
+    <div class="clear"></div> 
+  </div>
+  <!-- End header block -->
+
+  <div class="incluidos">{{title_two}}</div>
+
+  <!-- Start table result-->  
+      <tr ng-repeat="(key, value) in pagedItems[currentPage]" id='{[{ value.msisdn }]}'>
+        {% for field in fields %}    
+          {% if field.service_field == 'msisdn' %}
+            <td>
+              <span class='title-card' ><a class="numlinea" href='/{{extra}}?l={[{value.l}]}'>{[{ value.msisdn }]}</a><span>
+            </td>
+          {% elseif field.service_field == 'plan_consumo' %} 
+            <td>
+              {[{ value.plans.PlanType.planName }]}  
+            </td>
+          {% elseif field.service_field == 'plan_datos' %}
+            <td class="plan_datos">
+              <span ng-if="cantLine <= 50">{[{value.plan_datos}]}</span>
+            </td>
+          {% elseif field.service_field == 'add_ons' %}
+            <td class="add_ons">
+              <span ng-if="cantLine <= 50">{[{value.addons}]}</span>
+            </td>
+          {% elseif field.service_field == 'tele_group' %}
+            <td class="tele_group">
+              <span ng-if="cantLine <= 50 && value.tele_group == null && value.plan_datos == null && value.addons == null">{{menor_fifty}}</span>
+              <span ng-if="cantLine <= 50 && ( value.tele_group != null || value.plan_datos != null || value.addons != null)">{[{value.tele_group}]}</span>
+              <span ng-if="cantLine > 50" >
+                <a class="saldos" href='/{{extra}}?l={[{value.l}]}'>{{show_detail}}</a>
+              <span>
+            </td>
+          {% endif %}
+        {% endfor %}
+      </tr>
+  <!-- End table result-->
+{% endblock %}
+
+{% block table_foot %}
+  <td colspan="{{ fields|length }}">
+    <div class="row">
+      <!-- Paginador -->
+      <div class="col input-field s12 m11">        
+        {{ widgets.paginate() }}
+      </div>
+      <!-- Boton Exportar -->
+      <div class="col input-field s12 m1">
+        {% if export == TRUE %}
+          <a class="export" href="#">{{export_name}}</a>
+        {% endif %}        
+      </div>
+    </div>
+  </td>
+{% endblock %}

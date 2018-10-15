@@ -1,0 +1,75 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block filters_modal_content %}
+  <div class="row">
+    <div class="input-field col s12 m12 l6">
+      {% if title %}
+        <h5 class="title-core">{{ title }}</h5>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block filter_header_form %}
+  <form data-ng-submit="filterLogs()">
+{% endblock %}
+
+{% block validate_filters %}
+  {% if filters is not empty %}
+    <div class="row">
+      <div class="col input-field s12 m12 l12">
+        <button class="right waves-effect waves-light btn btn-primary" type="submit">Aplicar</button>
+        <input type="reset" value="limpiar" class="right btn btn-clear click-filter-reset" ng-click="cleanValues()">
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block modal %}
+{% endblock %}
+
+{% block table_head %}
+  <tr>
+    {% for item in fields %}
+      <th scope="col" ng-click="orderReverse();">
+        {{ item.label }}
+      </th>
+    {% endfor %}
+  </tr>
+{% endblock %}
+{% block table_body %}
+  <tr data-ng-repeat="log in pagedItems[currentPage] | orderBy:predicate:reverse" ng-show="pagedItems.length">
+    <td ng-repeat="(key, value) in log">
+      <div>
+        {[{ value }]}
+      </div>
+    </td>
+  </tr>
+ <tr ng-show="pagedItems.length == 0">
+                    <td colspan="12" id="nofoundop">
+                      {{ 'No hay información disponible.'|t }}
+                    </td>
+                  </tr>
+{% endblock %}
+{% block table_foot %}
+  <td colspan="{{ fields|length }}">
+    <div class="row">
+      <div class="col input-field s12 m9">
+        <!-- Get paginate -->
+        {{ widgets.paginate() }}
+      </div>
+      <div class="col input-field s12 m3">
+        <select name="exportdata" ng-model="data.exportdata" ng-change="exportData(data.exportdata)">
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="csv">CSV</option>
+          <option value="txt">TXT</option>
+          <option value="xls">XLS</option>
+        </select>
+        <label>Exportación</label>
+      </div>
+    </div>
+  </td>
+{% endblock %}
+
+{% block other_content_data %}
+{% endblock %}

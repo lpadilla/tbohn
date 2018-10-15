@@ -1,0 +1,110 @@
+tbo_general.entities_settings:
+  path: '/admin/structure/tbo_entities_settings'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Configuración de entidades'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+tbo_general.content_entities:
+  path: '/admin/structure/tbo_content_entities'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Entidades de tipo contenido'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+tbo_general.config_entities:
+  path: '/admin/structure/tbo_config_entities'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Entidades de tipo configuración'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+tbo_general.modal_form_controller_openModalForm:
+  path: '/admin/config/modal_form/{title}/{form}'
+  defaults:
+    _controller: '\Drupal\tbo_general\Controller\ModalFormController::openModalForm'
+    _title: 'openModalForm'
+  requirements:
+    _permission: 'access content'
+
+tbo_general.company_selector:
+  path: '/admin/config/tbo_general/companyselector'
+  defaults:
+    _form: '\Drupal\tbo_general\Form\CompanySelector'
+    _title: 'CompanySelector'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+tbo_general.company_selector_controller_companySelector:
+  path: '/tbo_general/selector/{uid}'
+  defaults:
+    _controller: '\Drupal\tbo_general\Controller\CompanySelectorController::companySelector'
+    _title: 'companySelector'
+  requirements:
+    _permission: 'access content'
+
+tbo_general.change_environment:
+  path: 'change/environment/{type}'
+  defaults:
+    _controller: '\Drupal\tbo_general\Controller\EnvironmentController::changeEnvironment'
+  requirements:
+    _permission: 'access content'
+
+tbo_general.export_configs:
+  path: '/admin/config/tbo_general/export_config'
+  defaults:
+    _form: '\Drupal\tbo_general\Form\ExportConfigForm'
+    _title: 'ExportConfigForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+tbo_general.settings:
+  path: '/admin/config/tbo/core/settings'
+  defaults:
+    _form: '\Drupal\tbo_general\Form\TboSettingsForm'
+    _title: 'Configuraciones globales Tbo'
+  requirements:
+    _permission: 'access tbo settings'
+  options:
+    _admin_route: TRUE
+
+tbo_general.search_b2b_config_form:
+  path: '/admin/config/tbo_general/search-b2b-config-form'
+  defaults:
+    _form: '\Drupal\tbo_general\Form\SearchB2bConfigForm'
+    _title: 'Configuración del buscador'
+  requirements:
+    _permission: 'access content'
+  options:
+    _admin_route: TRUE
+
+tbo_general.search_b2b:
+  path: 'search-b2b'
+  defaults:
+    _controller: '\Drupal\tbo_general\Controller\tboGeneralController::searchB2b'
+    _title: 'Search b2b'
+  requirements:
+    _permission: 'access content'
+
+tbo_general.settings_help_card:
+  path: '/admin/config/tbo/core/settings/help_card'
+  defaults:
+    _form: '\Drupal\tbo_general\Form\TboHelpCardsForm'
+    _title: 'Configuraciones de textos de ayuda para los formularios'
+  requirements:
+    _permission: 'access tbo settings'
+  options:
+    _admin_route: TRUE

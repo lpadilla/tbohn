@@ -1,0 +1,282 @@
+// Styles for Menus and Navs
+// ----------------------------
+// -------------------------------------------------
+main{
+  clear: both;
+  -webkit-transition: -webkit-transform .15s ease-in-out;
+  transition: transform .15s ease-in-out;
+  position: relative;
+  //border-left: 1px solid $color-line;
+  //min-height: 100%;
+  //height: 100%; quito estos dos elemenots por scroll en el login
+  .container{
+    width: 100%;
+    max-width: 100%;
+    @media #{$large-and-up} {
+      padding-left: 284px;
+    }
+    .box-container{
+      //max-width: 950px;
+    }
+
+  }
+  &.fluid{
+    .container{
+      padding-left: 0px;
+      .box-container{
+        border: none;
+      }
+    }
+
+  }
+  .tbo_main_menu{
+    display: none;
+    position: absolute;
+    //height: 100%;
+    //min-height: 570px;
+    width: 242px;
+    left: 0;
+    //top: 50px;
+    margin: 0;
+   // padding-bottom: 60px;
+    background-color: #fff;
+    z-index: 1;
+    will-change: transform;
+    border-right: 1px solid $color-line;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: -webkit-transform .15s ease-in-out;
+    transition: transform .15s ease-in-out;
+    @media #{$large-and-up} {
+      display: block;
+    }
+    &.open{
+      -ms-transform: translateX(0px);
+      -moz-transform: translateX(0px);
+      -webkit-transform: translateX(0px);
+      -o-transform:translateX(0px);
+      transform: translateX(0px);
+    }
+    &.closed{
+      -ms-transform: translateX(-242%);
+      -moz-transform: translateX(-24%);
+      -webkit-transform: translateX(-242%);
+      -o-transform:translateX(-242%);
+      transform: translateX(-242%);
+    }
+    nav{
+      width: 100%;
+      line-height: inherit;
+      height: auto;
+      border-bottom: 1px solid $color-line;
+      margin-top: 20px;
+      @include box-shadow(0px,0px,0px,0, transparent, true);
+      overflow: hidden;
+      &:last-child{
+        border: none;
+
+      }
+      ul{
+        li{
+          line-height: 30px;
+          width: 100%;
+          background: white;
+        }
+      }
+    }
+    .menu-side{
+      @include box-shadow(0px,0px,0px,0, transparent, true);
+      overflow: hidden;
+      border:none;
+      margin: 0;
+      padding-bottom: 20px;
+      li{
+        padding: 0;
+        margin: 0 0 18px 0;
+        a{
+          padding: 6px 4px 6px 45px;
+          width: 100%;
+          position: relative;
+          font-family: "Roboto", sans-serif;
+          i{
+            height: 0;
+          }
+          .path1,
+          .path2 {
+            position: absolute;
+            left: 15px;
+            margin-top: 0;
+            top: 6px;
+            &:before{
+              font-size: 18px;
+              margin-top: -3px;
+            }
+          }
+          p{
+            margin: 0 0 0 19px;
+            
+          }
+
+
+          /* antiguos icono */
+          &:before{
+            color:$color-text;
+            margin-right: 6px;
+          }
+          &.home{
+            &:before{
+              @include iconos-material('tigouneico','\e95a', 16px, bold);
+            }
+          }
+          &.bill{
+            position: relative;
+            &:before{
+              @include iconos-material('tigouneico','\e915', 16px, bold);
+            }
+            &:after{
+              @include iconos-material('tigouneico','\e914', 16px, bold);
+              position: absolute;
+              left: 11px;
+            }
+          }
+          &.services{
+            &:before{
+              @include iconos-material('tigouneico','\e9bd', 16px, bold);
+            }
+            &:after{
+              @include iconos-material('tigouneico','\e9be', 16px, bold);
+              position: absolute;
+              left: 11px;
+            }
+          }
+          &.technical-support{
+            &:before{
+              @include iconos-material('tigouneico','\e9c5', 16px, bold);
+
+            }
+          }
+          &.complaints{
+            &:before{
+              @include iconos-material('tigouneico','\e92c', 16px, bold);
+
+            }
+          }
+          &.requests-changes{
+            &:before{
+              @include iconos-material('tigouneico','\e9a3', 16px, bold);
+
+            }
+          }
+          &.is-active{
+            background-color: #E1E2E4;
+            color:$blue-tigo;
+
+            &:before, &:after{
+              color:$blue-tigo;
+            }
+
+          }
+          /* antiguos icono fin */
+        }
+        &:hover, &.is-active{
+          a{
+            background-color: #E1E2E4;
+            color:$blue-tigo;
+            font-weight: bold;
+            &:before{
+              color:$blue-tigo;
+            }
+            &:after{
+              color:$blue-tigo;
+            }
+          }
+        }
+        &.expanded.active{
+          a{
+            background-color: transparent;
+            color:#707682;
+          }
+        }
+        &.is-active{
+          ul.submenu{
+            li{
+              a{
+                background-color: transparent;
+                font-weight: normal;
+                color:#707682;
+              }
+            }
+          }
+          .collapsible-body{
+            //display: block !important;
+          }
+        }
+        .collapsible-header{
+          border: none;
+          width: 100%;
+          min-height: auto;
+          &:before {
+            //@include iconos-material('Material Icons', 'chevron_right', 16px, bold);
+            @include iconos-material('tigouneico', '\e92b', 16px, bold);
+            float: right;
+            color:$cyan-tigo;
+            position: relative;
+            z-index: 10;
+            top: 6px;
+          }
+          &.open, &.active{
+            background-color: #E0E2E4;
+            > a{
+              color:$blue-tigo;
+              font-weight: bold;
+              &:before, &:after{
+                color:$blue-tigo;
+              }
+              collapsible-body{
+                display: block;
+              }
+
+            }
+            &:before {
+              //@include iconos-material('Material Icons', 'expand_more', 16px, bold);
+              @include iconos-material('tigouneico', '\e928', 16px, bold);
+              color:$cyan-tigo;
+            }
+          }
+        }
+        .collapsible-body{
+          border: none;
+        }
+        ul.submenu{
+          width: 100%;
+          clear: both;
+          li{
+            border-bottom: 1px solid $color-line;
+            margin: 0;
+            a{
+              padding: 8px 4px 8px 52px;
+              min-height: 30px;
+              width: 100%;
+              &:hover, &.active{
+                color:$blue-tigo;
+              }
+            }
+            &:hover, &.active{
+              a{
+                background-color: transparent;
+                color:$blue-tigo;
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+      &:last-child{
+        padding-bottom: 0;
+      }
+    }
+    .box-menu-mobile{
+      display: none;
+    }
+  }
+}

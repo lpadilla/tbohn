@@ -1,0 +1,61 @@
+<div id="block-card" class="form-manage-credit-cards">
+  <h2 class="title-modal"> {{ data_popup_cards.title }} </h2>
+  <div class="cardsBlock">
+    {% if cards|length == 0 %}
+      <div class="cardRow">
+        {{ 'No posee tarjetas en el momento.'|t }}
+      </div>
+    {% else %}
+      {% for card in cards %}
+        <div class="cardRow">
+          <!--<i class="material-icons prefix card-icons col s4"></i>-->
+          <div class="box-mycard">
+            <i class="prefix icon-{{card.cardBrand | lower}}">
+              <span class="path1"></span>
+            </i>
+            <span class="number-card">**** **** ***** {{card.cardInfo}}</span>
+            {% if data_popup_cards.delete_way == 'outBlock' %}
+              <a class="pop-up-button segment-click" href="#external-delete-card" ng-click="setIndex('{{card.cardToken}}', '{{card.cardBrand}}', '{{card.cardInfo}}')"
+                 data-segment-event="TBO - Opciones Mis Tarjetas" data-segment-properties='{"category":"Pago automático","label":"Inicio Eliminar tarjeta - {[{ enviroment }]}"}'>
+                <i class="prefix icon-bin-cyan">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>
+              </a>
+            {% else %}
+              <a class="pop-up-button segment-click" href="#internal-delete-card" ng-click="setIndex(card.token, card.brand, card.number)"
+                 data-segment-event="TBO - Opciones Mis Tarjetas" data-segment-properties='{"category":"Pago automático","label":"Inicio Eliminar tarjeta - {[{ enviroment }]}"}'>
+                <i class="prefix icon-bin">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="internal-delete-card" class="modal">
+    <div class="modal-content">
+      {# Add preloading to pop up #}
+      <div class="preloadingContainer preloading-set-up" style="display: block;">
+        <div class="preloadingData" style="display: flex;">
+          <svg class="spinner" width="100%" height="100%" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+          </svg>
+        </div>
+      </div>
+      <h1>{{ 'Eliminar Tarjeta'|t }}</h1>
+      <p>{{ 'Al eliminar esta tarjeta de crédito cancela los pagos recurrentes a las facturas asociadas.'|t }}</p>
+      <p>{{ 'Deberá realizar los pagos de sus facturas por otros medios de pago.'|t }}</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="waves-effect waves-green btn-flat btn btn-second segment-click" ng-click="deleteCard()" data-segment-event="TBO - Eliminar Tarjeta - Tx" data-segment-properties='{ "category": "Pago automático", "label": "Aceptar - {[{ enviroment }]}", "site": "NEW" }'>ACEPTAR</a>
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat btn btn-second close-manage-cards-delete segment-click"  data-segment-event="TBO - Eliminar Tarjeta - Tx" data-segment-properties='{ "category": "Pago automático", "label": "Cancelar - {[{ enviroment }]}", "site": "NEW" }' >CANCELAR</a>
+    </div>
+  </div>
+
+</div>

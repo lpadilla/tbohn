@@ -1,0 +1,5 @@
+name: TBO General
+type: module
+description: Modulo con todas las funciones transverales a los demas modulos de tbo
+core: 8.x
+package: TBO

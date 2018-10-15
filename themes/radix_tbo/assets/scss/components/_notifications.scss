@@ -1,0 +1,147 @@
+.w-img-notif{
+  width: 30px;
+}
+.num-notif{
+  color: #FFFFFF;
+  margin: 0;
+  position: absolute;
+  z-index: 100;
+  float: right;
+  top: 14px;
+  background: #D8262E;
+  margin-left: 10px;
+  border-radius: 50px;
+  width: 14px;
+  height: 14px;
+  text-align: center;
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: bold;
+  padding-top: 0.4px;
+  padding-left: 0.7px;
+}
+.notif-img{
+  width: 30px;
+  float: left;
+  margin-top: 3px;
+}
+.not-block{
+  width: 25px;
+  height: 25px;
+  background: $red-tigo;
+  text-align: center;
+  border-radius: 50px;
+  line-height: 24px;
+  font-size: 14px;
+  color: white;
+  float: left;
+  margin: -5px 10px 0 0 !important;
+}
+.not-title{
+ height: 40px;
+}
+.not-title strong{
+  margin: 7px 0 10px 10px;
+  color: $text-input;
+  text-transform: uppercase;
+}
+#not_dropdown .field-type-image{
+width: 45px !important;
+}
+@media #{$medium-and-up}{
+  #not_dropdown {
+    width: 450px;
+    max-height: 350px;
+    min-height: 223px;
+    overflow-y: auto;
+    margin-top: 55px !important;
+    white-space: normal !important;
+    right: 0;
+    margin-right: 10px;
+  }
+  #not_dropdown .row{
+    max-height: 150px;
+  }
+  #not_dropdown .row p{
+    margin: 0;
+  }
+}
+#not_dropdown{
+  position: absolute;
+  display: none;
+  z-index: 100;
+  background: $gray6-tigo;
+  border: 1px solid $gray1-tigo;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+@media #{$medium-and-down}{
+  #not_dropdown{
+    width: 300px !important;
+    max-height: 350px;
+    overflow-y: auto;
+    margin-top: 55px !important;
+    left: 15px !important;
+  }
+  #not_dropdown .row{
+    max-height: 300px;
+  }
+  #not_dropdown .title-invoice-type{
+    display: block !important;
+  }
+  .icon-help-cyan{
+    float: left;
+    margin-left: 10px;
+  }
+  #modal-verified-account, #modal-last_send-verified{
+    top: 10% !important;
+  }
+  #modal-verified-account{
+    height: 300px;
+  }
+  .num-notif{
+    padding-top: 0.7px !important;
+    padding-left: 0.7px;
+  }
+
+}
+.not-cant{
+  display: block;
+  background-color: #dde1e4;
+  border-bottom: 1px solid #CDCDCD;
+  font-size: 18px;
+  line-height: 16px;
+  font-weight: 400;
+  padding: 12px 6px 14px 18px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 40px !important;
+  margin: 0;
+  color: black
+}
+
+#modal-verified-account, #modal-last_send-verified{
+  top: 30% !important;
+}
+ #modal-last_send-verified p a{
+  color: $cyan2-tigo !important;
+}
+#modal-verified-account p a{
+  color: $cyan2-tigo !important;
+}
+#modal-verified-account .btn-primary, #modal-last_send-verified .btn-primary{
+  color: white !important;
+}
+
+p strong{
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+//formulario
+#update-cel-number, #update-user-name{
+  margin-bottom: 2px !important;
+}
+.form-item-cel-number #status_pass{
+  line-height: 13px !important;
+
+}

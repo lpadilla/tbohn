@@ -1,0 +1,42 @@
+div.radius{
+	border-radius: 4px;
+}
+i.mg-left{
+	margin-left: 12px;
+}
+p.data-invoices{
+	font-size:20px;
+	color:#00377b;
+	font-weight:400;
+}
+
+p.p-fact{	
+	font-size: 16px;
+    font-weight: bold;
+    color: #00377b;
+}
+
+p.p-text{
+	font-size: 16px;
+    color: #00377b;
+	font-weight:400;
+}
+
+span.replace {
+    font-size: 14px;
+    color: #a8abb2;
+    font-weight: 500;
+}
+
+div.pad-right{
+	padding-right: 40px;
+}
+
+div.pad-tb{
+	padding-bottom: 25px;
+    padding-top: 10px;
+}
+
+button.mg-top{
+	margin-top: 20px;
+}

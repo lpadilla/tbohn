@@ -1,0 +1,14 @@
+{
+  "name": "drupal/tbo_account",
+  "type": "drupal-module",
+  "description": "Tbo Management",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/tbo_account",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/tbo_account",
+    "source": "http://cgit.drupalcode.org/tbo_account"
+  },
+  "require": { }
+}

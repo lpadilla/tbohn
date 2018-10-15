@@ -1,0 +1,6 @@
+tbo_atp.appointment_invlice_translation:
+  title: 'TBO ATP - Configuraciones'
+  route_name: tbo_atp.appointment_invoice
+  description: 'TBO ATP - Configuraciones'
+  parent: system.admin_config_system
+  weight: 99

@@ -1,0 +1,35 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_data %}
+<div id="container_invitation" class="container_invitation wrapper-create" ng-init="uuid='{{ uuid }}'">
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+  {% block other_content_data %}
+    {% set category = '' %}
+    {% for item in fields %}
+      {% set data = item.service_field %}
+      {% if item.service_field == 'icon' %}
+        <img src="{{ popup[data] }}" />
+      {% elseif item.service_field == 'description' %}
+        <div class="description">
+          {{ popup[data] | raw }}
+        </div>
+      {% else %}
+        {% set category = popup[data]  %}
+        <span class="title">{{ popup[data] }}</span>
+      {% endif %}
+    {% endfor %}
+    <div class="buttons">
+      {% for action in popup.actions %}
+        {% if action.label != '' %}
+          <a class="waves-light waves-effect btn {{ action.class }}  segment-click" data-segment-event="TBO - {{ action.label  }} - Tx"
+             data-segment-properties='{"category":"Dashboard","label":"{% if action.label == 'Te llamamos' %}{{ category }} - {{ popup.typeCategory }}{% else %}{{ category }}{% endif %}","site":"NEW"}'
+             href="{{ action.url }}" target="{{ action.target }}">{{ action.label }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+</div>
+{% endblock %}

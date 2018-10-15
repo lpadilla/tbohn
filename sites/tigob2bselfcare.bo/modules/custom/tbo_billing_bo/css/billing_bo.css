@@ -1,0 +1,127 @@
+.box-body{
+	width: 95% !important;
+}
+
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav{
+	box-shadow: none !important;
+}
+
+.card{
+	border-bottom: none !important;
+}
+
+.upcardfact{
+	margin-bottom: 10px;
+}
+.block-contracts .card-icon {   
+    top: 13px;
+}
+
+
+.col-lineas,.col-contract,.col-deuda{
+	float: left;
+}
+
+.col-contract,.col-lineas{
+	width: 15%;
+}
+.col-deuda{
+	width: 20%;
+}
+.back-button{
+	padding: 16px 0;
+    position: relative;
+    margin: 0;
+    border-bottom: 1px solid #8B99B6 !important;
+}
+.flecha-areaa{
+	width: 5.33333% !important;
+}
+
+@media only screen and (max-width: 500px){
+	.arrow_tf{
+		margin-left: 0px!important;
+		padding-left: 15px!important;
+	}
+}
+
+@media only screen and (min-width: 501px) and (max-width: 1250px){
+	.arrow_tf{
+		margin-left: -10px!important;
+		padding-left: 0px!important;
+	}
+}
+
+@media only screen and (min-width: 1251px){
+	.arrow_tf{
+		margin-left: -50px!important;
+		margin-top: 3px!important;
+	}
+}
+
+
+
+.return-arrow {
+    color: #00377B;
+}
+
+@media only screen and (max-width: 500px){
+	.col-contract{
+		width: 75%;
+		height: 50px;
+	}
+	.col-lineas{
+		width: 22%;
+	}
+	.col-deuda{
+		width: 40%;
+	}
+}
+
+div.return.rr{
+    margin-top: -62px !important;
+}
+
+a.title-card{
+	font-size: 14px!important;
+}
+
+a.export{
+	color: #00377B;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+a.saldos{
+	color: #00377B;
+	font-size:14px;
+	font-weight: 400;
+}
+a.numlinea{
+	color: #00377B;
+	font-size:18px;
+	font-weight: 400;
+}
+
+div.table_head_line{
+	height:30px;
+	border-bottom: 1px solid;
+	border-color:#879ab8;
+}
+
+div.width-100{
+	width: 100% !important;
+}
+
+div.left-auto{
+	left: auto !important;
+}
+
+div.col-lineas>p.del-up.ng-binding, div.col-deuda>p.del-up.ng-binding {
+	font-weight: 500;
+}
+
+.messages.alert-danger {
+    color: white;
+    font-weight: 500
+}

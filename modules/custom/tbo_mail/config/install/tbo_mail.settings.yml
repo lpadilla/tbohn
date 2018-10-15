@@ -1,0 +1,16 @@
+social_networks:
+  facebook_url: ''
+  youtube_url: ''
+  twitter_url: ''
+  instagram_url: ''
+disassociate_mail:
+  body:
+    value: '<table align="center" cellpadding="0" cellspacing="0" style="font-family: Arial, Helvetica;" width="550px"><tbody><tr> <td colspan="2"><div style="background: rgb(0, 46, 110); padding:20px 10px;"> <div><img alt="logo" src="[tbo_mail:logo]" /></div> </div> </td> </tr> <tr> <td colspan="2" style="padding-top:30px"> <h1 style="margin:10px; font-size: 32px; color:rgb(0, 46, 110); background-color: inherit; text-transform: capitalize; font-weight: initial;">Hola [tbo_mail:username]!</h1> </td> </tr> <tr> <td colspan="2" style="color:#666; padding-bottom:30px;"> <div style="margin: 10px; color:#666; font-size:0.9em;">&nbsp;</div><div style="margin: 10px; color:#666; font-size:0.9em;">La línea [tbo_mail:msisdn] ha sido removida de su cuentaaa.</div><div style="margin: 10px; color:#666; font-size:0.9em;"> <div style="padding:0.2em 0;">Atentamente</div><div style="padding:0.2em 0;">El Equipo de Tigo</div> </div> </td> </tr> <tr style="background: rgb(0, 46, 110);"> <td style="vertical-align:middle;" width="60%"> <div style="margin: 0 0 0 10px;"> <div style="margin: 10px 10px 0 0; float:left;"> <p style="font-size:0.9em; color: rgb(201, 223, 254); margin: 0; font-family: inherit;">Siguenos en:</p> </div><div style="max-height: 40px; overflow: hidden; margin: 20px 0;"><a href="[tbo_mail:facebook_url]" target="_blank"><img alt="Facebook" src="http://tigoselfcareregional-stg-sv.tigocloud.net/modules/custom/tbo_mail/images/comunidad-facebook.png" /> </a>&nbsp; <a href="[tbo_mail:twitter_url]" target="_blank"> <img alt="Twitter" src="http://tigoselfcareregional-stg-sv.tigocloud.net/modules/custom/tbo_mail/images/comunidad-twitter.png" /> </a>&nbsp; <a href="[tbo_mail:youtube_url]" target="_blank"> <img alt="Youtube" src="http://tigoselfcareregional-stg-sv.tigocloud.net/modules/custom/tbo_mail/images/comunidad-youtube.png" /> </a>&nbsp; <a href="[tbo_mail:instagram_url]" target="_blank"> <img alt="Instagram" src="http://tigoselfcareregional-stg-sv.tigocloud.net/modules/custom/tbo_mail/images/comunidad-instagram.png" /> </a></div> </div> </td> <td align="right" style="vertical-align:midle;" width="40%"> <div style="margin: 0 10px 0 0"> <p style="font-size:0.9em; color: rgb(201, 223, 254); margin: 0; font-family: inherit;">Visita <a href="[site:url]" style="color: rgb(67, 199, 244); text-decoration: none;" target="_blank" title="Visita [site:name]"> [site:name] </a></p> </div> </td> </tr></tbody></table>'
+  subject: 'Su cuenta ha sido modificada'
+images:
+  logo: ''
+update_user_info:
+  subject: 'Actualización datos de cuenta'
+  body:
+    value: "<p>Hola,</p>\r\n\r\n<p>Se han actualizado los datos de la cuenta asociada al correo [tbo_mail:admin_mail]</p>\r\n\r\n<p><a href=\"[site:url]\">[site:url-brief]</a></p>\r\n\r\n<p>Gracias,</p>\r\n\r\n<p>[site:name]</p>\r\n"
+    format: full_html

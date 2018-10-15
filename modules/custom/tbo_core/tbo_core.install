@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for TBO Core module.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_update_N().
+ */
+function tbo_core_update_8101() {
+  $tableSpecification = [
+    'description' => 'Table to store extra Admin (Errors) information for the Audit Logs',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'audit_log_id' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'unsigned' => TRUE,
+        'size' => 'normal',
+      ],
+      'roles' => [
+        'type' => 'varchar',
+        'length' => '200',
+        'not null' => TRUE,
+      ],
+      'error_code' => [
+        'type' => 'varchar',
+        'length' => '500',
+        'not null' => TRUE,
+      ],
+      'error_message' => [
+        'type' => 'varchar',
+        'length' => '500',
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+  $schema = Database::getConnection()->schema();
+  $schema->createTable('admin_audit_log', $tableSpecification);
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function tbo_core_update_8102() {
+  \Drupal::entityDefinitionUpdateManager()->applyUpdates();
+}

@@ -1,0 +1,14 @@
+{
+  "name": "drupal/selfcare_gtm",
+  "type": "drupal-module",
+  "description": "Google Tag Manager",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/selfcare_gtm",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/selfcare_gtm",
+    "source": "http://cgit.drupalcode.org/selfcare_gtm"
+  },
+  "require": { }
+}

@@ -1,0 +1,37 @@
+services:
+  # CurrentInvoiceHnBlock
+  tbo_billing_hn.current_invoice_hn_block:
+    class: Drupal\tbo_billing_hn\Plugin\Config\CurrentInvoiceHnBlockClass
+    arguments: []
+  tbo_billing_hn.current_invoice_hn_logic:
+    class: Drupal\tbo_billing_hn\Services\CurrentInvoiceHnService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  # ServicePortfolioHnBlock
+  tbo_billing_hn.service_portfolio_hn_block:
+    class: Drupal\tbo_billing_hn\Plugin\Config\ServicePortfolioHnBlockClass
+    arguments: []
+
+  tbo_billing_hn.service_portfolio_hn_block_logic:
+    class: Drupal\tbo_billing_hn\Services\ServicePortfolioHnService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+  
+  # InvoiceHistoryHnBlock
+  tbo_billing_hn.invoice_history_hn_block:
+    class: Drupal\tbo_billing_hn\Plugin\Config\Block\InvoiceHistoryHnBlockClass
+    arguments: []
+  
+  #InvoiceHistoryHnRestService
+  tbo_billing_hn.invoice_history_hn_rest:
+    class: Drupal\tbo_billing_hn\Services\InvoiceHistoryRestHnService
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+  
+  #BillingSummaryHnBlock
+  tbo_billing_hn.billing_summary_hn_block_class:
+    class: Drupal\tbo_billing_hn\Plugin\Config\Block\BillingSummaryHnBlockClass
+    arguments: ["@tbo_general.tbo_config","@tbo_api.client"]
+
+  # CreateMessageBlock
+  tbo_billing_hn.create_message_block:
+    class: Drupal\tbo_billing_hn\Plugin\Config\Block\CreateMessageBlockClass
+    arguments: []

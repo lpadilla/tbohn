@@ -1,0 +1,22 @@
+add audit log entity entities:
+  title: 'Create new Audit log entity entities'
+
+administer audit log entity entities:
+  title: 'Administer Audit log entity entities'
+  description: 'Allow to access the administration form to configure Audit log entity entities.'
+  restrict access: true
+
+delete audit log entity entities:
+  title: 'Delete Audit log entity entities'
+
+edit audit log entity entities:
+  title: 'Edit Audit log entity entities'
+
+access audit log entity overview:
+  title: 'Access the Audit log entity overview page'
+
+view published audit log entity entities:
+  title: 'View published Audit log entity entities'
+
+view unpublished audit log entity entities:
+  title: 'View unpublished Audit log entity entities'

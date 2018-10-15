@@ -1,0 +1,4 @@
+services:
+  tbo_api_bo.client:
+    class: Drupal\tbo_api_bo\TboApiBoClient
+    arguments: ['@adf_rest_api.client']

@@ -1,0 +1,7 @@
+name: TBO Account
+type: module
+description: TBO Account Management
+core: 8.x
+package: TBO
+dependencies:
+  - tbo_general

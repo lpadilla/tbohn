@@ -1,0 +1,5 @@
+services: 
+  # SystemLogsBoBlock
+  tbo_core_bo.system_logs_block_bo:
+    class: Drupal\tbo_core_bo\Plugin\Config\Block\SystemLogsBoBlockClass
+    arguments: []

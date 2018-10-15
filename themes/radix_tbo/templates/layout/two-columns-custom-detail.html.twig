@@ -1,0 +1,32 @@
+<div class="box-body">
+    <div class="row layout-tbo">
+
+      {% if content.header_detail %}
+          <div class="top-region col s12">
+            {{ content.header_detail }}
+          </div>
+      {% endif %}
+
+      {% if content.left_detail or content.right_detail %}
+          <div class="region-content-detail col s12">
+            {% if content.left_detail %}
+                <div class="left-region col s12 l6">
+                  {{ content.left_detail }}
+                </div>
+            {% endif %}
+            {% if content.right_detail %}
+                <div class="right-region col s12 l6">
+                  {{ content.right_detail }}
+                </div>
+            {% endif %}
+          </div>
+      {% endif %}
+
+      {% if content.footer_detail %}
+          <div class="inner-region col s12">
+            {{ content.footer_detail }}
+          </div>
+      {% endif %}
+
+    </div>
+</div>

@@ -1,0 +1,8 @@
+name: tbo_mail
+type: module
+description: Customizacion para envio de correos del sitio
+core: 8.x
+package: Custom
+dependencies:
+  - smtp
+  - mailsystem

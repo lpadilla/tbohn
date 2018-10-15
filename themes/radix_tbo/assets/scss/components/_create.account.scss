@@ -1,0 +1,66 @@
+/***** cree su cuenta ***/
+.block-form-account{
+  max-width: 472px;
+  //margin: 46px auto 0;
+  padding-top:23px;
+  margin: 0 auto;
+  form{
+    .select-wrapper{
+      &:before{
+        display: none;
+      }
+    }
+  }
+}
+
+.block-form-user{
+  margin-top: 46px;
+  form{
+    .select-wrapper{
+      &:before{
+        display: none;
+      }
+    }
+  }
+}
+
+.field-document-type,
+.field-document-number,
+.field-contract-number,
+.field-referent-payment{
+  position: relative;
+  .help-form{
+    position: absolute;
+    right: 13px;
+    top: 0;
+    width: 24px;
+    .prefix{
+      position: relative;
+      display: block;
+      height: 42px;
+    }
+    .icon-help-cyan{
+      .path1{
+        &:before{
+          color:$cyan-tigo;
+        }
+      }
+      .path2{
+        &:before{
+          color:$cyan-tigo;
+        }
+      }
+    }
+  }
+}
+.items{
+  .field-document-type{
+    padding-left: 0;
+  }
+  .field-document-number{
+    padding-right: 0;
+  }
+}
+#box-create-user card{
+  margin-top: 30px;
+}

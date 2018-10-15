@@ -1,0 +1,9 @@
+name: TBO Billing BO
+type: module
+description: Tbo - Billing para Bolivia
+core: 8.x
+version: 0.24
+package: TBO
+dependencies:
+  - tbo_billing
+  - tbo_general

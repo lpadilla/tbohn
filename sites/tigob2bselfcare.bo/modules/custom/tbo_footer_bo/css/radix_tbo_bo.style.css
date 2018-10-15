@@ -1,0 +1,139 @@
+
+/*  Movil  */
+	.soluciones{
+		float: left;
+		width: 100%;
+		height: 150px;
+		margin-top: -10px;
+	}
+	.soluciones .title-soluciones{
+		float: left;
+		width: 100%;
+		height: 30%;
+	}
+	.soluciones .title-soluciones span{
+		font-size: 1em;
+		color: gray;
+		float: left;
+		line-height: 50px;
+		padding-left: 1em;
+	}
+	.soluciones .icons-soluciones{
+		float: left;
+		width: 100%;
+		height: 65%;
+	}
+	.soluciones .icons-soluciones .icon-area{
+		width: 45%;
+		float: left;
+		margin: 0px 5px;
+		padding-left: 10px;
+		height: 50%;
+	}
+	.soluciones .icons-soluciones .icon-area img{
+		width: 38px;
+		height: 25px;
+		float: left;
+		margin-top: 8px;
+	}
+	.soluciones .icons-soluciones .icon-area span{
+		float: left;
+		padding: 12px 0px 12px 10px;
+		font-size: 16px;
+		color: #767676;
+		height: 50px;
+	}
+	footer, .push {
+	    height: 14em !important;
+	    display: none;
+	}
+	footer .container .block--nuestrassolucionesbo {
+	    float: left;
+	    width: 100%;
+	}
+
+
+@media only screen and (max-width: 500px){
+	footer, .push {
+	    display: block !important;
+	}
+	.block--redessociales, .block--redessocialesgeneral{
+		display: none;
+	}
+
+	footer .container .block--logofooterb2b,footer .container .block--radix-tbo-bo-logofooterb2b  {
+	    float: left;
+	    margin-right: 14px;
+	    width: 40%;	    
+	    margin-left: 10px;
+	}
+	.block--logofooterb2b .block__content a img,  .block--radix-tbo-bo-logofooterb2b .block__content a img{
+	width: 100%;
+	}
+	footer .container .block--copyright {
+	    float: left;
+	    width: 52%;
+	}
+	footer .container .block--copyright p {
+    margin-top: 0px; 
+    font-size: 10px;
+	}
+}
+
+/* DESKTOP */
+@media only screen and (min-width: 993px){
+	.block--redessociales,.block--redessociales{
+		display: block;
+	}
+	.soluciones{
+		float: left;
+		width: 100%;
+		height: 80px;
+		margin-top: -10px;
+	}
+	.soluciones .title-soluciones{
+		float: left;
+		width: 30%;
+		height: 100%;
+	}
+	.soluciones .title-soluciones span{
+		font-size: 1.2em;
+		color: gray;
+		float: right;
+		line-height: 80px;
+	}
+	.soluciones .icons-soluciones{
+		float: left;
+		width: 70%;
+	}
+	.soluciones .icons-soluciones .icon-area{
+		width: 20%;
+		float: left;
+		margin: 20px 5px;
+		padding-left: 10px;
+		height: 0%;
+	}
+	.soluciones .icons-soluciones .icon-area img{
+		width: 50px;
+		height: 45px;
+		padding: 5px;
+		float: left;
+		padding: 0px;
+		margin-top: 0px;
+	}
+	.soluciones .icons-soluciones .icon-area span{
+		float: left;
+		padding: 12px 0px 12px 10px;
+		font-size: 16px;
+		color: #767676;
+		height: 50px;
+	}
+	footer, .push {
+	    height: 10em !important;
+	    display: block !important;
+	}
+	footer .container .block--nuestrassolucionesbo {
+	    float: left;
+	    width: 100%;
+	}
+}	

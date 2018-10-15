@@ -1,0 +1,7 @@
+name: TBO Entities HN
+type: module
+description: TBO entities HN
+core: 8.x
+package: TBO
+dependencies:
+- tbo_entities

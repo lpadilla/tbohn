@@ -1,0 +1,40 @@
+.picker__box{
+   background: #EFF1F2;
+  .picker__date-display{
+    background-color: #00377B;
+    .picker__weekday-display{
+      background-color: #EFF1F2;
+      color:#777;
+    }
+  }     
+  .picker__calendar-container{
+    table{
+      .picker__day.picker__day--today{
+        color: #43C7F4;
+      }
+      .picker__day.picker__day--today.picker__day--selected{
+        color: white;
+      }
+      .picker__day--selected,
+      .picker__day--selected:hover,
+      .picker--focused .picker__day--selected{
+         background-color: #43C7F4;
+      }
+    }
+    .picker__nav--prev{
+      &:before{
+        //border-right: 0.75em solid #43C7F4;
+      }
+    }
+    .picker__nav--next{
+      &:before{
+        //border-left: 0.75em solid #43C7F4;
+      }
+    }
+  }
+  .picker__footer{
+    .picker__today, .picker__close{
+      color: #00377B;
+    }
+  }
+}

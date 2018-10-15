@@ -1,0 +1,9 @@
+name: tbo_mail_bo
+type: module
+description: Customizacion para envio de correos del sitio Bolivia
+core: 8.x
+package: Custom
+dependencies:
+  - smtp
+  - mailsystem
+  - tbo_mail

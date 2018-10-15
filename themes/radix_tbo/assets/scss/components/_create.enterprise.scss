@@ -1,0 +1,20 @@
+.wrapper-create{
+  .enterprise-modal-form{
+    @media #{$large-and-up} {
+      float: right;
+    }
+    form{
+
+    }
+  }
+  .data{
+    table.responsive-table{
+      thead tr th, tbody tr td{
+        @media #{$medium-and-up}{
+          //max-width: 51px;
+          //width: 25%;
+        }
+      }
+    }
+  }
+}

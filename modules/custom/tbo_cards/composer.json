@@ -1,0 +1,14 @@
+{
+  "name": "drupal/tbo_cards",
+  "type": "drupal-module",
+  "description": "Tbo Cards",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/tbo_cards",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/tbo_cards",
+    "source": "http://cgit.drupalcode.org/tbo_cards"
+  },
+  "require": { }
+}

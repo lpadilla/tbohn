@@ -1,0 +1,7 @@
+tigoapi.batch:
+  version: 1.x
+  js:
+    js/factory/apiBatch.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings

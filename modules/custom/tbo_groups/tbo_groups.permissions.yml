@@ -1,0 +1,23 @@
+view group entity:
+  title: 'View Group entity'
+add group entity:
+  title: 'Add Group entity'
+edit group entity:
+  title: 'Edit Group Entity'
+delete group entity:
+  title: 'Delete Group entity'
+administer group entity:
+  title: 'Administer Group entity'
+  restrict access: TRUE
+
+view group_account_relations entity:
+  title: 'View Group account_relations entity'
+add group_account_relations entity:
+  title: 'Add Group account_relations entity'
+edit group_account_relations entity:
+  title: 'Edit Group account_relations Entity'
+delete group_account_relations entity:
+  title: 'Delete Group account_relations entity'
+administer group_account_relations entity:
+  title: 'Administer Group account_relations entity'
+  restrict access: TRUE

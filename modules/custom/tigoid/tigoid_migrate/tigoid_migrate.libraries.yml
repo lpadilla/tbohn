@@ -1,0 +1,16 @@
+tigoid_migrate:
+  version: 1.x
+  js:
+    js/tigoid_migrate.js: {}
+login:
+  version: 1.x
+  js:
+    js/login_form.js: {}
+
+update_account:
+  version: 1.x
+  css:
+      theme:
+        css/update_account.css: {weight: -10}
+  js:
+    js/update_account.js: {}

@@ -1,0 +1,87 @@
+.block--sms-consumption-history, .mobile-call-history, .mobile-call-history-chart, .line-filters {
+  .button-wrapper {
+    @media #{$medium-and-down} {
+      float: right;
+    }
+  }
+  .btn-second {
+    margin: 0;
+    @media #{$medium-and-up} {
+      margin-top: 13px;
+    }
+  }
+  .informative-text-days span {
+    font-size: 12px;
+    font-weight: 400;
+    color: $text-description;
+    line-height: 16px;
+  }
+}
+tr.empty-message {
+  border: none !important;
+}
+.sms-informative-text, .voice-informative-text {
+  margin: -20px auto 20px;
+}
+
+.consumption-table {
+  &.table-mobile {
+    @media #{$medium-and-up} {
+      display: none;
+    }
+    @media #{$medium-and-down} {
+      display: table;
+    }
+  }
+  &:not(.table-mobile) {
+    @media #{$medium-and-up} {
+      display: table;
+    }
+    @media #{$medium-and-down} {
+      display: none;
+    }
+  }
+  @media #{$medium-and-up} {
+    thead, tbody {
+      .col-mobile {
+        display: none;
+      }
+    }
+  }
+  @media #{$medium-and-down} {
+    thead, tbody {
+      .col-mobile {
+        display: table-cell;
+      }
+    }
+  }
+  .pagination {
+    text-align: center;
+  }
+}
+.download-data {
+  &-wrapper {
+    display: flex;
+    @media #{$small-and-down} {
+      flex-direction: column;
+    }
+  }
+  &-text {
+    flex: 1;
+    padding-right: 15px;
+  }
+  &-button {
+    align-self: flex-end;
+    text-align: right;
+  }
+  @media #{$small-and-down} {
+    .download-data {
+      &-wrapper {
+        flex-direction: column;
+      }
+      &-text {
+        padding-right: 0;
+      }
+    }
+  }
+}

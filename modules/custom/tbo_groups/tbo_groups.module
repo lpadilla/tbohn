@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_groups.module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_groups_theme($existing, $type, $theme, $path) {
+  return [
+    'groups_list' => [
+      'variables' => [
+        'uuid' => NULL,
+        'config' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'form' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--groups-list',
+    ],
+  ];
+}

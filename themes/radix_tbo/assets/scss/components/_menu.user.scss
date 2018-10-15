@@ -1,0 +1,503 @@
+header{
+  #account_dropdown{
+    max-width: 308px;
+    min-width: 308px;
+    right: 22px;
+    left: inherit!important;
+    margin-top: 14px;
+    padding-top: 23px;
+    background-color: $dropdown-hover-background;
+    padding-bottom: 0px;
+    .click + .dropdown-content{
+      display:block;
+      opacity: 1;
+
+    }
+  }
+  #slide-out{
+    width: 308px;
+    right: 22px;
+    margin-top: 14px;
+    padding-top: 23px;
+    background-color: $dropdown-hover-background;
+    padding-bottom: 0px;
+  }
+  ul.menu-useraccount, ul.side-nav.menu-useraccount{
+    li {
+      position: relative;
+      color: $blue-tigo;
+      font-weight: $medium;
+      font-size: 14px;
+      line-height: 16px;
+      text-transform: capitalize;
+      margin-bottom: 9px;
+      padding: 4px 0px 4px 0px;
+      min-height: 30px;
+      a {
+        padding:8px 8px 8px 30px;
+        position: relative;
+        color: $blue-tigo;
+        font-size: 14px;
+        font-weight: $medium;
+        line-height: 14px;
+        height: 30px;
+        position: relative;
+        font-family: "Roboto", sans-serif !important;
+        font-weight: 400;
+        &.nivel-one{
+          &:before {
+            @include iconos-material('tigouneico','\e92b', 20px, bold);
+            top: 7px;
+            right: 2px;
+            left: auto;
+            color: #00C8FF;
+            position: absolute;
+            font-weight: normal;
+          }
+        }
+        &.click{
+          &:before {
+            display: none;
+          }
+          &::after {
+            @include iconos-material('tigouneico','\e928', 20px, bold);
+            top: 9px;
+            right: 0px;
+            left: auto;
+            position: absolute;
+            color: $cyan-tigo;
+            font-weight: normal;
+          }
+        }
+        span{
+          position: absolute;
+          left: 24px;
+          top: -8px;
+        }
+        .menu-account-title{
+          font-family: "Roboto", sans-serif;
+          position: relative;
+          left: 0;
+          top: 2px;
+          color: $blue-tigo;
+        }
+        line-height: 21px;
+        //height: 30px;
+        height: 37px;
+        font-family: "Roboto", sans-serif;
+        .prefix{
+          float: left;
+          margin-right: 19px;
+          position: relative;
+          height: 20px;
+          width: 20px;
+          .path1,.path2{
+            margin: 0;
+            left: 0;
+          }
+        }
+
+        &.estado-cuenta,
+        &.perfiles,
+        &.alertas,
+        &.documentos,
+        &.tarjetas,
+        &.soporte {
+          position: relative;
+          &:before,
+          &:after {
+            position: absolute;
+          }
+        }
+        &.estado-cuenta {
+          &:before,
+          &:after {
+            left: 26px;
+          }
+          &:before {
+            @include iconos-material('tigouneico','\e925', 20px, bold);
+            top: 0.324em;
+            left: 1.2em;
+          }
+          &:after {
+            @include iconos-material('tigouneico','\e924', 20px, bold);
+            top: 4px;
+          }
+        }
+        &.perfiles {
+          &:before {
+            @include iconos-material('tigouneico','\e9e2', 25px, bold);
+            top: 2px;
+            left: .95em;
+          }
+        }
+        &.alertas {
+          &:before,
+          &:after {
+            left: 25px;
+          }
+          &:before {
+            @include iconos-material('tigouneico','\e988', 20px, bold);
+            top: 0.324em;
+          }
+          &:after {
+            @include iconos-material('tigouneico','\e989', 20px, bold);
+            top: 6px;
+          }
+        }
+        &.documentos{
+          &:before,
+          &:after {
+            left: 26px;
+          }
+          &:before {
+            @include iconos-material('tigouneico','\e936', 20px, bold);
+            top: 0.324em;
+            left: 1.2em;
+          }
+          &:after {
+            @include iconos-material('tigouneico','\e937', 20px, bold);
+            top: 4px;
+          }
+        }
+        &:hover {
+          background-color: transparent;
+        }
+
+      }
+      &.user{
+        display: block;
+        padding: 0 0 18px 17px;
+        position: relative;
+        border-bottom: 1px solid #CDCDCD;
+        margin-bottom: 0;
+        overflow: hidden;
+        position: relative;
+        .options{
+          position: absolute;
+          right: 15px;
+          top: 13px;
+          width: 18px;
+          height: 20px;
+          cursor: pointer;
+          /*i{
+            &::before{
+              color: $cyan-tigo;
+              font-size: 15px;
+            }
+          }*/
+        }
+        .avatar{
+          float: left;
+          margin-right: 11px;
+          img{
+            @include radiosRedondos(23px);
+            background-size: cover;
+            background-position:  center center;
+            background-repeat: no-repeat;
+            width: 43px;
+            height: 43px;
+            background-color: white;
+
+          }
+
+        }
+        a.mi-editar{
+          display: block;
+          position: absolute;
+          width: 20px;
+          right: 24px;
+          top: 10px;
+          height: 15px;
+          padding: 0;
+          margin:0;
+          .span.path1{
+
+          }
+          &:before{
+            @include iconos-material('Material Icons', 'create', 14px, bold);
+            color:$cyan-tigo;
+            margin: 0;
+            position: absolute;
+            right: 0;
+          }
+        }
+        span{
+          float: left;
+          font-size: 16px;
+          line-height: 16px;
+          color: $blue-tigo;
+          text-transform: capitalize;
+          //font-weight: $light;
+          font-weight: $regular;
+          padding: 0;
+          margin: 0;
+          &.name{
+            font-size: 16px;
+            line-height: 16px;
+            //font-weight: $light;
+            font-weight: $regular;
+            display: block;
+            margin-top: 6px;
+            width: 76%;
+            padding-right: 18px;
+          }
+          &.enterprise{
+            font-size: 14px;
+            line-height: 14px;
+           // font-weight: $light;
+            font-weight: $regular;
+            //text-transform: lowercase;
+            width: 76%;
+            padding-right: 18px;
+          }
+        }
+      }
+      &.rol{
+        display: block;
+        background-color: #dde1e4;
+        border-bottom:1px solid #CDCDCD;
+        font-size: 18px;
+        line-height: 19px;
+        font-weight: $medium;
+        padding: 12px 6px 14px 18px;
+        margin-bottom: 20px;
+      }
+      &.change-acount{
+        display: block;
+        position: relative;
+        a.mi-editar{
+          position: absolute;
+          right: 10px;
+          top:4px;
+          margin: 0;
+          padding: 0;
+          display: block;
+          width: 16px;
+          height: 14px;
+          .path1{
+            display: block;
+            width: 20px;
+            margin: 0;
+            padding: 0;
+            &:before{
+              @include iconos-material('Material Icons', 'create', 14px, bold);
+              margin: 0;
+              color:$cyan-tigo;
+            }
+          }
+        }
+        span{
+          display: block;
+          font-size: 14px;
+          line-height: 16px;
+          //padding: 1px 14px 1px 26px;
+          font-weight: $regular;
+          &.admin{
+            color:$blue-tigo;
+            padding: 0px 0 0 31px;
+          }
+          &.email{
+            color:#2E2F37;
+            font-weight: $regular;
+            padding: 0px 0 0 31px;
+          }
+          &.title{
+            margin-top: 9px;
+            color:#002E6D;
+            font-size: 16px;
+            line-height: 16px;
+            font-weight: $regular;
+            padding: 7px 17px 7px 26px;
+            background: #dde1e4;
+          }
+        }
+        .container-selector-company{
+          .selector-company{
+            display: none;
+          }
+          .cuentas{
+            padding: 18px 9px 18px 26px;
+            a.company-ctn{
+              padding: 0;
+              border-bottom: 1px solid #8396B4;
+              margin-bottom: 6px;
+              padding-bottom: 9px;
+              padding-left: 5px;
+              padding-right: 10px;
+              height: auto;
+              .company-container{
+                overflow: hidden;
+                position: relative;
+                img{
+                  border-radius: 23px;
+                  background-size: cover;
+                  background-position: center center;
+                  background-repeat: no-repeat;
+                  width: 43px;
+                  height: 43px;
+                  background-color: white;
+                }
+                .company-info{
+                  float: left;
+                  overflow: hidden;
+                  margin-left: 10px;
+                  .company-info-name{
+                    font-size: 14px;
+                    line-height: 16px;
+                    font-weight: $regular;
+                    color:#233C79;
+                    max-width: 166px;
+                    word-break: break-all;
+                    word-wrap: break-word;
+                  }
+                  .company-info-mail{
+                    color:#2A2C35;
+                    font-size: 14px;
+                    line-height: 15px;
+                    font-weight: $regular;
+                    max-width: 166px;
+                    word-break: break-all;
+                    word-wrap: break-word;
+                  }
+                }
+                span.arrow{
+                  position: relative;
+                  right: 0px;
+                  width: 17px;
+                  z-index: 10;
+                  top:3px;
+                  &:before{
+                    @include iconos-material('Material Icons', 'chevron_right', 20px, bold);
+                    color:$cyan-tigo;
+                    margin: 0;
+                  }
+                }
+              }
+            }
+          }
+          a.action{
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: #213D77;
+            text-transform: uppercase;
+            font-weight: $medium;
+            margin: 34px auto;
+            max-width: 122px;
+            padding: 0;
+          }
+
+        }
+      }
+      &.logout{
+        display: block;
+        background-color: #6F7781;
+        padding: 12px 0;
+        margin: 0;
+        a{
+          display: block;
+          font-size: 14px;
+          line-height: 21px;
+          font-weight: 400;
+          color:#DCDFE1;
+          text-transform: uppercase;
+          padding: 6px 0 6px 30px;
+          max-width: 170px;
+          &:before{
+            content: '';
+            background: url('../images/icon_cerrarsession.png') top right;
+            width: 33px;
+            height: 20px;
+            float: right;
+
+          }
+        }
+      }
+
+      ul#dropdown2{
+        margin: 0;
+        position: inherit !important;
+        top:0 !important;
+        padding: 9px 0 11px;
+        background-color: transparent;
+        @include box-shadow(0px,0px,0px,0, transparent, true);
+        border-bottom: 1px solid #E0E2E4;
+        li{
+          margin: 0;
+          padding: 6px 0;
+          height: 37px;
+          a{
+            background-color: transparent;
+            color:#71757F;
+            font-weight: $regular;
+            font-size: 14px;
+            height: 32px;
+            line-height: 26px;
+            padding: 0 0px 0 76px;
+            .prefix{
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  #slide-out {
+    .collapsible-header{
+      min-height: auto;
+    }
+    .collapsible-body{
+      background-color: transparent;
+      ul{
+        li{
+          margin: 0;
+          padding: 6px 0;
+          height: 37px;
+          a {
+            background-color: transparent;
+            color: #71757F;
+            font-weight: 300;
+            font-size: 14px;
+            height: 32px;
+            line-height: 26px;
+            padding: 0 0px 0 69px;
+            .prefix{
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  .menu-option2{
+    display: none;
+  }
+
+}
+
+
+
+.icon-downside{
+  .path1{
+    margin: 0;
+    display: block;
+    &:before{
+      @include iconos-material('Material Icons', 'keyboard_arrow_down', 20px, bold);
+      margin: 0;
+      color:$cyan-tigo;
+    }
+  }
+}
+
+.icon-upside{
+  .path1{
+    margin: 0;
+    display: block;
+    &:before{
+      @include iconos-material('Material Icons', 'keyboard_arrow_up', 20px, bold);
+      margin: 0;
+      color:$cyan-tigo;
+    }
+  }
+}

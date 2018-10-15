@@ -1,0 +1,43 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block header_data %}
+  <div {% if id %} id="{{ id }}" {% endif %} class="{{ class }} block-form-massive-import" {{ directive }} ng-cloak ng-init="uuid='{{ uuid }}'">
+{% endblock %}
+
+{% block other_content %}
+  {% if title.show == 1 %}
+    <h3 class="txt-title center-align">{{ title.label }}</h3>
+  {% endif %}
+
+    {{ form }}
+  <div class="row">
+    <div class="input-field col s12 l12">
+      <a class="waves-effect waves-light btn btn-success btn-second" href="{{ file }}">
+      <i class="material-icons left">insert_drive_file</i>Descargar plantilla de importación</a>
+    </div>
+    <div class="input-field col s12 l12">
+      {% if buttons.import_datail.show == 1 %}
+        <div class="detalle col s12 l6">
+          <a id="getLogImport" class="waves-effect waves-light btn btn-second btn-success disabled" href="{{ buttons.import_datail.url }}">
+              <div ng-if="import == 1"></div>
+              {{ buttons.import_datail.title }}</a>
+          <p>{[{record_success}]}</p>
+          <p>{[{record_fail}]}</p>
+        </div>
+      {% endif %}
+
+      {% if select.show == 1 %}
+        <div class="tipo-export col s12 l6" >
+          <select name="exportdata" ng-model="typeFile" ng-change="downloadLogDetails(typeFile)">
+            <option value="" selected>Exportación</option>
+            {% for option in select.options %}
+              <option value="{{ option }}">{{ option }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      {% endif %}
+    </div>
+{% endblock %}

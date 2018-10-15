@@ -1,0 +1,116 @@
+@media #{$medium-and-down} {
+  .line-button{
+    border-bottom: 1px solid $blue-tigo;
+  }
+  .label2{
+    margin-top: 10px !important;
+    color: #A8AAB1;
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 11px;
+  }
+  .path--peticiones-quejas-reclamos .container{
+    padding: 0 !important;
+  }
+  .path--peticiones-quejas-reclamos{
+    .filters-mobile{
+      padding: 0 5px 0 5px;
+    }
+    #exact_search{
+      padding-left: 10px;
+    }
+    .filter-mobile ul{
+      padding-left: 15px;
+    }
+  }
+  .right-orientation{
+    float: right;
+  }
+  .padding-b{
+    padding-bottom: 10px !important;
+    margin: 0;
+  }
+  .h2-black {
+    color: #2A2B34;
+    margin: 10px 0 1px 0 !important;
+    font-size: 16px;
+  }
+  .font-11{
+    font-size: 11px !important;
+  }
+  .bold{
+    font-weight: bold;
+    margin-right: 3px !important;
+  }
+  .margin-top-3{
+    margin: 3px 0 0 0;
+  }
+}
+
+.h2-black{
+  color: $gray5-tigo;
+  margin:10px 0 10px 0;
+  font-size: 16px;
+}
+.h2-blue{
+  color: $blue-tigo;
+  margin:10px 0 10px 0;
+  font-size: 22px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.margin-0{
+  margin: 0 0 0 0;
+}
+.padding-0{
+  padding: 0 !important;
+}
+
+.row-margin{
+  margin-bottom: 10px;
+}
+div[class~="collapse"]{
+  display: none;
+}
+div[class~="expanded"]{
+  display: block;
+}
+.bord-righ{
+  border-right: 1px solid $gray1-tigo;
+}
+.padding-left{
+  padding-left: 20px;
+}
+.icon-pqrs{
+  width: 16px;
+  height: 16px;
+  top: 0;
+  right: 0px;
+  z-index: 3;
+}
+@media #{$medium-and-up} {
+  .label2{
+    margin: 0 0 10px;
+    color: #A8AAB1;
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 11px;
+  }
+  .margin-30{
+    margin-top: 30px;
+  }
+}
+.block-query-pqrs{
+  .btn-second, .ui-dialog .btn-second {
+    padding: 11px 2px;
+  }
+}
+.right-orientation-up{
+  float: right;
+}
+.query-technical{
+  p{
+    font-size: 12px !important;
+  }
+}

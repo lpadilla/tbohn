@@ -1,0 +1,6 @@
+tbo_lines.consumptions_filtres:
+  title: 'TBO Lines - Configuración de filtros'
+  route_name: tbo_lines.consumptions_filtres
+  description: 'Configuración de filtros para historial de consumos'
+  parent: system.admin_config_system
+  weight: 99

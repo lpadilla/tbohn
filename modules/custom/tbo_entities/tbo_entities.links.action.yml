@@ -1,0 +1,69 @@
+entity.company_entity.add_form:
+  route_name: entity.company_entity.add_form
+  title: 'Agregar empresa'
+  appears_on:
+    - entity.company_entity.collection
+
+entity.document_type_entity.add_form:
+  route_name: 'entity.document_type_entity.add_form'
+  title: 'Agregar Tipo de documento'
+  appears_on:
+    - entity.document_type_entity.collection
+
+entity.company_user_relations.add_form:
+  route_name: entity.company_user_relations.add_form
+  title: 'Agregar relacion empresa-usuarios'
+  appears_on:
+    - entity.company_user_relations.collection
+
+entity.invitation_access_entity.add_form:
+  route_name: entity.invitation_access_entity.add_form
+  title: 'Agregar invitación de acceso'
+  appears_on:
+    - entity.invitation_access_entity.collection
+
+entity.company_user_relations.add_form:
+  route_name: entity.company_user_relations.add_form
+  title: 'Add Company user relations'
+  appears_on:
+    - entity.company_user_relations.collection
+
+entity.category_services_entity.add_form:
+  route_name: 'entity.category_services_entity.add_form'
+  title: 'Agregar Categoria de servicio'
+  appears_on:
+    - entity.category_services_entity.collection
+
+entity.invitation_popup_entity.add_form:
+  route_name: 'entity.invitation_popup_entity.add_form'
+  title: 'Agregar Invitación en popup'
+  appears_on:
+    - entity.invitation_popup_entity.collection
+
+entity.transaction_category_entity.add_form:
+  route_name: 'entity.transaction_category_entity.add_form'
+  title: 'Agregar transacción de categoría'
+  appears_on:
+    - entity.transaction_category_entity.collection
+
+entity.wifi_channel.add_form:
+  route_name: entity.wifi_channel.add_form
+  title: 'Add Wifi channel'
+  appears_on:
+    - entity.wifi_channel.collection
+
+entity.wifi_security_type_entity.add_form:
+  route_name: entity.wifi_security_type_entity.add_form
+  title: 'Add Wifi security type entity'
+  appears_on:
+    - entity.wifi_security_type_entity.collection
+entity.notification_entity.add_form:
+  route_name: entity.notification_entity.add_form
+  title: 'Add Notification entity'
+  appears_on:
+    - entity.notification_entity.collection
+entity.notification_detail_entity.add_form:
+  route_name: entity.notification_detail_entity.add_form
+  title: 'Add Notification detail entity'
+  appears_on:
+    - entity.notification_detail_entity.collection

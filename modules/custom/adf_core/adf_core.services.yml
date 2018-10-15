@@ -1,0 +1,5 @@
+services:
+  #ExportController
+  adf_core.export_controller:
+    class: Drupal\adf_core\Services\Controller\ExportControllerService
+    arguments: []

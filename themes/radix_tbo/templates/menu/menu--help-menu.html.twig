@@ -1,0 +1,94 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *
+ * @ingroup themeable
+ */
+#}
+{% import _self as menus %}
+
+{%
+set nav_classes = [
+  'nav',
+  menu_name == 'main' ? 'navbar-nav',
+  menu_name == 'footer' ? 'nav-pills',
+]
+%}
+{% set dropdown_id = 'help_dropdown' %}
+
+{#
+  We call a macro which calls itself to render the full tree.
+  @see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+{{ menus.menu_links(items, attributes.addClass(nav_classes), 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+  {% import _self as menus %}
+  {% if items %}
+    {% if menu_level == 0 %}
+<div class="helpmenu_dropdown_wrapper">
+
+ {#  <a class="dropdown-button" href="#!" data-activates="help_dropdown">{{ dropdown_id }}</a> #}
+  <i class="prefix icon-help-cyan dropdown-button" data-activates="help_dropdown">
+    <span class="path1"></span>
+    <span class="path2"></span>
+    {{ dropdown_id }}
+  </i>
+</div>
+<ul{{ attributes.setAttribute('id', 'help_dropdown').addClass('dropdown-content') }}>
+  <h2>{{ 'Necesita ayuda?'|t }}</h2>
+  {% else %}
+  <ul class="dropdown-menu">
+
+    {% endif %}
+    {% for item in items %}
+      {%
+        set item_classes = [
+          item.in_active_trail ? 'active',
+          item.is_expanded ? 'expanded dropdown'
+        ]
+      %}
+      <li{{ item.attributes.addClass(item_classes) }}>
+        {% set doubleSpan = false %}
+        {% for Iterator in item.attributes.class.getIterator %}
+          {% if 'doubleSpan' in Iterator %}
+            {% set doubleSpan = true %}
+          {% endif %}
+        {% endfor %}
+
+        {% if menu_level == 0 and item.is_expanded %}
+          <a href="{{ item.url }}" class="dropdown-toggle {{ item.url.getOption('attributes')['class'].0 }}" 
+          data-toggle="dropdown" target="{{  item.url.getOption('attributes')['target'] }}">
+            {{ item.title }} 
+            <span class="caret"></span>
+            <span class="path1"></span>
+            <span class="path2"></span>
+          </a>
+        {% else %}
+          <a href="{{ item.url }}" class="dropdown-toggle prefix {{ item.url.getOption('attributes')['class'].0 }} segment-click"
+            data-segment-event="TBO - Ayuda"
+            data-segment-properties='{"category":"Dashboard","label":"{{ item.title }}","site":"NEW"}'
+            data-toggle="dropdown" target="{{  item.url.getOption('attributes')['target'] }}">
+            <span class="path1"></span>
+            <span class="path2"></span>
+            <span class="menu-title-help">{{ item.title }}</span>
+          </a>
+        {% endif %}
+        {% if item.below %}
+          {{ menus.menu_links(item.below, attributes.removeClass('nav'), menu_level + 1) }}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endmacro %}

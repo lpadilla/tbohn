@@ -1,0 +1,180 @@
+{% import "tbo_general_bo.html.twig" as widgets %}
+
+{% block header_data %}
+{% set directive_new = directive|replace({'-':'_'}) %}
+<div class="{{ class }}" {{ directive }} ng-cloak ng-init="uuid_{{ directive_new }} = '{{ uuid }}'">
+  {% endblock %}
+  {% if modal is not empty %}
+    {% block modal %}
+      {% block modal_link %}
+        <div class="row">
+          <div class="input-field col s12 m12 l12">
+            <a class="enterprise-modal-form waves-effect btn btn-primary"
+               href="#{{ modal.href }}">{{ modal.label }}</a>
+          </div>
+        </div>
+      {% endblock %}
+      {% block modal_content %}
+        <!-- Modal Structure -->
+        <div id="{{ modal.href }}" class="modal">
+          <div class="modal-content">
+            {% block modal_element %}
+              {{ form }}
+            {% endblock %}
+          </div>
+        </div>
+      {% endblock %}
+    {% endblock %}
+  {% endif %}
+
+  <!-- Form Filters -->
+  {% if filters is not empty %}
+    {% block filters %}
+      {% block filters_modal %}
+        <div class="card-block">
+          <div class="box-body">
+            {% block filters_modal_content %}
+            {% endblock %}
+          </div>
+        </div>
+      {% endblock %}
+
+      {% block filters_header %}
+        <div class="card-block">
+          <div class="box-body">
+            <div class="row {% if margin %}{% if margin.show_margin_filter == false %} mb-0 {% endif %}{% endif %}">
+              <div class="col s12">
+              {% block header_content_filters_card %}
+                <div class="card gray-card clearfix">
+                <div class="col s12">
+                {% block header_content_filters_card_detail %}
+                  {% block filter_header_form %}
+                    <form data-ng-submit="filterCompanies()">
+                  {% endblock %}
+                  <div class="row">
+                    {% block for_filters %}
+                      {% for filter in filters %}
+                        {{ widgets.validate_style( filter.label, filter, filter.class) }}
+                      {% endfor %}
+                    {% endblock %}
+                  </div>
+                  {% block validate_filters %}
+                    {% if filters is not empty %}
+                      <div class="row">
+                        <div class="col s12 m12 l12">
+                          <button class="waves-effect btn btn-primary" type="submit">Aplicar</button>
+                        </div>
+                      </div>
+                    {% endif %}
+                  {% endblock %}
+                  </form>
+                {% endblock %}
+              {% endblock %}
+              </div>
+            {% endblock %}
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endblock %}
+  {% endif %}
+
+  <!-- top-other-content -->
+  {% block top_other_content %}
+  {% endblock %}
+
+  <!-- Show view -->
+  <!-- data -->
+  {% block header_content_table %}
+    <div class="card-block">
+      <div class="box-body">
+        <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+          <div class="col s12">
+            {% block header_content_table_card %}
+            <div class="card white clearfix">
+              <div class="col s12">
+                {% endblock %}
+                {% if fields is not empty %}
+                  {% block table %}
+                    <table class="responsive-table">
+                      <thead>
+                      {% block table_head %}
+                        <tr>
+                          {% for item in fields %}
+                            <th scope="col" ng-click="orderReverse();"> {{ item.label }}</th>
+                          {% endfor %}
+                        </tr>
+                      {% endblock %}
+                      </thead>
+                      <tbody>
+                      {% block table_body %}
+                        <tr data-ng-repeat="compani in pagedItems[currentPage]  | orderBy:predicate:reverse">
+                          {% block table_body_td %}
+                            <td ng-repeat="(key, value) in compani">
+                              <div class="regular-cell">
+                                {[{value == null || value == "" ? "No disponible" : value}]}
+                              </div>
+                            </td>
+                          {% endblock %}
+                        </tr>
+                      {% endblock %}
+                      </tbody>
+                      <tfoot>
+                      {% block table_foot %}
+                        <td colspan="{{ fields|length }}">
+                          {% block paginate %}
+                            <!-- Get paginate  -->
+                            {{ widgets.paginate() }}
+                          {% endblock %}
+                        </td>
+                      {% endblock %}
+                      </tfoot>
+                    </table>
+                  {% endblock %}
+                {% endif %}
+                {% block data %}
+                {% endblock %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+
+  {% block other_content_data %}
+    <div class="card-block">
+      <div class="box-body">
+        <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+          <div class="col s12">
+            {% block other_content_data_card %}
+              <div class="card white clearfix">
+                <div class="col s12">
+                  {% block other_content %}
+                  {% endblock %}
+                </div>
+              </div>
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+
+  {% block message_exception %}
+    <div>
+      <div class="messages-only" style="display: none;">
+        <button type="button" class="close prefix icon-x-cyan" data-dismiss="alert" aria-hidden="true">
+          <span class="path1"></span><span class="path2"></span>
+        </button>
+        <div class="text-alert">
+          <div class="icon-alert">
+            <span class="icon-1"></span>
+            <span class="icon-2"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+</div>

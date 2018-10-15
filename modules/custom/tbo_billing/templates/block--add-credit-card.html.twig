@@ -1,0 +1,135 @@
+<div id="block-card" class="form-add-credit-card wrapper-card" data-ng-add-credit-card ng-cloak ng-init="uuidd='{{ uuid }}'">
+  <div class="box-body">
+    <div class="invoice-row">
+      <div class="card clearfix white invoice-content">
+        <h3 class="txt-title center-align"> {{ data.title }} </h3>
+        <form id="form-credit-card" class="">
+          <div class="row">
+            <div class="input-field col s12 m6 l6">
+              <i class="prefix icon-bill-cyan">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+              <input disabled value="{{ data.session['contractId'] }}" placeholder="{{ data.session['contractId'] }}" class="disabled" type="text" class="validate">
+              <label for="disabled">{{ data.contract }}</label>
+            </div>
+            <div class="input-field col s12 m6 l6">
+              <i class="prefix icon-specialservices-cyan">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+              <input disabled value="Pago de Factura" placeholder="Pago de Factura" class="disabled" type="text" class="validate">
+              <label for="disabled">{{ data.service }}</label>
+            </div>
+            <div class="input-field col s12 m6 l6">
+              <i class="prefix icon-mail-cyan">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+              <input id="email" type="text" name="email" placeholder="{{ data.mail }}"  maxlength="150" ng-model="mail" ng-change="validateMail()">
+              <!--<input id="email" type="text" name="email" data-error=".error-label" aria-describedby="email-error">-->
+              <label for="email" data-error="Dirección de email inválida">{{ data.mailLabel }}</label>
+              <p class="error">{{ data.mailError }}</p>
+            </div>
+            <div class="input-field col s12 m6 l6">
+              <i class="prefix icon-mobilephone-cyan">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+              <input id="phone" name="phone" type="text" ng-model="phone"  ng-change="validatePhone()">
+              <label for="phone">{{ data.phoneLabel }}</label>
+              <p class="error">{{ data.phoneError }}</p>
+            </div>
+            <div class="input-field col s12 m12 l12">
+              <i class="prefix icon-coveragemap-cyan">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+              <input id="address" type="text" class="validate" maxlength="200" ng-model="address">
+              <label for="address">{{ data.address }}</label>
+            </div>
+            <div class="input-field col s12 m6 l4">
+              <i class="prefix icon-{[{icon_card}]}">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+              <input id="card" type="text" class="validatedd" ng-model="card" ng-change="cardValidate()">
+              <label for="card">{{ data.cardLabel }}</label>
+              <p class="error">{{ data.cardError }}</p>
+            </div>
+            <div class="input-field col s12 m6 l4 box-date">
+              <span class="label">{{ data.dateLabel }}</span>
+              <div class="col s7 m7 l7">
+                <div class="form-item form-group form-type-select form-item-billing-select-enterprise">
+                  <i class="prefix icon-calendar-cyan">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </i>
+                  <select id="select-month" name="select_month" ng-model="month" ng-options="item for item in months">
+                    <option value="">MM</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col s5 m5 l5">
+                <div class="form-item form-group form-type-select form-item-billing-select-enterprise">
+                  <select id="select-year" name="year" ng-model="year" ng-options="item as item.year disable when item.disabled for item in years">
+                    <option value="">AAAA</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="input-field col s12 m6 l2">
+              <a class='dropdown-button help-card' href='#'
+                 data-activates='dropdown-card'>{{ data.codeLabel }}<span>(?)</span></a>
+              <!-- Dropdown Structure -->
+              <ul id="dropdown-card" class="dropdown-content">
+                <li>
+                  <div class="imagen">
+                    <img src="{{ data.imageSrc }}">
+                  </div>
+                </li>
+              </ul>
+              <i class="prefix icon-creditcard-cyan">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+              <input id="code" type="text" class="validatedd" ng-model="code" ng-change="validateCvv()">
+              <p class="error">{{ data.codeError }}</p>
+            </div>
+            <div class="input-field col s12 m12 l12">
+              <p id="edit-pass--description" class="txt-terms center-align">{{ 'Al presionar CONTINUAR está aceptando los'|t }}
+                <a href="#modal1" class="segment-click" data-segment-event="TBO - Ver términos y condiciones"
+                   data-segment-properties='{"category":"Agregar tarjeta de crédito","label":"{{ data.environment }}"}'>
+                  términos y condiciones
+                </a>
+              </p>
+            </div>
+            <div id="modal1" class="modal">
+              <div class="modal-content">
+                <h2 class="title-modal">Términos y condiciones</h2>
+                   {{ data.block }}
+              </div>
+              <div class="modal-footer">
+
+                  <div class="input-field col s12">
+                    <a href="#!" class="right modal-action modal-close waves-effect waves-light btn btn-primary">CERRAR</a>
+                  </div>
+
+              </div>
+            </div>
+            <div class="buttons-wrapper input-field col s12 m12 l12 center-align">
+              <a class="waves-effect waves-light btn btn-second segment-click"
+                 data-segment-event="TBO - Agregar Tarjeta de Crédito - Tx" data-segment-properties='{"category":"Pago automático","label":"Cancelar - {{ data.environment }} - Exitoso", "site": "NEW"}'
+                 href="{{ data.referer }}">CANCELAR</a>
+              <a class="waves-effect waves-light btn btn-primary disabled"
+                 ng-if="!validateForm()">CONTINUAR</a>
+              <a class="waves-effect waves-light btn btn-primary"
+                 ng-if="validateForm()"
+                 ng-click="submitFunction()">CONTINUAR</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

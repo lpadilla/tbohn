@@ -1,0 +1,74 @@
+{#
+/**
+ * @file
+ * Default theme implementation for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set classes = [
+'form-type-' ~ type|clean_class,
+type not in ['checkbox', 'radio', 'submit', 'button'] ? 'form-control',
+type in ['submit', 'button'] ? 'btn waves-effect ',
+type in ['submit', 'button'] ? 'btn-default',
+] %}
+
+{% set classesRadio = [
+'form-type-' ~ type|clean_class,
+'with-gap',
+] %}
+
+{% if type == 'radio' %}
+  {% set classes = [
+  'form-type-' ~ type|clean_class,
+  'with-gap',
+  ] %}
+{% endif %}
+<input{{ attributes.addClass(classes) }} />{{ children }}
+
+{% if attributes.autocomplete_ajax_account is not null %}
+  <div id="suggestions123" class="collection" style="border: none;">
+    <div id="suggestionsAccount">
+      <ul>
+        <li ng-repeat="item in suggestionsAccount">
+            <span>
+              <input type="checkbox" id="check-{[{item.account}]}" value="{[{item.account}]}" 
+                ng-model="checked" ng-click="selectChangeDesktop('account', checked, $event)"/>
+              <input type="checkbox" id="check-{[{item.account}]}" value="{[{item.account}]}" 
+                ng-model="checked" ng-click="selectChangeDesktop('account', checked, $event)"/>
+              <label for="check-{[{item.account}]}">{[{item.account}]}</label>
+            </span>
+        </li>
+      </ul>
+    </div>
+    <div class="chip" ng-repeat="key in accountOptions track by key">
+      {[{ key }]}
+      <span class="closebtn" ng-click="removeChipAccount('{[{ key }]}')">×</span>
+    </div>
+  </div>
+{% elseif attributes.autocomplete_ajax is not null %}
+    <div id="suggestions" class="collection" style="border: none;">
+        <ul>
+            <li class="collection-item ng-class: selectedIndexAjax===$index;" 
+              ng-repeat="suggestion in suggestionsAjax" ng-click="resultClickedAjax($index, 'mail')"
+              ng-mouseover="$parent.selectedIndexAjax = $index" ng-class="active : selectedIndexAjax===$index">{[{suggestion.name}]}
+            </li>
+        </ul>
+    </div>
+{% elseif attributes.autocomplete is not null %}
+    <div id="suggestions" class="collection" style="border: none;">
+        <ul>
+            <li class="collection-item ng-class: selectedIndexAjax===$index;" ng-repeat="suggestion in suggestions" 
+              ng-click="resultClicked($index, 'name')"
+              ng-mouseover="$parent.selectedIndex=$index" ng-class="active : selectedIndex===$index">{[{suggestion.name}]}
+            </li>
+        </ul>
+    </div>
+{% endif %}
+

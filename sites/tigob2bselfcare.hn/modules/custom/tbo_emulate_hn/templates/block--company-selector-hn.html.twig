@@ -1,0 +1,31 @@
+
+<div class="container-selector-company">
+  <h1 class="page-title center-align">Selecciona una cuenta</h1>
+  <div class="cuentas">
+    {% for item in data.companies %}
+      <a class="company-ctn segment-click"
+         data-segment-event="TBO - Seleccionar"
+         data-segment-properties='{"category":"Login","label":"Empresa","site":"NEW"}'
+         href="/tbo_general/selector/{{ item.company_id }}">
+        <div class="company-container clearfix valign-wrapper">
+            
+          {% if data.company.name %}
+            <canvas class="circleinitials" title="{{ item.name|slice(0,25) }}" data-userid="{{ item.company_id }}"></canvas>
+          {% endif %}
+            
+          {% if data.avatar.avatar %}
+          {% endif %}
+          <div class="company-info">
+            {% if data.company.name %}
+              <div class="company-info-name"> {{ item.name|slice(0,25) }} </div>
+            {% endif %}
+            {% if data.company.mail %}
+              <div class="company-info-mail"> {{ item.mail|slice(0,25) }} </div>
+            {% endif %}
+          </div>
+          <span class="arrow"></span>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,79 @@
+tigoid.redirect_controller_redirect:
+  path: '/redirect/tigoid'
+  defaults:
+    _controller: '\Drupal\tigoid\Controller\RedirectController::authenticate'
+    _title: 'Tigo ID redirect page'
+  requirements:
+    _custom_access: '\Drupal\tigoid\Controller\RedirectController::access'
+  options:
+    no_cache: 'TRUE'
+
+tigoid.tigoid_settings_form:
+  path: '/admin/config/tigoid/settings'
+  defaults:
+    _form: '\Drupal\tigoid\Form\SettingsForm'
+    _title: 'SettingsForm'
+  requirements:
+    _permission: 'access tigoid settings'
+  options:
+    _admin_route: TRUE
+
+tigoid.he.authorization_controller:
+  path: '/tigoid/he/endpoint'
+  defaults:
+    _controller: '\Drupal\tigoid\Controller\AuthorizationController::authorizeHe'
+    _title: 'authorization'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+
+tigoid.redirect.validationline:
+  path: '/tigoid/validateline/{msisdn}'
+  defaults:
+    _controller: '\Drupal\tigoid\Controller\AuthorizationController::authorizeValidationLine'
+    _title: 'authorization'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: TRUE
+
+tigoid.authorize:
+  path: '/tigoid/authorize'
+  defaults:
+    _controller: '\Drupal\tigoid\Controller\AuthorizationController::authorize'
+    _title: 'authorization'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: TRUE
+
+tigoid.login.handler:
+  path: '/user/login_handler'
+  defaults:
+    _controller: Drupal\tigoid\Controller\LoginHandler::evaluate
+    _title: 'login'
+    action: 'login'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+  options:
+    no_cache: TRUE
+
+tigoid.login.create:
+  path: '/user/create_handler'
+  defaults:
+    _controller: Drupal\tigoid\Controller\LoginHandler::evaluate
+    _title: 'login'
+    action: 'create'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+  options:
+    no_cache: TRUE
+
+tigoid.logout:
+  path: '/tigoid/logout'
+  defaults:
+    _controller: Drupal\tigoid\Controller\LoginHandler::evaluate
+    _title: 'login'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+  options:
+    no_cache: TRUE

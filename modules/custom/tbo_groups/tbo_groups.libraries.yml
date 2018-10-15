@@ -1,0 +1,11 @@
+groups-list:
+  version: 1.x
+  js:
+    js/directive/groups_list.js: {}
+    js/groups_manage_custom.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - core/drupal.dialog
+    - tbo_general/angular.tbo

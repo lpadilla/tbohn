@@ -1,0 +1,156 @@
+add company entity entities:
+  title: 'Create new Company entity entities'
+
+administer company entity entities:
+  title: 'Administer Company entity entities'
+  description: 'Allow to access the administration form to configure Company entity entities.'
+  restrict access: true
+
+delete company entity entities:
+  title: 'Delete Company entity entities'
+
+edit company entity entities:
+  title: 'Edit Company entity entities'
+
+access company entity overview:
+  title: 'Access the Company entity overview page'
+
+view published company entity entities:
+  title: 'View published Company entity entities'
+
+view unpublished company entity entities:
+  title: 'View unpublished Company entity entities'
+add company user role entity entities:
+  title: 'Create new Company user role entity entities'
+
+administer invitation access entity entities:
+  title: 'Administer Invitation access entity entities'
+  description: 'Allow to access the administration form to configure Invitation access entity entities.'
+  restrict access: true
+
+delete invitation access entity entities:
+  title: 'Delete Invitation access entity entities'
+
+edit invitation access entity entities:
+  title: 'Edit Invitation access entity entities'
+
+access invitation access entity overview:
+  title: 'Access the Invitation access entity overview page'
+
+view published invitation access entity entities:
+  title: 'View published Invitation access entity entities'
+
+view unpublished invitation access entity entities:
+  title: 'View unpublished Invitation access entity entities'
+add company user relations entities:
+  title: 'Create new Company user relations entities'
+
+administer company user relations entities:
+  title: 'Administer Company user relations entities'
+  description: 'Allow to access the administration form to configure Company user relations entities.'
+  restrict access: true
+
+delete company user relations entities:
+  title: 'Delete Company user relations entities'
+
+edit company user relations entities:
+  title: 'Edit Company user relations entities'
+
+access company user relations overview:
+  title: 'Access the Company user relations overview page'
+
+view published company user relations entities:
+  title: 'View published Company user relations entities'
+
+view unpublished company user relations entities:
+  title: 'View unpublished Company user relations entities'
+
+view all company user relations revisions:
+  title: 'View all Company user relations revisions'
+
+revert all company user relations revisions:
+  title: 'Revert all Company user relations revisions'
+  description: 'Role requires permission <em>view Company user relations revisions</em> and <em>edit rights</em> for company user relations entities in question or <em>administer company user relations entities</em>.'
+
+delete all company user relations revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Company user relations revisions</em> and <em>delete rights</em> for company user relations entities in question or <em>administer company user relations entities</em>.'
+
+add wifi channel entities:
+  title: 'Create new Wifi channel entities'
+
+administer wifi channel entities:
+  title: 'Administer Wifi channel entities'
+  description: 'Allow to access the administration form to configure Wifi channel entities.'
+  restrict access: true
+
+delete wifi channel entities:
+  title: 'Delete Wifi channel entities'
+
+edit wifi channel entities:
+  title: 'Edit Wifi channel entities'
+
+view published wifi channel entities:
+  title: 'View published Wifi channel entities'
+
+view unpublished wifi channel entities:
+  title: 'View unpublished Wifi channel entities'
+
+
+add wifi security type entity entities:
+  title: 'Create new Wifi security type entity entities'
+
+administer wifi security type entity entities:
+  title: 'Administer Wifi security type entity entities'
+  description: 'Allow to access the administration form to configure Wifi security type entity entities.'
+  restrict access: true
+
+delete wifi security type entity entities:
+  title: 'Delete Wifi security type entity entities'
+
+edit wifi security type entity entities:
+  title: 'Edit Wifi security type entity entities'
+
+view published wifi security type entity entities:
+  title: 'View published Wifi security type entity entities'
+
+view unpublished wifi security type entity entities:
+  title: 'View unpublished Wifi security type entity entities'
+add notification entity entities:
+  title: 'Create new Notification entity entities'
+
+administer notification entity entities:
+  title: 'Administer Notification entity entities'
+  description: 'Allow to access the administration form to configure Notification entity entities.'
+  restrict access: true
+
+delete notification entity entities:
+  title: 'Delete Notification entity entities'
+
+edit notification entity entities:
+  title: 'Edit Notification entity entities'
+
+view published notification entity entities:
+  title: 'View published Notification entity entities'
+
+view unpublished notification entity entities:
+  title: 'View unpublished Notification entity entities'
+add notification detail entity entities:
+  title: 'Create new Notification detail entity entities'
+
+administer notification detail entity entities:
+  title: 'Administer Notification detail entity entities'
+  description: 'Allow to access the administration form to configure Notification detail entity entities.'
+  restrict access: true
+
+delete notification detail entity entities:
+  title: 'Delete Notification detail entity entities'
+
+edit notification detail entity entities:
+  title: 'Edit Notification detail entity entities'
+
+view published notification detail entity entities:
+  title: 'View published Notification detail entity entities'
+
+view unpublished notification detail entity entities:
+  title: 'View unpublished Notification detail entity entities'

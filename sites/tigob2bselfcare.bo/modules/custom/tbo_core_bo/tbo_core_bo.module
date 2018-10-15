@@ -1,0 +1,168 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_core_bo.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+use Drupal\Core\Url;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+
+/**
+ * Implements hook_help().
+ */
+function tbo_core_bo_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_core_bo module.
+    case 'help.page.tbo_core_bo':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('custom tbo core BO module to have all shared functions') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+function tbo_core_bo_page_attachments_alter(array &$page) {
+  if(!isset($_SESSION['ummasquerade_block'])){
+    $conection = \Drupal::database();
+    $user = \Drupal::currentUser();
+    $userEntity = \Drupal\user\Entity\User::load($user->id());
+
+    $roles = $userEntity->getRoles();
+    if (in_array('admin_company', $roles)){
+      $page['#attached']['library'][] = 'tbo_core_bo/menu-return-admin';
+    }
+  }
+}
+
+
+/**
+ * Implements hook_user_login().
+ */
+function tbo_core_bo_user_login($account) {
+	
+	$conection = \Drupal::database();
+	$user = \Drupal::currentUser();
+	$userEntity = \Drupal\user\Entity\User::load($user->id());
+
+	$query = $conection->select('openid_connect_authmap', 'open')
+		->fields('open', ['sub'])
+		->condition('uid', $user->id(), '=');
+	
+	$tigoId = $query->execute()->fetchField();
+	$msisdn = $userEntity->get('phone_number')->value;
+	$segment = [
+		'tigoId' => $tigoId,
+		'site' => 'NEW',
+		'MSISDN' => $msisdn,
+	];
+	
+	$_SESSION['adf_segment']['user']['others'] = $segment;
+  
+  $usid = $user->id();
+  
+  $query = \Drupal::database()->select('company_user_relations_field_data', 'company_user');
+  $query->addField('company_user', 'company_id');
+  $query->condition('company_user.users', $usid);
+  $companiesR = $query->execute()->fetchAll();
+  
+  $uid = $companiesR[0]->company_id;
+  
+  $query = \Drupal::database()->select('company_entity_field_data', 'company');
+  $query->addField('company', 'id');
+  $query->addField('company', 'name');
+  $query->addField('company', 'document_number');
+  $query->addField('company', 'document_type');
+  $query->addField('company', 'segment');
+  $query->addField('company', 'fixed');
+  $query->addField('company', 'mobile');
+  $query->addField('company', 'client_code');
+  $query->condition('company.id', $uid);
+  $companies = $query->execute()->fetchAll();
+  $company = [];
+  $company ['id'] = $companies[0]->id;
+  $company ['name'] = $companies[0]->name;
+  $company ['nit'] = $companies[0]->document_number;
+  $company ['docType'] = $companies[0]->document_type;
+  $company ['segment'] = $companies[0]->segment;
+
+  $client_code_array = [];
+  $client_code_temp = explode(',', $companies[0]->client_code);
+  if(count($client_code_temp)>1){
+    foreach ($client_code_temp as $value1) {
+      $client_code_array[] = $value1;
+    }
+    $company['client_code'] = $client_code_array;             
+  }else{        
+    $company['client_code'] = $companies[0]->client_code; 
+  } 
+
+
+  if ($companies[0]->fixed == 1 && $companies[0]->mobile == 0) {
+    $company['environment'] = 'fijo';
+  }
+  else if ($companies[0]->fixed == 0 && $companies[0]->mobile == 1) {
+    $company['environment'] = 'movil';
+  }
+  else if ($companies[0]->fixed == 1 && $companies[0]->mobile == 1) {
+    $company['environment'] = 'both';
+  }
+  $_SESSION['company'] = $company;
+  $_SESSION['adf_segment']['user']['others']['custom'] = [
+    'enpterpriseTypeID' => $company['docType'],
+    'enterpriseID' => $company['nit'],
+    'enterpriseName' => $company['name'],
+    'businessUnit' => $company['environment'],
+    'clientCode' => $company['client_code'], 
+  ];
+  $_SESSION['adf_segment']['send_services'] = 0;
+  //Remove var sesion selector
+  unset($_SESSION['show_selector']);
+  //Load Service twig
+  $twig = \Drupal::service('twig');
+  $twig->addGlobal('show_selector', FALSE);
+  //Save audit log
+  
+  
+  if (empty($_SESSION['environment'])) {
+  	$_SESSION['environment'] = 'movil';
+  }
+  
+  
+  
+  if (isset($_SESSION['user_login_in'])) {
+    //Save log
+    $this->_saveInitSesionLog($company['name'], $company['nit']);
+  }
+  
+ 
+	
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_core_bo_theme($existing, $type, $theme, $path) {
+  return [
+    'audit_logs_bo' => [
+      'variables' => [
+        'uuid' => NULL,
+        'options_date' => NULL,
+        'config' => NULL,
+        'filters' => NULL,
+        'fields' => NULL,
+        'directive' => NULL,
+        'title' => NULL,
+        'class' => NULL,
+        'margin' => NULL,
+      ],
+      'template' => 'block--audit-logs-list-bo',
+    ],
+  ];
+}
+

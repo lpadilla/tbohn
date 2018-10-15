@@ -1,0 +1,159 @@
+{% extends 'block__card_base.html.twig' %}
+
+  {% block filters %}
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+  {% block header_data %}
+  {% set directive_new = directive|replace({'-':'_'}) %}
+<div class="detalle-servicios block-portfolio block-detalle-ver-producto-fijo enviroment-{{ enviroment }}" {{ directive }}
+  ng-cloak ng-init="uuid_{{ directive_new }} = '{{ uuid }}'">
+  {% endblock %}
+  {% block other_content_data %}
+    <div class="card-block">
+      <div class="box-body">
+        <div class="row">
+          <div class="col s12">
+            <h5 class="title-front title-desktop">
+              {{ block_title }}
+            </h5>
+            <div class="card clearfix card-white invoice-content">
+              <div class="col s12 m12 l12 xl8 content">
+                <div class="column-left col s12 m12 l5 xl5">
+                  <div class="box-border">
+                    {% if icon.icon_service.show == 1 %}
+                      <div
+                        class="{[{ class_img }]} icon left card-icon icon-service"></div>
+                    {% endif %}
+                    {% for field in fields %}
+                    <!--Print card fields-->
+                    {% if field.service_field == "category" %}
+                    <div class="box-txt">
+                      <h3>{[{ title_detalle }]}</h3>
+                      {% elseif field.service_field == "status" %}
+                      <p class="field-status {[{ status_class }]}">{[{ status
+                        }]}</p>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+                {% if field.service_field == "plan" %}
+                <div class="column-right col s12 m12 l7 xl7">
+                  <div class="col 3 s4 m6 l6 xl6">
+                    <p class="label">{{ field.label }}:</p>
+                    <p class="info">{[{ plan }]}</p>
+                  </div>
+                  {% elseif field.service_field == "address" %}
+                    <div class="col 4 s8 m6 l6 xl6">
+                      <p class="label">{{ field.label }}:</p>
+                      <p class="info">{[{ address }]}</p>
+                    </div>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+
+              {% if buttons.view_details.show == 1 or fixed_consumption.show == 1 %}
+                <!--Button Details-->
+                <div class="card-action col s12 m12 l12 xl4">
+                  {% if buttons.view_details.show == 1 %}
+                    <a
+                      class="waves-effect waves-light btn btn-second user-modal-form segment-click"
+                      href="#DetalleVerProductoModal"
+                      ng-click="saveLog()" {% if buttons.view_details.active == 0 %} disabled {% endif %}
+                      data-segment-event="TBO - Clic Más info - Consulta"
+                      data-segment-properties='{"category":"Detalle de Servicio","label":"{[{ plan }]}","site":"NEW"}'
+                    >{{ buttons.view_details.label }}</a>
+                  {% endif %}
+
+                  {% if fixed_consumption.show == 1 and productId == 13 %}
+                    <a class="waves-effect waves-light btn btn-primary segment-click"
+                       href="{{ fixed_consumption.url }}" {% if fixed_consumption.new_page == 1 %} target="_blank" {% endif %}  data-segment-event="TBO - Visualizar Consumos - Consulta"
+                       data-segment-properties='{"category":"Portafolio de Servicios","label":"{[{ title_detalle }]} - {[{service_type}]}","site":"NEW"}'>
+                      {{ fixed_consumption.label }}
+                    </a>
+                  {% elseif fixed_consumption.show == 1 %}
+                    <a class="waves-effect waves-light btn btn-primary enlace-a-ver-consumos" href="{{ fixed_consumption.url_mobile }}">
+                      {{ fixed_consumption.label_mobile }}
+                    </a>
+                  {% endif %}
+                </div>
+
+                <!-- Modal Structure -->
+                {% if buttons.view_details.show == 1 %}
+                  <div id="DetalleVerProductoModal" class="modal"
+                       data-ng-complete-enter>
+                    <div class="modal-content clearfix">
+                      {% if modal_title.show == 1 %}
+                        <h3 class="title">{{ modal_title.label }}</h3>
+                      {% endif %}
+
+                      <div class="ctn-info-modal clearfix">
+                        {% for modal in filters %}
+                          <!--Details-->
+                          {% if modal.service_field == "plan" %}
+                            <div class="plan col s12">
+                              <p class="field-label col s4">{{ modal.label }}
+                                :</p>
+                              <p class="col s8">{[{ plan }]}</p>
+                            </div>
+                          {% elseif modal.service_field == "id" %}
+                            <div class="id col s12">
+                              <p class="field-label col s4">{{ modal.label }}
+                                :</p>
+                              <p class="col s8">{[{ id_device }]}</p>
+                            </div>
+                          {% elseif modal.service_field == "serial" %}
+                            <div class="serial col s12">
+                              <p class="field-label col s4">{{ modal.label }}
+                                :</p>
+                              <p class="col s8">{[{ serial }]}</p>
+                            </div>
+                          {% elseif modal.service_field == "equipo" %}
+                            <div class="equipo col s12">
+                              <p class="field-label col s4">{{ modal.label }}
+                                :</p>
+                              <p class="col s8">{[{ equipment }]}</p>
+                            </div>
+                          {% elseif modal.service_field == "date" %}
+                            <div class="date col s12">
+                              <p class="field-label col s4">{{ modal.label }}
+                                :</p>
+                              <p class="col s8">{[{ date }]}</p>
+                            </div>
+                          {% elseif modal.service_field == "contract" %}
+                            <div class="contract col s12">
+                              <p class="field-label col s4">{{ modal.label }}
+                                :</p>
+                              <p class="col s8">{[{ contract }]}</p>
+                            </div>
+                          {% elseif modal.service_field == "address" %}
+                            <div class="address col s12">
+                              <p class="field-label col s4">{{ modal.label }}
+                                :</p>
+                              <p class="col s8">{[{ address }]}</p>
+                            </div>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+
+                      <!--Button Close-->
+                      {% if buttons.close.show == 1 %}
+                        <a
+                          class="modal-close-b2b portfolio-details waves-effect waves-light btn btn-second modal-action modal-close"
+                          href="#"
+                          {% if buttons.close.active == 0 %} disabled {% endif %}
+                        >{{ buttons.close.label }}</a>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}

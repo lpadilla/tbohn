@@ -1,0 +1,5 @@
+name: tbo_entities
+type: module
+description: Modulo que contiene todas las entidades necesarias para tbo
+core: 8.x
+package: Custom

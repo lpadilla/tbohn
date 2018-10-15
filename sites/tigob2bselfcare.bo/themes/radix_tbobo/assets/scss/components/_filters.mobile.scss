@@ -1,0 +1,365 @@
+.filters-mobile{
+  display: block;
+  background-color: white;
+  @media #{$large-and-up} {
+    display: none;
+  }
+  .title-invoice-type{
+    display: none;
+    @media #{$large-and-up} {
+      display: block;
+    }
+  }
+  #option-menu-billing{
+   form{
+     margin: 0;
+     .row{
+       margin: 0;
+       width: 100%;
+       .input-field{
+         &.radio{
+           padding: 0;
+           margin: 12px 0 11px 0;
+           label{
+             left: -4px;
+             padding-left: 26px;
+             font-size: 14px;
+             line-height: 28px;
+           }
+         }
+       }
+     }
+   }
+  }
+  .mobile-menu-filter-button {
+    .icon-filter{
+      text-align: right;
+      display: flex;
+      justify-content: space-between;
+      height: 48px;
+      width: 76px;
+      float: right;
+
+      > span{
+        font-size: 16px;
+        line-height: 16px;
+        color:$blue-tigo;
+        float: left;
+        margin-top: 19px;
+        font-weight: $medium;
+        top:0;
+      }
+      .prefix {
+        position: relative;
+        top: 16px;
+        float: right;
+        height: 28px;
+        cursor: pointer;
+       // margin-right: 4px;
+        .path1{
+          position: inherit;
+          margin-top: 0;
+        }
+        .path2{
+          margin-top: 0;
+        }
+      }
+    }
+  }
+  .filters-mobile-container{
+    clear: both;
+    position: fixed;
+    top:0;
+    background-color: white;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    &.closed{
+      -webkit-transform: translateX(100%);
+      -moz-transform: translateX(100%);
+      -o-transform: translateX(100%);
+      -ms-transform: translateX(100%);
+      transform: translateX(100%);
+
+    }
+    .window-firts{
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      z-index: 2;
+      .header-filter{
+        background-color:$blue-tigo;
+        padding: 17px 21px;
+        position: relative;
+        a.closed{
+          color:$cyan-tigo;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 20px;
+          position: absolute;
+          right: 22px;
+          top: 19px;
+        }
+        label{
+          color: white;
+          font-size: 18px;
+          line-height: 16px;
+          font-weight: 300;
+        }
+      }
+      #filters-mobile{
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        .items-filter{
+          border-bottom: 1px solid #879AB8;
+          position: relative;
+          span{
+            padding: 15px 22px;
+            color:#717580;
+            display: block;
+            text-align: left;
+            position: relative;
+            font-size: 16px;
+            line-height: 16px;
+            .icons{
+              position: absolute;
+              right: 22px;
+              width: 20px;
+              height: 20px;
+              top: 16px;
+              text-align: center;
+              vertical-align: middle;
+              display: table-cell;
+              &:before {
+                @include iconos-material('Material Icons', 'chevron_right', 16px, bold);
+                color:$cyan-tigo;
+                margin: 0;
+              }
+            }
+          }
+          &#openM-reference{
+            span{
+              &:before {
+                @include iconos-material('tigouneico', '\e9a8', 16px, bold);
+                color:$blue-tigo;
+              }
+            }
+          }
+          &#openM-address{
+            span{
+              &:before {
+                @include iconos-material('tigouneico', '\e9a9', 16px, bold);
+                color:$blue-tigo;
+              }
+            }
+          }
+          &#openM-contract{
+            span{
+              &:before {
+                @include iconos-material('tigouneico', '\e936', 16px, bold);
+                color:$blue-tigo;
+              }
+            }
+          }
+          &#openM-invoices{
+            span{
+              &:before {
+                @include iconos-material('tigouneico', '\e914', 16px, bold);
+                color:$blue-tigo;
+              }
+              &:after{
+                @include iconos-material('tigouneico', '\e915', 16px, bold);
+                color:$blue-tigo;
+                position: absolute;
+                left:22px;
+              }
+            }
+          }
+          &#openM-order{
+            span{
+              &:before {
+                content: '';
+                background:url('../images/icon_order.svg') top left no-repeat;
+                width: 16px;
+                display: inline-block;
+                height: 12px;
+                font-weight: bolder;
+                margin-right: 6px;
+              }
+            }
+          }
+        }
+        .btn{
+          margin: 20px auto;
+        }
+      }
+    }
+    .window-second{
+      position: relative;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      //z-index: 3;
+      margin: 0;
+      .form-group{
+        .filters-mobile{
+          height: 100%;
+          .row{
+            height: 100%;
+            .filter-mobile{
+              display: none;
+              overflow: hidden;
+              height: 100%;
+              .header-filter{
+                background-color:$blue-tigo;
+                padding: 17px 21px;
+                position: relative;
+                a.closed{
+                  color:$cyan-tigo;
+                  font-weight: 300;
+                  font-size: 16px;
+                  line-height: 16px;
+                  position: absolute;
+                  right: 22px;
+                  top: 19px;
+                }
+                .label{
+                  color: white;
+                  font-size: 20px;
+                  line-height: 20px;
+                  font-weight: 300;
+                  text-transform: capitalize;
+                  display: inline-block;
+                  span{
+                    display: inline-block;
+                    color:$cyan-tigo;
+                    font-weight: 300;
+                    font-size: 20px;
+                    width: 20px;
+                    height: 14px;
+                  }
+                }
+              }
+              .input-field{
+                padding: 0 21px;
+                .tags-cloud{
+                  position: relative;
+                  label{
+                    left: 0;
+                  }
+                }
+                ul{
+                  li{
+                    label{
+                      line-height: 25px;
+                      top:0;
+                      width: 100%;
+                      left: 0;
+                      margin: 0;
+                      padding: 0;
+                      font-weight: 400;
+                    }
+                    [type="checkbox"].filled-in:not(:checked) + label:after,
+                    [type="checkbox"].filled-in:checked + label:after{
+                      position: inherit;
+                      float: right;
+                    }
+                    [type="checkbox"].filled-in:checked + label:before{
+                      float: right;
+                      position: relative;
+                      left: -18px;
+                    }
+                  }
+                }
+                p{
+                  [type="radio"] + label:before,
+                  [type="radio"] + label:after{
+                    position: inherit;
+                    float: right;
+                  }
+                  [type="radio"] + label:after{
+                    margin-right: -20px;
+                  }
+                }
+                .autocomplete-address-mobile{
+                  border-bottom: 1px solid #879AB8;
+                  padding: 0 21px;
+                  input{
+
+                  }
+                }
+              }
+              p{
+                border-bottom: 1px solid #879AB8;
+                padding: 10px 21px;
+                margin: 0;
+                label{
+                  line-height: 25px;
+                  top:0;
+                  width: 100%;
+                  left: 0;
+                  margin: 0;
+                  padding: 0;
+                  font-weight: 400;
+                }
+                [type="checkbox"] + label:before,
+                [type="checkbox"]:not(.filled-in) + label:after{
+                  position: inherit;
+                  float: right;
+                }
+                &.active{
+                  background-color: #C4C6CB;
+                  label{
+                    color:$blue-tigo;
+                    font-weight: 500;
+
+                  }
+                }
+              }
+              &.address, &.contract, &.invoices, &.order{
+                .input-field{
+                  padding: 0;
+                  margin-top: 0;
+                  width: 100%;
+                  ul{
+                    margin: 0;
+                    li{
+                      border-bottom: 1px solid #879AB8;
+                      padding: 10px 21px;
+                      &.active{
+                        background-color: #C4C6CB;
+                        label{
+                          color:$blue-tigo;
+                          font-weight: 500;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .row{
+    .select-wrapper{
+      ul.dropdown-content{
+        li:first-child{
+          display: none;
+        }
+      }
+    }
+  }
+}

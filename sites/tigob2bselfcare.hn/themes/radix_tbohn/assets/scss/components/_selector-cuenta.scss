@@ -1,0 +1,100 @@
+.selector-cuenta {
+  position: relative;
+  top: 70px;
+  padding: 20px 5px;
+  max-width: 398px;
+  width: 90%;
+  margin: 0 auto;
+
+  // @media only screen and (max-width: 1024px) {
+  //   -webkit-transform: translate(-50%, 5%);
+  //   transform: translate(-50%, 5%);
+  // }
+
+  .page-header { display: block !important; }
+
+  .block--radix-tbo-page-title .page-title {
+    margin-top: 0;
+    text-align: center;
+  }
+
+  .container-selector-company {
+    .selector-company {
+      display: block;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .company-ctn {
+      position: relative;
+      display: block;
+      padding: 20px 0;
+      width: 100%;
+      border-top: 1px solid #7F9ABA;
+
+      &:last-child { border-bottom: 1px solid #7F9ABA; }
+
+      .company-container {
+        display: flex;
+        img {
+          // position: absolute;
+          border-radius: 23px;
+          background-size: cover;
+          background-position: center center;
+          background-repeat: no-repeat;
+          max-width: 43px;
+          height: auto;
+          background-color: white;
+          @media #{$large-and-up} {
+            max-width:50px;
+          }
+        }
+
+        .company-info {
+          display: inline-block;
+          float: left;
+          margin-top: 8px;
+          @media #{$large-and-up} {
+            margin-left: 15px;
+          }
+          .company-info-name {
+            color: $blue-tigo;
+            font-size: 16px;
+          }
+
+          .company-info-mail {
+            color: $gray-tigo;
+            font-size: 16px;
+          }
+        }
+
+        .arrow {
+          position: absolute;
+          // top: 45%;
+          display: inline-block;
+          right: 5px;
+          
+          background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3LjQxIDEyIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzQzYzdmNDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPlJlY3Vyc28gNTwvdGl0bGU+PGcgaWQ9IkNhcGFfMiIgZGF0YS1uYW1lPSJDYXBhIDIiPjxnIGlkPSJDYXBhXzEtMiIgZGF0YS1uYW1lPSJDYXBhIDEiPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTAsMTAuNTksNC41OCw2LDAsMS40MSwxLjQxLDBsNiw2LTYsNloiLz48L2c+PC9nPjwvc3ZnPg==);
+          background-position: center;
+          background-size: 7px 12px;
+          background-repeat: no-repeat;
+          color: transparent;
+          width: 7px;
+          height: 12px;
+          @media #{$large-and-up} {
+            right: 12px;
+          }            
+        }
+      }
+    }
+
+    .action {
+      display: inline-block;
+      margin-top: 35px;
+      width: 100%;
+      color: $blue-tigo;
+      text-align: center;
+      font-size: 14px;
+    }
+  }
+}

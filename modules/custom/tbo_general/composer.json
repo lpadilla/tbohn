@@ -1,0 +1,14 @@
+{
+  "name": "drupal/tbo_general",
+  "type": "drupal-module",
+  "description": "Modulo con todas las funciones transverales a los demas modulos de tbo",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/tbo_general",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/tbo_general",
+    "source": "http://cgit.drupalcode.org/tbo_general"
+  },
+  "require": { }
+}

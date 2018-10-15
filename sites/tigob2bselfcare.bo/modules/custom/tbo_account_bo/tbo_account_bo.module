@@ -1,0 +1,114 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_account_bo.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_account_bo_theme($existing, $type, $theme, $path) {
+  return array(
+    'users_list_bo' => array(
+      'variables' => array(
+        'uuid' => NULL,
+        'config' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'directive' => NULL,
+        'title' => NULL,
+        'class' => NULL,
+        'form' => NULL,
+        'margin' => NULL,
+        'show_form' => FALSE,
+      ),
+      'template' => 'block--users-list-bo',
+    ),
+     'manage_company_bo' => array(
+      'variables' => array(
+        'uuid' => NULL,
+        'filters' => NULL,
+        'form' => NULL,
+        'fields' => NULL,
+        'class' => NULL,
+        'margin' => NULL,
+        'title' => NULL,
+        'directive' => NULL,
+      ),
+      'template' => 'block--manage-company-bo',
+    ),
+    're_assing_business_between_users_tigo_admin_bo' => array(
+      'variables' => array(
+        'uuid' => NULL,
+        'config' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'usrtigo' => NULL,
+        'lsttigos' => NULL,
+        'directive' => NULL,
+        'class' => NULL,
+        'title' => NULL,
+        'margin' => NULL,
+      ),
+      'template' => 'block--re-assign-business-between-users-tigo-admin-bo',
+    ),
+    'tigo_admin_list_bo' => array(
+      'variables' => array(
+        'uuid' => NULL,
+        'config' => NULL,
+        'filters' => NULL,
+        'fields' => NULL,
+				'form' => NULL,
+        'directive' => NULL,
+        'class' => NULL,
+        'modal' => NULL,
+        'title' => NULL,
+        'margin' => NULL,
+        'url_config' => NULL,
+      ),
+      'template' => 'block--tigo-admin-list-bo',
+      ),
+    'companies_list_bo' => array(
+      'variables' => array(
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'form' => NULL,
+        'modal' => [],
+        'title' => NULL,
+        'class' => NULL,
+        'margin' => NULL,
+      ),
+      'template' => 'block--companies-list-bo',
+    ),
+    'tigo_admin_list_companies_bo' => array(
+      'variables' => array(
+        'uuid' => NULL,
+        'filters' => NULL,
+        'headers_table' => NULL,
+      ),
+      'template' => 'block--tigo-admin-list-companies-bo',
+    ),
+    'create_user_bo' => array(
+      'variables' => array(
+        'uuid' => NULL,
+        'config' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'form' => NULL,
+        'modal' => [],
+        'directive' => NULL,
+        'title' => NULL,
+        'class' => NULL,
+        'margin' => NULL,
+      ),
+      'template' => 'block--create-user-bo',
+    ),
+  );
+  
+}

@@ -1,0 +1,70 @@
+.wrapper-create{
+  position: relative;
+  @media #{$large-and-up} {
+    //padding-top: 56px;
+  }
+  form{
+    //margin-top: 8px;
+  }
+  .user-modal-form{
+    @media #{$large-and-up} {
+      position: absolute;
+      right: 0;
+      top:0;
+    }
+  }
+}
+
+.data{
+  table.striped{
+    thead{
+      tr {
+        th {
+          @media #{$medium-and-up}{
+            max-width: 51px;
+            width: 17%;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        td{
+          @media #{$medium-and-up}{
+            text-align: center;
+            max-width: 51px;
+            width: 17%;
+          }
+        }
+      }
+    }
+  }
+}
+
+.filter-users {
+  .filters {
+    .input-field {
+      &:first-child { height: 46px; }
+    }
+  }
+}
+
+.data-users {
+  table.striped {
+    thead tr th,
+    tbody tr td {
+      width: 10%;
+
+      @media only screen and (min-width: 992px) {
+        min-width: 100px;
+        word-wrap: break-word;
+        max-width: 51px;
+      }
+
+      @media only screen and (max-width: 992px) {
+        width: 70%;
+        min-width: 78px;
+      }
+    }
+  }
+}

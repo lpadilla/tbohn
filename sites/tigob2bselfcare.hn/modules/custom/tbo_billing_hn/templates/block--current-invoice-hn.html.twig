@@ -1,0 +1,555 @@
+{% extends 'block__card_base_hn.html.twig' %}
+
+{% if showoptions %}
+  {% block filters %}
+    {% if filters is not empty %}
+      <!-- Add Filters -->
+      <div class="card-block wrapper-filter">
+        <div class="box-body">
+          <div class="row {% if margin %}{% if margin.show_margin_filter == false %} mb-0 {% endif %}{% endif %}">
+            <div class="col s12">
+              <div class="card gray-card clearfix">
+                <div class="col s12">
+                  <form class="" data-ng-submit="filterCompanies()">
+                    <div class="row">
+                      {% for filter in filters %}
+                        {{ widgets.validate_style( filter.label, filter, filter.class) }}
+                      {% endfor %}
+                    </div>
+                    {% if filters is not empty %}
+                    <div class="row">
+                        <div class="col input-field s12 m12 l12">
+                           <button class="right waves-effect waves-light btn btn-primary" ng-click="aplyCurrentInvoice()" type="submit">{{ 'Aplicar' | t }} </button>
+                           <input type="reset" ng-click="filtersclear()" value="limpiar" class="right btn btn-clear click-filter-reset">
+                        </div>
+                    </div>
+                  {% endif %}
+
+                  </form>
+                </div>
+              </div><!-- cierro filter-desktop -->
+            </div>
+          </div>
+        </div>
+      </div><!--cierro wrapper-filter-->
+    {% endif %}
+    <!-- open/close mobile filters -->
+    <!-- open/close mobile filters -->
+    <div class="filters-mobile hide-class">
+      <!-- filtros de cabecera -->
+      <div class="row">
+        <div id="option-menu-billing" class="col s8 m10 l10">
+          <form>
+            <div class="row">
+              <form action="#">
+                <div class="input-field col s5 m2 l5 form-type-radio form-item-invoice-history-environment radio">
+                  <input class="with-gap" name="group1" type="radio" id="mobile" ng-model='result' ng-value='"movil"'
+                         ng-click="changeEnvironment('mobile')" checked>
+                  <label for="mobile">{{ 'Móvil' | t }} </label>
+                </div>
+                <div class="input-field col s5 m2 l5 form-type-radio form-item-invoice-history-environment radio">
+                  <input class="with-gap" name="group1" type="radio" id="fixed" ng-model='result' ng-value='"fijo"'
+                         ng-click="changeEnvironment('fixed')">
+                  <label for="fixed">{{ 'Fijo' | t }} </label>
+                </div>
+              </form>
+            </div>
+          </form>
+        </div>
+        <!--cierro option-menu-billing -->
+        <!-- bton de la primera cortina -->
+        <div id="mobile-menu-filter-button" class="mobile-menu-filter-button col s4 m2 l2">
+          <div class="icon-filter">
+            <span>Filtros</span>
+            <i id="closed-btn-1" ng-click="openCloseFilters()" class="prefix icon-filters-cyan closed">
+              <span class="path1"></span>
+              <span class="path2"></span>
+            </i>
+          </div>
+        </div>
+      </div><!--cierro row -->
+
+
+      <div class="filters-mobile-container closed" id="filters-mobile-container">
+        <!-- primera ventana -->
+        <div class="mobile-menu-filters window-firts" id="mobile-menu-filters">
+          <!--cabecera-->
+          <div class="header-filter">
+            <a class="closed" ng-click="closeFunction()">X</a>
+            <label ng-if="title == 'FACTURA DE SERVICIOS MOVILES'">
+              {{ 'Filtros' | t }} -{[{invoicesLength}]} {{ 'facturas moviles' | t }} 
+            </label>
+            <label ng-if="title == 'FACTURA DE SERVICIOS FIJOS'">
+              {{ 'Filtros' | t }} - {[{invoicesLength}]} {{ 'facturas fijas' | t }} 
+            </label>
+          </div>
+          <!--contendio-->
+          <div id="filters-mobile">
+            {% for filter in filters_mobile %}
+              <div class="items-filter" ng-click="showHideFilter('{{ filter.identifier }}')"
+                   id="openM-{{ filter.identifier }}">
+                <span>{{ filter.label }} <i id="{{ filter.identifier }}" class="icons closed"></i></span>
+              </div>
+            {% endfor %}
+            <button class="waves-effect waves-light btn btn-primary"
+                    ng-click="filterFunctionMobile()">{{ 'LISTO' | t }} 
+            </button>
+          </div>
+        </div><!--cierro window-firts-->
+      <!-- Segunda ventana -->
+        <form class="form-filtros-interno window-second"
+              data-ng-submit="filterCompanies()" id="form-filtros-interno">
+          <div class="form-group">
+            <div class="filters filters-mobile">
+              <div class="row">
+                {% for filter in filters %}
+                  <div class="filter-mobile {{ filter.identifier }}"
+                       id="filterM-{{ filter.identifier }}"
+                       style="display: none">
+                    <div class="header-filter">
+                      <div ng-click="hideFilter('{{ filter.identifier }}')"
+                           id="closeM-{{ filter.identifier }}" class="label">
+                        <span class="volver"><-</span> {{ filter.label }}
+                      </div>
+                      <a class="closed" ng-click="closeFunction()"> X</a>
+                    </div>
+
+                    {% if filter.identifier == 'reference' %}
+                      <div class="tags-wrapper" ng-mouseleave="closeSuggestions()">
+                        <div id="tagsList" class="tags-cloud">
+                          {% if value.validate_length %}
+                          
+                            <input id="{{ filter.identifier }}-mobile" data-ng-model="{{ filter.identifier }}"
+                                   class="form-control format-moments2"
+                                   ng-click="searchReference('{{ filter.identifier }}')"
+                                   ng-change="searchReference('{{ filter.identifier }}')" type="text"
+                                   autocomplete="off"
+                                   ng-keydown="checkKeyDownReference($event, '{{ filter.identifier }}')"
+                                   maxlength="{{ filter.validate_length }}"/>
+                          {% else %}
+                            <input id="{{ filter.identifier }}-mobile" data-ng-model="{{ filter.identifier }}"
+                                   class="form-control format-moments2"
+                                   ng-click="searchReference('{{ filter.identifier }}')"
+                                   ng-change="searchReference('{{ filter.identifier }}')" type="text"
+                                   autocomplete="off"
+                                   ng-keydown="checkKeyDownReference($event, '{{ filter.identifier }}')"/>
+                          {% endif %}
+                        </div>
+                        <div id="suggestions" class="collection" style="border: none;">
+                          <div id="suggestionsReference">
+                            <ul>
+                              <li class="collection-item" ng-repeat="suggestion in suggestionsReference"
+                                  ng-click="resultClickedReference($index, '{{ filter.identifier }}-mobile')"
+                                  ng-mouseover="$parent.selectedIndexReference=$index"
+                                  ng-class="{active : selectedIndexReference===$index}">
+                                {[{suggestion.name}]}
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    {% else %}
+                      {% if filter.identifier == 'invoices' %}
+                        <form action="#">
+                          <ul>
+                            <li ng-repeat="value in invoicesFilterOptions">
+                              <input class="" name="group1" type="checkbox" id="{[{value.key}]}"
+                                     ng-click="filtersChangeMobile('invoices', value.Selected, $event)"
+                                     ng-model="value.Selected"/>
+                              <label for="{[{ value.key }]}">{[{value.name}]}</label>
+                            </li>
+                          </ul>
+                        </form>
+                      {% endif %}
+
+                      <div class="input-field  content-row col m3 s12">
+                        {% if filter.identifier == 'contract' %}
+                          <div class="autocomplete-contract-mobile">
+                            <input id="{{ filter.identifier }}"
+                                   data-ng-model="{{ filter.identifier }}"
+                                   class="form-control format-moments2"
+                                   ng-change="searchContract('{{ filter.identifier }}')"
+                                   type="text" autocomplete="off"
+                                   ng-keydown="checkKeyDownContract($event, '{{ filter.identifier }}')"/>
+                            <label for="{{ filter.identifier }}" class="" style="display: none">{{ filter.label }}:</label>
+                          </div>
+                          <div class="multiple-select-contract-mobile" id="multiple-select-contract-mobile">
+                            <ul>
+                              <li class="x" ng-repeat="item in suggestionsContractMobile">
+                                <input class="filled-in" type="checkbox" id="{[{item.name}]}" ng-model="checked" ng-click="filtersChangeMobile('contract',checked, $event)"/>
+                                <label ng-bind-html="item.name" for="{[{item.name}]}"></label>
+                              </li>
+                            </ul>
+                          </div>
+                        {% endif %}
+                      <div class="input-field content-row col m3 s12">
+                        {% if filter.identifier == 'address' %}
+                          <div class="autocomplete-address-mobile">
+                            <input id="{{ filter.identifier }}"
+                                   data-ng-model="{{ filter.identifier }}"
+                                   class="form-control format-moments2"
+                                   ng-change="searchAddress('{{ filter.identifier }}')"
+                                   type="text" autocomplete="off"
+                                   ng-keydown="checkKeyDownAddress($event, '{{ filter.identifier }}')"/>
+                            <label for="{{ filter.identifier }}" class=""
+                                   style="display: none">{{ label }}:</label>
+                          </div>
+                          <div class="multiple-select-address-mobile" id="multiple-select-address-mobile">
+                            <ul>
+                              <li ng-repeat="item in suggestionsAddressMobile">
+                                <input class="filled-in" type="checkbox" id="{[{item.name}]}" ng-model="checked" ng-click="filtersChangeMobile('address',checked, $event)"/>
+                                <label ng-bind-html="item.name" for="{[{item.name}]}"></label>
+                              </li>
+                            </ul>
+                          </div>
+                        {% endif %}
+                      </div>
+                      <div class="input-field content-row col m3 s12">
+                        {% if filter.identifier == 'linea' %}
+                          <div class="autocomplete-linea-mobile">
+                            <input id="{{ filter.identifier }}"
+                                   data-ng-model="{{ filter.identifier }}"
+                                   class="form-control format-moments2"
+                                   ng-change="searchLinea('{{ filter.identifier }}')"
+                                   type="text" autocomplete="off"
+                                   ng-keydown="checkKeyDownLinea($event, '{{ filter.identifier }}')"/>
+                            <label for="{{ filter.identifier }}" class=""
+                                   style="display: none">{{ label }}:</label>
+                          </div>
+                          <div class="multiple-select-linea-mobile" id="multiple-select-linea-mobile">
+                            <ul>
+                              <li ng-repeat="item in suggestionsLineaMobile">
+                                <input class="filled-in" type="checkbox" id="{[{item.name}]}" ng-model="checked" ng-click="filtersChangeMobile('linea',checked, $event)"/>
+                                <label ng-bind-html="item.name" for="{[{item.name}]}"></label>
+                              </li>
+                            </ul>
+                          </div>
+                        {% endif %}
+                      </div>   
+                        {% if filter.identifier == 'order' %}
+                          <form action="#">
+                            {% for key,value in filter.options %}
+                              <p>
+                                <input class="with-gap" name="group1"
+                                       type="radio" id="{{ value }}"
+                                       ng-click="filtersChangeMobile('order', checked, $event)"/>
+                                <label for="{{ value }}">{{ value }}</label>
+                              </p>
+                            {% endfor %}
+                          </form>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <h5 class="title-front hide-on-med-and-down">
+        {[{ title }]}
+      </h5>
+    </div>
+  {% endblock %}
+{% endif %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+  <div class="card-block block-invoice" infinite-scroll="loadMore()" infinite-scroll-distance="1">
+    <div class="box-body">
+      <h5 class="title-front hide-on-med-and-down">
+        {[{ title }]}
+      </h5>
+      <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+        <div class="col s12">
+          <div ng-repeat="invoice in invoices | filter : { address : '!!' } track by $index" ng-class="{true: 'wrapper-card invoice-row', false: 'other-class invoice-row'}[invoice.address_show == 1]" ng-init="parentIndex = $index">
+            {% for field in fields %}
+              {% if field.service_field == 'address' %}
+                <div class="address" ng-if="invoice.address_show">{[{invoice.address }]}</div>
+              {% endif %}
+            {% endfor %}
+            <div class="card clearfix white invoice-content">
+              <div class="col s12 m12 l12 xl9 content">
+                <div class="box-bill col row s12">
+                  <div class="column-left col s12 m12 l4 xl4">
+                    <div class="left card-icon">
+                      <i class="prefix" ng-class="title == 'FACTURA DE SERVICIOS FIJOS' ? 'icon-business-cyan' : 'icon-mobilephone-cyan'">
+                      
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                      </i>
+                    </div>
+                    {% for field in fields %}
+                      {% if field.position == 'left' %}
+                        {% if field.service_field == 'invoice_value' %}
+                          <p class="label">{{ field.label }}</p>
+                          <h2 class="valor-factura">{[{ invoice.invoice_value2 }]}</h2>
+                        {% endif %}
+                        {% if field.service_field == 'date_payment' %}
+                          <p class="label fecha-factura col s7 l12 push-l3">
+                            <strong>{{ field.label }}:</strong> {[{invoice.date_payment2}]}</p>
+                        {% endif %}
+                        {% if field.service_field == 'status' %}
+                          <span
+                              ng-if="!invoice.status_invoice && !invoice.alert"
+                              class="alerta red col s5 l6 push-l3">{{ 'Factura Vencida' | t }} 
+                              <span class="icon-info">
+                                {# <span class="path1"></span>
+                                <span class="path2"></span> #}
+                              </span>
+                            </span>
+                          </span>
+                          <span ng-if="invoice.adjustment != 'Normal' && invoice.alert && result == 'fijo'"
+                                class="alerta green col s5 l6 push-l3">{{ 'Factura Ajustada' | t }} 
+                              <span class="icon-info">
+                                {# <span class="path1"></span>
+                                <span class="path2"></span> #}
+                              </span>
+                            </span>
+                          </span>
+                        {% endif %}
+                        {% if field.service_field == 'invoiceId' %}
+                          <p class="label">{{ field.label }}</p>
+                          <p class="info">{[{invoice.invoiceId}]}</p>                          
+                        {% endif %}
+                        {% if field.service_field == 'period' %}
+                          <p>{{ field.label }}</p>
+                          <p>{[{invoice.period}]}</p>
+                        {% endif %}
+                        {% if field.service_field == 'contract' %}
+                          <p>{{ field.label }}</p>
+                          <p>{[{invoice.contract}]}</p>
+                        {% endif %}
+                        {% if field.service_field == 'payment_reference' %}
+                          <p>{{ field.label }}</p>
+                          <p>{[{invoice.payment_reference}]}</p>
+                        {% endif %}
+                        
+                        
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                  <div class="column-right col s12 m12 l10 xl8 hide-on-med-and-down">
+                    {% for field in fields %}
+                      {% if field.position == 'right' %}
+                        {% if field.service_field == 'invoice_value' %}
+                          <div class="card-content-right col s4">
+                            <p>{{ field.label }}</p>
+                            <h2>{[{ invoice.invoice_value2 }]}</h2>
+                          </div>
+                        {% endif %}
+                        {% if field.service_field == 'date_payment' %}
+                          <div class="card-content-right col s4">
+                            <p>
+                              <strong>{{ field.label }}: </strong>{[{invoice.date_payment2}]}
+                            </p>
+                          </div>
+                        {% endif %}
+                        {% if field.service_field == 'status' %}
+                          <span
+                              ng-if="!invoice.status_invoice && !invoice.alert"
+                              class="alerta red col s4 l6">{{ 'Factura Vencida' | t }} 
+                            <span class="icon-info">
+                              <span class="path1"></span>
+                              <span class="path2"></span>
+                            </span>
+                          </span>
+                          <span ng-if="invoice.adjustment != 'Normal' && invoice.alert && result == 'fijo'"
+                                class="alerta green col s4 l6">{{ 'Factura Ajustada' | t }} 
+                            <span class="icon-info">
+                              <span class="path1"></span>
+                              <span class="path2"></span>
+                            </span>
+                          </span>
+                        {% endif %}
+                        {% if field.service_field == 'invoiceId' %}
+                          <div class="card-content-right col s3 ">
+                            <div class="box-align">
+                              <p class="label">{{ field.label }}</p>
+                              <p class="info">{[{invoice.invoiceId}]}</p>
+                            </div>
+                          </div>
+                        {% endif %}
+                        {% if field.service_field == 'period' %}
+                          <div class="card-content-right col s3 ">
+                            <div class="box-align">
+                              <p class="label">{{ field.label }}</p>
+                              <p class="info">{[{invoice.period}]}</p>
+                            </div>
+                          </div>
+                        {% endif %}
+                         {% if field.service_field == 'cai' %}
+                          <div class="card-content-right col s6">
+                            <div class="box-align">
+                              <p class="label">{{ field.label }}</p>
+                              <p class="info">{[{invoice.cai}]}</p>
+                            </div>
+                          </div>
+                        {% endif %}                        
+                        {% if field.service_field == 'address'%}
+                          <div class="card-content-left col s12"  ng-show="title == 'FACTURA DE SERVICIOS FIJOS' ? true : false">
+                            <div class="box-align">                              
+                                <p class="label">{{ field.label }}</p>
+                                <p class="info">{[{invoice.addressActual}]}</p>                              
+                            </div>
+                          </div>
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+
+                  <div class="column-left col s12 m12 l4 xl4 hide-on-large-only show-on-medium-and-down">
+                    {% for field in fields %}
+                      {% if field.service_field == 'invoiceId' %}
+                          <div class="card-content-right col s6 ">
+                            <div class="box-align">
+                              <p class="label">{{ field.label }}</p>
+                              <p class="info">{[{invoice.invoiceId}]}</p>
+                            </div>
+                          </div>
+                        {% endif %}
+                        {% if field.service_field == 'period' %}
+                          <div class="card-content-right col s6 ">
+                            <div class="box-align">
+                              <p class="label">{{ field.label }}</p>
+                              <p class="info">{[{invoice.period}]}</p>
+                            </div>
+                          </div>
+                        {% endif %}
+                         {% if field.service_field == 'cai' %}
+                          <div class="card-content-right col 12">
+                            <div class="box-align">
+                              <p class="label">{{ field.label }}</p>
+                              <p class="info">{[{invoice.cai}]}</p>
+                            </div>
+                          </div>
+                        {% endif %}                        
+                        {% if field.service_field == 'address'%}
+                          <div class="card-content-left col s12"  ng-show="title == 'FACTURA DE SERVICIOS FIJOS' ? true : false">
+                            <div class="box-align">                              
+                                <p class="label">{{ field.label }}</p>
+                                <p class="info">{[{invoice.addressActual}]}</p>                              
+                            </div>
+                          </div>
+                        {% endif %}
+                    {% endfor %}
+                  </div>
+                  
+                </div>
+              </div>
+              <!—cierro card-content—>
+              <div class="card-action col s12 m12 l12 xl3 left-desktop ">
+              
+                <a ng-if="isDetails == false" class="waves-effect waves-light btn btn-second"
+                   ng-href="{[{details_url}]}"
+                   ng-click="sendDetail($event, 'NIT', invoice.company_document, invoice.contract, result, true, invoice.payment_reference, invoice.addressActual, invoice.city, invoice.address, invoice.invoiceId, invoice.state, invoice.country, invoice.zipcode, invoice.msisdn)">{{ 'Detalles' | t }}</a>
+              {# 
+                <a ng-if="invoice.status != 'PAGADA' && isDetails == false"
+                   class="waves-effect waves-light btn btn-primary segment-click"
+                   href="/tbo_billing/payment/{[{ result }]}/{[{invoice.contract}]}/{[{invoice.payment_reference}]}/{[{ invoice.invoice_value }]}/{[{invoice.date_payment2}]}/{[{invoice.address}]}"
+                   data-segment-event="TBO - pagar"
+                   data-segment-properties='{"category":"Pago de Factura","label":"Facturas - {[{ environment }]}","value":{[{ invoice.invoice_value }]}}'
+                   data-segment-event-alt="TBO - Días Vencimiento"
+                   data-segment-properties-alt='{"category":"Pago de Factura","label":"{[{ invoice.day_payment }]} - {[{ environment }]}"}'>{{ 'Pagar' | t }} </a>
+                <a ng-if="invoice.status != 'PAGADA' && isDetails == true"
+                   class="waves-effect waves-light btn btn-primary segment-click"
+                   href="/tbo_billing/payment/{[{ result }]}/{[{invoice.contract}]}/{[{invoice.payment_reference}]}/{[{ invoice.invoice_value }]}/{[{invoice.date_payment2}]}/{[{invoice.address}]}"
+                   data-segment-event="TBO - pagar"
+                   data-segment-properties='{"category":"Pago de Factura","label":"Detalle Factura - {[{ environment }]}","value":{[{ invoice.invoice_value }]}}'
+                   data-segment-event-alt="TBO - Días Vencimiento"
+                   data-segment-properties-alt='{"category":"Pago de Factura","label":"{[{ invoice.day_payment }]} - {[{ environment }]}"}'>{{ 'Pagar' | t }} </a>
+              #}
+                <span class="detalle-factura" ng-if="invoice.status == 'PAGADA'">{{ 'PAGADA' | t }} √</span>
+                <span class="detalle-factura pendiente" ng-if="invoice.date_status != 'overdue' && invoice.date_status != 'paid'">{{ 'Pendiente de pago' | t }}  </span>
+                
+              </div>
+              <!—cierro card-action—>
+              <div class="user-options">
+              {% if (more_options.details == 1) or (more_options.simCard_change == 1) or (more_options.assign_contract_name == 1) or (more_options.approval == 1) or (more_options.complaint == 1) or (more_options.download_pdf == 1)%}  
+                <a class='dropdown-button desktop'
+                   ng-attr-data-activates='{[{ $index }]}'
+                   ng-mouseover="initDropdown()"
+                   ng-mouseleave="killDropdown()"><i
+                      class="icon"></i>
+                </a>
+               
+                <a class='dropdown-button mobile'
+                   ng-attr-data-activates='{[{ $index }]}'
+                   ng-click="initDropdown()"
+                   ng-mouseleave="killDropdown()"><i
+                      class="icon"></i>
+                </a>
+                <ul ng-attr-id='{[{ $index }]}' class='dropdown-content'>
+              
+                  {% if more_options.details == 1 %}
+                  <li ng-if="isDetails == false">
+                  {{invoice.msisdn}}
+                    <a ng-href="{[{details_url}]}"
+                       ng-click="sendDetail($event, 'NIT', invoice.company_document, invoice.contract, result, true, invoice.payment_reference, invoice.addressActual, invoice.city, invoice.address, invoice.invoiceId, invoice.state, invoice.country, invoice.msisdn)"
+                       data-segment-event="TBO - Opciones de factura"
+                       data-segment-properties='{"category":"Facturación","label":"Ver Detalles - {[{ environment }]}","site":"NEW"}'
+                       class="segment-click">{{ 'Ver Detalles' | t }} </a>
+                  </li>
+                    {% endif %}
+                  {% if more_options.simCard_change == 1 %}
+                  <li><a href="cambiar-simcard"
+                    data-segment-event="{[{ isDetails ? 'TBO - Detalle de Factura': 'TBO - Opciones de factura' }]}"
+                    data-segment-properties='{"category":"{[{ isDetails ? "Opciones de Factura": "Facturación"}]}","label":"Cambio de SimCard - {[{ environment }]}","site":"NEW"}'
+                    class="segment-click"> {{ 'Cambio de SimCard' | t }}  </a>
+                  </li>
+                  {% endif %}
+
+                 
+                  {% if more_options.assign_contract_name == 1 %}
+                  <li><a href="#"
+                         data-segment-event="{[{ isDetails ? 'TBO - Detalle de Factura': 'TBO - Opciones de factura' }]}"
+                         data-segment-properties='{"category":"{[{ isDetails ? "Opciones de Factura": "Facturación"}]}","label":"Asignar nombre al contrato - {[{ environment }]}","site":"NEW"}'
+                         class="segment-click"> {{ 'Asignar nombre al contrato' | t }}</a>
+                  </li>
+                    {% endif %}
+                  {% if more_options.approval == 1 %}
+                  <li><a href="#"
+                         data-segment-event="{[{ isDetails ? 'TBO - Detalle de Factura': 'TBO - Opciones de factura' }]}"
+                         data-segment-properties='{"category":"{[{ isDetails ? "Opciones de Factura": "Facturación"}]}","label":"Enviar para aprobación - {[{ environment }]}","site":"NEW"}'
+                         class="segment-click"> {{ 'Enviar para aprobación' | t }} </a>
+                  </li>
+                    {% endif %}
+                  {% if more_options.complaint == 1 %}
+                  <li><a href="#"
+                         data-segment-event="{[{ isDetails ? 'TBO - Detalle de Factura': 'TBO - Opciones de factura' }]}"
+                         data-segment-properties='{"category":"{[{ isDetails ? "Opciones de Factura": "Facturación"}]}","label":"Ingresar reclamo de factura - {[{ environment }]}","site":"NEW"}'
+                         class="segment-click">{{ 'Ingresar reclamo de factura' | t }}</a>
+                  </li>
+                    {% endif %}
+                  {% if more_options.download_pdf == 1 %}
+                  <li ng-if="title != 'FACTURA DE SERVICIOS FIJOS'"><a
+                        ng-href="/tbo_billing/download/{[{invoice.contract}]}/movil/{[{invoice.invoiceId}]}"
+                        data-segment-event="{[{ isDetails ? 'TBO - Detalle de Factura': 'TBO - Opciones de factura' }]}"
+                        data-segment-properties='{"category":"{[{ isDetails ? "Opciones de Factura": "Facturación"}]}","label":"Descargar PDF - {[{ environment }]}","values":{[{ invoice.invoice_value }]},"site":"NEW"}'
+                        class="segment-click"
+                        target="_blank">{{ 'Descargar PDF' | t }}</a>
+                  </li>
+                  <li ng-if="title == 'FACTURA DE SERVICIOS FIJOS'"><a
+                        ng-href="/tbo_billing/download/{[{invoice.contract}]}/fijo/{[{invoice.date_payment3}]}"
+                        data-segment-event="{[{ isDetails ? 'TBO - Detalle de Factura': 'TBO - Opciones de factura' }]}"
+                        data-segment-properties='{"category":"{[{ isDetails ? "Opciones de Factura": "Facturación"}]}","label":"Descargar PDF - {[{ environment }]}","values":{[{ invoice.invoice_value }]} ,"site":"NEW"}'
+                        class="segment-click"
+                        target="_blank">{{ 'Descargar PDF' | t }}</a>
+                  </li>
+                
+
+                    {% endif %}
+                </ul>
+                {% endif %} 
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

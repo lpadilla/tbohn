@@ -1,0 +1,4 @@
+services:
+  tbo_mail.send:
+    class: Drupal\tbo_mail\SendMessage
+    arguments: ["@tbo_api.client"]

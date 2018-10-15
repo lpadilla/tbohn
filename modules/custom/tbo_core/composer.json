@@ -1,0 +1,14 @@
+{
+  "name": "drupal/tbo_core",
+  "type": "drupal-module",
+  "description": "custom tbo core module to have all shared functions",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/tbo_core",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/tbo_core",
+    "source": "http://cgit.drupalcode.org/tbo_core"
+  },
+  "require": { }
+}

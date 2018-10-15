@@ -1,0 +1,64 @@
+current-invoice-bo:
+  version: 1.x
+  js:
+    js/directive/current_invoice_bo.js: {}
+    ../../../../../modules/custom/tbo_billing/js/invoices_history_custom.js: {}
+    ../../../../../modules/custom/tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+lineas-bo:
+  version: 1.x
+  css:
+    theme:
+      css/billing_bo.css: {}
+  js:
+    js/directive/lineas-bo.js: {}
+    ../../../../../modules/custom/tbo_general/js/materializeInit.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupalSettings
+      - tbo_general/angular.tbo
+
+service-portfolio-bo:
+  version: 1.x
+  js:
+    js/directive/service_portfolio_bo.js: {}
+    ../../../../../modules/custom/tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo.portfolio
+    - tigoapi_batch/tigoapi.batch
+
+contracts-bo:
+  version: 1.x
+  css:
+    theme:
+      css/contracts_colunm_bo.css: {}
+  js:
+    js/directive/contracts_bo.js: {}
+    ../../../../../modules/custom/tbo_general/js/materializeInit.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupalSettings
+      - tbo_general/angular.tbo
+
+billing_bo:
+  version: 1.x
+  css:
+    theme:
+      css/contracts_colunm_bo.css: {}
+
+facturacion-summary:
+  version: 1.x
+  js:
+    js/directive/facturacion_summary.js: {}
+    ../../../../../modules/custom/tbo_general/js/materializeInit.js: {}
+  dependencies:
+      - core/jquery
+      - core/drupalSettings
+      - tbo_general/angular.tbo
+

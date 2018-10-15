@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_cards.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_cards_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_cards module.
+    case 'help.page.tbo_cards':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Tbo Cards') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_cards_theme() {
+  return [
+    'tbo_cards' => [
+      'template' => 'tbo_cards',
+      'render element' => 'children',
+    ],
+    'card_billing' => [
+      'variables' => [
+        'uuid' => NULL,
+        'config' => NULL,
+        'fields' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--card-billing',
+    ],
+  ];
+}

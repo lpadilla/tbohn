@@ -1,0 +1,263 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_user_tools.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Session\AnonymousUserSession;
+use Drupal\user\Entity\User;
+use Drupal\views\ViewExecutable;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_user_tools_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_user_tools module.
+    case 'help.page.tbo_user_tools':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Module for users tbo') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * {@inheritdoc}
+ */
+function tbo_user_tools_views_pre_render(ViewExecutable $view) {
+  if ($view->id() == "delete_users" && $view->current_display == 'page_1') {
+    // Save audit log.
+    $service = \Drupal::service('tbo_core.audit_log_service');
+    $service->loadName();
+    $detalles = t("Usuario @userName accede a la interfaz de borrar usuarios",
+      [
+        '@userName' => $service->getName(),
+      ]);
+    // Create array data[].
+    $data = [
+      'companyName' => 'No aplica',
+      'companyDocument' => 'No aplica',
+      'companySegment' => 'No aplica',
+      'event_type' => t("Cuenta"),
+      'description' => t("Usuario accede a la interfaz de borrar usuarios"),
+      'details' => $detalles,
+      'old_value' => 'No disponible',
+      'new_value' => 'No disponible',
+    ];
+
+    // Save audit log.
+    $service->insertGenericLog($data);
+
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ *
+ * {@inheritdoc}
+ */
+function tbo_user_tools_user_delete(EntityInterface $entity) {
+  // Get relation id to company.
+  $uid = $entity->id();
+  if ($uid) {
+    $repository = \Drupal::service('tbo_user_tools.repository');
+    $cur = $repository->getUserRelation($uid);
+
+    if ($cur) {
+      // Delete registers to enterprise in table.
+      foreach ($cur as $key => $value) {
+        $entityRelationsCompany = \Drupal::entityTypeManager()
+          ->getStorage('company_user_relations')->load($value->id);
+        $entityRelationsCompany->delete();
+      }
+    }
+
+    // Delete invitations.
+    $invitation_id = $repository->getUserInvitation($uid);
+    if ($invitation_id) {
+      // Delete registers to enterprise in table.
+      $entityInvitation = \Drupal::entityTypeManager()
+        ->getStorage('invitation_access_entity')->load($invitation_id);
+      $entityInvitation->delete();
+    }
+
+    // Delete tigoId.
+    $tid = $repository->deleteUserTigoId($uid);
+
+  }
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function tbo_user_tools_entity_type_alter(array &$entity_types) {
+  $entity_types['user']->setFormClass('cancel', 'Drupal\tbo_user_tools\Form\UserCancelAlterForm');
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function tbo_user_tools_form_views_exposed_form_alter(&$form, $form_state, $form_id) {
+  $view = $form_state->get('view');
+  if (isset($view)) {
+    if ($view->id() == 'delete_users' && $form['#id'] == 'views-exposed-form-delete-users-page-1') {
+      $form['filter_email_delete_user'] = [
+        '#type' => 'email',
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function tbo_user_tools_form_views_form_delete_users_page_1_alter(&$form, $form_state, $form_id) {
+  if ($form['#id'] == 'views-form-delete-users-page-1') {
+    if (isset($form['actions'])) {
+      $form['actions']['submit']['#value'] = t('Borrar todos los usuarios seleccionados');
+    }
+    $form['header']['#attributes'] = [
+      'class' => ['hidden'],
+    ];
+  }
+}
+
+/**
+ * Cancel a user account.
+ *
+ * Since the user cancellation process needs to be run in a batch, either
+ * Form API will invoke it, or batch_process() needs to be invoked after calling
+ * this function and should define the path to redirect to.
+ *
+ * @param array $edit
+ *   An array of submitted form values.
+ * @param int $uid
+ *   The user ID of the user account to cancel.
+ * @param string $method
+ *   The account cancellation method to use.
+ *
+ * @see _user_cancel()
+ */
+function user_cancel_override($edit, $uid, $method) {
+  $account = User::load($uid);
+
+  if (!$account) {
+    drupal_set_message(t('The user account %id does not exist.', ['%id' => $uid]), 'error');
+    \Drupal::logger('user')->error('Attempted to cancel non-existing user account: %id.', ['%id' => $uid]);
+    return;
+  }
+
+  // Initialize batch (to set title).
+  $batch = [
+    'title' => t('Cancelling account'),
+    'operations' => [],
+  ];
+  batch_set($batch);
+
+  // When the 'user_cancel_delete' method is used, user_delete() is called,
+  // which invokes hook_ENTITY_TYPE_predelete() and hook_ENTITY_TYPE_delete()
+  // for the user entity. Modules should use those hooks to respond to the
+  // account deletion.
+  if ($method != 'user_cancel_delete') {
+    // Allow modules to add further sets to this batch.
+    \Drupal::moduleHandler()->invokeAll('user_cancel', [
+      $edit,
+      $account,
+      $method,
+    ]);
+  }
+
+  // Finish the batch and actually cancel the account.
+  $batch = [
+    'title' => t('Cancelling user account'),
+    'operations' => [
+      ['_user_cancel_override', [$edit, $account, $method]],
+    ],
+  ];
+
+  // After cancelling account, ensure that user is logged out.
+  if ($account->id() == \Drupal::currentUser()->id()) {
+    // Batch API stores data in the session, so use the finished operation to
+    // manipulate the current user's session id.
+    $batch['finished'] = '_user_cancel_session_regenerate';
+  }
+
+  batch_set($batch);
+
+  // Batch processing is either handled via Form API or has to be invoked
+  // manually.
+}
+
+/**
+ * Implements callback_batch_operation().
+ *
+ * Last step for cancelling a user account.
+ *
+ * Since batch and session API require a valid user account, the actual
+ * cancellation of a user account needs to happen last.
+ *
+ * @param array $edit
+ *   An array of submitted form values.
+ * @param \Drupal\user\UserInterface $account
+ *   The user ID of the user account to cancel.
+ * @param string $method
+ *   The account cancellation method to use.
+ *
+ * @see user_cancel()
+ */
+function _user_cancel_override($edit, UserInterface $account, $method) {
+  $logger = \Drupal::logger('user');
+
+  switch ($method) {
+    case 'user_cancel_block':
+    case 'user_cancel_block_unpublish':
+    default:
+      // Send account blocked notification if option was checked.
+      if (!empty($edit['user_cancel_notify'])) {
+        _user_mail_notify('status_blocked', $account);
+      }
+      $account->block();
+      $account->save();
+
+      $name = $account->get('full_name')->value;
+      if (empty($name)) {
+        $name = $account->getDisplayName();
+      }
+      drupal_set_message(t('%email has been disabled.', ['%email' => $account->getEmail()]));
+      $logger->notice('Blocked user: %name %email.', ['%name' => $name, '%email' => '<' . $account->getEmail() . '>']);
+      break;
+
+    case 'user_cancel_reassign':
+    case 'user_cancel_delete':
+      // Send account canceled notification if option was checked.
+      if (!empty($edit['user_cancel_notify'])) {
+        _user_mail_notify('status_canceled', $account);
+      }
+      $account->delete();
+      $name = $account->get('full_name')->value;
+      if (empty($name)) {
+        $name = $account->getDisplayName();
+      }
+      drupal_set_message(t('%email has been deleted.', ['%email' => $account->getEmail()]));
+      $logger->notice('Deleted user: %name %email.', ['%name' => $name, '%email' => '<' . $account->getEmail() . '>']);
+      break;
+  }
+
+  // After cancelling account, ensure that user is logged out. We can't destroy
+  // their session though, as we might have information in it, and we can't
+  // regenerate it because batch API uses the session ID, we will regenerate it
+  // in _user_cancel_session_regenerate().
+  if ($account->id() == \Drupal::currentUser()->id()) {
+    \Drupal::currentUser()->setAccount(new AnonymousUserSession());
+  }
+
+}

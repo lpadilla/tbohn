@@ -1,0 +1,20 @@
+tbo_services.change_sim_settings:
+  title: 'TBO Cambiar sim'
+  route_name: tbo_services.change_sim_settings
+  description: 'Menu for change sim configuration'
+  parent: system.admin_config_system
+  weight: 99
+
+tbo_services.notifications_settings:
+  title: 'Configuración de Alertas y Notificaciones'
+  route_name: tbo_services.notifications_settings
+  description: 'Configure las alertas y notificaciones del sitio'
+  parent: system.admin_config_system
+  weight: 99
+
+tbo_services.modal_form_settings:
+  title: 'Configurar Modales'
+  route_name: tbo_services.notification_form
+  description: 'Menu for notification configuration'
+  parent: tbo_services.notifications_settings
+  weight: 99

@@ -1,0 +1,10 @@
+
+tbo_general_co.mobile_payment_url_form:
+  path: '/admin/config/tbo_general_co/mobilepaymenturl'
+  defaults:
+    _form: '\Drupal\tbo_general_co\Form\MobilePaymentUrlForm'
+    _title: 'Formulario para configurar url de pago'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

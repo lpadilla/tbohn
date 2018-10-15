@@ -1,0 +1,48 @@
+{% extends 'block__card_base.html.twig' %}
+{% import "tbo_general.html.twig" as widgets %}
+
+{% block header_data %}
+  <div class="{{ class }}" {{ directive }} ng-cloak ng-init="uuid='{{ uuid }}'">
+   <div class="card-block">                      
+     <div class="box-body">                      
+       <div class="row">                         
+         <div class="input-field col s12 m12 l6">
+           {% if title.show == 1 %}
+             <h5 class="title-core">{{ title.label }}</h5>
+           {% endif %}  
+       </div>                                  
+     </div>                                    
+   </div>                                      
+ </div>
+{% endblock %}
+
+{% block filters %}
+  {% if filters is not empty %}
+    <div class="box-body tn utn">
+      <div class="row">
+        <div class="col s12">
+          <div class="card gray-card clearfix">
+            <div class="col s12">
+              <form ng-submit="filterLog(custom_id, status)">
+                <div class="row">
+                  {% for filter in filters %}
+                    {{ widgets.validate_style( filter.label, filter, filter.class) }}
+                  {% endfor %}
+                </div>
+                <div class="row">
+                  <div class="col input-field s12 m12 l12">
+                    <button class="right waves-effect waves-light btn btn-primary" type="submit">Aplicar</button>
+                    <input type="reset" value="limpiar" class="right btn btn-clear click-filter-reset" ng-click="clear()">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block other_content_data %}
+{% endblock %}

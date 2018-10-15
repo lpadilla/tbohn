@@ -1,0 +1,156 @@
+{% extends 'block__card_base.html.twig' %}
+
+  {% block filters_modal_content %}
+    <div class="row">
+      <div class="input-field col s12 m12 l12">
+        {% if title %}
+          <h5 class="title-core">{{ title }}</h5>
+        {% endif %}
+      </div>
+    </div>
+  {% endblock %}
+
+  {% block header_content_filters_card_detail %}
+    {% block filter_header_form %}
+      <form>
+    {% endblock %}
+    <div class="row">
+      {% block for_filters %}
+        {% for filter in filters %}
+          {% if filter.service_field == 'card_name' %}
+            <div class="input-field content-row col m4 s12">
+              <div class="tags-wrapper">
+                <div id="tagsList" class="tags-cloud">
+                  <input id="{{ filter.identifier }}" data-ng-model="{{ filter.identifier }}"
+                         class="form-control format-moments2"
+                         type="text"
+                         ng-keydown="checkKeyDownCard($event, '{{ filter.identifier }}')"
+                         maxlength="{{ filter.validate_length }}"/>
+                  <label for="{{ filter.identifier }}" class="">{{ filter.label }}:</label>
+                </div>
+                <div id="suggestions" class="collection" style="border: none;">
+                  <ul>
+                    <li class="collection-item" ng-repeat="suggestion in suggestions"
+                        ng-click="resultClickedCard($index, '{{ filter.identifier }}')"
+                        ng-mouseover="$parent.selectedIndex=$index" ng-class="{active : selectedIndex===$index}">
+                      {[{suggestion.label}]}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          {% else %}
+            {{ widgets.validate_style( filter.label, filter, filter.class) }}
+          {% endif %}
+        {% endfor %}
+      {% endblock %}
+    </div>
+    {% block validate_filters %}
+      {% if filters is not empty %}
+        <div class="row">
+          <div class="col s12 m12 card-action">
+            <a
+              class="right waves-effect waves-light btn btn-primary disabled"
+              id="action_card_search_companies_blocked_card"
+              ng-click="filterCompaniesBlockedCards()"
+            >{{ 'Consultar' | t }}</a>
+            <a
+              id="Cancelar"
+              class="right waves-effect waves-light btn btn-second"
+              ng-click="clearFiltersCompaniesBlockedCards()"
+            >{{ 'Limpiar' | t }}</a>
+          </div>
+        </div>
+      {% endif %}
+    {% endblock %}
+    </form>
+  {% endblock %}
+
+  {% block top_other_content %}
+
+  {% endblock %}
+
+  {% block modal %}
+  {% endblock %}
+
+  {% block header_content_table %}
+    <div class="card-block">
+      <div class="box-body">
+        <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+          <div class="col s12">
+            <div class="col s12 m12">
+              <h2 class="title">{{ 'INFORMACIÓN GENERAL' | t }}</h2>
+            </div>
+            <div class="card white clearfix">
+              <div class="line_bottom_tab col s12 m12 l12">
+                <div class="col s12 m12 l12" style="padding-top: 3px">
+                  <div class="col s12 m9">
+                    <span><strong>{{ 'Nombre del Card:' | t }}</strong></span>
+                    <span ng-bind="selected_card_name"></span>
+                  </div>
+                  <div class="col s12 m3">
+                    <a id="action_export_excel_blocked_cards" class="waves-effect waves-light btn btn-primary"
+                       ng-click="downloadReportBlockedCards();"><i
+                        class="material-icons left">border_all</i>{{ 'Exportar a Excel' | t }}</a>
+                  </div>
+                </div>
+                <div class="col s12 m12 l12">
+                  <div class="col s12 m12">
+                    <input type="hidden" id="validated_company_id" ng-model="validated_company_id">
+                    <input type="hidden" id="selected_block_id" ng-model="selected_block_id">
+                  
+                    <span><strong>{{ 'Nombre de la empresa:' | t }}</strong></span>
+                    <span ng-bind="selected_company_name"></span>
+                  </div>
+                </div>
+                <div class="col s12 m12 l12">
+                  <div class="col s12 m12">
+                    <span><strong>{{ 'Documento de la empresa:' | t }}</strong></span>
+                    <span ng-bind="selected_company_document"></span>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="table-scroll">
+                {% if fields is not empty %}
+                  <table class="">
+                    <thead class="row">
+                    <tr class="col s12 l12">
+                      {% for item in fields %}
+                        <th scope="col" ng-click="orderReverse();"
+                            class="{% if item.service_field == 'document_type' %}col s3 l3{% endif %}{% if item.service_field == 'document_number' %}col s3 l3{% endif %}{% if item.service_field == 'company_name' %}col s3 l3{% endif %}{% if item.service_field == 'block_event_date' %}col s3 l3{% endif %}"> {{ item.label }}</th>
+                      {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody class="row">
+                    <tr id="message_row" ng-style="message_row_display">
+                      <td class="col s12 l12">
+                        <div class="regular-cell" style="text-align: center;">
+                          {{ 'No hay información disponible' | t }}
+                        </div>
+                      </td>
+                    </tr>
+                    <tr data-ng-repeat="companyInfo in companiesBlockedCardsResults | orderBy:predicate:reverse"
+                        class="col s12 l12">
+                      <td data-ng-repeat="(key, companyItemValue) in companyInfo"
+                          ng-if="key != 'card_name' && key != 'access_status'"
+                          ng-class="{'col s3 l3': key == 'document_type' || key == 'document_number' || key == 'company_name' || key == 'block_event_date'}">
+                        <div class="regular-cell" ng-if="key != 'card_name' && key != 'access_status'">
+                          {[{companyItemValue == null || companyItemValue == "" ? "{{ 'No disponible' | t }}" :
+                          companyItemValue}]}
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+
+{% block other_content_data %}
+{% endblock %}

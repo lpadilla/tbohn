@@ -1,0 +1,5 @@
+name: tbo_emulate_bo
+type: module
+description: Module for emulate session tbo BO
+core: 8.x
+package: Custom

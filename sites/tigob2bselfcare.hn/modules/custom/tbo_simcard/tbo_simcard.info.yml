@@ -1,0 +1,5 @@
+name: TBO Simcard
+type: module
+description: TBO Change simcard user case
+core: 8.x
+package: TBO

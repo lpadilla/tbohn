@@ -1,0 +1,21 @@
+tbo_entities.invitation_popup_entity.*:
+  type: config_entity
+  label: 'Invitaciónes en popup config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    icon:
+      type: string
+      label: 'icon'
+    description:
+      type: string
+      label: 'description'
+    actions_popup:
+      type: string
+      label: 'actions_popup'
+    uuid:
+      type: string

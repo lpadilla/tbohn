@@ -1,0 +1,33 @@
+.return {
+  display: flex;
+  margin: 0;
+  &-content {
+    display: flex;
+    align-items: center;
+  }
+  &-arrow {
+    margin-top: 2px;
+    .path1 {
+      position: relative;
+      height: 16px;
+      margin-top: 0;
+      float: none;
+      &:before {
+        font-size: 16px;
+      }
+    }
+  }
+  &-text {
+    padding-left: 10px;
+    color: $color-text;
+  }
+}
+.card-no-border{
+  border: none;
+  @include box-shadow(0px,0px,0px,0, transparent, true);
+  .return{
+  }
+}
+.card-transparent{
+  background-color: transparent;
+}

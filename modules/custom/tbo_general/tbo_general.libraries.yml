@@ -1,0 +1,92 @@
+angular.angularjs:
+  remote: https://github.com/angular/angular.js
+  version: 1.5.8
+  license:
+    name: MIT
+    url: https://github.com/angular/angular.js/blob/master/LICENSE
+    gpl-compatible: true
+  js:
+   js/vendor/angular/angular.js: { minified: true }
+   js/vendor/angular/angular-sanitize.js: { minified: true }
+
+angular.request:
+  version: 1.5.8
+  license:
+    name: MIT
+    url: https://github.com/angular/angular.js/blob/master/LICENSE
+    gpl-compatible: true
+  js:
+   js/vendor/angular/angular-resource.js: { minified: true }
+
+# @TODO Pendiente realizar funcionalidad para manejo de varios modulos
+angular.tbo:
+  version: 1.x
+  js:
+    js/app/order-paginate.js: {}
+    js/app.js: {}
+    js/angular_chart.js: {}
+    js/Chart.min.js: { minified: true }
+    js/angular-chart.min.js: { minified: true }
+    js/ng-infinite-scroll.min.js: {}
+    js/vendor/angular/angular-materialize.min.js: { minified: true }
+  dependencies:
+    - tbo_general/angular.angularjs
+    - tbo_general/angular.request
+
+angular.tbo.portfolio:
+  version: 1.x
+  js:
+    js/app_portfolio.js: {}
+    js/ng-infinite-scroll.min.js: {}
+    js/vendor/angular/angular-materialize.min.js: { minified: true }
+  dependencies:
+    - tbo_general/angular.angularjs
+    - tbo_general/angular.request
+
+angular.tbo.base:
+  version: 1.x
+  js:
+    js/app_base.js: {}
+    js/ng-infinite-scroll.min.js: {}
+    js/vendor/angular/angular-materialize.min.js: { minified: true }
+  dependencies:
+    - tbo_general/angular.angularjs
+    - tbo_general/angular.request
+
+messaging:
+  version: 1.x
+  js:
+    js/utils.js: {}
+
+tools.tbo:
+  version: 1.x
+  js:
+    js/tools-b2b.js: {}
+
+card-base-example:
+  version: 1.x
+  js:
+    js/directive/card_base_example.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+login-form:
+  version: 1.x
+  js:
+    js/directive/login_form.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+card_launcher:
+  version: 1.x
+  js:
+    js/directive/launcher.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+

@@ -1,0 +1,38 @@
+<!-- Show nuestras soluciones -->
+
+{% if fields.logo %}
+<div class="soluciones">
+	<div class="title-soluciones"><span>Nuestras Soluciones:</span></div>
+	<div class="icons-soluciones">
+	{% if logo.url1  %}
+	<a href="{{ logo.url1 }}" title="{{logo.name1}}" rel="home" class="navbar-brand icon-area">
+	   <img src="{{ logo.src1 }}" alt="{{logo.name1}}" class="site-logo">
+	   <span>{{ logo.name1 }}</span>
+	</a>
+	{% endif %}
+ 	{% if logo.url2  %}
+	<a href="{{ logo.url2 }}" title="{{logo.name2}}" rel="home" class="navbar-brand icon-area">
+    	<img src="{{ logo.src2 }}" alt="{{logo.name2}}" class="site-logo">
+    	<span>{{ logo.name2 }}</span>
+	</a>
+  	{% endif %}
+  	{% if logo.url3  %}
+	<a href="{{ logo.url3 }}" title="{{logo.name3}}" rel="home" class="navbar-brand icon-area">
+    	<img src="{{ logo.src3 }}" alt="{{logo.name3}}" class="site-logo">
+    	<span>{{ logo.name3 }}</span>
+	</a>
+  	{% endif %}
+  	{% if logo.url4  %}
+	<a href="{{ logo.url4 }}" title="{{logo.name4}}" rel="home" class="navbar-brand icon-area">
+    	<img src="{{ logo.src4 }}" alt="{{logo.name4}}" class="site-logo">
+    	<span>{{ logo.name4 }}</span>
+	</a>
+  	{% endif %}
+  	</div>
+</div>
+{% endif %}
+
+{% if secondfield.logo %}
+
+	
+{% endif %}

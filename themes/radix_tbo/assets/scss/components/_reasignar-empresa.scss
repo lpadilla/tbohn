@@ -1,0 +1,12 @@
+#reasignaEmpresa > table.responsive-table > thead th {
+  @media only screen and (max-width: 400px) {
+    text-align: center;
+
+    span {
+      display: block;
+      width: 100%;
+    }
+
+    [type="checkbox"] + label { padding-left: 20px; }
+  }
+}

@@ -1,0 +1,5 @@
+name: tbo_general_co
+type: module
+description: Tbo general para Colombia
+core: 8.x
+package: Custom

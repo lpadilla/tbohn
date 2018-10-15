@@ -1,0 +1,131 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_content_table %}
+<div class="card-block">
+  <div class="box-body">
+    <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+      <div class="col s12">
+        {% block header_content_table_card %}
+        <div class="card white clearfix">
+          <div class="col s12">
+            <h2 class="title-card">{{ title_view }}</h2>
+            {% endblock %}
+            {% if fields is not empty %}
+              {% block table %}
+                <table class="responsive-table">
+                  <thead>
+                  {% block table_head %}
+                    <tr>
+                      {% for header in headers_table %}
+                        <th scope="col"
+                            ng-click="orderReverse();"> {% if header.identifier == 'contractId' %} {{ title_colum }} {% else %} {{ header.label }} {% endif %}
+                        </th>
+                      {% endfor %}
+                    </tr>
+                  {% endblock %}
+                  </thead>
+                  <tbody>
+                  {% block table_body %}
+                    <tr data-ng-repeat=" (key, compani) in pagedItems[currentPage] track by compani.invoiceId  | orderBy:predicate:reverse">
+                      {% for column in fields %}
+                        {% if column.service_field == 'contractId' and environment_history == 'fijo' %}
+                          <td> {[{compani.invoiceId }]}</td>
+                        {% else %}
+                          <td> {[{compani.{{ column.service_field }} }]}</td>
+                        {% endif %}
+                      {% endfor %}
+                      {% if opions_enable %}
+                        <td>
+                          <a class='dropdown-{[{$index+1}]} js-dropdown-button material-icons medium' href="#!"
+                             ng-attr-data-activates="dropdown-{[{$index+1}]}"
+                             ng-click="showContent($event)"
+                             ng-if="!compani.noPdf">toc</a>
+
+                          <ul id="dropdown-{[{$index+1}]}" class='js-dropdown-content'>
+                            {% if show_detail %}
+                            <li ng-if="compani.status == 'Pagada' && result == 'fijo'">
+                              <a ng-href="/tbo_billing/payment/{[{compani.contractId}]}/{[{compani.invoiceId}]}"
+                                 class="modalcustomtwo segment-click"
+                                 ng-click="myFunc($event ,'/tbo_billing/payment/' + compani.contractId + '/' + compani.invoiceId)"
+                                  data-segment-event="TBO - Opciones Histórico - Consulta"
+                                  data-segment-properties='{ "category":"Detalle de Factura","label": "Ver detalle de pago - {[{ environment_history }]}","site":"NEW"}'
+                                 >
+                                <span class="dropdown-icon">
+                                  <i class="prefix icon-bill-cyan">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                  </i>
+                                  <p>
+                                    {{ 'Ver detalle'|t }}
+                                  </p>
+                                </span>
+                              </a>
+                            </li><!-- Dropdown Trigger -->
+                            {% endif %}
+                            <li ng-if="environment_history == 'movil'">
+                              <a ng-href="/tbo_billing/download/{[{ compani.contractOfSendDetails }]}/{[{ environment_history }]}/{[{ compani.invoiceNumber }]}"
+                                 target="_blank" class="modalcustomtwo segment-click"
+                                  data-segment-event="TBO - Opciones Histórico - Consulta"
+                                  data-segment-properties='{ "category":"Detalle de Factura","label": "Descargar PDF - {[{ environment_history }]}","site":"NEW"}'
+                                 >
+                                <span class="dropdown-icon">
+                                  <i class="prefix icon-pdf-cyan">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                  </i>
+                                  <p>
+                                    {{ 'Descargar PDF'|t }}
+                                  </p>
+                                </span>
+                              </a><!-- Dropdown Trigger -->
+                            </li>
+                            <li ng-if="environment_history == 'fijo'">
+                              <a ng-href="/tbo_billing/download/{[{compani.contractId}]}/fijo/{[{compani.invoiceId}]}"
+                                 target="_blank" class="modalcustomtwo material-icons dp48 segment-click"
+                                  data-segment-event="TBO - Opciones Histórico - Consulta"
+                                  data-segment-properties='{ "category":"Detalle de Factura","label": "Descargar PDF - {[{ environment_history }]}","site":"NEW"}'
+                                  >
+                                <span class="dropdown-icon">
+                                  {#<i class="icon-tigo"></i> #}
+                                  <i class="prefix icon-pdf-cyan">
+                                  <span class="path1"></span>
+                                  <span class="path2"></span>
+                                  </i>
+                                  <p>
+                                  {{ 'Descargar PDF'|t }}
+                                  </p>
+                                </span>
+                              </a><!-- Dropdown Trigger -->
+                            </li>
+                          </ul>
+                        </td>
+                      {% endif %}
+                    </tr>
+                  {% endblock %}
+                  </tbody>
+                  <tfoot>
+                  {% block table_foot %}
+                    <td colspan="{{ fields|length }}">
+                      {% block paginate %}
+                        <!-- Get paginate  -->
+                        {{ widgets.paginate() }}
+                      {% endblock %}
+                    </td>
+                  {% endblock %}
+                  </tfoot>
+                </table>
+              {% endblock %}
+            {% endif %}
+            {% block data %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block other_content_data %}
+  <div id="modal_history" class="modal-customs modal_history"></div>
+{% endblock %}

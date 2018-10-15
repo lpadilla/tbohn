@@ -1,0 +1,225 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_mail.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_mail_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_mail module.
+    case 'help.page.tbo_mail':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Customizacion para envio de correos del sitio') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implement hook_mail.
+ *
+ * @param $key
+ * @param $message
+ * @param $params
+ */
+function tbo_mail_mail($key, &$message, $params) {
+  // Incluimos variable al que se enviara el correo si no esta definida.
+  if (!isset($params['uid'])) {
+    $params['uid'] = \Drupal::currentUser()->id();
+  }
+  $tokens = $params['tokens'];
+  $token_service = \Drupal::token();
+  $params['body'] = $token_service->replace($params['body'], $tokens);
+  $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
+  $message['uid'] = $params['uid'];
+  // Add attachment when available.
+  switch ($key) {
+    case 'disassociate_line':
+      break;
+
+    default:
+      $ut = utf8_encode($params['subject']);
+      $preferences = [
+        "input-charset" => "UTF-8",
+        "output-charset" => "UTF-8",
+        "line-length" => 500,
+        "line-break-chars" => "\n",
+      ];
+      $preferences["scheme"] = "Q";
+      $message['subject'] = iconv_mime_encode("", $params['subject'], $preferences);
+      $message['body'][] = $params['body'];
+      // Add attachment when available.
+      if (isset($params['tokens']['attachments'])) {
+        $message['params']['attachments'][] = $params['tokens']['attachments'];
+      }
+  }
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function tbo_mail_token_info() {
+
+  $info['types']['tbo_mail'] = [
+    'name' => 'Tbo mail',
+    'description' => "",
+  ];
+  $info['tokens']['tbo_mail']['username'] = [
+    'name' => t("Nombre de usuario"),
+    'description' => t("Short Username"),
+  ];
+  $info['tokens']['tbo_mail']['msisdn'] = [
+    'name' => t("Línea"),
+    'description' => t("Línea del usuario"),
+  ];
+
+  $info['tokens']['tbo_mail']['admin'] = [
+    'name' => t("Nombre completo"),
+    'description' => t("Nombre completo del usuario"),
+  ];
+
+  $info['tokens']['tbo_mail']['link'] = [
+    'name' => t("Link"),
+    'description' => t("Url de ingreso al sitio, dependiendo de la plantilla su valor puede cambiar"),
+  ];
+
+  $info['tokens']['tbo_mail']['role'] = [
+    'name' => t("Rol"),
+    'description' => t("Rol del usuario"),
+  ];
+
+  $info['tokens']['tbo_mail']['enterprise'] = [
+    'name' => t("Empresa"),
+    'description' => t("Nombre de la empresa"),
+  ];
+
+  $info['tokens']['tbo_mail']['enterprise_num'] = [
+    'name' => t("Documento Empresa"),
+    'description' => t("Numero de documento de la empresa"),
+  ];
+
+  $info['tokens']['tbo_mail']['enterprise_doc'] = [
+    'name' => t("Tipo documento empresa"),
+    'description' => t("Numero de documento de la empresa"),
+  ];
+
+  $info['tokens']['tbo_mail']['admin_enterprise'] = [
+    'name' => t("Admin empresa"),
+    'description' => t("Nombre del administrador de la empresa"),
+  ];
+
+  $info['tokens']['tbo_mail']['admin_mail'] = [
+    'name' => t("Admin empresa email"),
+    'description' => t("Correo del administrador de la empresa"),
+  ];
+
+  $info['tokens']['tbo_mail']['admin_phone'] = [
+    'name' => t("Admin empresa Telefono"),
+    'description' => t("Telefono del administrador de la empresa"),
+  ];
+
+  $info['tokens']['tbo_mail']['bill_status'] = [
+    'name' => t("Estado factura"),
+    'description' => t("Estado de la factura"),
+  ];
+
+  $info['tokens']['tbo_mail']['bill_number'] = [
+    'name' => t("Numero factura"),
+    'description' => t("Numero de la factura"),
+  ];
+
+  $info['tokens']['tbo_mail']['bill_old'] = [
+    'name' => t("Envio de factura anterior"),
+    'description' => t("Envio de factura anterior"),
+  ];
+
+  $info['tokens']['tbo_mail']['bill_new'] = [
+    'name' => t("Envio de factura nueva"),
+    'description' => t("Envio de factura nueva"),
+  ];
+
+  $info['tokens']['tbo_mail']['complain_type'] = [
+    'name' => t("Documento Empresa"),
+    'description' => t("Numero de documento de la empresa"),
+  ];
+
+  $info['tokens']['tbo_mail']['complain_description'] = [
+    'name' => t("Documento Empresa"),
+    'description' => t("Numero de documento de la empresa"),
+  ];
+
+  $info['tokens']['tbo_mail']['attachments'] = [
+    'name' => t("Documento Empresa"),
+    'description' => t("Numero de documento de la empresa"),
+  ];
+
+  $info['tokens']['tbo_mail']['creator'] = [
+    'name' => t("Nombre del creador de la cuenta"),
+    'description' => t("Nombre del creador de la cuenta"),
+  ];
+
+  $info['tokens']['tbo_mail']['creator_mail'] = [
+    'name' => t("Email del creador de la cuenta"),
+    'description' => t("Email del creador de la cuenta"),
+  ];
+  $info['tokens']['tbo_mail']['invitation_code'] = [
+    'name' => t("Codigo de invitacion"),
+    'description' => t("Codigo de invitacion para el creador de la cuenta"),
+  ];
+  $info['tokens']['tbo_mail']['wifi_dmz'] = [
+    'name' => t("IP DMZ"),
+    'description' => t("IP asignada en la configuración DMZ"),
+  ];
+  $info['tokens']['tbo_mail']['wifi_new_name'] = [
+    'name' => t("Nombre de red wifi"),
+    'description' => t("Nuevo nombre asignado a la red wifi"),
+  ];
+
+  $info['tokens']['tbo_mail']['facebook_url'] = [
+    'name' => t("Facebook"),
+    'description' => t("Link de Facebook."),
+  ];
+  $info['tokens']['tbo_mail']['twitter_url'] = [
+    'name' => t("Twitter"),
+    'description' => t("Link de Twitter."),
+  ];
+  $info['tokens']['tbo_mail']['youtube_url'] = [
+    'name' => t("Youtube"),
+    'description' => t("Link de Youtube"),
+  ];
+  $info['tokens']['tbo_mail']['instagram_url'] = [
+    'name' => t("Instagram"),
+    'description' => t("Url de Instagram"),
+  ];
+  $info['tokens']['tbo_mail']['logo'] = [
+    'name' => t("Logo"),
+    'description' => t("Logo de Tigo Business online para envío de correos"),
+  ];
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function tbo_mail_tokens($type, $tokens, array $data = [], array $options = []) {
+  \Drupal::logger('tbo_mail')->notice('hook tokens');
+  $replacements = [];
+  if ($type == 'tbo_mail') {
+    // Loop through the available tokens.
+    foreach ($tokens as $name => $original) {
+      // Find our custom tokens by name.
+      if (array_key_exists($name, $data)) {
+        $replacements[$original] = $data[$name];
+      }
+    }
+  }
+  return $replacements;
+}

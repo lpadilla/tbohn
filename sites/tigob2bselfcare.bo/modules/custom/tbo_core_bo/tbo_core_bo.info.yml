@@ -1,0 +1,9 @@
+name: TBO Core BO
+type: module
+description: TBO Core Bolivia
+core: 8.x
+version: 0.22
+package: TBO
+dependencies:
+  - tbo_general
+  - tbo_core

@@ -1,0 +1,31 @@
+{% macro consumption_filters(filters, buttons, ng_submit) %}
+  {% import "modules/custom/tbo_general/templates/tbo_general.html.twig" as filters_general %}
+  <div class="line-filters" data-ng-consumption-filters ng-cloak ng-init="uuid_{{ directive_new }} = '{{ uuid }}'">
+    <form ng-submit="{{ ng_submit }}">
+      <div class="row">
+        <div class="input-field content-row col s12 m10">
+          <div class="date-tbo clearfix">
+            {% for filter in filters %}
+                {% if filter.show %}
+                  {{ filters_general.validate_style(filter.label, filter, filter.class) }}
+                {% endif %}
+            {% endfor %}
+          </div>
+          <div class="informative-text-days">
+            <span>{{ informative_text_filters_lines }}</span>
+          </div>
+        </div>
+        {% for button in buttons %}
+          {% if button.show %}
+           <div class="input-field content-row col s12 m2">
+              <button class="{{ button.class }} right  waves-effect waves-light btn btn-second">
+                {{ button.label }}
+              </button>
+           </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </form>
+  </div>
+
+{% endmacro %}

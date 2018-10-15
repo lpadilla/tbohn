@@ -1,0 +1,204 @@
+{% extends 'block__card_base.html.twig' %}
+{% block filters %}
+{% endblock %}
+{% block header_content_table %}
+{% endblock %}
+{% block other_content_data %}
+  {% if show_card_enviroment %}
+    <div class="card-block">
+    <div class="box-body">
+    <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+      <div class="col s12">
+        {% block other_content_data_card %}
+        <div class="voice-balance">
+          {% import "/modules/custom/tbo_lines/templates/consumption-filters-base.html.twig" as filter_base %}
+          {% block other_content %}
+          <div class="voice-tabs voice-desktop-tabs row">
+            <div class="col m6">
+              <div class="card white clearfix voice-wrapper">
+                <div class="col m12">
+                  {% if title_tab.title_saldo.show %}
+                    <div class="row">
+                      <div class="header-card clearfix">
+                        <div class="col s12">
+                          <h3 class="title-card2">{{ title_tab.title_saldo.label }}</h3>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                  <div class="voice-services">
+                    {% for value in fields %}
+                      {% if value.show %}
+                        <div class="voice-container">
+                          <div class="voice-icon">
+                              <span class="prefix icon-call-cyan">
+                                <span class="path1"></span>
+                              </span>
+                          </div>
+                          <div class="voice-details">
+                            <div class="top">
+                              <h6 class="voice-title">
+                                {{ value.title }}
+                              </h6>
+                              <p ng-cloak class="voice-value">
+                                {[{ {{ value.prefix }} }]}
+                              </p>
+                            </div>
+                            <div class="bottom">
+                              <div class="voice-status" style="background-color:{{ value.color }};"></div>
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                  {% if redirec.show %}
+                    <div class="col s12 m12 card-action">
+                      <a class="right waves-effect waves-light btn btn-second"
+                         ng-click="insertLog('notype','detalle','{{ redirec.url }}')" href="javascript:void(0)">
+                        {{ redirec.label }}
+                      </a>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <div class="col m6">
+              <div class="card white clearfix voice-wrapper">
+                <div class="col s12">
+                  {% if title_tab.title_consumo.show %}
+                    <div class="row">
+                      <div class="header-card clearfix">
+                        <div class="col s12">
+                          <h3 class="title-card2">{{ title_tab.title_consumo.label }}</h3>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                  {{ filter_base.consumption_filters(filters, buttons, 'filter_voz_chart();') }}
+                  <div class="voice-chart">
+                    <h6 class="voice-chart-label">{[{yAxisLabelVozChart}]}</h6>
+                    <canvas
+                      class="chart chart-bar chart-label-z"
+                      chart-data="data_voz_chart"
+                      chart-labels="labels_voz_chart"
+                      chart-legend="false"
+                      chart-series="series_voz_chart"
+                      chart-colors="colors_voz_chart"
+                      chart-options="desktop_options">
+                    </canvas>
+                    <h6 class="voice-chart-label-z right-align">{[{ZAxisLabelVozChart}]}</h6>
+                  </div>
+                </div>
+                {% if text_info.show %}
+                  <div class="voice-chart-footer">
+                    <div class="col s12">
+                      <p>{{ text_info.label }}</p>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {#tabla movil#}
+          <div class="card white clearfix voice-wrapper voice-mobile-tabs hide-on-med-and-up show-on-medium">
+            {% if show_title %}
+              <div class="col s12">
+                <div class="row">
+                  <div class="clearfix">
+                    <div class="col s12">
+                      <h3 class="title-card2">{{ title }}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+            <div class="voice-tabs-wrapper">
+              <ul class="tabs">
+                <li class="tab col s6"><a class="active" href="#tab_saldo">
+                    {% if title_tab.tab_saldo.show %}
+                      {{ title_tab.tab_saldo.label }}
+                    {% endif %}
+                  </a></li>
+                <li class="tab col s6"><a href="#tab_grafica">
+                    {% if title_tab.tab_consumo.show %}
+                      {{ title_tab.tab_consumo.label }}
+                    {% endif %}
+                  </a></li>
+              </ul>
+            </div>
+            <div class="voice-tabs">
+              <div id="tab_saldo" class="col m12 s12 voice-wrapper">
+                <div class="col s12">
+                  <div class="voice-services">
+                    {% for value in fields %}
+                      {% if value.show %}
+                        <div class="voice-container">
+                          <div class="voice-icon">
+                                  <span class="prefix icon-call-cyan">
+                                    <span class="path1"></span>
+                                  </span>
+                          </div>
+                          <div class="voice-details">
+                            <div class="top">
+                              <h6 class="voice-title">
+                                {{ value.title }}
+                              </h6>
+                              <p ng-cloak class="voice-value">
+                                {[{ {{ value.prefix }} }]}
+                              </p>
+                            </div>
+                            <div class="bottom">
+                              <div class="voice-status" style="background-color:{{ value.color }};"></div>
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+              <div id="tab_grafica" class="voice-chart-wrapper">
+                <div class="col s12">
+                  {{ filter_base.consumption_filters(filters_mobile, buttons, 'filter_voz_chart_m();') }}
+                  <div class="voice-informative-text">
+                    <span>{{ info_text }}</span>
+                  </div>
+                  <div class="voice-chart">
+                    <h6 class="voice-chart-label">{[{yAxisLabelVozChart}]}</h6>
+                    <canvas
+                      class="chart chart-bar chart-label-z"
+                      chart-data="data_voz_chart"
+                      chart-labels="labels_voz_chart"
+                      chart-legend="false"
+                      chart-series="series_voz_chart"
+                      chart-colors="colors_voz_chart"
+                      chart-options="mobile_options">
+                    </canvas>
+                    <h6 class="voice-chart-label-z right-align">{[{ZAxisLabelVozChart}]}</h6>
+                  </div>
+                   {% if redirec.show %}
+                  <div class="col s12 m12 card-action">
+                    <a class="right waves-effect waves-light btn btn-second" ng-click="insertLog('notype','detalle','{{ redirec.url }}')" href="javascript:void(0)">
+                      {{ redirec.label }}
+                    </a>
+                  </div>
+                  {% endif %}
+                  {% if text_info.show %}
+                </div>
+                <div class="voice-chart-footer">
+                  <div class="col s12">
+                    <p>{{ text_info.label }}</p>
+                  </div>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            {% endblock %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+{% endblock %}

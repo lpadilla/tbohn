@@ -1,0 +1,33 @@
+<div class="box-body">
+  <div class="two-columns-custom-ini row">
+    {% if content.top %}
+      <div class="top-region col s12">
+        {{ content.top }}
+      </div>
+    {% endif %}
+    {% if content.fwt %}
+      <div class="full-width-top-region col s12">
+        {{ content.fwt }}
+      </div>
+    {% endif %}
+    {% if content.left or content.right %}
+      <div class="ctn-lr col s12">
+        {% if content.left %}
+          <div class="left-region col s12 l6">
+            {{ content.left }}
+          </div>
+        {% endif %}
+        {% if content.right %}
+          <div class="right-region col s12 l6">
+            {{ content.right }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if content.bottom %}
+      <div class="inner-region col s12">
+        {{ content.bottom }}
+      </div>
+    {% endif %}
+  </div>
+</div>

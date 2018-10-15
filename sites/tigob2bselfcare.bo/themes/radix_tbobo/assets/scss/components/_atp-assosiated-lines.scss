@@ -1,0 +1,83 @@
+.atp-corp-plan-per-contract {
+  .label {
+    color: $gray3-tigo;
+    font-weight: 400;
+    font-size: 12px;
+    margin: 0;
+  }
+  .ligth-f {
+    font-weight: 300;
+  }
+  strong {
+    font-weight: 400;
+  }
+  .sm-font, .sm-font span {
+    @media #{$small-and-down} {
+      font-size: 12px;
+    }
+  }
+  &__desktop {
+    .r-font {
+      font-weight: 400;
+    }
+    .disabled_anchor {
+      color: $gray1-tigo;
+      pointer-events: none;
+    }
+    .pagination ul {
+      text-align: center;
+    }
+  }
+  &__mobile {
+    background: transparent;
+  }
+  &-title {
+    h2 {
+      margin: 0 0 5px;
+    }
+    .title-content {
+      line-height: 14px;
+    }
+  }
+  &-data.col {
+    padding: 20px 0 15px;
+  }
+  &-button {
+    a {
+      margin-right: 0;
+    }
+  }
+}
+.empty-mobile {
+  display: none;
+  @media #{$small-and-down} {
+    display: block;
+  }
+  .atp-corp-plan-per-contract {
+    padding: 10px 12px;
+  }
+}
+
+.atp-assosiated-lines {
+  &-title {
+    h3 {
+      color: $blue-tigo;
+    }
+  }
+  &-table {
+    .pagination {
+      text-align: center;
+    }
+  }
+  &-buttons {
+    display: flex;
+    justify-content: flex-end;
+    .input-field {
+      a {
+        margin-right: 0;
+        display: inline-flex;
+        align-items: center;
+      }
+    }
+  }
+}

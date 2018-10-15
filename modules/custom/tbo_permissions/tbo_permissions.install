@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for TBO Permissions module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function tbo_permissions_schema() {
+  $schema['cards_access_by_company_permissions'] = [
+    'description' => 'Table to relate all Cards access to each Company.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'block_id' => [
+        'type' => 'varchar_ascii',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'company_id' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'access_status' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'tiny',
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'normal',
+        'default' => '0',
+      ],
+      'last_modification' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'size' => 'normal',
+        'default' => '0',
+      ],
+      'last_modification_author' => [
+        'type' => 'varchar_ascii',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function tbo_permissions_install() {
+  try {
+    $queueFactory = \Drupal::service('queue');
+    $companiesQueue = $queueFactory->get('company_permissions_queue_processor');
+    $companiesQueue->deleteQueue();
+  }
+  catch (\Exception $e) {
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function tbo_permissions_uninstall() {
+  try {
+    $queueFactory = \Drupal::service('queue');
+    $companiesQueue = $queueFactory->get('company_permissions_queue_processor');
+    $companiesQueue->deleteQueue();
+  }
+  catch (\Exception $e) {
+  }
+}

@@ -1,0 +1,21 @@
+base:
+  #version: VERSION
+  css:
+    theme:
+      assets/css/materialize/materialize.css: {}
+      #assets/css/materialize/vendor_scripts.min.css: {}
+      assets/css/radix_tbo.style.css: {}
+      assets/css/radix_tbo_bo.style.css: {}
+
+  js:
+    #bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js: {}
+    #assets/js/radix_tbo.script.js: {}
+    assets/js/materialize.js: {}
+    assets/js/vendor_scripts.js: {}
+    assets/js/radix_tbo.script.js: {}
+    assets/js/selectOverride.js: {}
+    assets/js/descrambler/descrambler.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal

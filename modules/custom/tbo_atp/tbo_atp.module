@@ -1,0 +1,105 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_atp.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_atp_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_atp module.
+    case 'help.page.tbo_atp':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Tbo ATP') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_atp_theme() {
+  return [
+    'search_by_profile' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'class' => NULL,
+        'buttons' => NULL,
+        'title' => NULL,
+        'margin' => NULL,
+        'columns_rigth' => NULL,
+        'columns_details' => NULL,
+        'categories' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--search-by-profile',
+    ],
+    'atp_contract_filter' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'download' => NULL,
+        'card_margin' => NULL,
+        'val_atp' => NULL,
+        'plugin_id' => NULL,
+        'label_btn_account_detail' => NULL,
+        'label_btn_invoice_detail' => NULL,
+        'show_btn_account_detail' => NULL,
+        'show_btn_invoice_detail' => NULL,
+      ],
+      'template' =>  'block--atp-contract-filter',
+    ],
+    'associated_lines' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'class' => NULL,
+        'buttons' => NULL,
+        'title' => NULL,
+        'margin' => NULL,
+        'plan_type' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--associated-lines',
+    ],
+    'atp_corporative_plan_summary' => array(
+      'variables' => array(
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'url_details' => NULL,
+        'val_atp' => NULL,
+        'plugin_id' => NULL,
+      ),
+      'template' => 'block--atp-corporative-plan-summary',
+    ),
+    'corporative_profiles' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'margin' => NULL,
+        'movil_fields' => NULL,
+        'url' => NULL,
+        'link_label' => NULL,
+        'val_atp' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--corporative-profiles',
+    ],
+  ];
+}

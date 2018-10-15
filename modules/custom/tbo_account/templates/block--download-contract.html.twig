@@ -1,0 +1,200 @@
+{% extends 'block__card_base.html.twig' %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+  {% block other_content %}
+    <h6 class="field__label"><strong>{{ textInform }}</strong></h6>
+      <form id="form-credit-card" class="">
+          <div class="row">
+             <div class="input-field col s12 m12 l6"
+                ng-init="validationFixed{{ uuid2 }} = '{{ validation }}'"
+                  placeholder="">
+                  {% if select == 'fixed' %}
+                  <div class="col s12 m12 l6">
+                      <input name="group1" ng-model="validationFixed{{ uuid2 }}"
+                     type="radio"
+                     id="input-fixed-{{ uuid2 }}" value="fixed"
+                     ng-change="resetValueDownload('{{ uuid2 }}')"/>
+                       <label
+                      for="input-fixed-{{ uuid2 }}">{{ 'Servicios fijos' |t }}</label>
+                  </div>
+                   <div class="col s12 m12 l6">
+                     <input name="group1" type="radio"
+                     ng-model="validationFixed{{ uuid2 }}"
+                     id="input-movile-{{ uuid2 }}" value="movile"
+                     ng-true-value="'1'"
+                     ng-change="resetValueDownload('{{ uuid2 }}')"/>
+                      <label
+                       for="input-movile-{{ uuid2 }}">{{ 'Servicios Moviles'|t }}</label>
+                    </div>
+                    {% endif %}
+                    {% if select == 'movile' %}
+                    <div class="col s12 m12 l6">
+                      <input name="group1" type="radio"
+                      ng-model="validationFixed{{ uuid2 }}"
+                      id="input-movile-{{ uuid2 }}" value="movile"
+                      ng-true-value="'1'"
+                       ng-change="resetValueDownload('{{ uuid2 }}')"/>
+                       <label
+                        for="input-movile-{{ uuid2 }}">{{ 'Servicios Moviles'|t }}</label>
+                    </div>
+                      <div class="col s12 m12 l6">
+                          <input name="group1" ng-model="validationFixed{{ uuid2 }}"
+                           type="radio"
+                            id="input-fixed-{{ uuid2 }}" value="fixed"
+                              ng-change="resetValueDownload('{{ uuid2 }}')"/>
+                            <label
+                            for="input-fixed-{{ uuid2 }}">{{ 'Servicios fijos' |t }}</label>
+                      </div>
+                        {% endif %}
+             </div>
+
+                    <div class="input-field col s12 m12 l3"
+                        ng-init="initFunction('{{ uuid }}')">
+                        <input id="phone{{ uuid2 }}" name="phone{{ uuid2 }}" type="text"
+                         ng-model="phone{{ uuid2 }}"
+                        ng-change="validatePhone('{{ uuid2 }}') "
+                         placeholder="{[{ placeHolderFunction('{{ uuid2 }}', '{{ place_holder }}') }]}"
+                          style="margin-top: -18px;" ng-trim="false">
+                        <label>{{ data.phoneLabel }}</label>
+                        <p class="error">{[{ errorMessage['{{ uuid2 }}'] }]}</p>
+                    </div>
+
+                    <div class="input-field col s12 m12 l3">
+                     <a
+                      id="confirm-{{ uuid2 }}"
+                      class="waves-effect waves-light btn btn-second float-right segment-click disabled"
+                      ng-click="downloadContractFunction(0, '{{ uuid2 }}')"
+                      data-segment-event="TBO - Consultar Contrato - Consulta"
+                        data-segment-properties='{"category":"Contratos","label":"{[{ validationFixed["{{ uuid2 }}"] == "fixed" ? "fijo" : "movil"}]}", "site":"NEW"}'
+                      >{{ buttons }}</a>
+                     </div>
+          </div>
+      </form>
+
+        <div class="card-block hide-mov">
+               <div class="box-body">
+                  <div class="row">
+                      <div class="col s12">
+                      <div
+                        class="col s12 m8 l9 font-cabecera">{{ titleDocument }}</div>
+                      <div
+                        class="col s12 m4 l3 font-cabecera">{{ titleResource }}</div>
+                      <hr>
+                      <div ng-show="resultButtom['{{ uuid2 }}'] == 1">
+                       <div class="col s12 "
+                           ng-show="statusIni['{{ uuid2 }}'] != 0 && statusResponse['{{ uuid2 }}'] == 1">
+                            <div class="col s12 m8 l9">{[{ contractTitle['{{ uuid2 }}'] }]}
+                             </div>
+
+                         <div class="col s12 m4 l3">
+                              <a data-segment-event="TBO - Descargar Contrato - Tx"
+                              data-segment-properties='{"category":"Contratos","label":"{[{ validationFixed["{{ uuid2 }}"] == "fixed" ? "fijo" : "movil"}]}", "site":"NEW"}'
+                              class="waves-effect waves-light  modal-trigger segment-click"
+                              ng-click="sendMail('normal', '{{ uuid2 }}')">
+                                <div class="icon-pdf-cyan">
+                                   <div class="icon-pdf">
+                                    </div>
+                                 </div>
+                                </a><!-- Dropdown Trigger -->
+                          </div>
+                        </div>
+                        <div class="col s12"
+                          ng-show="statusIni['{{ uuid2 }}'] != 0 && statusResponse['{{ uuid2 }}'] == 0">
+                            <div class="col s12 m8 l9">{[{ contractTitle['{{ uuid2 }}'] }]}
+                            </div>
+                          <div class="col s12 m4 l3">
+                            <a class="waves-effect waves-light  modal-trigger"
+                             href="#modal{{ uuid2 }}" ng-click="saveAuditLog('{{ uuid2 }}')">
+                              {{ 'ENVIAR FÍSICAMENTE'|t }}
+                             </a><!-- Dropdown Trigger -->
+                             </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+    <!-- Modal Structure -->
+    <div id="modal{{ uuid2 }}" class="modal popup-medium">
+          <div class="card">
+              <div class="row delete-margin">
+                  <div class="modal-content col s12 m12 l12">
+                   <h2 class="title-modal">{{ titlePopup }}</h2>
+                    <p>{{ description }}</p>
+                  </div>
+                  <div class="input-field col s12 m12 l12 margin-botton-15">
+                   <div class="input-field float-right margin-rigth-10">
+                        {% if buttons_modal.modal_accept.show == 1 %}
+                       <a {% if buttons_modal.modal_accept.active == 1 %} data-segment-event="TBO - Solicitar Contrato - Tx"
+                    data-segment-properties='{"category":"Contratos","label":"{[{ validationFixed["{{ uuid2 }}"] == "fixed" ? "fijo" : "movil"}]}", "site":"NEW"}' ng-click="openChat('log')" {% else %} disabled="disabled" {% endif %}
+                    class="waves-effect waves-light btn btn-primary float-right segment-click modal-close">{{ buttons_modal.modal_accept.label }}</a>
+                        {% endif %}
+                     </div>
+                    <div class="input-field float-right">
+                        {% if buttons_modal.modal_cancel.show == 1 %}
+                         <a
+                        class="modal-action modal-close waves-effect btn-flat  btn btn-second float-right" {% if buttons_modal.modal_cancel.active != 1 %} disabled="disabled" {% endif %}>{{ buttons_modal.modal_cancel.label }}</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+
+{% block footer_card %}
+  <!-- Movil -->
+  <div class="card-block hide-web">
+    <div class="box-body">
+      <div class="row">
+        <div class="col s12">
+          <div class="card white clearfix">
+          <div class="col s12 "
+               ng-show="statusIni['{{ uuid2 }}'] != 0 && statusResponse['{{ uuid2 }}'] == 1">
+            <div
+              class="col s12 m8 l9 font-cabecera">{{ titleDocument }}</div>
+            <div class="col s12 m8 l9">{[{ contractTitle['{{ uuid2 }}'] }]}
+            </div>
+            <div
+              class="col s12 m4 l3 font-cabecera">{{ titleResource }}</div>
+            <div ng-show="resultButtom['{{ uuid2 }}'] == 1">
+            <div class="col s12 m4 l3">
+              <a data-segment-event="TBO - Descargar Contrato - Tx"
+                 data-segment-properties='{"category":"Contratos","label":"{[{ validationFixed["{{ uuid2 }}"] == "fixed" ? "fijo" : "movil"}]}", "site":"NEW"}'
+                 class="waves-effect waves-light  modal-trigger segment-click"
+                 ng-click="sendMail('normal', '{{ uuid2 }}')">
+                <div class="icon-pdf-cyan">
+                  <div class="icon-pdf">
+                  </div>
+                </div>
+              </a><!-- Dropdown Trigger -->
+            </div>
+            </div>
+          </div>
+                    <div class="col s12"
+                  ng-show="statusIni['{{ uuid2 }}'] != 0 && statusResponse['{{ uuid2 }}'] == 0">
+                      <div
+            class="col s12 m8 l9 font-cabecera">{{ titleDocument }}</div>
+            <div ng-show="resultButtom['{{ uuid2 }}'] == 1">
+          <div class="col s12 m8 l9">{[{ contractTitle['{{ uuid2 }}'] }]}
+          </div>
+            </div>
+          <div
+            class="col s12 m4 l3 font-cabecera">{{ titleResource }}</div>
+            <div ng-show="resultButtom['{{ uuid2 }}'] == 1">
+          <div class="col s12 m4 l3">
+            <a class="waves-effect waves-light  modal-trigger"
+               href="#modal{{ uuid2 }}" ng-click="saveAuditLog('{{ uuid2 }}')">
+              {{ 'ENVIAR FÍSICAMENTE'|t }}
+            </a><!-- Dropdown Trigger -->
+          </div>
+            </div>
+        </div>
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

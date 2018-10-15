@@ -1,0 +1,14 @@
+{
+  "name": "drupal/tbo_general_co",
+  "type": "drupal-module",
+  "description": "Tbo general para Colombia",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/tbo_general_co",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/tbo_general_co",
+    "source": "http://cgit.drupalcode.org/tbo_general_co"
+  },
+  "require": { }
+}

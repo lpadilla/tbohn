@@ -1,0 +1,97 @@
+<div id="box-create-user" class="block-card block-form-user form-custom" ng-cloak>
+  <div class="box-body">
+    <div class="row">
+      <div class="col s12">
+        <div class="card clearfix white">
+          <div class="col s12">
+            <div class="form-update-user-info" data-ng-update-user-info>
+              <div class="row mb0"><div class="col s12">
+                  <h1 class="left-align">{{ form.title_instructions }}</h1>
+                  <p class="left-align">{{ form.instructions }}</p>
+                </div>
+              </div>
+              <div id="components-update-user-info-wrapper" class="components-wrapper">
+
+                {{ form.form_build_id }}
+                {{ form.form_token }}
+                {{ form.form_id }}
+
+                {{ form.error_msgs }}
+
+                <!-- Field Name -->
+                <div class="field-contract-number items input-field col s12 m6 l6">
+                  <i class="prefix icon-contracts-cyan">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </i>
+                  {{ form.name }}
+                </div>
+
+                <!-- Field Cel Number -->
+                <div class="field-phone items input-field col s12 m6 l6">
+                  <i class="prefix icon-mobilephone-cyan">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </i>
+                  {{ form.cel_number }}
+                </div>
+
+                <!-- Field Document Type -->
+                <div class="items input-field col s12 m6 l6">
+                  <div class="field-document-type col s4">
+                    <i class="prefix icon-id-cyan">
+                      <span class="path1"></span>
+                      <span class="path2"></span>
+                    </i>
+                    {{ form.document_type }}
+                  </div>
+
+                  <!-- Field Document Number -->
+                  <div class="field-document-number col s8">
+                    {{ form.document_number }}
+                  </div>
+
+                </div>
+
+                <!-- Field Mail -->
+                <div class="field-referent-payment items input-field col s12 m6 l6">
+                  <i class="prefix icon-paymentreference-cyan">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </i>
+                  {{ form.mail }}
+                </div>
+
+                <!-- Terms and conditions -->
+                <div id="terms-conditions" class="terms-conditions col s12 m12 l12 center-align">
+                  {{ form.terms }}
+                </div>
+
+                <!-- Submit button -->
+                <div class="buttons-wrapper input-field col s12 m12 l12 center-align">
+                  {{ form.submit }}
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if (show_popup_terms_popup)  %}
+<!-- Modal Structure -->
+<div id="modal-terms" class="modal">
+  <div class="modal-content">
+    <h1>{{ form.terms_title }}</h1>
+    {{ form.popup_terms }}
+  </div>
+  <div class="modal-footer">
+    <div class="input-field col s12">
+      <a href="" class="right modal-action modal-close waves-effect waves-light btn btn-primary">CERRAR</a>
+    </div>
+  </div>
+</div>
+{% endif %}

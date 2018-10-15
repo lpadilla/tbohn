@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_simcard.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_simcard_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_simcard module.
+    case 'help.page.tbo_simcard':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('TBO Change simcard user case') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_simcard_theme() {
+  return [
+    'tbo_simcard_block' => [
+      'variables' => array(
+        'form' => null,
+        'formName' => null,
+      ),
+    ],
+  ];
+}

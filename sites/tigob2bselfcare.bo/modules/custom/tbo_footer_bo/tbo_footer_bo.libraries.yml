@@ -1,0 +1,5 @@
+nuestras-solucionnes:
+  version: 1.x
+  css:
+    theme:
+      css/radix_tbo_bo.style.css: {}

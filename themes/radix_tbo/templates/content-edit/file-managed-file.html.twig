@@ -1,0 +1,58 @@
+{#
+/**
+ * @file
+ * Theme override to display a file form widget.
+ *
+ * Available variables:
+ * - element: Form element for the file upload.
+ * - attributes: HTML attributes for the containing element.
+ *    'file-field',
+    'input-field',
+ * @see template_preprocess_file_managed_file()
+ */
+#}
+{%
+  set classes = [
+    'js-form-managed-file',
+    'form-managed-file',
+    'file-field',
+    'input-field'
+  ]
+%}
+
+{%
+  set upload_button_class = [
+    'button',
+    'js-form-submit',
+    'form-submit form-type-submit',
+    'btn waves-effect btn-default waves-input-wrapper'
+  ]
+%}
+{% set upload_button_class = upload_button_class|merge(element.upload_button['#attributes']['class'])  %}
+<div {{ attributes.addClass(classes) }}>
+  <div class="btn waves-effect waves-light btn-success btn-second">
+    <span>{{ element['#title'].__toString() }}</span>
+    <input id="{{ element['#id'] }}" type="file"
+      {% for attribute, value in  element['#attributes'] %}
+        {{ attribute }}="{{ value }}"
+      {% endfor %}
+    class="{{ element['#attributes']['class'] }} js-form-file form-file error form-type-file form-control"
+    name="{{ element.upload['#name'] }}" {% if element['#required'] == true %} required {% endif %}>
+    <i {{ attributes.addClass(upload_button_class) }}>
+      <input type="{{ element.upload_button['#type'] }}"  name="{{ element.upload_button['#name'] }}"
+        id="{{ element.upload_button['#id'] }}" value="{{ element.upload_button['#value'] }}"
+        class="waves-button-input"
+        {% for attribute, value in element.upload_button['#attributes'] %}
+          {{ attribute }}="{{ value }}"
+        {% endfor %}>
+    </i>
+   <input type="{{ element.fids['#type'] }}" id="{{ element.fids['#id'] }}"
+    name="{{ element.fids['#name'] }}" class="form-type-hidden form-control"
+      {% for attribute, value in element.fids['#attributes'] %}
+      {{ attribute }}="{{ value }}"
+    {% endfor %}>
+  </div>
+  <div class="file-path-wrapper">
+    <input class="file-path validate" type="text" ng-model="file_upload_name" disabled>
+  </div>
+</div>

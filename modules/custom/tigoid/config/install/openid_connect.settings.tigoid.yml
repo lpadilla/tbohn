@@ -1,0 +1,8 @@
+enabled: false
+settings:
+  client_id: gOke2wfT332F2Xg0DUDG5BJfwniMKg7d
+  client_secret: ySb50gA3Lq9s2Yq8
+  authorization_endpoint: 'https://dev.id.tigo.com/oauth/v2/authorize'
+  token_endpoint: 'https://dev.id.tigo.com/oauth/v2/accesstoken'
+  userinfo_endpoint: 'https://dev.id.tigo.com/oauth/v2/getdetails'
+  revoke_endpoint: 'https://dev.id.tigo.com/oauth/v2/revoke'

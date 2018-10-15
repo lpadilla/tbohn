@@ -1,0 +1,171 @@
+{% extends 'block__card_base_hn.html.twig' %}
+
+{% block filters_modal_content %}
+<div class="row">
+  <div class="input-field col s6 m6 l8">
+    {% if title %}
+      <h5 class="title-core">{{ title }}</h5>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block header_content_filters_card_detail %}
+  {% block filter_header_form %}
+    <form class="filter-users" data-ng-submit="filterCompanies()">
+  {% endblock %}
+  <div class="row">
+    {% block for_filters %}
+      {% for filter in filters %}
+        {{ widgets.validate_style( filter.label, filter, filter.class) }}
+      {% endfor %}
+    {% endblock %}
+  </div>
+  {% block validate_filters %}
+    {% if filters is not empty %}
+      <div class="row">
+        <div class="col input-field s12 m12 l12">
+          <button class="right waves-effect waves-light btn btn-primary" type="submit">Consultar</button>
+          <input type="reset" value="limpiar" class="right btn btn-clear click-filter-reset">
+        </div>
+      </div>
+    {% endif %}
+  {% endblock %}
+  </form>
+{% endblock %}
+
+{% block top_other_content %}
+<div class="card-block">
+  <div class="box-body">
+    <div class="row {% if margin %}{% if margin.show_margin_top_content_card == false %} mb-0 {% endif %}{% endif %}">
+      <div class="col s12">
+        <div class="card white clearfix">
+          <div class="col s12">
+            <h3 id="{{ usrtigo.uid }}" class="title-outstanding">{{ usrtigo.nombre }}</h3>
+            <p class="subtitle">Cuentas asociadas: <span>{[{ num_companies }]}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block modal %}
+{% endblock %}
+
+{% block header_content_table %}
+  <div class="card-block">
+    <div class="box-body">
+      <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+        <div class="col s12">
+          {% block header_content_table_card %}
+          <div class="card white clearfix">
+            <div class="col s12">
+              {% endblock %}
+              {% if fields is not empty %}
+              <div class="mensaje-error"></div>
+              <form id="reasignaEmpresa" method="post" ng-submit="submit()">
+                <table class="responsive-table">
+                  <thead>
+                  <tr>
+                    {% for item in fields %}
+                      {% if item.label == 'Reasignar' %}
+                        <th id="seleccionar-todos-check" scope="col" ng-click="statesChanged();">
+                          <input class="filled-in checkbox-blue" type="checkbox"  />
+                          <label for="filled-in-box"></label>
+                        </th>
+                      {% else %}
+                        <th scope="col" ng-click="orderByProperty('{{ item.service_field }}', $event);">{{ item.label }}</th>
+                      {% endif %}
+
+                    {% endfor %}
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr data-ng-repeat="compani in pagedItems[currentPage]  | orderBy:predicate:reverse track by $index">
+                    <td data-ng-repeat="(key, value) in compani">
+                      <div ng-if="key == 'reasignar'">
+                        <div class="row">
+                          <div class="input-field">
+                            <input id="company-{[{ value }]}" class="filled-in checkbox-blue" ng-checked="selection.indexOf(value) > -1" ng-click="toggleSelection(value)" type="checkbox" name="selectedCompanies[]" value="{[{ value }]}"/>
+                            <label for="company-{[{ value }]}"></label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div ng-if="key == 'name' || key == 'full_name'">
+                        {[{value == null || value == "" ? "No disponible" : value}]}
+                      </div>
+
+                      <div ng-if="key == 'reasignarA'">
+                        <div class="row">
+                          <div class="input-field col s12 ">
+                            <select id="company-{[{ value }]}" ng-change="selecTigos(value, selected)" data-ng-model="selected" name="selectedTigos[]" ng-init="initMaterialSelect()">
+                              <option value="" selected>Seleccione</option>
+                              {% for k, v in lsttigos %}
+                                <option value="{{ k }}">{{ v }}</option>
+                              {% endfor %}
+                            </select>
+                            <label></label>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                  <tfoot>
+                  <td colspan="{{ fields|length }}">
+                    <!-- Get paginate -->
+                    {{ widgets.paginate() }}
+                  </td>
+                  </tfoot>
+                </table>
+                <div class="row">
+                  <div class="col s6">
+                    <a class="waves-effect waves-light btn btn-second" href="#modalReasignar" ng-init="initModal()">Reasignar a todos</a>
+                  </div>
+                  <div class="col s6">
+                    <input type="submit" id="edit-button-wrapper-submit" name="op" value="Guardar" class="right waves-effect waves-light btn btn-primary" />
+                  </div>
+                </div>
+              </form>
+                {% if fields is not empty %}
+                  <div id="modalReasignar" class="modal">
+                    <div class="modal-content">
+                      <h2 class="title-modal">{{ 'Seleccione Tigo Admin'|t }}</h2>
+                      <form ng-submit="masivo()">
+                        <div class="row">
+                          <div class="input-field col s12 m12 l12">
+                            <select id="reasigna-masivo" data-ng-model="tigoMSelected" name="reasigna-masivo" ng-init="initMaterialSelect()">
+                              <option value="">Seleccione</option>
+                              {% for k, v in lsttigos %}
+                                <option value="{{ k }}">{{ v }}</option>
+                              {% endfor %}
+                            </select>
+                            <label>Reasignar a:</label>
+                          </div>
+                        </div>
+                        <div class="actions">
+                          <div class="row">
+                            <div class="input-field col s12 m12 l12">
+                              <button class="right waves-effect waves-light btn btn-primary" type="submit" >Asignar</button>
+                              <a class="right waves-effect waves-light btn btn-second modal-close">Cancelar</a>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block other_content_data %}
+{% endblock %}

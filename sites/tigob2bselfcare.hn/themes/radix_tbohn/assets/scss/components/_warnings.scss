@@ -1,0 +1,213 @@
+.messages{
+  position: relative;
+  padding: 20px 38px 20px 10px;
+  @media #{$large-and-up} {
+    padding: 18px 48px;
+  }
+  .close{
+    position: absolute;
+    right: 46px;
+    top: 0px;
+    background: transparent;
+    border: none;
+    @media #{$medium-and-up}{
+      top: 1px;
+    }
+    @media #{$large-and-up} {
+     top: -2px;
+    }
+    .path1,
+    .path2 {
+      &::before{
+        color: $bk-desktop;
+      }
+    }
+  }
+  .text-alert{
+    position: relative;
+    .icon-alert{
+      display: inline-block;
+      float: left;
+      position: relative;
+      top: -7px;
+      margin-right: 10px;
+      @media #{$medium-and-up}{
+         top: -8px;
+      }
+      @media #{$large-and-up} {
+        top: -4px;
+      }
+      &::before{
+        display: none;
+      }
+      @media #{$large-and-up} {
+        margin-right: 30px;
+       // height: 50px;
+      }
+      span{
+        color:white;
+        display: inline-flex;
+        &.icon-1,
+        &.icon-2 {
+          position: absolute;
+          left: 0;
+          top:0 !important;
+          &::before{
+            font-weight: $regular;
+          }
+        }
+      }
+    }
+    p{
+      color:white;
+      margin: 0;
+      position: relative;
+      @media #{$large-and-up} {
+        top:2px;
+      }
+    }
+    .txt-message{
+      float: left;
+      width: 80%;
+      margin-left: 38px;
+      @media #{$medium-and-up}{
+        //margin-top: 9px;
+      }
+    }
+  }
+  &.alert-danger{
+    background-color: $alert-danger;
+    .text-alert{
+      .icon-alert{
+        span{
+          &.icon-1{
+            &:before{
+              @include iconos-material('tigouneico','\eaf8', 32px, normal);
+              font-weight: $regular;
+              @media #{$large-and-up} {
+                @include iconos-material('tigouneico','\eaf8', 27px, normal);
+              }
+
+            }
+          }
+          &.icon-2{
+            &:before{
+              @include iconos-material('tigouneico','\eaf9', 32px, normal);
+              font-weight: $regular;
+              @media #{$large-and-up} {
+
+                @include iconos-material('tigouneico','\eaf9', 27px, normal);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &.alert-success{
+    background-color: $alert-success;
+    .text-alert{
+      .icon-alert{
+        span{
+          &.icon-1{
+            top:3px;
+            &:before{
+              @include iconos-material('tigouneico','\eb1c', 32px, normal);
+              @media #{$large-and-up} {
+                @include iconos-material('tigouneico','\eb1c', 27px, normal);
+              }
+            }
+          }
+          &.icon-2{
+            &:before{
+              @include iconos-material('tigouneico','\eb1d', 32px, normal);
+              @media #{$large-and-up} {
+                @include iconos-material('tigouneico','\eb1d', 27px, normal);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &.alert-pending{
+    background-color: $yellow3-tigo;
+    .text-alert{
+      overflow: hidden;
+      .icon-alert{
+        top:0;
+        color: white;
+        position: relative;
+        width: 32px;
+        &:before{
+          @include iconos-material('tigouneico','\e904', 32px, normal);
+          @media #{$large-and-up} {
+           // @include iconos-material('tigouneico','\e904', 27px, normal);
+          }
+        }
+        &:after{
+          @include iconos-material('tigouneico','\e905', 23px, normal);
+          position: absolute;
+          top: 5px;
+          width: 100%;
+          text-align: center;
+          @media #{$large-and-up} {
+           // @include iconos-material('tigouneico','\e905', 15px, normal);
+          }
+        }
+      }
+      .txt-message{
+        float: left;
+        width: 80%;
+        @media #{$medium-and-up}{
+          margin-top: 9px;
+        }
+      }
+      p{
+        top:0px;
+      }
+    }
+  }
+  ul{
+    color:white;
+    padding-left: 46px;
+    position: relative;
+    @media #{$large-and-up} {
+      padding-left: 36px;
+    }
+    &:before {
+      @include iconos-material('tigouneico', '\e960', 32px, normal);
+      margin: 0;
+      position: absolute;
+      left: 0;
+      @media #{$large-and-up} {
+        @include iconos-material('tigouneico', '\e960', 27px, normal);
+      }
+    }
+    &:after{
+      @include iconos-material('tigouneico','\e905', 26px, normal);
+      position: absolute;
+      margin: 0;
+      left: 3px;
+      top: 2px;
+      @media #{$large-and-up} {
+        left: 1px;
+        top: 0px;
+        @include iconos-material('tigouneico','\e905', 26px, normal);
+      }
+    }
+    li, li span, li p{
+      color:white;
+      margin-bottom: 7px;
+      font-size: 14px;
+      line-height: 14px;
+      font-weight: $regular;
+      p{
+        line-height: 20px;
+      }
+    }
+  }
+  &.closed-messages{
+    display: none;
+  }
+}

@@ -1,0 +1,82 @@
+.simcard-change {
+  .input-field {
+    display: flex;
+    flex-direction: column;
+    #status_sim {
+      font-size: 11px;
+      line-height: 11px;
+      position: absolute;
+      bottom: -6px;
+      margin: 0;
+      transition: all 0.3 ease-in-out;
+    }
+  }
+  .messages {
+    position: absolute;
+    width: 100%;
+    height: 4rem;
+    padding: 20px 35px;
+    left: 0;
+    .text-alert {
+      width: 80%;
+      .txt-message {
+      }
+      h2 {
+        color: white;
+      }
+    }
+  }
+  .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 1rem;
+    &-wrapper {
+      padding-top: 5rem;
+      hr {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        right: 0;
+        color: $gray-tigo;
+      }
+    }
+    &-data {
+      .row {
+        margin-bottom: 0;
+      }
+      .pull-left-20 {
+        margin-left: -20px;
+        padding-left: 0;
+      }
+    }
+    &-details {
+      padding-top: 2rem;
+    }
+  }
+}
+
+@media #{$medium-and-down} {
+  .simcard-change {
+    .messages {
+      height: 5rem;
+      padding: 20px;
+      .text-alert {
+        width: 85%;
+        .txt-message {
+          margin-left: 40px;
+        }
+        .icon-alert {
+          margin-right: 0;
+        }
+      }
+    }
+    .modal {
+      &-wrapper {
+        padding-top: 5rem;
+      }
+      &-details {
+        padding-top: 1rem;
+      }
+    }
+  }
+}

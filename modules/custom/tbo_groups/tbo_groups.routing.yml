@@ -1,0 +1,153 @@
+# This file brings everything together. Very nifty!
+
+# Route name can be used in several places; e.g. links, redirects, and local
+# actions.
+entity.content_entity_group.canonical:
+  path: '/content_entity_group/{content_entity_group}'
+  defaults:
+  # Calls the view controller, defined in the annotation of the group entity
+    _entity_view: 'content_entity_group'
+    _title: 'Group Content'
+  requirements:
+  # Calls the access controller of the entity, $operation 'view'
+    _entity_access: 'content_entity_group.view'
+
+entity.content_entity_group.collection:
+  path: '/content_entity_group/list'
+  defaults:
+  # Calls the list controller, defined in the annotation of the group entity.
+    _entity_list: 'content_entity_group'
+    _title: 'Group List'
+  requirements:
+  # Checks for permission directly.
+    _permission: 'administer group entity'
+
+tbo_groups.group_add:
+  path: '/content_entity_group/add'
+  defaults:
+  # Calls the form.add controller, defined in the group entity.
+    _entity_form: content_entity_group.add
+    _title: 'Add Group'
+  requirements:
+    _entity_create_access: 'content_entity_group'
+
+entity.content_entity_group.edit_form:
+  path: '/content_entity_group/{content_entity_group}/edit'
+  defaults:
+  # Calls the form.edit controller, defined in the group entity.
+    _entity_form: content_entity_group.edit
+    _title: 'Edit Group'
+  requirements:
+    _entity_access: 'content_entity_group.edit'
+
+entity.content_entity_group.delete_form:
+  path: '/group/{content_entity_group}/delete'
+  defaults:
+    # Calls the form.delete controller, defined in the group entity.
+    _entity_form: content_entity_group.delete
+    _title: 'Delete Group'
+  requirements:
+    _entity_access: 'content_entity_group.delete'
+
+tbo_groups.group_settings:
+  path: 'admin/structure/content_entity_group_settings'
+  defaults:
+    _form: '\Drupal\tbo_groups\Form\GroupSettingsForm'
+    _title: 'Group Settings'
+  requirements:
+    _permission: 'administer group entity'
+
+tbo_groups.autocomplete_accounts:
+  path: '/tbo_groups/autocomplete/{account}'
+  defaults:
+    _controller: '\Drupal\tbo_groups\Controller\AutocompleteAccountController::autocompleteAccounts'
+    _title: 'autocompleteEmail'
+  requirements:
+    _permission: 'access content'
+
+tbo_groups.get_all_accounts:
+  path: '/tbo_groups/get_all_accounts'
+  defaults:
+    _controller: '\Drupal\tbo_groups\Controller\AutocompleteAccountController::getAllAccounts'
+    _title: 'autocompleteEmail'
+  requirements:
+    _permission: 'access content'
+
+tbo_groups.groups_message_confirm:
+  path: '/groups/message/{type}/{name}/{pathname}/{confirm}'
+  defaults:
+    _controller: '\Drupal\tbo_groups\Controller\GroupsController::groupMessageConfirm'
+    _title: 'load'
+    state: FALSE
+    confirm: FALSE
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator+tigo_admin+super_admin'
+
+tbo_groups.get_data_group:
+  path: '/groups/get_data/{name}'
+  defaults:
+    _controller: '\Drupal\tbo_groups\Controller\GroupsController::getDataGroup'
+    _title: 'load'
+    state: FALSE
+    confirm: FALSE
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator+tigo_admin+super_admin'
+
+# Route name can be used in several places; e.g. links, redirects, and local
+# actions.
+entity.group_account_relations.canonical:
+  path: '/group_account_relations/{group_account_relations}'
+  defaults:
+  # Calls the view controller, defined in the annotation of the group entity
+    _entity_view: 'group_account_relations'
+    _title: 'Group account relations Content'
+  requirements:
+  # Calls the access controller of the entity, $operation 'view'
+    _entity_access: 'group_account_relations.view'
+
+entity.group_account_relations.collection:
+  path: '/group_account_relations/list'
+  defaults:
+  # Calls the list controller, defined in the annotation of the group entity.
+    _entity_list: 'group_account_relations'
+    _title: 'Group account relations List'
+  requirements:
+  # Checks for permission directly.
+    _permission: 'administer group entity'
+
+tbo_groups.group_add:
+  path: '/group_account_relations/add'
+  defaults:
+  # Calls the form.add controller, defined in the group entity.
+    _entity_form: group_account_relations.add
+    _title: 'Add Group account relations'
+  requirements:
+    _entity_create_access: 'group_account_relations'
+
+entity.group_account_relations.edit_form:
+  path: '/group_account_relations/{group_account_relations}/edit'
+  defaults:
+  # Calls the form.edit controller, defined in the group entity.
+    _entity_form: group_account_relations.edit
+    _title: 'Edit Group account relations'
+  requirements:
+    _entity_access: 'group_account_relations.edit'
+
+entity.group_account_relations.delete_form:
+  path: '/group/{group_account_relations}/delete'
+  defaults:
+    # Calls the form.delete controller, defined in the group entity.
+    _entity_form: group_account_relations.delete
+    _title: 'Delete Group account relations'
+  requirements:
+    _entity_access: 'group_account_relations.delete'
+
+tbo_groups.group_settings:
+  path: 'admin/structure/group_account_relations_settings'
+  defaults:
+    _form: '\Drupal\tbo_groups\Form\GroupAccountRelationsSettingsForm'
+    _title: 'Group account relations Settings'
+  requirements:
+    _permission: 'administer group entity'

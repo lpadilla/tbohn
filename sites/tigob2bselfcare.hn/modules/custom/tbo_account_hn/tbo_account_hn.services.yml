@@ -1,0 +1,48 @@
+services:
+  tbo_account_hn.create_users_hn_form_logic:
+    class: Drupal\tbo_account_hn\Plugin\Config\form\CreateUsersHnFormClass
+    arguments: []
+  
+  # TigoAdminListHnBlock
+  tbo_account_hn.manage_users_tigo_admin_hn_block:
+    class: Drupal\tbo_account_hn\Plugin\Config\Block\TigoAdminListHnBlockClass
+    arguments: []
+
+# CreateCompaniesBlock
+  tbo_account_hn.create_companies_hn_block:
+    class: Drupal\tbo_account_hn\Plugin\Config\Block\CreateCompaniesHnBlockClass
+    arguments: []
+
+  tbo_account_hn.create_companies_form:
+    class: Drupal\tbo_account_hn\Plugin\Config\form\CreateCompanyFormClass
+    arguments: []
+
+# service rest
+  tbo_account_hn.create_companies_rest_hn:
+    class: Drupal\tbo_account_hn\Services\Rest\CreateCompaniesRestServiceHn
+    arguments: []
+
+  tbo_account_hn.repository:
+    class: Drupal\tbo_account_hn\Repository\AccountRepositoryHn
+    arguments: []
+
+
+
+  tbo_account_hn.create_companies_service:
+    class: Drupal\tbo_account_hn\Services\CreateCompanyServiceHn
+    arguments: ["@tbo_api.client"]
+
+# ReAssignBusinessBetweenUsersTigoAdminHnBlock
+  tbo_account_hn.re_assign_business_between_users_tigo_admin_block_hn:
+    class: Drupal\tbo_account_hn\Plugin\Config\Block\ReAssignBusinessBetweenUsersTigoAdminHnBlockClass
+    arguments: []
+
+# ManageCompanyHnBlock   
+  tbo_account_hn.manage_company_hn_block:
+    class: Drupal\tbo_account_hn\Plugin\Config\Block\ManageCompanyHnBlockClass
+    arguments: []
+    
+# UsersListHnBlock
+  tbo_account_hn.users_list_hn_block:
+    class: Drupal\tbo_account_hn\Plugin\Config\Block\UserListHnBlockClass
+    arguments: []

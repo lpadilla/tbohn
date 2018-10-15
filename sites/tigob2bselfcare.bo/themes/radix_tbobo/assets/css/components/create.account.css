@@ -1,0 +1,24 @@
+.field-document-type,
+.field-document-number,
+.field-contract-number,
+.field-referent-payment {
+  position: relative;
+}
+.field-document-type .help-form,
+.field-document-number .help-form,
+.field-contract-number .help-form,
+.field-referent-payment .help-form {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.items .field-document-type {
+  padding-left: 0;
+}
+
+.items .field-document-number {
+  padding-right: 0;
+}
+
+/*# sourceMappingURL=create.account.css.map */

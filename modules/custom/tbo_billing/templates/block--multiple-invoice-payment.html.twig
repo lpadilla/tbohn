@@ -1,0 +1,184 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% if showoptions %}
+{% endif %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+  <div class="card-block" ng-class="(type_invoices == 'movil') ? 'is-mobile' : ''">
+    <div class="box-body">
+      <div class="row mb-0">
+        <div class="col s12">
+          <div class="card blue-card clearfix">
+            <div class="header-payment-box">
+              <div class="col s6 m7 l8 xl8 content">
+                {% if more.value_to_pay == 1 %}
+                  <div class="col s12 m4 push-m8">
+                    <div class="total-value">
+                      <span class="title-sub">{{ more.texts.value }}</span>
+                      <!--<span class="title-quantity odometer ">{[{total_value}]}</span>-->
+                      {#<span class="title-quantity scramble">{[{total_value}]}</span>#}
+                      <span id="total-value" class="title-quantity scramble"></span>
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% if more.amount_invoices == 1 %}
+                  <div class="col s12 m8 pull-m4">
+                    <div class="amount-invoices">
+                     <span class=""
+                           ng-if="type_texts == 'all'">{[{amount_invoices}]} {{ more.texts.amount_invoices_1 }}</span>
+                      <span class=""
+                            ng-if="type_texts == 'selected'">{[{amount_invoices}]} {{ more.texts.amount_invoices_2 }}</span>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="col s6 m5 l4 xl4">
+                <div class="col s12 m11 center-align">
+                  {% if more.pay_button == 1 %}
+                    <div id="button-payment" class="button-payment">
+                      <a class="waves-effect waves-light btn btn-third segment-click"
+                         data-segment-event="TBO - Iniciar Pago múltiples facturas"
+                         data-segment-properties='{"category":"Facturación","label":"pagar todas - fijo - {[{amount_invoices}]}","value":"{[{total_value_resp}]}","site":"NEW"}'
+                         ng-if="type_texts == 'all' || all_selected == '1'"
+                         ng-click="paymentProcess()" ng-class="status_button != 1 ? 'disabled' : ''">{{ more.texts.button_1 }}
+                      </a>
+                      <a class="waves-effect waves-light btn btn-third btn-pay segment-click"
+                         data-segment-event="TBO - Iniciar Pago múltiples facturas"
+                         data-segment-properties='{"category":"Facturación","label":"pagar - fijo - {[{amount_invoices}]}","value":"{[{total_value_resp}]}","site":"NEW"}'
+                         ng-if="type_texts == 'selected' && all_selected != '1'"
+                         ng-click="paymentProcess()" ng-class="status_button != 1 ? 'disabled' : ''">{{ more.texts.button_2 }}</a>
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="col m1 hide-on-med-and-down">
+                  <div class="deploy-icon">
+                    <i class="prefix icon-upside-cyan"
+                       ng-click="showHideDetails()" ng-class="amount_invoices > 0 ? '' : 'hide'">
+                      <span class="path1"></span>
+                      <span class="path2"></span>
+                    </i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="body-payment-box" class="body-payment-box hide-table">
+              <div class="scroll-pane" ng-mouseover="initScrollPane()">
+                <div class="row">
+                   <div class="col s11 m11">
+                  <table class="multiple-payment-table">
+                    <thead>
+                      <tr>
+                        {% for item in table %}
+                          {% if item.show == 1 %}
+                            {% if item.service_field != 'close' %}
+                              {% if item.service_field == 'value' or item.service_field == 'date_payment' %}
+                                <th scope="col" ng-click="orderByParameter('{{ item.service_field }}')">
+                                  {{ item.label }}
+                                  <span class="icon-order {{ item.service_field }}"></span>
+                                </th>
+                              {% else %}
+                                <th scope="col">{{ item.label }}</th>
+                              {% endif %}
+                            {% else %}
+                              <th scope="col"></th>
+                            {% endif %}
+                          {% endif %}
+                        {% endfor %}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        data-ng-repeat="(iterator, invoice) in invoices_collection  | orderBy:predicate:reverse">
+                        <td ng-repeat="(key, value) in invoice">
+                          <div class="regular-cell">
+                            <span
+                              ng-if="key != 'close' && key != 'invoice_value2'"> {[{value == null || value == "" ? "No disponible" : value}]}</span>
+                            <span ng-if="key == 'invoice_value2'"
+                                  ng-class="valueType(invoice) == '1' ? 'normal' : 'red'"> {[{value == null || value == "" ? "No disponible" : value}]}</span>
+                            <i ng-if="key == 'close'"
+                               ng-click="deleteInvoicePayment(invoice)"
+                               class="prefix icon-x-cyan">
+                              <span class="path1"></span>
+                              <span class="path2"></span>
+                            </i>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                  </table>
+                </div>
+                </div>
+              </div>
+            </div>
+
+            {#tabla mobile#}
+            <div id="body-payment-box-mobile" class="body-payment-box hide-table">
+              <div class="scroll-pane" ng-mouseover="initScrollPane()">
+                <div class="row">
+                  <div class="col s11 m11">
+                    <table class="multiple-payment-table">
+                      <thead>
+                      <tr>
+                        {% set count = 0 %}
+                        {% for item in table %}
+                          {% if (item.show_mobile == 1) and (count < 3) %}
+                            {% if item.service_field != 'close' %}
+                              {% if item.service_field == 'value' or item.service_field == 'date_payment' %}
+                                <th scope="col" ng-click="orderByParameter('{{ item.service_field }}')">
+                                  {{ item.label }}
+                                  <span class="flecha {{ item.service_field }}"></span>
+                                </th>
+                              {% else %}
+                                <th scope="col">{{ item.label }}</th>
+                              {% endif %}
+                            {% else %}
+                              <th scope="col"></th>
+                            {% endif %}
+                            {% set count = count + 1 %}
+                          {% endif %}
+                        {% endfor %}
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr
+                        data-ng-repeat="(iterator_m, invoice_m) in invoices_collection_mobile  | orderBy:predicate:reverse">
+                        <td ng-repeat="(key_m, value_m) in invoice_m">
+                          <div class="regular-cell">
+                            <span
+                              ng-if="key_m != 'close' && key_m != 'invoice_value2'"> {[{value_m == null || value_m == "" ? "No disponible" : value_m}]}</span>
+                            <span ng-if="key_m == 'invoice_value2'"
+                                  ng-class="valueType(invoice_m) == '1' ? 'normal' : 'red'"> {[{value_m == null || value_m == "" ? "No disponible" : value_m}]}</span>
+                            <i ng-if="key_m == 'close'"
+                               ng-click="deleteInvoicePayment(invoice_m)"
+                               class="prefix icon-x-cyan">
+                              <span class="path1"></span>
+                              <span class="path2"></span>
+                            </i>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                      <tfoot>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {#fin tabla mobile#}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+

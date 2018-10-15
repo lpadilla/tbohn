@@ -1,0 +1,4 @@
+services:
+  adf_segment:
+    class: Drupal\adf_segment\Services\AdfSegmentService
+    arguments: []

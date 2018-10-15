@@ -1,0 +1,22 @@
+{#
+/**
+ * @file log_import_data_entity.html.twig
+ * Default theme implementation to present Log import data entity data.
+ *
+ * This template is used when viewing Log import data entity pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_log_import_data_entity()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('log_import_data_entity') }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</div>

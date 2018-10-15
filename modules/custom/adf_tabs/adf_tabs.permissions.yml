@@ -1,0 +1,44 @@
+add menu tab entity entities:
+  title: 'Create new Menu tab entity entities'
+
+administer menu tab entity entities:
+  title: 'Administer Menu tab entity entities'
+  description: 'Allow to access the administration form to configure Menu tab entity entities.'
+  restrict access: true
+
+delete menu tab entity entities:
+  title: 'Delete Menu tab entity entities'
+
+edit menu tab entity entities:
+  title: 'Edit Menu tab entity entities'
+
+access menu tab entity overview:
+  title: 'Access the Menu tab entity overview page'
+
+view published menu tab entity entities:
+  title: 'View published Menu tab entity entities'
+
+view unpublished menu tab entity entities:
+  title: 'View unpublished Menu tab entity entities'
+add item menu tab entity entities:
+  title: 'Create new Item menu tab entity entities'
+
+administer item menu tab entity entities:
+  title: 'Administer Item menu tab entity entities'
+  description: 'Allow to access the administration form to configure Item menu tab entity entities.'
+  restrict access: true
+
+delete item menu tab entity entities:
+  title: 'Delete Item menu tab entity entities'
+
+edit item menu tab entity entities:
+  title: 'Edit Item menu tab entity entities'
+
+access item menu tab entity overview:
+  title: 'Access the Item menu tab entity overview page'
+
+view published item menu tab entity entities:
+  title: 'View published Item menu tab entity entities'
+
+view unpublished item menu tab entity entities:
+  title: 'View unpublished Item menu tab entity entities'

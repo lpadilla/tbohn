@@ -1,0 +1,18 @@
+tbo_entities.transaction_category_entity.*:
+  type: config_entity
+  label: 'Transaction category entity config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string
+    category:
+      type: string
+      label: 'category'
+    card:
+      type: string
+      label: 'card'

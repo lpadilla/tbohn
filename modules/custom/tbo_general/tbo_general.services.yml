@@ -1,0 +1,69 @@
+services:
+  tbo_general.tbo_config:
+    class: Drupal\tbo_general\Services\TboConfigService
+    arguments: []
+
+  tbo_general.card_base_example_block:
+    class: Drupal\tbo_general\Plugin\Config\CardBaseExampleBlockClass
+    arguments: []
+
+  tbo_general.card_base_example_block_logic:
+    class: Drupal\tbo_general\Services\CardBaseExampleService
+    arguments: ["@tbo_general.tbo_config"]
+
+  tbo_general.launcher_block:
+    class: Drupal\tbo_general\Plugin\Config\Block\LauncherBlockClass
+    arguments: []
+
+  tbo_general.launcher:
+    class: Drupal\tbo_general\Services\LauncherService
+    arguments: []
+
+  tbo_general.launcher_rest_logic:
+    class: Drupal\tbo_general\Services\LauncherRestLogic
+    arguments: ["@current_user"]
+
+  tbo_general.transaction_category_controller_class:
+    class: Drupal\tbo_general\Plugin\Config\Controller\TransactionCategoryControllerClass
+    arguments: []
+
+  tbo_general.global_format_rest_logic:
+    class: Drupal\tbo_general\Services\GlobalFormatRestService
+    arguments: ["@tbo_general.tbo_config", "@current_user"]
+
+  tbo_general.custom_script_block:
+    class: Drupal\tbo_general\Plugin\Config\Block\CustomScriptsBlockClass
+    arguments: []
+
+  tbo_general.footer_site_block:
+    class: Drupal\tbo_general\Plugin\Config\Block\FooterSiteBlockClass
+    arguments: []
+
+  tbo_general.social_networks_site_block:
+    class: Drupal\tbo_general\Plugin\Config\Block\SocialNetworksSiteBlockClass
+    arguments: []
+
+  tbo_general.logo_copy_site_block:
+    class: Drupal\tbo_general\Plugin\Config\Block\LogoCopySiteBlockClass
+    arguments: []
+
+  tbo_general.repository:
+    class: Drupal\tbo_general\Repository\GeneralRepository
+    arguments: []
+
+  tbo_general.company_selector_block:
+    class: Drupal\tbo_general\Plugin\Config\Block\CompanySelectorBlockClass
+    arguments: []
+
+  tbo_general.company_selector_form:
+    class: Drupal\tbo_general\Plugin\Config\Form\CompanySelectorFormClass
+    arguments: []
+
+  tbo_general.company_selector_controller:
+    class: Drupal\tbo_general\Services\Controller\CompanySelectorControllerClass
+    arguments: []
+
+  tbo_general.twig.extension:
+    class: Drupal\tbo_general\TwigExtension\TboThemingTwigExtension
+    tags:
+      - { name: twig.extension }

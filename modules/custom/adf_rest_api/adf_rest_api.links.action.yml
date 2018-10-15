@@ -1,0 +1,5 @@
+entity.adf_rest_api_endpoint_entity.add_form:
+  route_name: entity.adf_rest_api_endpoint_entity.add_form
+  title: 'Add Adf rest api endpoint entity'
+  appears_on:
+    - entity.adf_rest_api_endpoint_entity.collection

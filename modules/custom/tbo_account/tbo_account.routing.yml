@@ -1,0 +1,148 @@
+tbo_account.create_enterprise_form:
+  path: '/tbo_account/form/create_enterprise'
+  defaults:
+    _form: '\Drupal\tbo_account\Form\CreateEnterpriseForm'
+    _title: 'CreateEnterpriseForm'
+  requirements:
+    _access: 'TRUE'
+
+
+tbo_account.example_form:
+  path: '/tbo_account/form/example'
+  defaults:
+    _form: '\Drupal\tbo_account\Form\ExampleForm'
+    _title: 'ExampleForm'
+  requirements:
+    _access: 'TRUE'
+
+
+tbo_account.pager_form_config:
+  path: '/admin/config/tbo_account/pagerformconfig'
+  defaults:
+    _form: '\Drupal\tbo_account\Form\PagerFormConfig'
+    _title: 'PagerFormConfig'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+tbo_account.autocomplete_New_Users:
+  path: '/tbo-account-autocomplete'
+  defaults:
+    _controller: '\Drupal\tbo_account\Controller\tboAccountController::autocomple_enterprises'
+    _format: json
+  requirements:
+    _access: 'TRUE'
+
+tbo_account.manage_companies_message_confirm:
+  path: '/account/manage/message/{type}/{clientId}/{name}/{pathname}/{state}/{confirm}'
+  defaults:
+    _controller: '\Drupal\tbo_account\Controller\tboAccountController::manageCompanyMessageConfirm'
+    _title: 'load'
+    state: FALSE
+    confirm: FALSE
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator+tigo_admin+super_admin'
+
+tbo_account.enable_disable_tigo_admin:
+  path: '/tbo-account/manage-tigo/enable-disable/{button}/{type}/{pathname}/{url_config}'
+  defaults:
+    _controller: '\Drupal\tbo_account\Controller\tboAccountController::enableDisableTigoUser'
+    _title: 'load'
+  requirements:
+    _permission: 'access content'
+
+tbo_account.invited_user:
+  path: '/invitado/{token}/{login}'
+  defaults:
+    _controller: '\Drupal\tbo_account\Controller\tboAccountController::invitedUser'
+    login: FALSE
+  requirements:
+    _permission: 'access content'
+
+tbo_account.verified_user:
+  path: '/verificar/usuario'
+  defaults:
+    _controller: '\Drupal\tbo_account\Controller\tboAccountController::verifiedUser'
+    login: FALSE
+  requirements:
+    _permission: 'access content'
+
+tbo_account.autocomplete_email_controller_autocompleteEmail:
+  path: '/tbo_account/autocomplete/{mail}'
+  defaults:
+    _controller: '\Drupal\tbo_account\Controller\AutocompleteEmailController::autocompleteEmail'
+    _title: 'autocompleteEmail'
+  requirements:
+    _permission: 'access content'
+
+import_data.import_data_form_config:
+  path: '/admin/config/tbo_account/importdataformconfig'
+  defaults:
+    _form: '\Drupal\tbo_account\Form\ImportDataFormConfig'
+    _title: 'Configurar la importación de archivos'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+tbo_account.edit_user_data_form:
+  path: '/tbo_account/form/edit_user_data'
+  defaults:
+    _form: '\Drupal\tbo_account\Form\EditUserDataForm'
+    _title: 'EditUserDataForm'
+  requirements:
+    _access: 'TRUE'
+
+tbo_account.autocreate_account_controller_autocreateAccount:
+  path: '/auto_create/{type}'
+  defaults:
+    _controller: '\Drupal\tbo_account\Controller\AutocreateAccountController::autocreateAccount'
+  requirements:
+    _permission: 'access content'
+    _role: 'authenticated'
+
+tbo_account.export_data_log:
+  path: '/tbo-account/export-log'
+  defaults:
+   _controller: '\Drupal\tbo_account\Controller\MassiveEnterpriseController::exportLog'
+  requirements:
+    _permission: 'access content'
+
+tbo_account.autocreate_config:
+  path: '/admin/config/autocreate/settings'
+  defaults:
+    _form: '\Drupal\tbo_account\Form\AutocreateFormConfig'
+    _title: 'Seleccionar método de autocreación'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+tbo_account.update_user_data_form:
+  path: '/tbo_account/form/update_user_data'
+  defaults:
+    _form: '\Drupal\tbo_account\Form\UpdateUserDataForm'
+    _title: 'UpdateUserDataForm'
+  requirements:
+    _access: 'TRUE'
+
+tbo_account.autocreate_account_config:
+  path: '/admin/config/autocreate/account/settings'
+  defaults:
+    _form: '\Drupal\tbo_account\Form\AutocreateAccountFormConfig'
+    _title: 'Configuraciones de auto creación de cuenta'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+tbo_account.create_account_form:
+  path: '/auto_crear_cuenta'
+  defaults:
+    _form: '\Drupal\tbo_account\Form\CreateAccountForm'
+    _title: 'Auto crear cuenta'
+  requirements:
+    _access: 'TRUE'
+    _role: 'authenticated'

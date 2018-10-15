@@ -1,0 +1,5 @@
+name: tbo_services
+type: module
+description: Tbo - services
+core: 8.x
+package: Custom

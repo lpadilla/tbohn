@@ -1,0 +1,147 @@
+// Typography
+// -----------------------------------------------------------------------------
+
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/material-icons/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+  local('MaterialIcons-Regular'),
+  url(http://fonts.gstatic.com/s/materialicons/v21/2fcrYFNaTjcS6g4U3t-Y5UEw0lE80llgEseQY3FEmqw.woff2) format('woff2'),
+  url(../fonts/material-icons/MaterialIcons-Regular.woff) format('woff'),
+  url(../fonts/material-icons/MaterialIcons-Regular.svg) format('svg'),
+  url(../fonts/material-icons/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+  font-family: 'tigouneico';
+  src: url('../fonts/tigo/tigouneico.eot?wyrkxn');
+  src: url('../fonts/tigo/tigouneico.eot?wyrkxn#iefix') format('embedded-opentype'),
+  url('../fonts/tigo/tigouneico.ttf?wyrkxn') format('truetype'),
+  url('../fonts/tigo/tigouneico.woff?wyrkxn') format('woff'),
+  url('../fonts/tigo/tigouneico.svg?wyrkxn#tigouneico') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*
+[class^="icon-"], [class*=" icon-"] {
+  // use !important to prevent issues with browser extensions that change fonts
+  font-family: 'tigouneico' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+*/
+
+body {
+  color: $color-text;
+}
+
+p, span {
+  font-size: 12px;
+  line-height: 17px;
+  font-weight: $regular;
+  color: $color-text;
+  font-family: "Roboto", sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: $regular;
+  display: block;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  font-size: 24px;
+  line-height: 24px;
+  color: $blue-tigo;
+  margin-bottom: 18px;
+}
+
+h2 {
+  font-size: 20px;
+  line-height: 20px;
+  color: $gray2-tigo;
+}
+
+h3 {
+  font-size: 20px;
+  line-height: 20px;
+  color: $gray-tigo;
+  margin: 0;
+  padding: 2.1rem 0 1.68rem 0;
+}
+
+h4 {
+  font-size: 24px;
+  line-height: 24px;
+  color: $blue-tigo;
+  font-weight: $light;
+  margin-bottom: 10px;
+}
+
+h5 {
+  font-size: 14px;
+  line-height: 14px;
+  color: #292B34;
+  text-transform: uppercase;
+}
+
+h6 {
+  font-size: 14px;
+  line-height: 14px;
+  color: $gray2-tigo;
+  font-weight: light;
+  font-family: "Roboto", sans-serif;
+}
+
+h4.block__title {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 300;
+  padding: 25px 0 15px 0;
+  margin: 0;
+  //margin-bottom: 18px;
+}
+
+strong {
+  font-family: "Roboto", sans-serif;
+  font-weight: $bold;
+}
+
+a {
+  font-family: "Roboto", sans-serif;
+  color: $cyan-tigo;
+  font-size: 14px;
+  font-weight: $regular;
+}
+
+a.txt-message {
+  color: $text-btn-primary;
+}

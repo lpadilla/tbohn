@@ -1,0 +1,9 @@
+{% extends 'tbo_modal.html.twig' %}
+{% block print_message %}
+    {{ message }}
+{% endblock %}
+{% block button %}
+    <a href="#" id="btnDone" class="waves-effect waves-light btn btn-second">Cancelar</a>
+    <a href="{{ path('tbo_groups.groups_message_confirm', {'type':type, 'clientId': clientId, 'name': name, 'pathname': pathname, 'state': state_change, 'confirm': TRUE}) }}" id="confirm" class="create-group waves-effect waves-light btn btn-primary">{{ button }}</a>
+{% endblock %}
+

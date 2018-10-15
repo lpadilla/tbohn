@@ -1,0 +1,17 @@
+logs-hn:
+  version: 1.x
+  js:
+    js/directive/auditlogs_list_hn.js: {}
+    ../../../../../modules/custom/tbo_core/js/logs_config.js: {}
+    ../../../../../modules/custom/tbo_core/js/directive/auditlogs_list.js: {}
+    ../tbo_general_hn/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+menu-return-admin-hn:
+  version: 1.x
+  css:
+    theme:
+      css/menu_return_admin_hn.css: {}

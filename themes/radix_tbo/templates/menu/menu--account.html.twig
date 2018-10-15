@@ -1,0 +1,357 @@
+{#
+/**
+ * @file
+ * Theme override to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+{% import _self as menus %}
+{% import _self as book_tree %}
+
+{#
+  We call a macro which calls itself to render the full tree.
+  @see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+{{ menus.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+
+  {% import _self as menus %}
+  {% if show_create_account != true %}
+  {% for item in items %}
+
+    {% if loop.first %}
+      {% if menu_level == 0 %}
+        <div class="account_dropdown_wrapper">
+          <a class="dropdown-button " data-activates="account_dropdown">
+            <span {% if username|length > 55 %} class="name shadow" data-position="top" data-delay="50" data-tooltip="{{ username }}" {% else %} class="name" {% endif %}>{% if username|length > 55 %} {{ username[0:54] }} {% else %} {{ username }} {% endif %}</span>
+            {% if enterprise is not empty %}
+              <span {% if enterprise|length > 55 %} class="enterprise shadow" data-position="top" data-delay="50" data-tooltip="{{ enterprise }}" {% else %} class="enterprise" {% endif %}>{% if enterprise|length > 55 %} {{ enterprise[0:54]|title }} {% else %} {{ enterprise|title }} {% endif %}</span>
+            {% endif %}
+            <i class="prefix icon-user-cyan">
+              <span class="path1"></span>
+            </i>
+          </a>
+        </div>
+      {% endif %}
+      <ul {% if menu_level == 0 %} {{ attributes.setAttribute('id', 'account_dropdown').addClass('dropdown-content menu-useraccount') }} {% else %} id="dropdown2" class="dropdown-content menu-useraccount" {% endif %}>
+    {% endif %}
+    {% if loop.first and  menu_level == 0  %}
+      <li class="user">
+        <div class="avatar">
+          <img src="{{ image_user }}" alt="avatar user">
+        </div>
+        <span {% if username|length > 27 %} class="name tooltipped" data-position="top" data-delay="50" data-tooltip="{{ username }}" {% else %} class="name" {% endif %}>{% if username|length > 27 %} {{ username[0:26] }} {% else %} {{ username }} {% endif %}
+        </span>
+        {% if enterprise is not empty %}
+          <span {% if enterprise|length > 27 %} class="enterprise tooltipped" data-position="top" data-delay="50" data-tooltip="{{ enterprise }}" {% else %} class="enterprise" {% endif %}>{% if enterprise|length > 27 %} {{ enterprise[0:26]|title }} {% else %} {{ enterprise|title }} {% endif %}
+          </span>
+        {% endif %}
+      {#Variables para validaciones:
+        - validar si se muestra el icono de edicion {{ show_edit }}
+        - Url de la imagen del usuario {{ image_user }}
+      #}
+      {# Agregar el boton de editar si el caso de uso ya esta listo #}
+        {% if selector %}
+          <div class="options">
+            <i class="prefix icon-downside-cyan">
+              <span class="path1"></span>
+            </i>
+          </div>
+        {% else %}
+          {% if show_edit %}
+            <a href="{{ data_edit.url }}" class="{{ data_edit.class }}">
+              {% if data_edit.double_span %}
+                <div class="icon-x">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </div>
+              {% else %}
+                <span class="path1"></span>
+              {% endif %}
+            </a>
+          {% endif %}
+        {% endif %}
+      </li>
+    <div class="menu-option">
+      <li class="rol">
+        {{ rol }}
+      </li>
+  {% endif %}
+
+
+
+    <li {{ item.attributes.addClass(item_classes) }}>
+      {% set doubleSpan = false %}
+      {% for Iterator in item.attributes.class.getIterator %}
+        {% if 'doubleSpan' in Iterator %}
+          {% set doubleSpan = true %}
+        {% endif %}
+      {% endfor %}
+
+
+      {% if menu_level == 0 and item.is_expanded %}
+        <!-- primer nivel con hijos -->
+        <a href="#" class="dropdown-button2 is_expanded icon-down" data-activates='dropdown2' data-hover="hover" data-alignment="left" >
+          {{ item.title }}
+          <i class="prefix {{ item.url.getOption('attributes')['class'].0 }}">
+            <span class="path1"></span>
+            <span class="path2"></span>
+          </i>
+
+
+          {# <i class="prefix icon-downside-cyan "></i> #}
+        </a>
+
+      {% else %}
+        {# Comento esta linea para el icono #}
+        {# {{ link(item.title, item.url) }} #}
+        <a href="{{ item.url }}" class="" data-activates='dropdown2' data-hover="hover" data-alignment="left" target="{{  item.url.getOption('attributes')['target'] }}">
+          {{ item.title }}
+          <i class="prefix {{ item.url.getOption('attributes')['class'].0 }}">
+            <span class="path1"></span>
+            <span class="path2"></span>
+          </i>
+        </a>
+      {% endif %}
+      {% if item.below and menu_level == 0 %}
+        {{ menus.menu_links(item.below, attributes.removeClass('nav'), menu_level + 1) }}
+      {% endif %}
+
+    </li>
+
+    {% if loop.last and  menu_level == 0  %}
+      </div>
+      {% if selector %}
+       <div class="menu-option2">
+          <li class="change-acount">
+            <span class="admin">Administrar cuenta</span>
+            <span class="email"> {{ email }}</span>
+            {% if show_edit %}
+              <a href="{{ data_edit.url }}" class="{{ data_edit.class }}">
+                {% if data_edit.double_span %}
+                  <div class="icon-x">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </div>
+                {% else %}
+                  <span class="path1"></span>
+                {% endif %}
+              </a>
+            {% endif %}
+            {# Agregar boton de edicion, pendiente el caso de uso de editar perfil #}
+            <span class="title">Cambiar Cuenta</span>
+            {{ selector }}
+          </li>
+       </div>
+      {% endif %}
+      <li class="logout">
+        <a href="/user/logout" class="is-logout" target="" data-drupal-link-system-path="user/logout">{{ 'CERRAR SESION'|t }}</a>
+      </li>
+    {% endif %}
+
+    {% if loop.last %}
+      </ul>
+
+    {% endif %}
+
+  {% endfor %}
+  {% endif %}
+
+{#menu usuario sin rol#}
+  {% if show_create_account == true %}
+    {% if items or show_create_account == true %}
+    {% if menu_level == 0 %}
+  <div class="account_dropdown_wrapper">
+    <a class="dropdown-button"  data-activates="account_dropdown">
+      <span {% if username|length > 19 %} class="name shadow" data-position="top" data-delay="50" data-tooltip="{{ username }}" {% else %} class="name" {% endif %}>{% if username|length > 19 %} {{ username[0:18] }} {% else %} {{ username }} {% endif %}</span>
+      {% if enterprise is not empty %}
+        <span {% if enterprise|length > 19 %} class="enterprise shadow" data-position="top" data-delay="50" data-tooltip="{{ enterprise }}" {% else %} class="enterprise" {% endif %}>{% if enterprise|length > 19 %} {{ enterprise[0:18] }} {% else %} {{ enterprise }} {% endif %}</span>
+      {% endif %}
+      <i class="prefix icon-user-cyan">
+        <span class="path1"></span>
+      </i>
+    </a>
+  </div>
+<ul{{ attributes.setAttribute('id', 'account_dropdown').addClass('dropdown-content', 'menu-useraccount') }}>
+  {% else %}
+  <ul id="dropdown2" class="dropdown-content menu-useraccount">
+    {% endif %}
+
+    <li class="user">
+      <div class="avatar">
+        <img src="{{ image_user }}" alt="avatar user">
+      </div>
+      <span {% if username|length > 19 %} class="name tooltipped" data-position="top" data-delay="50" data-tooltip="{{ username }}" {% else %} class="name" {% endif %}>{% if username|length > 19 %} {{ username[0:18] }} {% else %} {{ username }} {% endif %}</span>
+      {% if enterprise is not empty %}
+        <span {% if enterprise|length > 19 %} class="enterprise tooltipped" data-position="top" data-delay="50" data-tooltip="{{ enterprise }}" {% else %} class="enterprise" {% endif %}>{% if enterprise|length > 19 %} {{ enterprise[0:18] }} {% else %} {{ enterprise }} {% endif %}</span>
+      {% endif %}
+      {#Variables para validaciones:
+        - validar si se muestra el icono de edicion {{ show_edit }}
+        - Url de la imagen del usuario {{ image_user }}
+      #}
+      {# Agregar el boton de editar si el caso de uso ya esta listo #}
+      {% if selector %}
+        <div class="options">
+          <i class="prefix icon-downside-cyan">
+            <span class="path1"></span>
+          </i>
+        </div>
+      {% else %}
+        {% if show_edit %}
+          <a href="{{ data_edit.url }}" class="{{ data_edit.class }}">
+            {% if data_edit.double_span %}
+              <div class="icon-x">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </div>
+            {% else %}
+              <span class="path1"></span>
+            {% endif %}
+          </a>
+        {% endif %}
+      {% endif %}
+    </li>
+    <li class="logout">
+      <a href="/user/logout" class="is-logout" target=""
+         data-drupal-link-system-path="user/logout">{{ 'CERRAR SESION'|t }}</a>
+    </li>
+  </ul>
+  {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{{ book_tree.book_links(items, attributes, 0) }}
+{% macro book_links(items, attributes, menu_level) %}
+{% import _self as book_tree %}
+{% if items %}
+{% if menu_level == 0 %}
+<ul id="slide-out" class="side-nav menu-useraccount">
+
+  {% else %}
+  <ul>
+    {% endif %}
+    {% if menu_level == 0 %}
+      <li class="user">
+        <div class="avatar">
+          <img src="{{ image_user }}" alt="avatar user">
+        </div>
+        <span {% if username|length > 27 %} class="name tooltipped" data-position="top" data-delay="50" data-tooltip="{{ username }}" {% else %} class="name" {% endif %}>{% if username|length > 27 %} {{ username[0:26] }} {% else %} {{ username }} {% endif %}</span>
+        {% if enterprise is not empty %}
+          <span {% if enterprise|length > 27 %} class="enterprise tooltipped" data-position="top" data-delay="50" data-tooltip="{{ enterprise }}" {% else %} class="enterprise" {% endif %}>{% if enterprise|length > 27 %} {{ enterprise[0:26] }} {% else %} {{ enterprise }} {% endif %}</span>
+        {% endif %}
+        {#Variables para validaciones:
+          - validar si se muestra el icono de edicion {{ show_edit }}
+          - Url de la imagen del usuario {{ image_user }}
+        #}
+        {# Agregar el boton de editar si el caso de uso ya esta listo #}
+        {% if selector %}
+          <div class="options">
+            <i class="prefix icon-downside-cyan">
+              <span class="path1"></span>
+              <span class="path2"></span>
+            </i>
+          </div>
+        {% else %}
+          {% if show_edit %}
+            <a href="{{ data_edit.url }}" class="{{ data_edit.class }}">
+              {% if data_edit.double_span %}
+                <div class="icon-x">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </div>
+              {% else %}
+                <span class="path1"></span>
+              {% endif %}
+            </a>
+          {% endif %}
+        {% endif %}
+      </li>
+      <div class="menu-option">
+        <li class="rol">
+          {{ rol }}
+        </li>
+    {% endif %}
+    {% for item in items %}
+      <li{{ item.attributes }}>
+
+        {% set doubleSpan = false %}
+        {% for Iterator in item.attributes.class.getIterator %}
+          {% if 'doubleSpan' in Iterator %}
+            {% set doubleSpan = true %}
+          {% endif %}
+        {% endfor %}
+
+        {% if menu_level == 0 and item.is_expanded %}
+
+          <ul class="collapsible collapsible-accordion">
+            <a class="collapsible-header is_expanded icon-down">
+            {{ item.title }}
+              <i class="prefix {{ item.url.getOption('attributes')['class'].0 }}">
+                <span class="path1"></span>
+                <span class="path2"></span>
+              </i>
+            </a>
+            {% if item.below %}
+              <div class="collapsible-body">
+                {{ book_tree.book_links(item.below, attributes, menu_level + 1) }}
+              </div>
+            {% endif %}
+          </ul>
+        {% else %}
+          <a href="{{ item.url }}">
+            {{ item.title }}
+            <i class="prefix {{ item.url.getOption('attributes')['class'].0 }}">
+              <span class="path1"></span>
+              <span class="path2"></span>
+            </i>
+          </a>
+        {% endif %}
+
+      </li>
+    {% endfor %}
+    {% if menu_level == 0 %}
+        </div>
+      {% if selector %}
+         <div class="menu-option2">
+           <li class="change-acount">
+          <span class="admin">Administrar cuenta</span>
+          <span class="email"> {{ email }}</span>
+          {% if show_edit %}
+            <a href="{{ data_edit.url }}" class="{{ data_edit.class }}">
+              {% if data_edit.double_span %}
+                <div class="icon-x">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </div>
+              {% else %}
+                <span class="path1"></span>
+              {% endif %}
+            </a>
+          {% endif %}
+          {# Agregar boton de edicion, pendiente el caso de uso de editar perfil #}
+          <span class="title">{{ 'Cambiar Cuenta'|t }}</span>
+          {{ selector }}
+        </li>
+         </div>
+      {% endif %}
+      <li class="logout">
+        <a href="/user/logout" class="is-logout" target="" data-drupal-link-system-path="user/logout">{{ 'CERRAR SESION'|t }}</a>
+      </li>
+    {% endif %}
+  </ul>
+  {% endif %}
+{% endmacro %}

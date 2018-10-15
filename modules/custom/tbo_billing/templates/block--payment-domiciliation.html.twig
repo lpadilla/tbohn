@@ -1,0 +1,167 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_data %}
+{% set directive_new = directive|replace({'-':'_'}) %}
+<div class="domiciliation" {{ directive }} ng-cloak ng-init="uuid_{{ directive_new }} = '{{ uuid }}'">
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+  {% block other_content %}
+
+    {% if config.label_display == 'visible' %}
+      <h2 class="title-card">{{ config.label }}</h2>
+    {% endif %}
+
+    {# mostrar la descipcion del card, depenciendo del estado actual de programar pago #}
+    <div ng-if="payment_domiciliation.show_description_block_configured_payment === 1" class="row">
+      <div class="description col s12 m5 l4">
+        {{ config.others.config.description_block_configured_payment.value|raw }}
+      </div>
+
+      {# mostrar los datos de pago programado (nuemro de tarjeta de credito y fecha de expiracion#}
+      <div class="{[{ item.class }]} tarjeta col s12 m7"
+           ng-repeat="(key, item) in payment_domiciliation.fields">
+        <span class="title col s5 m4">{[{ item.label }]}:</span>
+        <div class="value col s7 m8" ng-bind-html="item.value | to_trusted"></div>
+      </div>
+
+    </div>
+    <div ng-if="payment_domiciliation.show_description_block_payment_not_configured === 1" class=row>
+      <div class="description col s12">
+        {{ config.others.config.description_block_payment_not_configured.value|raw }}
+      </div>
+    </div>
+    <div ng-if="payment_domiciliation.show_description_block_payment_method_debit === 1" class="row">
+      <div class="description col s12">
+        {{ config.others.config.description_block_payment_method_debit.value|raw }}
+      </div>
+    </div>
+
+    {# mostrar los links dependiento del estado actual de programar pago #}
+    <div class="actions">
+      {% if config.others.config.actions.show_add_card_button %}
+        <a
+            href="/adicionar-tarjeta"
+            class="btn btn-primary segment-click"
+            data-segment-event="TBO - Opciones pago automático - Tx"
+            data-segment-properties='{"category":"Pago automático","label":"Agregar Tarjeta - {[{ enviroment }]}","site":"NEW"}'
+            ng-if="payment_domiciliation.show_add_card_button === 1">
+          {{ 'Agregar Tarjeta'|t }}
+        </a>
+      {% endif %}
+
+      {% if config.others.config.actions.show_add_programmer_payment_button %}
+        {# form schedule payment popup #}
+        <a
+            href="#SchedulePaymentForm"
+            class="btn btn-primary right segment-click"
+            ng-if="payment_domiciliation.show_add_programmer_payment_button === 1"
+            data-segment-event="TBO - Opciones pago automático - Tx"
+            data-segment-properties='{"category":"Pago automático","label":"Programar pago"}'>
+          {{ 'Programar pago'|t }}
+        </a>
+      {% endif %}
+
+
+      {% if pop_up is not empty %}
+        {# abrir el pop up de confirmación adicion tarjeta#}
+        <div class="open-pop-up">
+          <a href="#popup-schedule-payment" id="open-modal-confirmation">
+          </a>
+          {[{ openModalConfirmation() }]}
+        </div>
+      {% endif %}
+
+      {% if config.others.config.actions.show_edit_programmer_payment_button %}
+        {# form schedule payment popup #}
+        <a
+            ng-if="payment_domiciliation.show_edit_programmer_payment_button === 1"
+            href="#SchedulePaymentForm"
+            class="btn btn-second right segment-click"
+            data-segment-event="TBO - Opciones pago automático - Tx"
+            data-segment-properties='{"category":"Pago automático","label":"Desprogramar"}'>
+          {{ 'Desprogramar'|t }}
+        </a>
+      {% endif %}
+
+
+      {% if config.others.config.actions.show_my_cards_link %}
+        <a
+            ng-if="payment_domiciliation.show_my_cards_link === 1"
+            href="#cards-modal"
+            class="btn btn-second mis-tarjetas right segment-click"
+            data-segment-event="TBO - Opciones pago automático - Tx"
+            data-segment-properties='{"category":"Pago automático","label":"Mis tarjetas - {[{ enviroment }]}","site":"NEW"}'>
+          {{ 'Mis Tarjetas'|t }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div id="popup-schedule-payment" class="modal">
+      <div class="modal-content">
+        <div class="messages-popup alert-success">
+          <div class="prefix icon-simplicity-cyan">
+            <span class="path1"></span>
+            <span class="path2"></span>
+          </div>
+          <div class="txt-alert">
+            <p><strong>Su tarjeta ha sido guardada.</strong></p>
+            <p>Ahora puede programar el pago de esta factura</p>
+          </div>
+        </div>
+        {{ pop_up }}
+      </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="external-delete-card" class="modal">
+      <div class="modal-content">
+        {# Add preloading to pop up #}
+      <div class="preloadingContainer preloading-set-up" style="display: block;">
+        <div class="preloadingData" style="display: flex;">
+          <svg class="spinner" width="100%" height="100%" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+          </svg>
+        </div>
+      </div>
+      <h1>{{ 'Eliminar Tarjeta'|t }}</h1>
+      <p>{{ 'Al eliminar esta tarjeta de crédito cancela los pagos recurrentes a las facturas asociadas.'|t }}</p>
+      <p>{{ 'Deberá realizar los pagos de sus facturas por otros medios de pago.'|t }}</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="waves-effect waves-light btn btn-primary" ng-click="deleteCard()">
+          ACEPTAR
+        </a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-light btn btn-second close-manage-cards-delete segment-click" data-segment-event="TBO - Eliminar Tarjeta - Tx" data-segment-properties='{ "category": "Pago automático", "label": "Cancelar - {[{ enviroment }]}", "site": "NEW" }' >
+          CANCELAR
+        </a>
+      </div>
+    </div>
+
+    <div id="cards-modal" class="modal popup-my-cards">
+      <div class="modal-content">
+        {% set vars = {'cards': cards, 'data_popup_cards': data_popup_cards} %}
+        {% include 'block--manage-credit-cards.html.twig' with vars %}
+      </div>
+      <div class="modal-footer">
+        <a class="waves-effect waves-light btn btn-primary segment-click" href="/adicionar-tarjeta"
+        data-segment-event="TBO - Opciones Mis Tarjetas" data-segment-properties='{"category":"Pago automático","label":"Inicio Agregar tarjeta - {[{ enviroment }]}"}'>
+          AGREGAR
+        </a>
+        <a class="modal-action modal-close waves-effect waves-light btn btn-second close-manage-cards" href="#">CANCELAR</a>
+      </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="SchedulePaymentForm" class="modal" data-ng-complete-enter>
+      <div class="modal-content">
+        <h2 class="title-modal">{{ 'Pagos programados'|t }}</h2>
+        <p class="description">{{ 'Selecciona la tarjeta que deseas usar para pagar mes a mes tu contrato:'|t }}</p>
+        {{ schedule_payment_form }}
+      </div>
+    </div>
+
+    <div id="modal" class="form-modal"></div>
+{% endblock %}

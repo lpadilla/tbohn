@@ -1,0 +1,22 @@
+{#
+/**
+ * @file company_user_relations.html.twig
+ * Default theme implementation to present Company user relations data.
+ *
+ * This template is used when viewing Company user relations pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_company_user_relations()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('company_user_relations') }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</div>

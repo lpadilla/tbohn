@@ -1,0 +1,220 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_billing.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_billing_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_billing module.
+    case 'help.page.tbo_billing':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Tbo - Billing') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_billing_theme() {
+  return [
+    'invoice_history' => [
+      'variables' => [
+        'uuid' => NULL,
+        'title_view' => NULL,
+        'form_config' => NULL,
+        'headers_table' => NULL,
+        'fields' => NULL,
+        'opions_enable' => NULL,
+        'show_detail' => NULL,
+        'title_colum' => NULL,
+        'environment' => NULL,
+        'class' => NULL,
+        'directive' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--invoices-history',
+    ],
+    'current_invoice' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'config' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'class' => NULL,
+        'id' => NULL,
+        'form' => NULL,
+        'title_invoice' => NULL,
+        'address_options' => NULL,
+        'filters_mobile' => NULL,
+        'showoptions' => NULL,
+        'display' => NULL,
+        'checked' => NULL,
+        'margin' => NULL,
+        'more_options' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--current-invoice',
+    ],
+    'test_example' => [
+      'variables' => [],
+      'template' => 'test-example',
+    ],
+    'invoice_delivery_status' => [
+      'variables' => [
+        'uuid' => NULL,
+        'form' => NULL,
+        'config' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--invoice-delivery-status',
+    ],
+    'mobile_invoice_delivery_status' => [
+      'variables' => [
+        'uuid' => NULL,
+        'form' => NULL,
+        'config' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--mobile-invoice-delivery-status',
+    ],
+    'response_payment' => [
+      'variables' => [
+        'data' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--response-payment',
+    ],
+    'set_up_invoice_delivery' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'modal' => NULL,
+        'buttons' => NULL,
+        'margin' => NULL,
+        'class' => NULL,
+        'angular_class' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--set-up-invoice-delivery',
+    ],
+    'service_portfolio' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'class' => NULL,
+        'buttons' => NULL,
+        'title' => NULL,
+        'others_display' => NULL,
+        'margin' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--service-portfolio',
+    ],
+    'billing_summary' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'type' => NULL,
+        'url' => NULL,
+        'description' => NULL,
+        'button_text' => NULL,
+        'button_url' => NULL,
+        'titleNoServices' => NULL,
+        'fields' => NULL,
+        'class' => NULL,
+        'display' => NULL,
+        'url_payment' => NULL,
+        'segment' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--billing-summary',
+    ],
+    'service_summary' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--service-summary',
+    ],
+    'page_title_custom' => [
+      'variables' => [
+        'data' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--page-title-custom',
+    ],
+    'payment_domiciliation' => [
+      'variables' => [
+        'uuid' => NULL,
+        'fields' => NULL,
+        'directive' => NULL,
+        'schedule_payment_form' => NULL,
+        'config' => NULL,
+        'pop_up' => NULL,
+        'cards' => NULL,
+        'text_button' => NULL,
+        'margin' => NULL,
+        'data_popup_cards' => NULL,
+        'class' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--payment-domiciliation',
+    ],
+    'add_credit_card' => [
+      'variables' => [
+        'data' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--add-credit-card',
+    ],
+    'tbo_general_portfolio' => [
+      'template' => 'tbo-general-portfolio',
+      // layout_plugin expects the theme hook to be declared with this:
+      'render element' => 'content',
+      // 'path' => '/templates/field',.
+    ],
+    'manage_credit_cards' => [
+      'variables' => [
+        'data' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--manage-credit-cards',
+    ],
+    'block__manage_credit_cards' => [
+      'template' => 'block--manage-credit-cards',
+      'render element' => 'content',
+    ],
+    'multiple_invoice_payment' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'config' => NULL,
+        'class' => NULL,
+        'id' => NULL,
+        'margin' => NULL,
+        'more' => NULL,
+        'table' => NULL,
+        'table_mobile' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--multiple-invoice-payment',
+    ],
+  ];
+}

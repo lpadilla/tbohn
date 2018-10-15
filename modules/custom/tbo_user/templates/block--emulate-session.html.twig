@@ -1,0 +1,63 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block filters_modal_content %}
+  <div class="row">
+    <div class="input-field col s12 m12 l6">
+      {% if title %}
+        <h5 class="title-core">{{ title }}</h5>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block header_content_filters_card_detail %}
+  {% block filter_header_form %}
+    <form data-ng-submit="filterAdmin()">
+  {% endblock %}
+  <div class="row">
+    {% block for_filters %}
+      {% for filter in filters %}
+        {{ widgets.validate_style( filter.label, filter, filter.class) }}
+      {% endfor %}
+    {% endblock %}
+  </div>
+  {% block validate_filters %}
+    {% if filters is not empty %}
+      <div class="row">
+        <div class="col input-field s12 m12 l12">
+          <button class="right waves-effect waves-light btn btn-primary" type="submit">{{ 'FILTRAR'|t }}</button>
+          <input type="reset" value="limpiar" class="right btn btn-clear" ng-click="cleanValues()">
+        </div>
+      </div>
+    {% endif %}
+  {% endblock %}
+  </form>
+{% endblock %}
+
+{% block modal %}
+{% endblock %}
+
+{% block table_head %}
+  <tr>
+    {% for item in fields %}
+      <th scope="col" ng-click="columnReverse('{{ item.service_field }}');">{{ item.label }}</th>
+    {% endfor %}
+  </tr>
+{% endblock %}
+
+{% block table_body %}
+  <tr data-ng-repeat="compani in pagedItems[currentPage]  | orderBy:predicate:reverse">
+    {[{ compani }]}
+    <td ng-repeat="(key,value) in compani" ng-if="key != 'uid' && key != 'id' && key != 'admin_company'">
+      <ul class="block">
+        <li ng-if="key == 'full_name'" ng-repeat="admin in compani.admin_company">
+          <a href="/tbo_user/emulate/{[{admin.uid}]}">{[{admin.full_name}]}</a>
+        </li>
+      </ul>
+      <span ng-if="key == 'name'">{[{value == null || value == "" ? "No disponible" : value}]}</span>
+    </td>
+  </tr>
+{% endblock %}
+
+{% block other_content_data %}
+{% endblock %}

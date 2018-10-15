@@ -1,0 +1,22 @@
+add log import data entity entities:
+  title: 'Create new Log import data entity entities'
+
+administer log import data entity entities:
+  title: 'Administer Log import data entity entities'
+  description: 'Allow to access the administration form to configure Log import data entity entities.'
+  restrict access: true
+
+delete log import data entity entities:
+  title: 'Delete Log import data entity entities'
+
+edit log import data entity entities:
+  title: 'Edit Log import data entity entities'
+
+access log import data entity overview:
+  title: 'Access the Log import data entity overview page'
+
+view published log import data entity entities:
+  title: 'View published Log import data entity entities'
+
+view unpublished log import data entity entities:
+  title: 'View unpublished Log import data entity entities'

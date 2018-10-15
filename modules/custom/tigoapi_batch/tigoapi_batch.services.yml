@@ -1,0 +1,16 @@
+services:
+  tigoapi_batch.process:
+    class: Drupal\tigoapi_batch\TigoapiBatchService
+    arguments: []
+    tags:
+      - { name: service_collector, tag: batch_process, call: addProcessor }
+  tigoapi_batch.getportfoliomovildata:
+    class: Drupal\tigoapi_batch\Services\GetPorfolioMovilData
+    tags:
+      - { name: batch_process }
+    arguments: []
+  tigoapi_batch.getpqrsmovildata:
+    class: Drupal\tigoapi_batch\Services\GetPqrsMovilData
+    tags:
+      - { name: batch_process }
+    arguments: []

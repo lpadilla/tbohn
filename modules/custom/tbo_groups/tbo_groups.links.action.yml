@@ -1,0 +1,17 @@
+# All action links for this module
+
+tbo_groups.group_add:
+  # Which route will be called by the link
+  route_name: tbo_groups.group_add
+  title: 'Add Group'
+  # Where will the link appear, defined by route name.
+  appears_on:
+    - entity.tbo_groups_group.collection
+    - entity.tbo_groups_group.canonical
+
+tbo_groups.group_account_relations:
+  route_name: tbo_groups.group_account_relations.group_account_relations_add
+  title: 'Add group account relations'
+  appears_on:
+    - entity.group_account_relations.collection
+    - entity.group_account_relations.canonical

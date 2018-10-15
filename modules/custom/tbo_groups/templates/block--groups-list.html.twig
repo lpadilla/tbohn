@@ -1,0 +1,95 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% import "tbo_general.html.twig" as widgets %}
+
+{% block header_data %}
+{% endblock %}
+
+{% block filters %}
+{% endblock %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+{% endblock %}
+
+{% block message_exception %}
+{% endblock %}
+
+{% block end %}
+{% endblock %}
+
+{% block top_other_content %}
+  <div class="wrapper-create" data-ng-groups-list ng-init="uuid='{{ uuid }}'">
+    <a class="waves-effect waves-light btn enterprise-modal-form btn-primary" href="#modalFormGroup">Crear Grupo</a>
+    
+    <!-- Modal Structure -->
+    <div id="modalFormGroup" class="modal">
+      <div class="modal-content">
+        {{ form }}
+      </div>
+    </div>
+    
+    <!-- Form Filters -->
+    <form data-ng-submit="filterGroups()">
+      <div class="form-group">
+        <div class="filters">
+          <div class="row">
+            {% for filter in filters %}
+              {{ widgets.validate_style( filter.label, filter, filter.class) }}
+            {% endfor %}
+          </div>
+        </div>
+        {% if filters is not empty %}
+          <button class="btn btn-primary" type="submit">Aplicar</button>
+        {% endif %}
+      </div>
+    </form>
+    
+    <!-- Show view -->
+    <!-- Headers -->
+    <div class="data">
+      <table class="responsive-table">
+        <thead>
+        <tr>
+          {% for item in fields %}
+            <th scope="col" ng-click="orderReverse();"> {{ item.label }}</th>
+          {% endfor %}
+          <th scope="col">Operaciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="group in pagedItems[currentPage]  | orderBy:predicate:reverse">
+          <td ng-repeat="(key, groups) in group track by $index">
+            <div ng-if="key != 'operations'" class="regular-cell">
+              {[{groups == null || groups == "" ? "No disponible" : groups}]}
+            </div>
+            <div ng-if="key == 'operations'" class="regular-cell">
+              <div class="user-options col l1 row">
+                <a class='dropdown-button'
+                   ng-attr-data-activates='{[{ $index }]}'><i class="icon"></i></a>
+                <ul ng-attr-id='{[{ $index }]}' class='dropdown-content2'>
+                  <li><a ng-href="#modalFormGroup" class="modalcustomtwo"
+                         ng-click="getDataGroup($event, group.name )">Editar
+                    </a></li>
+                  <li><a ng-href="" class="modalcustomtwo"
+                         ng-click="deleteGroup($event, group.name )">Eliminar
+                    </a></li>
+                </ul>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <td colspan="{{ fields|length }}">
+          <!-- Get paginate  -->
+          {{ widgets.paginate() }}
+        </td>
+        </tfoot>
+      </table>
+    </div>
+    <div id="modal"></div>
+  </div>
+{% endblock %}

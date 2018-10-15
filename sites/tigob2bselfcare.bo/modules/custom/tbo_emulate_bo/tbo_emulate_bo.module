@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_emulate_bo.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_emulate_bo_theme(){
+  return [                
+    'emulate_session_bo' => [
+      'variables' => [
+        'uuid' => NULL,
+        'title_view' => NULL,
+        'form_config' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'directive' => NULL,
+        'title' => NULL,
+        'class' => NULL,
+        'margin' => NULL,
+      ],
+      'template' => 'block--emulate-session',
+    ],
+    'unmasquerade_bo' => [
+      'variables' => [
+      'role' => NULL,
+      ],
+      'template' => 'block--unmasquerade-session',
+    ],
+    'company_selector_bo' => [
+      'variables' => [
+        'data' => [],
+      ],
+      'template' => 'block--company-selector-bo',
+    ],
+  ];
+}

@@ -1,0 +1,565 @@
+body{
+  #toolbar-bar{
+    height: auto !important;
+    line-height: auto;
+    .toolbar-tab{
+      line-height: normal;
+    }
+    nav{
+      height: auto !important;
+      line-height: normal;
+
+    }
+  }
+  header{
+    clear: both;
+    border-bottom: 1px solid $color-line;
+    @include box-shadow(0px,0px,2px,3px,rgba(232,232,232,1),false);
+    position: relative;
+    @media #{$large-and-up} {
+      //z-index:4;
+    }
+    .navbar{
+      .row{
+        margin: 0;
+        @media #{$large-and-up} {
+          width: 100%;
+        }
+        .navbar-branding{
+          .hambuger-menu{
+            display: none;
+            width: 32px;
+            float: left;
+            color: $blue-tigo;
+            margin-right: 30px;
+            line-height: inherit;
+            height: 50px;
+            text-align: center;
+            cursor: pointer;
+            @media #{$large-and-up} {
+              display: block;
+              display: inline-block;
+            }
+            .icon-pricelist-cyan{
+              .path1{
+                display: none;
+              }
+              .path2{
+                margin-top: 11px;
+              }
+            }
+            .material-icons{
+              height: 100%;
+              line-height: 46px;
+              &:before{
+                text-align: center;
+                @include iconos-material('tigouneico', '\e997', 24px, bold);
+              }
+            }
+          }
+          .user-menu{
+            display: block;
+            width: 32px;
+            float: left;
+            color: $blue-tigo;
+            line-height: inherit;
+            height: 50px;
+            text-align: center;
+            cursor: pointer;
+            text-align: center;
+            margin-right: 0;
+            @media #{$large-and-up} {
+              display: none;
+            }
+            a.button-collapse{
+              margin: 0 auto;
+              width: 16px;
+              overflow: hidden;
+              display: block;
+              float: none;
+              text-align: left;
+              margin-left: 6px;
+            }
+            .material-icons{
+              line-height: 46px;
+              &:before{
+                text-align: center;
+                @include iconos-material('tigouneico', '\e997', 28px, bold);
+                margin: 14px 0 0 0;
+                color:$blue-tigo;
+                @media #{$large-and-up} {
+                  @include iconos-material('tigouneico', '\e997', 24px, bold);
+                }
+              }
+            }
+          }
+          .block--radix-tbo-branding{
+            float: left;
+            overflow: hidden;
+            background-color: white;
+            height: 50px;
+            .block__content{
+              a{
+                display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+                display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+                display: -ms-flexbox;      /* TWEENER - IE 10 */
+                display: -webkit-flex;     /* NEW - Chrome */
+                display: flex;
+                margin-top: 9px;
+                @media #{$large-and-up} {
+                  margin-top: 2px;
+                }
+                img{
+                   max-width: 74px;
+                   width: 100%;
+                   height: auto;
+                  @media #{$large-and-up} {
+                    max-width: 70px;
+                  }
+                }
+              }
+            }
+            img{
+              /*height: 50px;
+              padding-top: 8px;*/
+            }
+          }
+        }
+        .navbar-search{
+          position: relative;
+        //display: none;
+         // @media #{$large-and-up} {
+           // display: block;
+          //}
+          .block--search{
+            height: 50px;
+            display: flex;
+            position: relative;
+            @media #{$large-and-up} {
+              overflow: hidden;
+            }
+            >i.prefix{
+              @media #{$medium-and-down} {
+                position: absolute;
+                right: 20px;
+                top: 3px;
+              }
+            }
+            form{
+              margin: 11px 0 0 0;
+              float: left;
+              width: 100%;
+              position: relative;
+              height: 30px;
+              .row{
+                position: relative;
+                .input-field{
+                  width: 94%;
+                  margin: 0 0 0 32px;
+                  padding: 0;
+                  display: none;
+                  position: absolute;
+                  top: 35px;
+                  padding: 20px;
+                  right: 0;
+                  background-color: #f6f6f6;
+                  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+                  height: 74px;
+                  width: 242px;
+                  z-index: 10;
+                  @media #{$large-and-up} {
+                    display: block;
+                    position:inherit;
+                    top: inherit;
+                    padding: 0px;
+                    height: auto;
+                    right: inherit;
+                    background-color:transparent;
+                    box-shadow: none;
+                  }
+                  @media #{$extra-large-and-up} {
+                    width: 88%;
+                    margin: 0 0 0 12%;
+                  }
+                  input{
+                    margin: 0;
+                    text-align: left;
+                    padding:0;
+                    width: 100%;
+                    margin-right: 0;
+                    top:-4px;
+                    position: relative;
+                    line-height: 11px;
+                    height: 30px;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    -o-appearance: none;
+                  }
+                  /*** palceholder **/
+                 input::-webkit-input-placeholder {
+                    color: #A6A8AF;
+                    //color: red;
+                    font-size: 14px;
+                    font-weight: 300;
+                    font-family: "Roboto", sans-serif;
+                  }
+                  input:-moz-placeholder {
+                    color: #A6A8AF;
+                    font-size: 14px;
+                    font-weight: 300;
+                    font-family: "Roboto", sans-serif;
+                  }
+                  input::-moz-placeholder {
+                    color: #A6A8AF;
+                    font-size: 14px;
+                    font-weight: 300;
+                    font-family: "Roboto", sans-serif;
+                  }
+                  input:-ms-input-placeholder {
+                    color: #A6A8AF;
+                    font-size: 14px;
+                    font-family: "Roboto", sans-serif;
+                    font-weight: 300;
+                  }
+
+                }
+                #edit-actions{
+                  position: absolute;
+                  right: -14px;
+                  top:3px;
+                  @media #{$large-and-up} {
+                    right: inherit;
+                    left: 0;
+                    top:0;
+                  }
+                  .button{
+                    background-color: transparent;
+                    display: block;
+                    margin: 0;
+                    padding: 0;
+                    height: 30px;
+                    width: 42px;
+                    overflow: hidden;
+                    text-align: inherit;
+                    @include box-shadow(0px,0px,0px,0, transparent, true);
+                    @media #{$large-and-up} {
+                      height: 28px;
+                      width: 30px;
+                    }
+                    input{
+                      display: none;
+                    }
+                    &::before{
+                      margin: 0;
+                      color:$blue-tigo;
+                      width: 100%;
+                      text-align: center;
+                      font-size: 21px;
+                      top: 2px;
+                      @media #{$large-and-up} {
+                        color:#A6A8AF;
+                      }
+                    }
+                  }
+                  &.active:before {
+                    content: "";
+                    position: fixed;
+                    width: 100vw;
+                    height: 100vh;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    z-index: 1;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .account_dropdown_wrapper{
+          position: relative;
+          > a {
+            position: relative;
+            display: block;
+            text-align: right;
+            position: relative;
+            padding-right: 35px;
+            vertical-align: middle;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -ms-flex-pack: center;
+            justify-content: center;
+            height: 57px;
+            float: right;
+            &:before{
+              margin: 0;
+              position: absolute;
+              right: 0;
+              font-size: 22px;
+              top:15px;
+              color:$blue-tigo;
+            }
+            span{
+              display: block;
+              position: relative;
+              color:#707682;
+              font-weight: $regular;
+              font-size: 12px;
+              line-height: 15px;
+              text-transform: capitalize;
+              margin-bottom: 1px;
+              position: relative;
+              &.name.shadow, &.enterprise.shadow{
+                 &:before{
+                    text-align: center;
+                    content: "";
+                    width: 18px;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    right: 0px;
+                    background: url("../images/degrade.svg") bottom left repeat-y;
+                    z-index: 3;
+                 }
+              }
+              &.name{
+                font-weight: $bold;
+              }
+            }
+            i{
+              height: auto;
+              line-height: 1;
+              position: absolute;
+              right: 0;
+              top: 0;
+            }
+          }
+          .dropdown-content {
+            @media #{$large-and-down} {
+              top: 40px !important;
+            }
+          }
+        }
+        .navbar-account{
+          //display: none;
+          //@media #{$large-and-up} {
+           // display: block;
+          //}
+          .box-content{
+            display: block;
+            .dropdown-content{
+              top: 50px !important;
+              width: 100%;
+            }
+          }
+          .block--radix-tbo-account-menu, .block--radix-tbo-co-account-menu{
+            float: left;
+            margin-right: 25px;
+            .account_dropdown_wrapper{
+              display: none;
+              @media #{$large-and-up} {
+                display: block;
+              }
+            }
+            @media #{$large-and-up} {
+              width: 79%;
+              display: block;
+            }
+            @media #{$extra-large-and-up} {
+              width: 83%;
+            }
+
+          }
+          .block--ayudatbo, .block--radix-tbo-co-ayudatbo{
+            width: 100%;
+            @media #{$large-and-up} {
+              width: 23px;
+              float: left;
+            }
+            @media (min-width: 1200px) {
+
+            }
+            .helpmenu_dropdown_wrapper{
+              width: 100%;
+              position: relative;
+              > a{
+                display: block;
+                height: 50px;
+                position: relative;
+                width: 30px;
+                float: right;
+                @media #{$large-and-up} {
+                  width: 21px;
+                }
+                &:before{
+                  @include iconos-material('tigouneico','\e956', 30px, bold);
+                  width: 100%;
+                  color:$blue-tigo;
+                  margin: 14px 0 0 0;
+                  @media #{$large-and-up} {
+                    @include iconos-material('tigouneico','\e956', 20px, bold);
+                  }
+                }
+                &:after{
+                  @include iconos-material('tigouneico','\e957', 30px, bold);
+                  @media #{$large-and-up} {
+                    @include iconos-material('tigouneico','\e957', 20px, bold);
+                    top:15px;
+                  }
+                  color:$blue-tigo;
+                  position: absolute;
+                  right: 0px;
+                  top:16px;
+                  margin: 0;
+                  width: 100%;
+                  text-align: center;
+                  @media #{$large-and-up} {
+                    right: inherit;
+                    left: 0;
+
+                  }
+                }
+              }
+              ul.dropdown-content{
+                min-width: 208px;
+                left: inherit!important;
+                right: 0;
+                margin-top: 14px;
+                @media #{$large-and-down} {
+                  top: 40px !important;
+                }
+                h2{
+                  color:$blue-tigo;
+                  text-align: left;
+                  border-bottom: 1px solid $blue-tigo;
+                  margin: 0;
+                  padding: 14px 0 14px 14px;
+                }
+                li{
+                  border-bottom: 1px solid #cacaca;
+                  a{
+                    padding-left: 14px;
+                    &::before {
+                      font-size: 16px;
+                      margin-top: -1px;
+                      color: $gray-tigo;
+                    }
+                    span{
+                      margin-top: 0px;
+                      height: 18px;
+
+                      &::before {
+                        font-size: 16px;
+                        margin-top: -1px;
+                        color: $gray-tigo;
+                      }
+                    }
+                    .menu-title-help{
+                      margin-left: 30px;
+                      line-height: 14px;
+                      color: $gray-tigo;
+                    }
+                    &:hover {
+                      &::before {
+                        color: $blue-tigo;
+                      }
+                      span{
+                        &::before {
+                          color: $blue-tigo;
+                        }
+                      }
+                      .menu-title-help{
+                        color: $blue-tigo;
+                      }
+                    }
+                  }
+                }
+              }
+              @media #{$large-and-down} {
+                .dropdown-button.active:before {
+                  content: "";
+                  position: fixed;
+                  width: 100vw;
+                  height: 100vh;
+                  left: 0;
+                  top: 0;
+                  right: 0;
+                  z-index: 1;
+                }
+              }
+            }
+          }
+        }
+        /***nueva ***/
+        .block--logoheaderb2b{
+          .block__content{
+            a{
+              display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+              display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+              display: -ms-flexbox;      /* TWEENER - IE 10 */
+              display: -webkit-flex;     /* NEW - Chrome */
+              display: flex;
+              margin: 8px 0 0;
+              @media #{$large-and-up} {
+                margin: 5px 0;
+              }
+              background-color: white;
+              img{
+                max-width: 68px;
+                width: 100%;
+                height: auto;
+                @media #{$large-and-up} {
+                  max-width: 76px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .divider{
+      background-color: transparent;
+    }
+    .menu-side{
+      display: none;
+    }
+
+  }
+  &.page--logged-in{
+    background-color: $bk-mobile;
+    @media #{$large-and-up} {
+      background-color: $bk-desktop;
+    }
+  }
+  .alerta{
+    background-color: #ffc734;
+    padding: 6px 0;
+    p{
+      font-weight: 300;
+      color:white;
+      font-size: 14px;
+      line-height: 24px;
+      margin: 0;
+      &:before{
+        @include iconos-material('Material Icons','warning', 16px, bold);
+      }
+      .linkis{
+        font-weight: 300;
+        color:white;
+        font-size: 14px;
+        line-height: 24px;
+        display: inline-block;
+        text-decoration: underline;
+      }
+    }
+
+  }
+}
+
+.block--radix-tbo-account-menu, .block--radix-tbo-co-account-menu{
+  a.button-collapse{
+    display: block !important;
+  }
+}

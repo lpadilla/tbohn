@@ -1,0 +1,7 @@
+tbo_general.company_selector_controller_companySelector:
+  path: '/tbo_general/selector/{uid}'
+  defaults:
+    _controller: '\Drupal\tbo_general_hn\Controller\CompanySelectorHnController::companySelector'
+    _title: 'Seleccione una empresa'
+  requirements:
+    _permission: 'access content'

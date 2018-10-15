@@ -1,0 +1,234 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block validate_filters %}
+{% endblock %}
+
+{% block header_data %}
+{% set directive_new = directive|replace({'-':'_'}) %}
+<div class="{{ class }}" {{ directive }} ng-cloak ng-init="uuid_{{ directive_new }} = '{{ uuid }}'">
+{% endblock %}
+
+{% block header_content_filters_card %}
+  {% if val_atp != 'no_atp_aviable' %}
+  <div class="card gray-noborder-transparent-on-mobile-card clearfix input-field-search-wrapper"  >
+    <div class="col s12">
+      {% block header_content_filters_card_detail %}
+        {% block filter_header_form %}
+        <form data-ng-submit="filterCompanies()">
+          {% block for_filters %}
+            <div class="input-field input-field-search content-row">
+              <div class="input-field-search-icon">
+                <i class="icon-search-cyan">
+                  <span class="path1"></span>
+                </i>
+              </div>
+              <div class="input-field-search-content">
+                <input id="{{ filters.name_filter.identifier }}" data-ng-model="{{ filters.name_filter.identifier }}" class="form-control format-moments2"
+                    type="text" maxlength="{{ filters.name_filter.validate_length }}" ng-change="searchProfile({{ filters.name_filter.identifier }});" ng-trim="false"
+                    autocomplete="off"
+                />
+                <label for="{{ filters.name_filter.identifier }}">{{ filters.name_filter.label }}:</label>
+                <div class="container-suggestions">
+                  <span ng-repeat="(key, value) in suggestions" data-ng-model="suggestion" ng-click="selectedSuggestion(key, suggestion);" ng-bind-html="value.search"></span>
+                </div>
+              </div>
+            </div>
+
+          {% endblock %}
+        </form>
+        {% endblock %}
+      {% endblock %}
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}
+
+
+{% block header_content_table %}
+  {% if val_atp != 'no_atp_aviable' %}
+  <div class="card-block">
+    <div class="box-body">
+      <div class="row {% if margin %}{% if not margin.show_margin_table %} mb-0 {% endif %}{% endif %}">
+        <div class="col s12">
+          {% block header_content_table_card %}
+          <div class="card white clearfix show-on-medium-and-up hide-on-med-and-down">
+            <div class="col s12">
+              {% endblock %}
+              {% block table %}
+                <table class="table-white atp-corp-plan-per-contract__desktop" ng-cloak>
+                  <thead>
+                    {% block table_head %}
+                    <tr>
+                      {% for item in fields %}
+                        {% if item.service_field != 'profile_description' and item.service_field != 'lines' %}
+                          <th scope="col" class="sortable-th" ng-click="sortTableProfiles('{{ item.service_field }}', $event);">
+                            {{ item.label }}
+                            {% if item.service_field == 'profile' %}
+                              <span class="icon-order icon-arrow-down"></span>
+                            {% else %}
+                              <span class="icon-order"></span>
+                            {% endif %}
+                          </th>
+                        {% else %}
+                          <th scope="col">{{  item.label }}</th>
+                        {% endif %}
+                      {% endfor %}
+                    </tr>
+                    {% endblock %}
+                  </thead>
+                  <tbody>
+                    {% block table_body %}
+                      <tr data-ng-repeat="profile in pagedItemsCorProfiles[currentPageCorProfiles] | orderBy:predicate:reverse">
+                        {% block table_body_td %}
+                          {% for field in fields %}
+                            {% set angular_var = "profile."~field.service_field %}
+                            {% if field.service_field == 'package_value' or field.service_field == 'total_value' %}
+                              {% set angular_var = angular_var~"_show" %}
+                            {% endif %}
+                            <td>
+                              <div class="regular-cell">
+                              {% if field.service_field == 'lines' %}
+                                <a  class="r-font segment-click {[{ disabled_for_line_table }]} btn-atp-consultar-linea" ng-click="setLog($event, 'lines', profile.profile);"
+                                   href="{{ url }}?p1={[{ profile.profile_id }]}&p2={[{ accountIdCorProfiles }]}"
+                                   data-href-org="{{ url }}?p1={[{ profile.profile_id }]}&p2={[{ accountIdCorProfiles }]}"
+                                   data-segment-event="TBO - Ver Líneas cuenta ATP - Consulta"
+                                   data-segment-properties='{ "category":"Arma tu Plan Business","label":"{[{ contractCorProfiles }]} - movil","site":"NEW"}'
+                                >{{ link_label | upper }}</a>
+                              {% else %}
+                                {[{ {{ angular_var }} == null || {{ angular_var }} == "" ? "No disponible" : {{ angular_var }} }]}
+                              {% endif %}
+                              </div>
+                            </td>
+                          {% endfor %}
+                          <tr ng-if="empty_message_corp_profiles != '' && empty_message_corp_profiles !== undefined " class="empty-message" colspan="12" id="nofoundop" >
+                            <td colspan="12">{[{ empty_message_corp_profiles }]}</td>
+                          </tr>
+                        {% endblock %}
+                      </tr>
+                    {% endblock %}
+                  </tbody>
+                  <tfoot>
+                    {% block table_foot %}
+                    <td colspan="{{ fields|length }}">
+                      {% block paginate %}
+                        <!-- Get paginate  -->
+                        <div ng-if="pagedItemsCorProfiles.length > 1" class="pagination">
+                          <ul class="pagination">
+                            <li class="firts" ng-class="{disabled: currentPageCorProfiles == 0}">
+                              <a href ng-click="prevPageCorProfiles()">
+                                <i class="icon-prev">
+                                  <span class="path1"></span>
+                                </i>
+                              </a>
+                            </li>
+                            <li ng-repeat="n in rangeCorProfiles(pagedItemsCorProfiles.length, currentPageCorProfiles, currentPageCorProfiles + gapCorProfiles) "
+                                ng-class="{active: n == currentPageCorProfiles}"
+                                ng-click="setPageCorProfiles()" class="waves-effect">
+                              <a href ng-bind="n + 1">1</a>
+                            </li>
+                            <li class="last" ng-class="{disabled: (currentPageCorProfiles) == pagedItemsCorProfiles.length - 1}">
+                              <a href ng-click="nextPageCorProfiles()">
+                                <i class="icon-next">
+                                  <span class="path1"></span>
+                                </i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      {% endblock %}
+                    </td>
+                    {% endblock %}
+                  </tfoot>
+                </table>
+              {% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}
+
+{% block other_content_data %}
+  {% if val_atp != 'no_atp_aviable' %}
+  <div class="card-block">
+    <div class="box-body atp-corp-plan-per-contract__mobile show-on-small hide-on-med-and-up"
+       data-ng-repeat="profile in corporativeProfiles[0] | orderBy:predicate:reverse" infinite-scroll="loadMore()" infinite-scroll-distance="1000">
+      <div class="row {% if margin.show_margin_card == false %} mb-0 {% endif %}">
+        <div class="col s12">
+
+        {% block other_content_data_card %}
+          <div class="card white clearfix atp-corp-plan-per-contract">
+            {% block other_content %}
+              <div class="atp-corp-plan-per-contract-title">
+                {% if movil_fields.profile %}
+                <div class="col s12">
+                  <p class="label">{{ movil_fields.profile.label }}</p>
+                </div>
+                <div class="col s12">
+                  <h2>
+                    <strong>{[{ profile.profile }]}</strong>
+                  </h2>
+                </div>
+                {% endif %}
+                {% if movil_fields.profile_description %}
+                  <div class="col s12 title-content">
+                    <strong class="label">{{ movil_fields.profile_description.label }}</strong>
+                    <span class="label ligth-f">{[{ profile.profile_description }]}</span>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="atp-corp-plan-per-contract-data col s12">
+                {% if movil_fields.associated_lines %}
+                  <div class="col s4">
+                    <p class="label ligth-f sm-font">{{ movil_fields.associated_lines.label }}</p>
+                    <strong>{[{ profile.associated_lines }]}</strong>
+                  </div>
+                {% endif %}
+                {% if movil_fields.package_value %}
+                  <div class="col s4">
+                    <p class="label ligth-f sm-font">{{ movil_fields.package_value.label }}</p>
+                    <strong>{[{ profile.package_value_show }]}</strong>
+                  </div>
+                {% endif %}
+                {% if movil_fields.total_value %}
+                  <div class="col s4">
+                    <p class="label ligth-f sm-font">{{ movil_fields.total_value.label }}</p>
+                    <strong>{[{ profile.total_value_show }]}</strong>
+                  </div>
+                {% endif %}
+              </div>
+              {% if movil_fields.lines %}
+                <div class="atp-corp-plan-per-contract-button col s12">
+                  <a class="btn btn-second right waves-effect waves-light segment-click {[{ disabled_for_line }]}"
+                     ng-click="setLog($event, 'lines', profile.profile);" href="{{ url }}?p1={[{ profile.profile_id }]}&p2={[{ accountIdCorProfiles }]}"
+                     data-segment-event="TBO - Ver Líneas cuenta ATP - Consulta"
+                     data-segment-properties='{ "category":"Arma tu Plan Business","label":"{[{ contractCorProfiles }]} - movil","site":"NEW"}'
+                  >{{ movil_fields.lines.label }}</a>
+                </div>
+              {% endif %}
+            {% endblock %}
+
+          </div>
+        {% endblock %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% block no_info_message %}
+    <div class="box-body empty-mobile" ng-if="empty_message_corp_profiles != '' && empty_message_corp_profiles !== undefined " class="empty-message" id="nofoundop" >
+      <div class="row">
+        <div class="col s12">
+          <div class="card white clearfix atp-corp-plan-per-contract">
+            <p>{[{ empty_message_corp_profiles }]}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+  {% endif %}
+
+{% endblock %}

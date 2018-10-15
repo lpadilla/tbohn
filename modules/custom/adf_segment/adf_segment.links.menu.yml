@@ -1,0 +1,6 @@
+adf_segment.adf_segment_form_config:
+  title: 'Segment configurations'
+  route_name: adf_segment.adf_segment_form_config
+  description: 'A description for the menu entry'
+  parent: system.admin_config_services
+  weight: 99

@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\system\Entity\Menu;
+
+/**
+ * Generate menu links for all the ones implemented in hook_definitions
+ * Implement hook_module_preinstall()
+ */
+function tbo_menus_install() {
+  list($menus, $options) = tbo_menus_definitions();
+
+  foreach ($menus as $machine_name => $menu) {
+
+    $entity = Menu::load($machine_name);
+
+    if (is_null($entity)) {
+      $new_menu = Menu::create([
+        'id' => $machine_name,
+        'label' => $menu['label'],
+        'description' => $menu['description'],
+      ]);
+      $new_menu->save();
+      $error_message = 'El menu %menu ha sido creado';
+      $error_binds = ['%menu' => $menu['label']];
+      drupal_set_message(t($error_message, $error_binds), 'status');
+      \Drupal::logger('tbo_menus')->notice($error_message, $error_binds);
+
+      if (isset($options[$machine_name])) {
+        foreach ($options[$machine_name] as $num => $item) {
+
+          MenuLinkContent::create([
+            'title' => $item['title'],
+            'link' => $item['link'],
+            'menu_name' => $machine_name,
+            'weight' => $num,
+            '#attributes' => [
+              'class' => ['exampleclass'],
+            ],
+          ])->save();
+        }
+      }
+    }
+  }
+}
+
+/**
+ *
+ */
+function tbo_menus_uninstall() {
+  // TODO por el momento se deja este return para evitar eliminar menus al eliminar el modulo
+  // return;.
+  list($menus, $options) = tbo_menus_definitions();
+  foreach ($menus as $machine_name => $menu) {
+    $entity = Menu::load($machine_name);
+    if (!is_null($entity)) {
+      $entity->delete();
+
+      $error_message = 'El menu %menu y sus opciones han sido eliminados';
+      $error_binds = ['%menu' => $menu['label']];
+      drupal_set_message(t($error_message, $error_binds), 'status');
+      \Drupal::logger('tbo_menus')->notice($error_message, $error_binds);
+    }
+  }
+}

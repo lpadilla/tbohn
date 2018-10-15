@@ -1,0 +1,9 @@
+tbo_core.audit_log_pager_form_config:
+  path: '/admin/config/tbo_core/auditlogpagerformconfig'
+  defaults:
+    _form: '\Drupal\tbo_core\Form\AuditLogPagerFormConfig'
+    _title: 'Configuracion del log de auditorias'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

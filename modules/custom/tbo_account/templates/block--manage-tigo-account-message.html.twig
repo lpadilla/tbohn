@@ -1,0 +1,23 @@
+{% extends 'tbo_modal.html.twig' %}
+{% block print_message %}
+    {{ message }}
+  <script>
+    (function ($) {
+      $("#btnDone").click(function (e) {
+          var postBody = {
+              noDisable: 'TRUE',
+          };
+          $.get('/api/tigo-admin-list?_format=json', postBody, function(response, status){
+            if(response == 'noDisable'){
+              location.reload();
+            }
+          });
+      });
+    })(jQuery);
+  </script>
+{% endblock %}
+{% block button %}
+  <a href="{{ url_config }}" id="confirm" class="right waves-effect waves-light btn btn-primary">{{ button }}</a>
+  <a href="#" id="btnDone" class="right waves-effect waves-light btn btn-second">Cancelar</a>
+{% endblock %}
+

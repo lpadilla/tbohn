@@ -1,0 +1,8 @@
+
+# Menu tab entity menu items definition
+entity.menu_tab_entity.collection:
+  title: 'Menu tab entity list'
+  route_name: entity.menu_tab_entity.collection
+  description: 'List Menu tab entity entities'
+  parent: system.admin_structure
+  weight: 100

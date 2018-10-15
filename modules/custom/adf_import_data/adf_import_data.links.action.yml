@@ -1,0 +1,5 @@
+entity.log_import_data_entity.add_form:
+  route_name: entity.log_import_data_entity.add_form
+  title: 'Add Log import data entity'
+  appears_on:
+    - entity.log_import_data_entity.collection

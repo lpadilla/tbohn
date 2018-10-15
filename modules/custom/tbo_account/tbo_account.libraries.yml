@@ -1,0 +1,156 @@
+companies-list:
+  version: 1.x
+  js:
+    js/directive/companies_list.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+users-list:
+  version: 1.x
+  js:
+    js/directive/users_list.js: {}
+    js/directive/autocomplete.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+companies-manage:
+  version: 1.x
+  js:
+    js/directive/companies_manage.js: {}
+    js/companies_manage_custom.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - core/drupal.dialog
+    - tbo_general/angular.tbo
+
+tigoAd-list:
+  version: 1.x
+  js:
+    js/directive/tigoAd_list.js: {}
+    js/directive/autocomplete.js: {}
+    js/tigoList_manage_custom.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - core/drupal.dialog
+    - tbo_general/angular.tbo
+
+tigo-admin-list-companies:
+  version: 1.x
+  js:
+    js/directive/tigo_admin_list_companies.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - core/drupal.dialog
+    - tbo_general/angular.tbo
+
+re-assing-business-between-users-tigo-admin:
+  version: 1.x
+  js:
+    js/directive/re_assing_business_between_users_tigo_admin.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+category-services:
+  version: 1.x
+  js:
+    js/directive/category_services.js: {}
+    js/category_services_custom.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - core/drupal.dialog
+    - tbo_general/angular.tbo
+
+create-account:
+  version: 1.x
+  js:
+    js/directive/create_account.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+    - core/drupal.dialog
+
+edit-user-info:
+  version: 1.x
+  js:
+    js/directive/edit_user_info.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+    ../tbo_general/js/liveValidationsForm.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+    - core/drupal.dialog
+
+import-data:
+  version: 1.x
+  js:
+    js/directive/import_data.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+    - core/drupal.dialog
+
+data-log:
+  version: 1.x
+  js:
+    js/directive/import_data_log.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+    - core/drupal.dialog
+
+create-user:
+  version: 1.x
+  js:
+    js/directive/autocomplete.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+download-contract:
+  version: 1.x
+  js:
+    js/directive/download_contract.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+    ../tbo_general/js/liveValidationsForm.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+    - core/drupal.dialog
+
+update-user-info:
+  version: 1.x
+  js:
+    js/directive/update_user_info.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+    ../tbo_general/js/liveValidationsForm.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - core/drupal.dialog
+    - tbo_general/angular.tbo

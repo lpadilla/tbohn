@@ -1,0 +1,6 @@
+name: adf_segment
+type: module
+description: Integración con segment
+core: 8.x
+package: ADF
+configure: adf_segment.adf_segment_form_config

@@ -1,0 +1,125 @@
+{% extends 'block__card_base.html.twig' %}
+
+  {% block filters %}
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+  {% block other_content_data %}
+    {% set percentage= '80%' %}
+    <div class="card-block  wrapper-mobile-details-usage " ng-class="{true: 'no-post', false: 'post'}[ type_service != 'POS']" >
+      <div class="box-body">
+        <div class="row">
+          <div class="col s12">
+            <div class="card card-white clearfix">
+              <div class="header-card clearfix">
+                {% if config.label_display %}
+                  <div class="col s12">
+                    <h3 class="title-card2">{{ config.label }}</h3>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="col s12">
+                <div class="wrapper-data row">
+                  <div class="box-center clearfix">
+                    {% if data.mostrar_detalle_voz == 1 %}
+                    <div class="col s12 m12 l4">
+                      <div class="box-voz box-general">
+                        <div class="box-icon col s2 m1 l2">
+                          <img src="{{ data.icono_voz }}">
+                        </div>
+                        <div class="box-graphic col s8 m10 l10">
+                          <div class="graphic">
+                            <p class="data1 left">{% if fields.texto_voz.show == '1' %} {{ fields.texto_voz.label }}: {% endif %}<span> {[{ voice_limit }]}</span></p>
+                            <p class="data2 right"><span> {[{ voice_actual }]} {% if fields.unidad_voz.show == '1' %} {{ fields.unidad_voz.label }} {% endif %}</span> </p>
+                            <div class="graphic-scroll">
+                              <div class="line-base">
+                                <div class="percentage" style="width: {[{ voice_percentage }]}"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="enlace col s2 m1 l12">
+                          {% if buttons.detalle_voz.show == '1' %}
+                          <a class="link-primary hide-on-med-and-down" {% if buttons.detalle_voz.active == '1' %} href="{{ buttons.detalle_voz.url }}" ng-click="enviarLogDetalles('voz')" {% endif %} >{{ buttons.detalle_voz.label }}</a>
+                          {% endif %}
+                          <a href="{{ buttons.detalle_voz.url }}" class="link-mobile hide-on-large-only">
+                            <i class="prefix icon-rightside-cyan">
+                              <span class="path1"></span>
+                              <span class="path1"></span>
+                            </i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% if data.mostrar_detalle_datos == 1  %}
+                    <div class="col s12 m12 l4">
+                      <div class="box-data box-general ">
+                        <div class="box-icon col s2 m1 l2">
+                          <img src="{{ data.icono_datos }}" >
+                        </div>
+                        <div class="box-graphic col s8 m10 l10">
+                          <div class="graphic">
+                            <p class="data1 left">{% if fields.texto_datos.show == '1' %} {{ fields.texto_datos.label }}: {% endif %} <span> {[{ internet_limit }]}</span></p>
+                            <p class="data2 right"><span> {[{ internet_actual }]} {% if fields.unidad_datos.show == '1' %} {{ fields.unidad_datos.label }} {% endif %}</span> </p>
+                            <div class="graphic-scroll">
+                              <div class="line-base">
+                                <div class="percentage" style="width: {[{ internet_percentage }]}"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="enlace col s2 m1 l12">
+                          {% if buttons.detalle_datos.show == '1' %}
+                          <a class="link-primary hide-on-med-and-down" {% if buttons.detalle_datos.active == '1' %} href="{{ buttons.detalle_datos.url }}" ng-click="enviarLogDetalles('datos')"  {% endif %} >{{ buttons.detalle_datos.label }}</a>
+                          {% endif %}
+                          <a class="link-mobile hide-on-large-only" href="{{ buttons.detalle_datos.url }}">
+                            <i class="prefix icon-rightside-cyan">
+                              <span class="path1"></span>
+                            </i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% if data.mostrar_detalle_sms == 1  %}
+                    <div class="col s12 m12 l4">
+                      <div class="box-sms box-general">
+                        <div class="box-icon col s2 m1 l2">
+                          <img src="{{ data.icono_sms }}">
+                        </div>
+                        <div class="box-graphic col s8 m10 l10">
+                          <div class="graphic">
+                            <p class="data1 left">{% if fields.texto_sms.show == '1' %} {{ fields.texto_sms.label }}: {% endif %} <span> {[{ sms_limit }]}</span></p>
+                            <p class="data2 right"><span> {[{ sms_actual }]} {% if fields.unidad_sms.show == '1' %} {{ fields.unidad_sms.label }} {% endif %}</span> </p>
+                            <div class="graphic-scroll">
+                              <div class="line-base">
+                                <div class="percentage" style="width: {[{ sms_percentage }]}"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="enlace col s2 m1 l12">
+                          {% if buttons.detalle_sms.show == '1' %}
+                          <a class="link-primary hide-on-med-and-down" {% if buttons.detalle_sms.active == '1' %} href="{{ buttons.detalle_sms.url }}" ng-click="enviarLogDetalles('sms')" {% endif %} >{{ buttons.detalle_sms.label }}</a>
+                          {% endif %}
+                          <a class="link-mobile hide-on-large-only" href="{{ buttons.detalle_sms.url }}">
+                             <i class="prefix icon-rightside-cyan">
+                              <span class="path1"></span>
+                             </i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}

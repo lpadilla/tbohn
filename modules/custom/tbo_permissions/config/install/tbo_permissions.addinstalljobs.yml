@@ -1,0 +1,6 @@
+tbo_permissions:
+  session_started: 'false'
+  batch_count: '0'
+  jobs_count: '0'
+  companies_total: '0'
+  companies_batch_size: '100'

@@ -1,0 +1,160 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_simcard.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_billing_bo_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_simcard module.
+    case 'help.page.tbo_simcard':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('TBO Billing Bo user cases') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_billing_bo_theme() {
+  return [
+    'facturacion_summary' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'type' => NULL,
+        'url' => NULL,
+        'description' => NULL,
+        'button_text' => NULL,
+        'button_url' => NULL,
+        'titleNoServices' => NULL,
+        'fields' => NULL,
+        'class' => NULL,
+        'display' => NULL,
+        'url_payment' => NULL,
+        'segment' => NULL,
+        'title' => NULL,
+      ],
+      'template' => 'block--facturacion-summary',
+    ],
+    'contracts_bo' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'type' => NULL,
+        'url' => NULL,
+        'description' => NULL,
+        'button_text' => NULL,
+        'button_url' => NULL,
+        'titleNoServices' => NULL,
+        'fields' => NULL,
+        'display' => NULL,
+        'url_balance' => NULL,
+        'url_manage' => NULL,
+        'segment' => NULL,
+        'money' => NULL,
+        'invoices' => NULL,
+        'export' => NULL,
+        'title_exportar' => NULL,
+        'title' => NUlL,
+      ],
+      'template' => 'block--contracts-bo',
+    ],
+    'billing_header_operations_bo' => array(
+      'variables' =>array(
+      ),
+      'template' => 'block--header-operations-bo',
+    ),
+    'lineas_summary' => [
+      'variables' => [
+        'uuid' => NULL,
+        'directive' => NULL,
+        'type' => NULL,
+        'url' => NULL,
+        'description' => NULL,
+        'button_text' => NULL,
+        'button_url' => NULL,
+        'titleNoServices' => NULL,
+        'fields' => NULL,
+        'display' => NULL,
+        'url_payment' => NULL,
+        'segment' => NULL,
+        'header_line' => NULL,
+        'header_deuda' => NULL,
+        'title_two' => NULL,
+        'export_name' => NULL,
+        'menor_fifty' => NULL,
+        'extra' => NULL,
+        'show_detail' => NULL,
+      ],
+      'template' => 'block--lineas-bo',
+    ],
+    'current_invoice_bo' => [
+      'variables' => array(
+          'uuid' => NULL,
+          'directive' => NULL,
+          'config' => NULL,
+          'fields' => NULL,
+          'filters' => NULL,
+          'class' => NULL,
+          'id' => NULL,
+          'form' => NULL,
+          'title_invoice' => NULL,
+          'address_options' => NULL,
+          'filters_mobile' => NULL,
+          'showoptions' => NULL,
+          'display' => NULL,
+          'checked' => NULL,
+          'margin' => NULL,
+          'more_options' => NULL,
+      ),
+      'template' => 'block--current-invoice-bo',
+    ],
+    'invoice_history_bo' => [
+      'variables' => [
+        'uuid' => NULL,
+        'title_view' => NULL,
+        'form_config' => NULL,
+        'headers_table' => NULL,
+        'fields' => NULL,
+        'opions_enable' => NULL,
+        'show_detail' => NULL,
+        'title_colum' => NULL,
+        'environment' => NULL,
+        'class' => NULL,
+        'directive' => NULL,
+      ],
+      'template' => 'block--invoices-history-bo',
+    ],
+    'service_portfolio_bo' => array(
+      'variables' => array(
+          'uuid' => NULL,
+          'directive' => NULL,
+          'fields' => NULL,
+          'filters' => NULL,
+          'class' => NULL,
+          'buttons' => NULL,
+          'title' => NULL,
+          'others_display' => NULL,
+          'margin' => NULL,
+      ),
+      'template' => 'block--service-portfolio-bo',
+  ),
+  'tbo_general_portfolio_bo' => [
+    'template' => 'tbo-general-portfolio-bo',
+    // layout_plugin expects the theme hook to be declared with this:
+    'render element' => 'content',
+  ],
+
+  ];
+}

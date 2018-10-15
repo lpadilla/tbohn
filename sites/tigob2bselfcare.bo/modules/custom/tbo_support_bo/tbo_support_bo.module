@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_support_bo.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_support_bo_theme(){
+    return [                
+        'supports_bo' => [
+          'variables' => array(
+            'form'=> null,
+            'formName' => null,
+            'directive' => null,
+            'class' => null,
+            'attached' => null,
+            'title' => null,
+            'modal' => null,
+            'msisdn' => null,
+            'support' => null,            
+            'name_agent' => null,
+            'segment' => null,
+            'call_title' => null,
+            'phone_call_number' => null,
+            'schedule_call_time' => null,
+            'phone_call_show' => null,
+            'schedule_call_show' => null,
+            'agent_title' => null,
+            'phone_agent_number' => null,
+            'schedule_agent_time' => null,
+            'name_show' => null,
+            'phone_agent_show' => null,
+            'schedule_agent_show' => null,
+            'email_agent_show' => null,
+            'email_agent' => null,
+            'send_mail' => null,
+          ),
+          'template' => 'block--supports-bo',
+        ],
+    ];
+}

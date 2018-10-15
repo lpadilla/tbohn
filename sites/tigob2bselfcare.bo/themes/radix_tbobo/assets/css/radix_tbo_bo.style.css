@@ -1,0 +1,1220 @@
+
+body header .navbar .row .navbar-branding .hambuger-menu {
+    margin-right: 15px;
+}
+
+.block.block--copyrightbo {
+    max-width: 60%;
+    float: left;
+}
+
+header ul.menu-useraccount li.logout a, header ul.side-nav.menu-useraccount li.logout a{
+    max-width: 180px !important;
+}
+span.menu-title-help {
+    margin-top: 20px;
+    margin-left: 32px;
+}
+.card .content .column-left .info.service-status-inactive::before {    
+    content: "..";
+    background: #B82A31;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    font-size: 0;
+    position: absolute;
+    left: 6px;
+    top: 1px;
+}
+@media only screen and (max-width: 992px){
+    .responsive-table tbody {
+        height: auto !important;
+    }
+   
+}
+
+.card .content .column-left .info.service-status-discontinued::before  {    
+    content: "..";
+    background: #E69724;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    font-size: 0;
+    position: absolute;
+    left: 6px;
+    top: 1px;
+}
+.Contrato > .tags-wrapper #tagsList label {
+    margin-left: -12px;
+}
+.col.input-field.s12.Contrato>.tags-wrapper>#tagsList label {
+    margin-left: -12px;
+}
+.box-unlocked {
+    max-width: 50% !important;
+    height: auto;
+}
+ul#help_dropdown {
+    width: 200px !important;
+}
+.contextual-region.block.block--radix-tbo-hn-menuadministradorempresa-2,
+.contextual-region.block.block--menu.block--radix-tbo-hn-account-menu,
+ .block--radix-tbobo-account-menu {
+    width: 92%;
+    float: left;  
+}
+.block.block--logoheaderb2b {
+    width: 97%;
+}
+.row.box-unlocked .block--logoheaderb2b .block__content a img {
+    max-width: 95% !important;
+    height: 40px !important;
+}
+body header .navbar .row .account_dropdown_wrapper > a span.name {
+    font-weight: 500;    
+}
+
+body header .navbar .row .navbar-branding .user-menu {
+    margin-right: 10px;
+}
+
+th.img-center {
+    text-align: center !important;
+}
+.upcardfact {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.upcard{
+    margin-bottom: 10px;
+}
+
+.block-contracts .left.card-icon {
+    top: 8px;
+}
+
+.block-contracts .del-bottom {
+    margin-bottom: 0px;
+}
+.block-contracts .del-up{
+    margin-top: 1px;
+    margin-bottom: 20px !important;
+}
+footer, .push {
+    height: 5.5em ;
+}
+.card .content .column-right .label {    
+    word-break: break-word !important;
+}
+.filter-users .row .input-field .tags-wrapper {
+    position: initial !important;
+}
+
+.block--logofooterb2bbo{
+    width: 40%; float: left;
+}
+
+footer .container {
+    padding-top: 15px !important;
+}
+footer .container .block--copyright p {
+    margin-top: 15px;
+}
+.admin-menu-area{
+    background-color: #f6f6f6;
+    max-width: 308px;
+    width: 308px;
+    float: left;
+    padding-top: 10px !important;
+}
+.profile,.lista-emp{
+    padding: 5px;
+    width: 100%;
+    float: left;
+    height: 70px;
+}
+.lista-emp{
+    padding-left: 20px;
+    border-bottom: solid 2px #e4e4e4;
+    width: 90%;
+    margin: auto 5%;
+}
+.foto{
+    float: left;
+    height: 50px;
+    padding-right: 0px;
+}
+.foto img{
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+}
+.titulo-admin{
+    float: left;
+    padding-left: 5px;
+    width: 75%;
+    height: 100%;
+}
+.nombre-admin,.nombre-company{
+    height: 50%;
+    width: 100%;
+    color: #00377B;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    width: 243px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.nombre-company {
+    font-size: 14px; 
+    display: inline-block;
+    line-height: 18px;        
+}
+
+.opciones-usuario{
+    float: left;
+    width: 100%;
+    height: 60px;
+    border-top: solid 1.5px #e4e4e4;
+}
+.admin-cuenta,.correo{
+    float: left;
+    width: 100%;
+    height: 50%;
+    padding-left: 10px;
+}
+.admin-cuenta a{
+    height: 100%;
+    font-weight: 400;
+    color: #00377B;
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 18px;
+    float: left;
+}
+.correo{
+    vertical-align: middle;
+    color: #848484;
+    display: flex;
+    align-items: flex-end;
+    font-size: 14px;
+    padding: 0px 5px 0px 10px;
+}
+.cintillo{
+    float: left;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    color: #00377B;
+    font-size: 18px;
+    font-weight: 400;
+    background-color: #e4e4e4;
+    padding-left: 10px;
+}
+.area-action{
+    float: left;
+    width: 100%;
+    text-align: center;
+    height: 60px;
+}
+.area-action a{
+    font-size: 16px;
+    font-weight: bold;
+    color: #00377B;
+}
+header #account_dropdown {
+    width: 308px !important;
+    padding-top: 10px;
+}
+.side-nav a{
+    padding: 5px 0px;
+}
+.account_dropdown_wrapper{
+    display: none;
+}
+.block--menudenavegacion-2{
+    height: 50px !important;
+}
+header .row .unlocked {
+    max-width: 100%;
+}
+
+input::-webkit-input-placeholder {
+    font-size: 11px !important;
+    color: #A8AAB1 !important;
+    line-height: 30px !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+  input:-moz-placeholder {
+    font-size: 11px !important;
+    color: #A8AAB1 !important;
+    line-height: 30px !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+  input:-ms-input-placeholder { 
+    font-size: 13px !important;
+    color: #A8AAB1 !important;
+    line-height: 30px !important;
+    padding: 0 !important;
+    display: block !important;
+    padding-bottom: 0px !important;
+  }
+
+  .form-group.form-type-select.form-item-document-type {
+    margin-right: 0;
+    padding-right: 0;
+    width: 28%;
+}
+.form-group.form-type-textfield.form-item-document-number {
+    padding-left: 1;
+    margin-left: 0;
+    width: 71%;
+}
+.icon-pdf:before {
+    content: "\e993";
+    color:blue;
+  }
+
+
+form.filter-users>.row>.input-field.content-row.col.field-document_type {
+    margin-right: 1px;
+    padding-right: 1px;
+}
+
+form.filter-users>.row>.field-document_number {
+    padding-left: 0!important;
+    margin-left: 0 !important;
+}
+
+.create-user .form-item-full-name , .create-user .form-item-email,.create-user .form-item-line-number,.create-user .form-item-rol,.create-user .form-item-enterprise {
+    width: 100% !important;
+   
+}
+.create-user .form-item-document-type {
+    width: 32% !important;
+}
+.create-user .form-item-document-number {
+    width: 66% !important;
+}
+
+form .input-field label {
+    font-size: 11px !important;
+    color: #00377B !important;
+}
+.left.card-icon-invoice {
+    margin: 16px 22px 31px 43px;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    background: #ffffff;
+    border-radius: 50%;
+    position: relative;
+}
+
+.options.column-right.col.s12.l8.xl8 {
+    text-align: right !important;
+}
+.dropdown-button .prefix .path2 {
+    width: 26px;
+    height: 30px;
+    display: inline-block;
+    position: absolute;   
+    margin-top: 0px !important;
+}
+
+.wrapper-page {
+   min-height: 98% !important;
+}
+
+.card p.note-bill {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 21px;
+    width: 100%;
+    word-wrap: break-word;
+    margin: 0;
+}
+
+
+.card .input-card p {
+    margin: 0px 0 11px 0;
+}
+.block-currentinvoice .card-block .box-body .row {
+    margin-bottom: 0px !important;
+}
+.block-currentinvoice .card-block .box-body .row .card {
+    border-bottom: 0px !important;
+}
+.historical_invoice .card-block .box-body .row {
+    margin-bottom: 0px !important;
+}
+.historical_invoice .card-block .box-body .row .card {
+    border-bottom: 0px !important;
+}
+
+.col.input-field.s12 {
+    margin-bottom: 14px;
+}
+.historical_invoice .card-block .box-body .row .col .card .col .title-card {
+    font-size: 12px;
+}
+.billing-shipping {
+    background-color: #ebf3f6;
+}
+.card .title-card {
+    font-size: 18px;
+    line-height: 18px;
+    color: #00377B;
+    margin: 19px 0 15px 0;
+    font-weight: 400;
+}
+form .input-field label {
+    font-size: 13px;
+    font-weight: bold;
+}
+.pendiente{
+    color: #ff6633 !important;
+    font-family: Roboto;
+}
+
+#FormUserModal{
+     width: 460px!important;
+}
+/* company style  - gridd.scss*/
+#modalFormEnterprise{
+    width: 460px;
+}
+form#create-users-bo .row .input-field {
+    width: 100% !important;
+}
+form#create-users-bo .row .form-item-document-type{
+width: 40% !important;
+}
+form#create-users-bo .row .form-item-document-number{
+    width: 60% !important;
+}
+.modalcreate{
+    min-height: 676px !important;
+    top: 2% !important;
+}
+.modalassociate{
+    min-height: 550px !important;
+    top: 5% !important;
+}
+
+.path--cambiar-simcard .wrapper-page .container .box-container .box-body .block__title {
+    display: block !important;
+}
+.path--cambiar-simcard .wrapper-page .container .box-container .box-body .block__content #modalConfirm{
+    width: 30% !important;
+    background-color: #fff;
+    height: 35% !important;
+    min-height: 30% !important;
+}
+.form-item-simcard-number {
+    margin-left: 3% !important;
+}
+.create-enterprise .row .form-item-document-type, .create-enterprise .row .form-item-document-number,
+.user-form .input-field #edit-user-fielset-user-form div .form-item-user-fielset-user-form-admin-name,
+.user-form .input-field #edit-user-fielset-user-form div .form-item-user-fielset-user-form-admin-mail,
+.user-form .input-field #edit-user-fielset-user-form div .form-item-user-fielset-user-form-admin-phone
+{
+    width: 90%;
+}
+
+.block-create-company-message form .field-document_number{
+    width: 100% !important;
+    margin-left: auto !important;
+    padding-left: 0.75rem;
+}
+
+
+#modalFormEnterprise {
+    width: 460px;
+    max-height: 95% !important;
+    min-height: 80% !important;
+}
+.modal.users-tigo-admin {
+    max-width: 400px;
+    max-height: auto;
+    min-height: auto !important;
+    background-color: white;
+}
+.change-simcard{
+    display: block !important;
+}
+.change-simcard .row .input-field .enterprise-modal-form {
+    display: none;
+}
+.content-modal{
+    display: none;
+    display: block;
+    float: right;
+    width: 20%;
+}
+.testbut{
+        float: right;
+    display: block;
+}
+.form-item-enterprise-name{
+    width: 45% !important;
+}
+.button-simcard-area{
+    width: 95%;
+    float: left;
+}
+.content-enterprise-name div, .content-enterprise-name div label{
+    padding-left: 3% !important;
+}
+.content-enterprise-name div,form.create-enterprise #content-enterprise-name .content-enterprise-name div label{
+    padding-left: 0% !important;
+}
+.sim-continue,.cancel-sim{
+    float: right;
+    margin-top: 2em;
+}
+.tbo-billing-hn-modal-form .row{
+    margin-top: 2em;
+    float: right;
+}
+.title-simcard{
+    padding: 2em 0em 0em 2em;
+    font-size: 20px;
+    color: #00377B;
+}
+.block-manage-companies .card-block .responsive-table tr td a.modalcustomtwo {
+    float: right;
+    margin-right: 40%;
+}
+
+.block.block--menuadministradorempresa-2,.block.block--menuadministradorempresabo {
+    width: 89%;  
+    float: left;
+}
+form input:-webkit-autofill, form input:-webkit-autofill:hover, form input:-webkit-autofill:active, form input:-webkit-autofill:focus {
+    background-color: #FFFFFF !important;   
+    color: #292B34 !important; 
+    -webkit-text-fill-color: #292B34 !important;
+}
+.card.gray-card.clearfix form input:-webkit-autofill,.card.gray-card.clearfix form input:-webkit-autofill:hover,.card.gray-card.clearfix form input:-webkit-autofill:active,.card.gray-card.clearfix form input:-webkit-autofill:focus {
+-webkit-box-shadow: 0 0 0 1000px #E0E2E4 inset !important;
+
+}
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: transparent !important;
+   
+}
+span.item-title {
+    float: left;
+    top: 10px;
+    margin-top: 10px;
+    margin-left: 31px;
+    color: #00377B !important;
+}
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: transparent !important;
+    background-image: none;
+    color: rgb(0, 0, 0);
+}
+
+span.data-name {    
+   
+    margin-top: 8px;  
+    color: #00377B;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    margin-bottom: 12px;   
+    margin-bottom: 0px;
+}
+.material-tooltip {  
+    color: #fff;
+  }
+ 
+.backdrop{
+    background-color:#00377B;
+    color: #ffffff !important;
+    font-weight: bold;   
+   
+  }
+  .material-tooltip> .backdrop{
+    background-color: #00377B;
+  }
+.material-tooltip> span{   
+    color: #fff;
+    font-size: 0.9em;
+}
+
+span.difu {
+    text-shadow: 0px 0px 5px #000;
+    height: auto;
+    margin-top: -10px;
+    margin-left: -11px;    
+    font-size: 30px;
+}
+
+  .has-tip{
+    color: white !important;
+  }
+ 
+  .nub{
+    color: white !important;
+  }
+  .color{
+    color: #ffffff !important;
+  }
+form.create-enterprise #content-enterprise-name {   
+    white-space: nowrap;
+}
+
+.form-type-textfield.form-item-enterprise-name.form-disabled.form-item-disabled {
+    min-width: 90%;
+    margin: 0;
+    margin-top: 10px !important;
+    padding: 0;
+    left: 10px;
+}
+.input-field.col.s12.m12.l12.form-group.form-type-textfield.form-item-enterprise-name.form-disabled.form-item-disabled label {
+    margin-left: -20px;
+}
+.switch label .lever:after {
+    box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0) !important;
+   
+}
+div#account_dropdown {
+    white-space: inherit !important;
+}
+
+footer .block__content a img {
+    height: 75%;
+    width: 90%;
+    padding-left: 0.9em;    
+}
+
+main {
+    
+    padding-bottom: 57px !important;
+}
+
+.path--batch header .hambuger-menu {
+    display:none !important;
+}
+
+/*pagina Factura atual*/
+.invoice-content .row .col.xl4 {
+    width: 34.33333% !important;
+}
+.invoice-content .row .col.xl8 {
+    width: 64.66667%;
+}
+.detalle-factura{
+    padding: 10px 4px !important;
+}
+.invoice-content .valor-factura{
+    font-size: 22px !important; 
+}
+@media screen and (min-width: 426px) {
+    .detail-but{
+        float: left;
+        width: auto;
+    }
+}
+/*@media screen and (max-width: 425px) {
+    .detail-but{
+        float: left;
+    }
+}*/
+
+/*Dashboard*/
+.block-facturacion-summary-message .block-services{
+    min-height: 110px !important;
+}
+.block-facturacion-summary-message .block-services .buttons{
+    margin-top: -50px !important;
+}
+.block-facturacion-summary-message .block-services .total-invoices{
+    margin-bottom: 2px !important;
+}
+.block-facturacion-summary-message .buttons .btn-second{
+    font-size: 17px !important;
+}
+.messages.alert-danger {
+    color:#fff;
+}
+/*
+@media only screen and (max-width: 425px){
+.card .content .column-left .info.service-status-discontinued {
+     
+    padding-left: 21px !important;
+}
+.card .content .column-left .info.service-status-active {
+    color: #9CC553;
+}
+}*/
+@media screen and (max-width: 1000px) and (min-width: 501px) {
+    .card .content .column-left .info.service-status-discontinued {
+        color: #E69724;
+        margin-left: -4px !important;
+    }
+    
+    .block--logofooterb2bbo {
+        width: 30%;
+        float: left;
+    }
+    footer .container .block--radix-tbo-hn-copyright p {
+        margin-top: 0px !important;
+    }
+    footer .container .block--radix-tbo-hn-copyright {
+        float: left;
+        width: 39%;
+    }
+    
+    .block--redessociales {   
+        width: 30%;
+        float: left;  
+    }
+    footer .container {
+        padding-top: 12px !important;
+    }
+    
+    footer .block__content a img {
+        height: 75%;
+        width: 89%;
+        padding-left: 0.9em;        
+    }
+
+    .block--redessociales .block__content a img {
+        height: 100%;
+        width: 100%;        
+        margin-left: 4.5em;
+    }
+
+    .block--redessociales .block__content a {
+        float: left;
+        width: 40px;
+    }
+
+    .wrapper-page {
+        min-height: 95% !important;
+    }
+
+}
+
+.navbar-branding .block--logoheaderb2b .block__content a img {
+    max-width: 100%;
+    width: 100%;
+    height: 50px;
+}
+@media only screen and (min-width: 801px) {
+    .return2 {
+        font-size: 18px;
+        line-height: 18px;
+        color: #00377B;
+        margin: 4px 0 15px 10px !important;
+        font-weight: 400;       
+    }
+
+}  
+
+   
+
+
+@media only screen and (max-width: 800px){
+
+    .block-currentinvoice .invoice-content .col.s6.m6.l3.xl3.ng-scope {
+        text-align: left !important;
+    
+    }
+
+    .block-portfolio p.info.service-status-active.ng-binding.ng-scope {
+        padding-left: 22px !important;
+    }
+    .block-currentinvoice a.waves-effect.btn.btn-second.detail-but.ng-scope {
+        float: left;
+    }
+    .path--factura-actual span.detalle-factura.detail-but.ng-scope {
+        float: left;
+    }
+    
+    .block-create-company-message .card-block .row .col.s12.m12.l6 {
+        width: 50% !important;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+
+    .block-currentinvoice .card .content .column-left .info {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        line-height: 12px;
+        position: relative;
+        padding-left: 0px !important;
+    }
+
+    .block-currentinvoice .col.s6.m6.l3.xl3.no-padd-down {
+       margin-left: -10px;
+    }
+    .path--usuarios .block-white {
+        background-color: transparent !important;
+        padding: 1px 3px;
+        box-shadow: 0px 0px 0px 0px;
+    }
+
+    body.page--logged-in.path--usuarios .wrapper-page .container .box-container .block-white .col.s12 {
+        width: 50%;
+    }
+    .block-invoice .row .col.push-s1 {
+        left: 10px !important;
+    }
+    .card .content .box-bill .alerta.red {
+        color: #CC3333;
+        left: 10px;
+    }
+    .block-invoice .row .col.s7 {
+        width: 100%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+    .card .card-action .detalle-factura {
+        color: #9CC553;
+        font-weight: 400;
+        font-size: 14px;
+        padding: 11px 20px;
+       
+    }
+    .card .content .column-left .info {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        line-height: 12px;
+        position: relative;
+        padding-left: 0px!important;
+    }
+
+    .path--saldos .block-invoice .card .content .column-left .info {
+        padding-left: 22px!important;
+    }
+    .block-currentinvoice .block-invoice .card .content .box-bill .column-left .info{
+        padding-left: 0px !important;
+    }
+
+    form input:not([type]), form input[type=text], form input[type=password], form input[type=email], form input[type=url], form input[type=time], form input[type=date], form input[type=datetime], form input[type=datetime-local], form input[type=tel], form input[type=number], form input[type=search], form input[type=textarea], form textarea.materialize-textarea {
+        animation-duration: unset !important; 
+        width: 100%;
+        font-size: 14px;
+        line-height: 30px;
+        font-weight: 300;
+        color: #292B34;
+        margin-bottom: 0px;
+        background-color: transparent;
+        border-bottom: 1px solid #8D919B;
+    }
+
+    .col.s11.m11.l11.xl11.arrow_tf .return2 {
+        margin-left: 0px !important;
+        font-size: 18px;
+        line-height: 21px;
+        color: #00377B;
+        font-weight: 400;
+             
+    }
+    .block-invoice .col.s11.m11.l11.xl11.arrow_tf .return2 {
+            font-size: 18px;
+            line-height: 21px;
+            color: #00377B;        
+            margin-left: 50px !important;
+            font-weight: 400;
+        }        
+    
+        body header .navbar .row .block--logoheaderb2b .block__content a img {
+            max-width: 100%;
+            height: 47px;
+        }
+
+        .card-block.block-invoice .row .content>.col.s1.m1.l1.xl1 {
+            width: 20.33333%;
+            margin-left: auto;
+            left: auto;
+            right: auto;
+        }
+        .card-block.block-invoice .column-left.col.s12.m12.l8.xl8 {           
+            padding: 16px 0;
+            position: relative;
+            margin-top: 11px;
+            border-top: 1px solid #8B99B6;
+        }
+        .card-block.block-invoice .column-left.col.offset-xl3.s12.m12.l8.xl8{
+            padding: 0;
+            position: relative;
+            margin-top: 0px;
+            border-top: 0px solid #8B99B6;
+        }
+        .card-block.block-invoice .row .content>.col.s11 {
+            width: 74.66667%;
+            margin-left: auto;
+            left: auto;
+            right: auto;
+        }
+        .card .content .column-left .box-border {
+            border-bottom: 0px;
+            overflow: hidden;
+            padding-bottom: 14px;
+        }
+
+        .invoice-row .card .content .column-left .box-border {
+            border-bottom: 0px;
+            overflow: hidden;
+            padding-bottom: 14px;
+        }
+
+}
+
+
+
+ @media only screen and (min-width: 500px){
+
+
+    body header .navbar .row .block--logoheaderb2b .block__content a img {
+        max-width: 100%;
+    }
+    
+    .box-unlocked {
+        max-width: 21% !important;
+        height: auto;
+    }
+
+    .page--logged-in .wrapper-page .page-box .row .col.s6 {      
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+    .wrapper-page .page-box .row .col.m7{
+        width: 25% !important;
+    }
+   
+}
+@media only screen and (min-width: 502px){
+
+}
+
+@media only screen and (min-width: 993px){
+    header ul.menu-useraccount li.logout a, header ul.side-nav.menu-useraccount li.logout a{
+        max-width: 180px !important;
+    }
+    .block-currentinvoice .row .col.xl3 {
+        width: 70%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+
+    .block-portfolio .card-block .box-body .row .card .col.s12.l12.content {
+        width: 80%;
+    }
+   
+    .block-currentinvoice .box-body .card-action.col.m12 {
+        width: 25% !important;
+    }
+    .block-portfolio .card-block .box-body .row .col.xl3 {       
+       
+        float: right;
+    }
+
+  .block-users-list .card-block .box-body .row .col .card .row .col.l12 {
+        width: 98%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+    .navbar-account.col.s2.m1.l6 {
+
+        width: 72% !important;
+    
+    }
+    #create-enterprise .row .input-field.col.s12.m6.l6.form-group.form-type-select.form-item-document-type {
+        width: 95% !important;
+    }
+    #create-enterprise .row .input-field.col.s12.m6.l6.form-group.form-type-textfield.form-item-document-number {
+        width: 98% !important;
+    }
+    .row .col.l6 {
+        width: 50% !important; 
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+
+    .switch {
+        text-align: center !important;
+    }
+    
+   
+    .wrapper-page .page-box .row .col.m7 {
+        width: 25% !important;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+
+    }
+    .page--logged-in.path--factura-actual .wrapper-page .page-box .row .col.s6 {
+        width: 50%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+    .page--logged-in .wrapper-page .page-box .row .col.s6 {       
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+    .block--radix-tbobo-ayudatbo {
+        width: 23px;
+        float: right;
+    }
+
+        .row.box-unlocked .block--logoheaderb2b .block__content a img {
+            max-width: 95% !important;
+            height: auto !important;
+        }
+      
+        .filters-mobile form.filter-portfolio .row .input-field:first-child {
+            display: block !important;
+        }
+        .block--logofooterb2bbo{
+            width: 20%; float: left;
+        }
+        footer .container .block--radix-tbo-hn-logofooterb2b,  footer .container .block--radix-tbo-bo-logofooterb2b {
+            float: left;
+            margin-right: 14px;
+        }
+    
+
+        .block--redessocialesbo,.block--redessocialesgeneral{
+            float: right;
+            height: 100%;
+            width: 140px;
+            padding-top: 5px; 
+            margin-right: 10%;
+        }
+        footer .block--redessocialesbo .block__content a, footer .block--redessocialesgeneral .block__content a{
+            float: left;
+            width: 40px;
+            
+        }
+        footer .block--redessocialesbo .block__content a img, footer .block--redessocialesgeneral .block__content a img{
+            height: 100%;
+            width: 100%;
+            padding-left: 20px;
+        }
+          
+
+
+        .block--menuadministradorempresabo, .block--radix-tbo-hn-menuadministradorempresa-2, .block--radix-tbo-bo-menuadministradorempresa{
+            float: right;
+            margin-right: 50px;
+        }
+        .account_dropdown_wrapper{
+            display: block;
+        }
+        footer .container .block--radix-tbo-bo-copyright {
+            float: left;
+        }
+       
+        .lista-emp{
+            padding-left: 5px;
+        }
+        .admin-cuenta a{
+            float:none;
+        }
+       
+        .cintillo{
+            padding-left: 10px
+        }
+        .area-action{
+            float: left;
+            width: 100%;
+            text-align: center;
+            height: 60px;
+        }
+        .area-action a{
+            font-size: 16px;
+            font-weight: bold;
+            color: #00377B;
+        }
+        header #account_dropdown {
+            width: 308px !important;
+
+        }
+        .side-nav a{
+            padding: 5px;
+        }
+
+        .block-create-company-message form .field-document_number{
+            width: 25% !important;
+        }
+
+        body.page--logged-in.path--usuarios .wrapper-page .page-box .container .box-container .block-white {
+            width: 100% !important;
+        }
+        .wrapper-page .page-box .row .col.m7 {
+            width: 25% !important;
+            margin-left: auto;
+            left: auto;
+            right: auto;
+        }
+        .contextual-region.block.block--copyrightbo {
+            float: left;
+        }
+        .block--radix-tbobo-redessocialesbo-2 {
+            float: right;
+            height: 100%;
+            width: 140px;
+            padding-top: 5px;
+            margin-right: 10%;
+        }
+
+       
+
+}
+
+@media only screen and (max-width: 993px) {
+    .block-manage-companies .card-block .responsive-table tr td a.modalcustomtwo {       
+        float: left;       
+        margin-left: 10%;
+    }
+   
+    
+}
+
+@media only screen and (max-width: 500px) {
+    footer, .push{
+        display: none ;
+    }
+    input#edit-simcard-number {
+        width: 94%;
+    }
+    
+    .path--cambiar-simcard .wrapper-page .container .box-container .box-body .block__content #modalConfirm{       
+        width: auto !important;
+        background-color: #fff;
+        height: auto !important;
+        min-height: 30% !important;
+    }
+
+    .filters-mobile form.filter-portfolio .row .input-field:first-child {
+        display: block !important;
+    }
+    .input-field.content-row.col.field-document_type {
+        margin-right: 5px;
+        padding-right: 1px;
+        width: 43%;        
+    }
+ 
+    .card .content .column-right .label {        
+        word-break: break-word !important;
+    }
+
+    
+}   
+
+
+
+
+.circleinitials, .circleinitialsmenu, .userpic-round {
+    border-radius: 50%;
+}
+
+.circleinitials, .userpic-letter-custom, .userpic-letter {
+    width: 60px;
+    height: 60px;
+}
+
+.circleinitialsmenu {
+    width: 50px;
+    height: 50px;
+}
+
+
+
+.invoice-content .left .card-icon{
+top:5px;
+}
+
+.invoice-content .column-left p {
+    margin-bottom: 0px;
+}
+p.del-up.ng-binding {
+    margin-top: 3px;
+}
+.box-bill .left.card-icon {
+    top: 9px;
+}
+
+.incluidos {
+    margin-left: 26px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.invoice-content table.responsive-table thead tr th {
+    word-wrap: break-word;
+    height: 100%;
+    text-align: left;
+    padding: 15px 2px;
+}
+ table.responsive-table tbody tr td {
+    height: 100%;
+    text-align: left;
+    word-wrap: break-word;}
+
+ table.responsive-table {
+    width: 94%;
+    margin-left: 2%;
+}
+
+.block-currentinvoice .field-contract #tagsList label {
+    left: 0px;
+}
+
+.return {
+    margin-top: -43px;
+    margin-left: 31px;
+}
+
+
+i.prefix.icon-contracts-cyan{
+    margin-left: 5px !important;
+}
+
+.tigo-login .card .links .btn-second {
+    display: none;
+}
+
+/* company selector */
+@media only screen and (max-width: 768px) {    
+    div.company-container.clearfix.valign-wrapper>div.company-info>div.company-info-name,
+    div.company-container.clearfix.valign-wrapper>div.company-info>div.company-info-mail {
+        margin-left: 15px !important;
+    }
+    .circleinitials, .userpic-letter-custom, .userpic-letter{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.modal.modal-fixed-footer .modal-footer {
+    border-top: 0px;
+}

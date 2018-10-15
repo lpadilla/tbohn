@@ -1,0 +1,33 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_data %}
+{% endblock %}
+
+  {% block filters %}
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+{% block other_content_data %}
+  <div class="tigo-login">
+    <div class="card ">
+      <h4 class="block__title">¡Bienvenido!</h4>
+      <div class="actions">
+        {{ message }}
+      </div>
+      <div class="links">
+        <a class="create-account waves-effect waves-light btn btn-second segment-click" href="{{ create_account }}"
+           data-segment-event="TBO - Bienvenida" data-segment-properties='{ "category":"Zona de Bienvenida", "label":"Crear cuenta", "site":"NEW"}'
+        >
+          CREAR UNA CUENTA
+        </a>
+        <a class="login-account waves-effect waves-light btn btn-primary segment-click" href="{{ create_account }}"
+           data-segment-event="TBO - Bienvenida" data-segment-properties='{ "category":"Zona de Bienvenida", "label":"Iniciar sesión", "site":"NEW"}'
+        >
+          INICIAR SESIÓN
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

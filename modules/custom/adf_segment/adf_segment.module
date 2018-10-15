@@ -1,0 +1,192 @@
+<?php
+
+/**
+ * @file
+ * Contains adf_segment.module.
+ */
+
+use Drupal\user\Entity\User;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_user_login().
+ */
+function adf_segment_user_login($account) {
+  // \Drupal::logger('user_login')->notice(print_r($_SESSION, TRUE));.
+  $_SESSION['adf_segment']['user']['actionId'] = 'successful_authentication';
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ *
+ * @param array $page
+ */
+function adf_segment_page_attachments_alter(array &$page) {
+
+  // unset($page['#attached']['drupalSettings']['tbo_segment']);.
+  $segment = [];
+  $domain = $_SERVER['HTTP_HOST'];
+  $api_key = \Drupal::config('adf_segment.adf_segment_form_config')->get('api_key');
+  $segment['api_key'] = $api_key;
+  $segment['domain'] = $domain;
+
+  // Datos de usuario.
+  $user = adf_segment_user_register_activity();
+  $segment['user'] = $user;
+
+  // Datos de cuentas.
+  $extra = adf_segment_register_accounts();
+  if (isset($extra['account'])) {
+    $segment['user']['accounts'] = $extra['account'];
+  }
+
+  $segment['user']['userLogin'] = $extra['userLogin'];
+  $segment['user']['userChangeCurrentAccount'] = $extra['userChangeCurrentAccount'];
+
+  // $form = tbo_segment_register_form_finish();
+  // if(!empty($form)){
+  //  $segment['form'] = $form;
+  // }.
+  $page['#attached']['drupalSettings']['adf_segment'] = $segment;
+  $page['#attached']['library'][] = 'adf_segment/adf_segment';
+
+  // Eliminar session segment para que solo registre el evento de login o de
+  // cambio de cuenta una vez.
+  unset($_SESSION['adf_segment']['user']);
+
+}
+
+/**
+ * @return mixed
+ */
+function adf_segment_user_register_activity() {
+  $user = [];
+  $user['userId'] = NULL;
+
+  $current_account = \Drupal::service('adf_segment')->getCurrentAccount();
+
+  // Set User information for segment identify.
+  if ($current_account) {
+    $email = $current_account->getEmail();
+    $userType = User::load($current_account->id())->getRoles();
+
+    $user['userId'] = $current_account->id();
+    $user['email'] = $email;
+    $user['userType'] = $userType[1];
+
+    // Validate if exits customs identify properties.
+    if (isset($_SESSION['adf_segment']['user'])) {
+      if (array_key_exists('others', $_SESSION['adf_segment']['user'])) {
+        foreach ($_SESSION['adf_segment']['user']['others'] as $key => $value) {
+          $user[$key] = $value;
+        }
+      }
+    }
+  }
+
+  return $user;
+}
+
+/**
+ * @return bool
+ */
+function adf_segment_register_accounts() {
+
+  if (isset($_SESSION['adf_segment']['user'])) {
+
+    // $session_accounts = \Drupal::service('selfcare_core.session')->getAccounts();
+    // Usuario se logueo.
+    $userLogin = FALSE;
+    if ($_SESSION['adf_segment']['user']['actionId'] == 'successful_authentication') {
+      $userLogin = TRUE;
+    }
+
+    // Usuario cambio de cuenta.
+    $userChangeCurrentAccount = FALSE;
+    if ($_SESSION['adf_segment']['user']['actionId'] == 'change_current_account') {
+      $userChangeCurrentAccount = TRUE;
+    }
+
+    // organizamos el array como lo solicito el cliente
+    // el atributo type que viene en cada cuenta no es necesario
+    // se cambia el identificador de "id" de cada cuenta por homeid o mobileid segun el caso
+    // cambiamos el identificador de homeid a homeids y mobileid a mobileids
+    // $accounts = array();
+    /*foreach ($session_accounts as $key => $account_items) {
+    foreach ($account_items as $k => $account_e){
+    // $account_items[$k][$key] = $account_items[$k]['id'];
+    unset($account_items[$k]['id']);
+    unset($account_items[$k]['type']);
+    }
+    $accounts[$key.'s'] = $account_items;
+    }*/
+
+    $result = [
+      // 'account' => $accounts,.
+      'userLogin' => $userLogin,
+      'userChangeCurrentAccount' => $userChangeCurrentAccount,
+    ];
+
+    return $result;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Agregando atributo data-block-action a los bloques que fueron seleccionados
+ * en la administracion, para que sean los unicos que van a tener seguimiento en
+ * segment.
+ *
+ * @param $variables
+ * @param $hook
+ */
+function adf_segment_preprocess(&$variables, $hook) {
+
+  if ($hook == "block") {
+    $config = \Drupal::config('adf_segment.adf_segment_form_config')->get('blocks');
+    if (isset($config[$variables['plugin_id']]) && $config[$variables['plugin_id']] == 1) {
+      $variables['attributes']['data-block-action'] = [$config[$variables['plugin_id'] . '_label']];
+      $variables['attributes']['data-block-group'] = [$config[$variables['plugin_id'] . '_group']];
+    }
+  }
+}
+
+/**
+ * @param $form
+ * @param $form_state
+ */
+function adf_segment_form_alter(&$form, &$form_state) {
+  $config = \Drupal::config('adf_segment.adf_segment_form_config')->get('forms');
+  if (isset($config[$form['#form_id']]) &&  isset($config[$form['#form_id']]) == 1) {
+    $form['#attributes']['data-form-action'] = $config[$form['#form_id'] . '_label'];
+    $form['#submit'][] = 'adf_segment_form_submit';
+  }
+}
+
+/**
+ * @param array $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function adf_segment_form_submit(array $form, FormStateInterface $form_state) {
+  $_SESSION['adf_segment']['forms'][$form['#form_id']] = ['finish' => TRUE];
+}
+
+/**
+ * @return array
+ */
+function adf_segment_register_form_finish() {
+  $config = \Drupal::config('adf_segment.adf_segment_form_config')->get('forms');
+  if (!empty($config)) {
+    foreach ($config as $k => $c) {
+      if (isset($_SESSION['adf_segment']['forms'][$k]['finish'])) {
+        if ($_SESSION['adf_segment']['forms'][$k]['finish']) {
+          return [
+            'id' => $k,
+            'name' => $config[$k . '_label'],
+          ];
+        }
+      }
+    }
+  }
+}

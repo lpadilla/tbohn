@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Contains selfcare_angular.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function selfcare_angular_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the selfcare_angular module.
+    case 'help.page.selfcare_angular':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('My Awesome Module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ * Incluye la etiqueta para inicializar el app de angular.
+ */
+function tbo_core_preprocess_html(&$variables) {
+  $variables['html_attributes']['data-ng-app'] = 'selfcareApp';
+}

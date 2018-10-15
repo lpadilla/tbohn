@@ -1,0 +1,267 @@
+<?php
+
+/**
+ * @file
+ * Theme functions.
+ */
+
+use Drupal\user\Entity\User;
+
+// Include all files from the includes directory.
+$includes_path = dirname(__FILE__) . '/includes/*.inc';
+foreach (glob($includes_path) as $filename) {
+  require_once dirname(__FILE__) . '/includes/' . basename($filename);
+}
+
+/**
+ * Render a custom message block for certain sessions vars.
+ */
+function radix_tbohn_preprocess_html(&$variables) {
+	
+  unset($variables['head_title']['name']);
+  if (!empty($_COOKIE['logout_no_role'])) {
+    $variables['page']['tbo_main_top'][] = drupal_set_message(t('Ha cancelado la solicitud de auto creación de cuenta.'), 'error');
+    setcookie('logout_no_role', 'logout', time() - 3600, '/');
+    unset($_COOKIE['logout_no_role']);
+  }
+
+  if (isset($_SESSION['block_info']['render'])) {
+    $variables['page']['tbo_main_top'][] = $_SESSION['block_info']['render']->build();
+    unset($_SESSION['block_info']);
+  }
+
+  $current_path = \Drupal::service('path.current')->getPath();
+  if(!empty($_SERVER['HTTP_REFERER'])){
+    if (strpos($_SERVER['HTTP_REFERER'], 'factura-actual') && !strpos($current_path, 'factura-actual') && isset($_SESSION['data_cache'])) {
+      unset($_SESSION['data_cache']);
+    }
+  }
+  
+}
+
+
+/**
+ * @param $variables
+ */
+function radix_tbohn_preprocess_menu__main_menu(&$variables) {
+	$variables['#cache']['max-age'] = 0;
+}
+
+/**
+ * @param $variables
+ */
+function radix_tbohn_preprocess(&$variables, $hook) {
+	
+	// Agregar movil en region footer-top.
+  $twig = \Drupal::service('twig');
+  $twig->addGlobal('type_environment', isset($_SESSION['environment']) ? $_SESSION['environment'] : 'movil');
+  // Delete cache menu.
+  $delete = 'config:system';
+  $query = \Drupal::database()->delete('cache_render');
+  $query->condition('tags', '%' . $delete . '%', 'LIKE');
+  $query->execute();
+
+  // Reload cache for user not administrator.
+  $delete = 'config:block.block.radix_tbo_account_menu';
+  $query = \Drupal::database()->delete('cache_dynamic_page_cache');
+  $query->condition('tags', '%' . $delete . '%', 'LIKE');
+  $query->condition('data', '%cache_redirect%', 'LIKE');
+  $query->execute();
+
+  $current_path = \Drupal::service('path.current')->getPath();
+
+  // Assign current_path to /inicio for current.
+  if ($current_path == '/home' || $current_path == '/') {
+    $current_path = '/inicio';
+  }
+  
+  if ($hook == 'menu__main_menu' || $hook == 'menu__account' || $hook == 'menu__help_menu') {
+
+    if ($hook == 'menu__account') {
+      $config = \Drupal::config('system.menu.account');
+      // Add data to twig.
+      $twig->addGlobal('show_edit', $config->get('show_edit'));
+      $data_edit = [
+        'url' => $config->get('url_details'),
+        'class' => $config->get('class'),
+        'double_span' => $config->get('is_double_span'),
+      ];
+      $twig->addGlobal('data_edit', $data_edit);
+      // Load path image.
+      $file = file_load($config->get('default_image')[0]);
+      if ($file) {
+        $src = file_create_url($file->getFileUri());
+        $twig->addGlobal('image_user', $src);
+      }
+    }
+
+    foreach ($variables['items'] as $key => $value) {
+      // Validate submenu.
+      if (isset($value['below'])) {
+        foreach ($value['below'] as $keySubmenu => $submenu) {
+          if ($current_path == '/factura-actual') {
+            if (!$submenu['url']->isExternal()) {
+              try {
+                if (isset($_SESSION['environment']) && $_SESSION['environment'] == $submenu['url']->getRouteParameters()['type']) {
+                  $value['below'][$keySubmenu]['attributes']->addClass('active');
+                }
+              }
+              catch (\Exception $e) {}
+            }
+          }
+
+          if (isset($submenu['url']->getOption('attributes')['doubleSpan']) && $submenu['url']->getOption('attributes')['doubleSpan'] == 1) {
+            $value['below'][$keySubmenu]['attributes']->addClass('doubleSpan');
+          }
+
+          if (!in_array('administrator', \Drupal::currentUser()->getRoles(TRUE))) {
+            $exist_submenu = FALSE;
+            $roles_submenu = [];
+
+            foreach ($submenu['url']->getOption('attributes')['roles'] as $id_submenu => $rol_submenu) {
+              if ($rol_submenu !== 0) {
+                $roles_submenu[] = $id_submenu;
+              }
+            }
+
+            if (!in_array('authenticated', $roles_submenu)) {
+              foreach (\Drupal::currentUser()->getRoles(TRUE) as $keyRol_submenu => $valueRol_submenu) {
+                if (!$exist_submenu) {
+                  if (in_array($valueRol_submenu, $roles_submenu)) {
+                    $exist_submenu = true;
+                    break;
+                  }
+                }
+              }
+
+              if (!$exist_submenu) {
+                unset($variables['items'][$key]['below'][$keySubmenu]);
+              }
+            }
+          }
+        }
+      }
+
+      if ($value['url']->toString($collect_bubbleable_metadata = FALSE) == $current_path) {
+        $variables['items'][$key]['attributes']->addClass('is-active');
+      }
+
+      if (isset($value['url']->getOption('attributes')['doubleSpan']) && $value['url']->getOption('attributes')['doubleSpan'] == 1) {
+        $variables['items'][$key]['attributes']->addClass('doubleSpan');
+      }
+
+      if (!in_array('administrator', \Drupal::currentUser()->getRoles(TRUE))) {
+        $exist = FALSE;
+        $roles = [];
+
+        foreach ($value['url']->getOption('attributes')['roles'] as $id => $rol) {
+          if ($rol !== 0) {
+            $roles[] = $id;
+          }
+        }
+
+        if (!in_array('authenticated', $roles)) {
+          foreach (\Drupal::currentUser()->getRoles(TRUE) as $keyRol => $valueRol) {
+            if (!$exist) {
+              if (in_array($valueRol, $roles)) {
+                $exist = TRUE;
+              }
+            }
+          }
+
+          if (!$exist) {
+            unset($variables['items'][$key]);
+          }
+        }
+      }
+
+
+
+
+      if (!isset($_SESSION['ummasquerade_block'])) {
+        if ($hook == 'menu__main_menu') {
+        	
+        	
+          if ($value['url']->toString($collect_bubbleable_metadata = FALSE) == '/tbo_user/emulate/unmasquerade') {
+            unset($variables['items'][$key]);
+          }
+          
+          if ($value['url']->toString($collect_bubbleable_metadata = FALSE) == '/tbo_emulate_hn/emulate/unmasquerade') {
+            unset($variables['items'][$key]);
+          }
+        }
+      }
+      else {
+        if ($hook == 'menu__main_menu') {
+        	
+        	
+        	if ($value['url']->toString($collect_bubbleable_metadata = FALSE) == '/tbo_user/emulate/unmasquerade') {
+            
+            unset($variables['items'][$key]); //RVS 20180208
+            
+          }
+          
+          if ($value['url']->toString($collect_bubbleable_metadata = FALSE) == '/tbo_emulate_hn/emulate/unmasquerade') {
+            $variables['items'][$key]['title'] = 'Regresar a ' . $_SESSION['emular_role']; //RVS 20180215
+            
+          }
+          
+        }
+      }
+      
+    
+      
+    }
+  }
+}
+
+
+/**
+ * @param $variables
+ */
+function radix_tbohn_preprocess_menu__account(&$variables) {
+
+  // Load fields account.
+  $account_fields = \Drupal::currentUser()->getAccount();
+  if (isset($account_fields->full_name) && !empty($account_fields->full_name)) {
+    $name = $account_fields->full_name;
+  }
+  else {
+    $name = \Drupal::currentUser()->getAccountName();
+  }
+
+  // Load account.
+  $account = User::load(\Drupal::currentUser()->id());
+
+  // Get name rol.
+  $rol = \Drupal::service('tbo_core.repository')->getRoleName($account->get('roles')->getValue()[0]['target_id']);
+
+  // Add data to twig.
+  $twig = \Drupal::service('twig');
+  $twig->addGlobal('username', $name);
+  $twig->addGlobal('rol', $rol);
+
+  $roles = \Drupal::currentUser()->getRoles(TRUE);
+
+  if (in_array('administrator', $roles) || in_array('super_admin', $roles) || in_array('tigo_admin', $roles)) {
+    $twig->addGlobal('enterprise', '');
+  }
+  else {
+    $twig->addGlobal('enterprise', $_SESSION['company']['name']);
+  }
+
+  if (in_array('admin_company', $roles)) {
+    // Validate company > 1.
+    $companies = \Drupal::service('tbo_account.repository')->getAllCompanyRoleAdminCompany(\Drupal::currentUser()->id());
+
+    if (count($companies) > 1) {
+      // Var session for selector.
+      $block_manager = \Drupal::service('plugin.manager.block');
+      $config = [];
+      $plugin_block = $block_manager->createInstance('company_selector_block', $config);
+      // Some blocks might implement access check.
+      $twig->addGlobal('selector', $plugin_block->build());
+      $twig->addGlobal('email', \Drupal::currentUser()->getEmail());
+    }
+  }
+}

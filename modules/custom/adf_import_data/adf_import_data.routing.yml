@@ -1,0 +1,10 @@
+
+adf_import_data.adf_import_data_form_config:
+  path: '/admin/config/adf_import_data/adfimportdataformconfig'
+  defaults:
+    _form: '\Drupal\adf_import_data\Form\AdfImportDataFormConfig'
+    _title: 'Configurar la importación de archivos'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE

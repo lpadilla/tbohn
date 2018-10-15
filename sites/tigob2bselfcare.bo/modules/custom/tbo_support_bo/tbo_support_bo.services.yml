@@ -1,0 +1,10 @@
+services:
+  # SupportBoBlock
+  tbo_support_bo.support_bo_block:
+    class: Drupal\tbo_support_bo\Plugin\Config\Block\SupportBoBlockClass
+    arguments: []
+
+
+  tbo_support_bo.support_bo_form:
+    class: Drupal\tbo_support_bo\Form\SupportsBoForm
+    arguments: []

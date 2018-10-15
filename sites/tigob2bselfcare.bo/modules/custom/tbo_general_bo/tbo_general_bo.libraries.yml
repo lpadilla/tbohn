@@ -1,0 +1,5 @@
+general-social:
+  version: 1.x
+  css:
+    theme:
+      css/social.style.css: {}

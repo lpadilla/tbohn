@@ -1,0 +1,4 @@
+access list company:
+  title: 'access list company'
+  description: 'Allows entry to the card companies list.'
+  restrict access: TRUE

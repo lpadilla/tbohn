@@ -1,0 +1,21 @@
+adf_import_data.adf_import_data_form_config:
+  title: 'Configurar la importación de archivos'
+  route_name: adf_import_data.adf_import_data_form_config
+  description: 'A description for the menu entry'
+  parent: system.admin_config_system
+  weight: 99
+
+
+# Log import data entity menu items definition
+entity.log_import_data_entity.collection:
+  title: 'Log import data entity list'
+  route_name: entity.log_import_data_entity.collection
+  description: 'List Log import data entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+log_import_data_entity.admin.structure.settings:
+  title: Log import data entity settings
+  description: 'Configure Log import data entity entities'
+  route_name: log_import_data_entity.settings
+  parent: system.admin_structure

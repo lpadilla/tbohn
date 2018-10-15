@@ -1,0 +1,8 @@
+name: tigoid
+type: module
+description: OpenID Connect Plugin for TigoID
+core: 8.x
+package: TigoID
+dependencies:
+  - openid_connect
+  - selfcare_gtm

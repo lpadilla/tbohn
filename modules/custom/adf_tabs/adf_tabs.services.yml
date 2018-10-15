@@ -1,0 +1,24 @@
+services:
+  adf_tabs.menu_tab_block_class:
+    class: Drupal\adf_tabs\Plugin\Config\Block\MenuTabBlockClass
+    argument: []
+
+  adf_tabs.menu_tab_service:
+    class: Drupal\adf_tabs\Services\MenuTabService
+    arguments: []
+
+  adf_tabs.menu_tab_rest_logic:
+    class: Drupal\adf_tabs\Services\MenuTabRestLogic
+    arguments: ["@current_user"]
+
+  adf_tabs.repository:
+    class: Drupal\adf_tabs\Repository\AdfTabsRepository
+    arguments: []
+
+  adf_tabs.menu_tab_controller_class:
+    class: Drupal\adf_tabs\Plugin\Config\Controller\MenuTabControllerClass
+    arguments: []
+
+  adf_tabs.adf_tabs_add_block_form:
+    class: Drupal\adf_tabs\Plugin\Config\Form\AddTabsAddFormClass
+    arguments: ['@plugin.manager.block']

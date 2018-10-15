@@ -1,0 +1,45 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_data %}
+<div class="{{ class }}" >
+{% endblock %}
+
+{% block filters %}
+  {% block filters_modal %}
+    <div class="card-block">
+      <div class="box-body">
+        <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+          <div class="input-field col s12 m12 l6">
+            {% if title %}
+              <h5 class="title-core">{{ title }}</h5>
+            {% endif %}
+          </div>
+          <div class="input-field col s12 m12 l6">
+            <a class="right enterprise-modal-form waves-effect waves-light btn btn-primary" href="#{{ modal.href }}">{{ modal.label }}</a>
+          </div>
+        </div>
+        <!-- Modal Structure -->
+        <div id="{{ modal.href }}" class="modal" data-ng-complete-enter>
+          <h2>{{ 'Title Modal - Crear Usuario'|t }}</h2>
+          <div class="modal-content">
+            {% block modal_element %}
+              {{ form }}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+{% endblock %}
+
+{% block modal %}
+{% endblock %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+{% endblock %}
+
+{% block message_exception %}
+{% endblock %}

@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_footer_bo.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Box\Spout\Writer\WriterFactory;
+use Box\Spout\Common\Type;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Template\Attribute;
+use Drupal\Component\Utility\Crypt;
+use Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Component\Utility\Unicode;
+use Drupal\Core\Menu\MenuLinkInterface;
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_footer_bo_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_general module.
+    case 'help.page.tbo_footer_bo':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Modulo para opciones de pie de página para Bolivia') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_footer_bo_theme($existing, $type, $theme, $path) {
+  return array(
+  	'footer_soluciones' => array(
+      'variables' => array(
+        'uuid' => NULL,
+        'directive' => NULL,
+        'fields' => NULL,
+        'filters' => NULL,
+        'logo' => NULL,
+      ),
+      'template' => 'block--footer_soluciones',
+    ),
+  );
+}
+
+?>

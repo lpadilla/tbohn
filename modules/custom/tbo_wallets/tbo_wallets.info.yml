@@ -1,0 +1,5 @@
+name: tbo_wallets
+type: module
+description: Manejo de billeteras para saldos
+core: 8.x
+package: Custom

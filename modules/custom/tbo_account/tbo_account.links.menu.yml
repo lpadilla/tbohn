@@ -1,0 +1,20 @@
+tbo_account.pager_form_config:
+  title: 'Pager configuration'
+  route_name: tbo_account.pager_form_config
+  description: 'Menu for configurate pager'
+  parent: system.admin_config_system
+  weight: 99
+
+tbo_account.autocreate_form_config:
+  title: 'Auto creación de empresa - Configuraciones'
+  route_name: tbo_account.autocreate_config
+  description: 'Configuración del metodo de auto creación'
+  parent: system.admin_config_system
+  weight: 99
+
+tbo_account.autocreate_account_form_config:
+  title: 'Auto creación de cuenta - Configuraciones'
+  route_name: tbo_account.autocreate_account_config
+  description: 'Configuraciones de auto creación de cuenta'
+  parent: system.admin_config_system
+  weight: 99

@@ -1,0 +1,9 @@
+name: TBO Account HN
+type: module
+description: TBO Account Management Honduras
+core: 8.x
+version: 0.18
+package: TBO
+dependencies:
+  - tbo_general
+  - tbo_account

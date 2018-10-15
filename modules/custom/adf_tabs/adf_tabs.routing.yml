@@ -1,0 +1,24 @@
+adf_tabs.block_display_select_block:
+  path: '/admin/structure/adf_tabs/block_display/{block_display}/{row_id}/select'
+  defaults:
+    _controller: '\Drupal\adf_tabs\Controller\AdfTabsController::selectBlock'
+    _title: 'Select block'
+    tempstore_id: 'adf_tags.block_display'
+  requirements:
+    _ctools_access: 'block_display'
+
+adf_tabs.block_display_add_block:
+  path: '/admin/structure/adf_tabs/block_display/{block_display}/add/{block_id}/{row_id}'
+  defaults:
+    _form: '\Drupal\adf_tabs\Form\AdfTabsAddBlockForm'
+    _title: 'Add block'
+    tempstore_id: 'adf_tabs.block_display'
+  requirements:
+    _ctools_access: 'block_display'
+
+adf_tabs.new_page_block:
+  path: '/adf_tabs/new-page-block'
+  defaults:
+    _controller: '\Drupal\adf_tabs\Controller\MenuTabController::mobileViewBlock'
+  requirements:
+    _permission: 'access content'

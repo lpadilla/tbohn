@@ -1,0 +1,75 @@
+companies-manage-hn:
+  version: 1.x
+  js:
+    js/directive/companies_manage_hn.js: {}
+    js/companies_manage_custom.js: {}
+    ../../../../../modules/custom/tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - core/drupal.dialog
+    - tbo_general_hn/angular.tbo
+
+
+
+companies-list-hn:
+  version: 1.x
+  js: 
+    js/directive/companies_list_hn.js: {}
+    ../../../../../modules/custom/tbo_account/js/directive/companies_list.js: {}
+    ../../../../../modules/custom/tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+users-list-hn:
+  version: 1.x
+  js:
+    js/directive/users_list_hn.js: {}    
+    js/directive/autocomplete.js: {}
+    ../../../../../modules/custom/tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+tigoAd-list-hn:
+  version: 1.x
+  js:
+    js/directive/tigoAd_list_hn.js: {}
+
+
+
+
+
+re-assing-business-between-users-tigo-admin-hn:
+  version: 1.x
+  js:
+    js/directive/re_assing_business_between_users_tigo_admin_hn.js: {}
+    
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+tigo-admin-list-companies-hn:
+  version: 1.x
+  js:
+    js/directive/tigo_admin_list_companies_hn.js: {}
+    ../../../../../modules/custom/tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - core/drupal.dialog
+    - tbo_general/angular.tbo
+
+create-user-hn:
+  version: 1.x
+  js:
+    js/directive/autocomplete.js: {}
+    ../../../../../modules/custom/tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo

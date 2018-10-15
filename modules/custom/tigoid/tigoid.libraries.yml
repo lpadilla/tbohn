@@ -1,0 +1,5 @@
+tigoid_he:
+  version: 1.x
+  js:
+    js/tigoid_he.js: {}
+    js/tigoid_he_jsonp.js: {}

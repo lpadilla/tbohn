@@ -1,0 +1,1056 @@
+{% macro validate_style(label, value, class) %}
+  {% if (value.input_type is not defined or value.input_type is empty) %}
+    {% set value = value|merge({'input_type': 'text'}) %}
+  {% endif %}
+  {% import _self as forms %}
+  {% if ("destacado" in value.class) %}
+    {{ forms.destacado(label, value, class) }}
+  {% elseif ("12-columns" in value.class) %}
+    {{ forms.twelve_columns(label, value, class) }}
+  {% elseif ("11-columns" in value.class) %}
+    {{ forms.eleven_columns(label, value, class) }}
+  {% elseif ("10-columns" in value.class) %}
+    {{ forms.ten_columns(label, value, class) }}
+  {% elseif ("9-columns" in value.class) %}
+    {{ forms.nine_columns(label, value, class) }}
+  {% elseif ("8-columns" in value.class) %}
+    {{ forms.eight_columns(label, value, class) }}
+  {% elseif ("7-columns" in value.class) %}
+    {{ forms.seven_columns(label, value, class) }}
+  {% elseif ("6-columns" in value.class) %}
+    {{ forms.six_columns(label, value, class) }}
+  {% elseif ("5-columns" in value.class) %}
+    {{ forms.five_columns(label, value, class) }}
+  {% elseif ("4-columns" in value.class) %}
+    {{ forms.four_columns(label, value, class) }}
+  {% elseif ("3-columns" in value.class) %}
+    {{ forms.three_columns(label, value, class) }}
+  {% elseif ("2-columns" in value.class) %}
+    {{ forms.two_columns(label, value, class) }}
+  {% elseif ("1-columns" in value.class) %}
+    {{ forms.one_columns(label, value, class) }}
+  {% elseif ("title" in value.class) %}
+    {{ forms.title(label) }}
+  {% else %}
+    {{ forms.generally(label, value, class) }}
+  {% endif %}
+{% endmacro %}
+
+{% macro one_columns(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field  {{label}}{{class}} {% if value.date_line == 1 %}{{ 'form-type-date ' }}{% endif %} content-row col m1 s12">
+    {% if value.autocomplete %}
+      {{ forms.autocomplete(label, value) }}
+    {% elseif value.autocomplete_invoice %}
+      {{ forms.autocomplete_invoice(label, value) }}
+    {% elseif value.select_multiple %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.checkboxes_type %}
+      {{ value.checkboxes_type }}
+    {% elseif value.created %}
+      <div class="date-tbo">{{ value.created }}</div>
+    {% elseif value.type == "selectable_list" %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.type == "selectable" or value.type == "select" %}
+      {{ forms.select(label, value) }}
+    {% elseif value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.password_to_confirm %}
+      {{ forms.password_to_confirm(label, value, value.password_to_confirm) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"  placeholder="{{value.placeholder}}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro two_columns(label, value, left, right, class) %}
+  {% import _self as forms %}
+  <div class="input-field  {{label}}{{class}} {{label}}{% if value.date_line == 1 %}{{ 'form-type-date ' }}{% endif %} content-row col m2 s12 {{class}}">
+    {% if value.autocomplete %}
+      {{ forms.autocomplete(label, value) }}
+    {% elseif value.autocomplete_invoice %}
+      {{ forms.autocomplete_invoice(label, value) }}
+    {% elseif value.select_multiple %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.type == "selectable_list" %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.type == "selectable" or value.type == "select" %}
+      {{ forms.select(label, value) }}
+    {% elseif value.created %}
+      <div class="date-tbo">{{ value.created }}</div>
+    {% elseif value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.password_to_confirm %}
+      {{ forms.password_to_confirm(label, value, value.password_to_confirm) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}"placeholder="{{value.placeholder}}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro three_columns(label, value, left, right, class) %}
+  {% import _self as forms %}
+  <div class="input-field {{label}}{{class}}{% if value.date_line == 1 %}{{ 'form-type-date ' }}{% endif %} content-row col m3 s12 {{class}}">
+    {% if value.autocomplete %}
+      {{ forms.autocomplete(label, value) }}
+    {% elseif value.autocomplete_invoice %}
+      {{ forms.autocomplete_invoice(label, value) }}
+    {% elseif value.select_multiple %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.created %}
+      <div class="date-tbo">{{ value.created }}</div>
+    {% elseif value.type == "selectable_list" %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.type == "selectable" or value.type == "select" %}
+      {{ forms.select(label, value) }}
+    {% elseif value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.password_to_confirm %}
+      {{ forms.password_to_confirm(label, value, value.password_to_confirm) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}" placeholder="{{value.placeholder}}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro four_columns(label, value, left, right, class) %}
+  {% import _self as forms %}
+  <div class="input-field  {{label}}{{class}}  {% if value.date_line == 1 %}{{ 'form-type-date ' }}{% endif %}  content-row col m4 s12 {{class}}">
+    {% if value.autocomplete %}
+      {{ forms.autocomplete(label, value) }}
+    {% elseif value.autocomplete_invoice %}
+      {{ forms.autocomplete_invoice(label, value) }}
+    {% elseif value.select_multiple %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.created %}
+      <div class="date-tbo">{{ value.created }}</div>
+    {% elseif value.type == "selectable_list" %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.type == "selectable" or value.type == "select" %}
+      {{ forms.select(label, value) }}
+    {% elseif value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.password_to_confirm %}
+      {{ forms.password_to_confirm(label, value, value.password_to_confirm) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}" placeholder="{{value.placeholder}}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro five_columns(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field {{label}}{{class}} {% if value.date_line == 1 %}{{ 'form-type-date ' }}{% endif %} content-row col m5 s12 {{class}}">
+    {% if value.autocomplete %}
+      {{ forms.autocomplete(label, value) }}
+    {% elseif value.autocomplete_invoice %}
+      {{ forms.autocomplete_invoice(label, value) }}
+    {% elseif value.select_multiple %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.checkboxes_type %}
+      {{ value.checkboxes_type }}
+    {% elseif value.created %}
+      <div class="date-tbo">{{ value.created }}</div>
+    {% elseif value.type == "selectable_list" %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.type == "selectable" or value.type == "select" %}
+      {{ forms.select(label, value) }}
+    {% elseif value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.password_to_confirm %}
+      {{ forms.password_to_confirm(label, value, value.password_to_confirm) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}" placeholder="{{value.placeholder}}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro six_columns(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field {{label}}{{class}}{% if value.date_line == 1 %}{{ 'form-type-date ' }}{% endif %}content-row col m6 s12 {{class}}">
+    {% if value.autocomplete %}
+      {{ forms.autocomplete(label, value) }}
+    {% elseif value.autocomplete_invoice %}
+      {{ forms.autocomplete_invoice(label, value) }}
+    {% elseif value.select_multiple %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.checkboxes_type %}
+      {{ value.checkboxes_type }}
+    {% elseif value.created %}
+      <div class="date-tbo">{{ value.created }}</div>
+    {% elseif value.type == "selectable_list" %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.type == "selectable" or value.type == "select" %}
+      {{ forms.select(label, value) }}
+    {% elseif value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.password_to_confirm %}
+      {{ forms.password_to_confirm(label, value, value.password_to_confirm) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}" placeholder="{{value.placeholder}}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro seven_columns(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field {{label}}{{class}} {% if value.date_line == 1 %}{{ 'form-type-date ' }}{% endif %} content-row col m7 s12 {{class}}">
+    {% if value.autocomplete %}
+      {{ forms.autocomplete(label, value) }}
+    {% elseif value.autocomplete_invoice %}
+      {{ forms.autocomplete_invoice(label, value) }}
+    {% elseif value.select_multiple %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.checkboxes_type %}
+      {{ value.checkboxes_type }}
+    {% elseif value.created %}
+      <div class="date-tbo">{{ value.created }}</div>
+    {% elseif value.type == "selectable_list" %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.type == "selectable" or value.type == "select" %}
+      {{ forms.select(label, value) }}
+    {% elseif value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.password_to_confirm %}
+      {{ forms.password_to_confirm(label, value, value.password_to_confirm) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}" placeholder="{{value.placeholder}}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro eight_columns(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field {{label}}{{class}} {% if value.date_line == 1 %}{{ 'form-type-date ' }}{% endif %} content-row col m8 s12 {{class}}">
+    {% if value.autocomplete %}
+      {{ forms.autocomplete(label, value) }}
+    {% elseif value.autocomplete_invoice %}
+      {{ forms.autocomplete_invoice(label, value) }}
+    {% elseif value.select_multiple %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.checkboxes_type %}
+      {{ value.checkboxes_type }}
+    {% elseif value.created %}
+      <div class="date-tbo">{{ value.created }}</div>
+    {% elseif value.type == "selectable_list" %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.type == "selectable" or value.type == "select" %}
+      {{ forms.select(label, value) }}
+    {% elseif value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.password_to_confirm %}
+      {{ forms.password_to_confirm(label, value, value.password_to_confirm) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}" placeholder="{{value.placeholder}}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro nine_columns(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field  {{label}}{{class}}  {% if value.date_line == 1 %}{{ 'form-type-date ' }}{% endif %} content-row col m9 s12 {{class}}">
+    {% if value.autocomplete %}
+      {{ forms.autocomplete(label, value) }}
+    {% elseif value.autocomplete_invoice %}
+      {{ forms.autocomplete_invoice(label, value) }}
+    {% elseif value.select_multiple %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.checkboxes_type %}
+      {{ value.checkboxes_type }}
+    {% elseif value.created %}
+      <div class="date-tbo">{{ value.created }}</div>
+    {% elseif value.type == "selectable_list" %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.type == "selectable" or value.type == "select" %}
+      {{ forms.select(label, value) }}
+    {% elseif value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.password_to_confirm %}
+      {{ forms.password_to_confirm(label, value, value.password_to_confirm) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}" placeholder="{{value.placeholder}}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro ten_columns(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field  {{label}}{{class}}  {% if value.date_line == 1 %}{{ 'form-type-date ' }}{% endif %} content-row col m10 s12 {{class}}">
+    {% if value.autocomplete %}
+      {{ forms.autocomplete(label, value) }}
+    {% elseif value.autocomplete_invoice %}
+      {{ forms.autocomplete_invoice(label, value) }}
+    {% elseif value.select_multiple %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.checkboxes_type %}
+      {{ value.checkboxes_type }}
+    {% elseif value.created %}
+      <div class="date-tbo">{{ value.created }}</div>
+    {% elseif value.type == "selectable_list" %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.type == "selectable" or value.type == "select" %}
+      {{ forms.select(label, value) }}
+    {% elseif value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.password_to_confirm %}
+      {{ forms.password_to_confirm(label, value, value.password_to_confirm) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}" placeholder="{{value.placeholder}}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro eleven_columns(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field  {{label}}{{class}}  {% if value.date_line == 1 %}{{ 'form-type-date ' }}{% endif %} content-row col m11 s12 {{class}}">
+    {% if value.autocomplete %}
+      {{ forms.autocomplete(label, value) }}
+    {% elseif value.autocomplete_invoice %}
+      {{ forms.autocomplete_invoice(label, value) }}
+    {% elseif value.select_multiple %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.checkboxes_type %}
+      {{ value.checkboxes_type }}
+    {% elseif value.created %}
+      <div class="date-tbo">{{ value.created }}</div>
+    {% elseif value.type == "selectable_list" %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.type == "selectable" or value.type == "select" %}
+      {{ forms.select(label, value) }}
+    {% elseif value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.password_to_confirm %}
+      {{ forms.password_to_confirm(label, value, value.password_to_confirm) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}" placeholder="{{value.placeholder}}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro twelve_columns(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field  {{label}}{{class}}  {% if value.date_line == 1 %}{{ 'form-type-date ' }}{% endif %} content-row col m12 s12 {{class}}">
+    {% if value.autocomplete %}
+      {{ forms.autocomplete(label, value) }}
+    {% elseif value.autocomplete_invoice %}
+      {{ forms.autocomplete_invoice(label, value) }}
+    {% elseif value.select_multiple %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.checkboxes_type %}
+      {{ value.checkboxes_type }}
+    {% elseif value.created %}
+      <div class="date-tbo">{{ value.created }}</div>
+    {% elseif value.type == "selectable_list" %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.type == "selectable" or value.type == "select" %}
+      {{ forms.select(label, value) }}
+    {% elseif value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.password_to_confirm %}
+      {{ forms.password_to_confirm(label, value, value.password_to_confirm) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }}
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}" placeholder="{{value.placeholder}}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro destacado(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field  {{label}}{{class}}  {% if value.date_line == 1 %}{{ 'form-type-date ' }}{% endif %} row-field {{ class }}">
+    {% if value.autocomplete %}
+      {{ forms.autocomplete(label, value) }}
+    {% elseif value.autocomplete_invoice %}
+      {{ forms.autocomplete_invoice(label, value) }}
+    {% elseif value.select_multiple %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.created %}
+      <div class="date-tbo">{{ value.created }}</div>
+    {% elseif value.type == "selectable_list" %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.type == "selectable" or value.type == "select" %}
+      {{ forms.select(label, value) }}
+    {% elseif value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.password_to_confirm %}
+      {{ forms.password_to_confirm(label, value, value.password_to_confirm) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if label is not empty %}
+        <h2>{{ label }}</h2>
+      {% endif %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% elseif (value.value is defined) and (value.disabled is defined) %}
+        <input value="{{ value.value }}" placeholder="{{value.placeholder}}"
+               class="form-control format-moments2" type="{{ value.input_type }}" {{ value.validations }} {{ value.disabled }} />
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro generally(label, value, class) %}
+  {% import _self as forms %}
+  <div class="input-field  {{label}}{{class}}  {% if value.date_line == 1 %}{{ 'form-type-date ' }}{% endif %} content-row col {{class}}">
+    {% if value.autocomplete %}
+      {{ forms.autocomplete(label, value) }}
+    {% elseif value.autocomplete_invoice %}
+      {{ forms.autocomplete_invoice(label, value) }}
+    {% elseif value.select_multiple %}
+      {{ forms.select_multiple(label, value) }}
+    {% elseif value.created %}
+      <div class="date-tbo">{{ value.created }}</div>
+    {% elseif value.type == "selectable" or value.type == "select" %}
+      {{ forms.select(label, value) }}
+    {% elseif value.select_multiple_ng_options %}
+      {{ forms.select_multiple_ng_options(label, value) }}
+    {% elseif value.autocomplete_portafolio %}
+      {{ forms.autocomplete_portafolio(label, value) }}
+    {% elseif value.password_to_confirm %}
+      {{ forms.password_to_confirm(label, value, value.password_to_confirm) }}
+    {% elseif value.logo_filter %}
+      {{ forms.logo_filters(label, value) }}
+    {% else %}
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2" type="{{ value.input_type }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endmacro %}
+
+
+{% macro autocomplete(label, value) %}
+  <div class="tags-wrapper">
+    <div id="tagsList" class="tags-cloud">
+      {% if value.validate_length %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2"
+               ng-change="search('{{ value.identifier }}')" type="text" autocomplete="off"
+               ng-keydown="checkKeyDown($event, '{{ value.identifier }}')"
+               maxlength="{{ value.validate_length }}"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% else %}
+        <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+               class="form-control format-moments2"
+               ng-change="search('{{ value.identifier }}')" type="text" autocomplete="off"
+               ng-keydown="checkKeyDown($event, '{{ value.identifier }}')"/>
+        <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+      {% endif %}
+    </div>
+    <div id="suggestions" class="collection" style="border: none;">
+      <ul>
+        <li class="collection-item" ng-repeat="suggestion in suggestions"
+            ng-click="resultClicked($index, '{{ value.identifier }}')"
+            ng-mouseover="$parent.selectedIndex=$index" ng-class="{active : selectedIndex===$index}">
+          {[{suggestion.name}]}
+        </li>
+      </ul>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro select_multiple(label, value) %}
+    {% if value.identifier == 'address' %}
+       <select multiple id="address-select" ng-model="addressModel" ng-change="filtersChange()">
+    {% elseif value.identifier == 'contract' %}
+       <select multiple id="contract'" ng-model="contract"  ng-options="i.name as i.name for i in  contracts" >
+    {% elseif value.identifier == 'invoices' %}
+       <select multiple id="invoices-select" ng-model="invoicesModel" ng-change="filtersChange()">
+    {% elseif value.identifier == 'order' %}
+       <select multiple id="order-select" ng-model="orderModel" ng-change="filtersChange()">
+    {% elseif value.identifier == 'user_role' %}
+       <select multiple id="user_role" data-ng-model="{{ value.identifier }}">
+    {% elseif value.identifier == 'status' %}
+       <select multiple id="status" data-ng-model="{{ value.identifier }}">
+    {% elseif value.identifier == 'linea' %}
+       <select multiple id="linea" data-ng-model="{{ value.identifier }}" ng-options="i.name as i.name for i in addressF"  >
+    {% else %}
+            
+            <select multiple data-ng-model="{{ value.identifier }}" >
+              {% endif %}
+              <option value="" disabled selected>{{ label }}</option>`
+              {% for key, value in value.options %}
+                <option value="{{ key }}">{{ value }}</option>
+              {% endfor %}
+            </select>
+            <label for="{{ value.identifier }}">{{ label }}</label>
+            {% endmacro %}
+
+            {% macro select(label, value) %}
+              <select id="{{ value.identifier }}" data-ng-model="{{ value.identifier }}">
+                <option value="">{{ value.none }}</option>
+                {% for key, value in value.options %}
+                  <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
+              </select>
+              <label>{{ label }}</label>
+            {% endmacro %}
+
+            {% macro title(label) %}
+              <h2 class="title-card">{{ label }}</h2>
+            {% endmacro %}
+
+
+            {% macro autocomplete_invoice(label, value) %}
+              {% if value.identifier == 'contract' %}
+                <div class="tags-wrapper" ng-mouseleave="closeSuggestions()">
+                  <div id="tagsList" class="tags-cloud">
+                    {% if value.validate_length %}
+                      <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+                             class="form-control format-moments2 "
+                             ng-click="searchContract('{{ value.identifier }}')"
+                             ng-change="searchContract('{{ value.identifier }}')" type="text" autocomplete="off"
+                             ng-keydown="checkKeyDownContract($event, '{{ value.identifier }}')"
+                             maxlength="{{ value.validate_length }}"/>
+                      <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+                    {% else %}
+                      <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+                             class="form-control format-moments2"
+                             ng-click="searchContract('{{ value.identifier }}')"
+                             ng-change="searchContract('{{ value.identifier }}')" type="text" autocomplete="off"
+                             ng-keydown="checkKeyDownContract($event, '{{ value.identifier }}')"/>
+                      <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+                    {% endif %}
+                  </div>
+                  <div id="suggestions" class="collection" style="border: none;">
+                    <div id="suggestionsContract">
+                      <ul>
+                        <li ng-repeat="item in suggestionsContract">
+                <span>
+                   <input class="filled-in" type="checkbox" id="check-{[{item.name}]}" value="{[{item.name}]}" ng-model="checked"
+                          ng-click="filtersChangeDesktop('contract',checked, $event)"/>
+                   <label ng-bind-html="item.name" for="check-{[{item.name}]}"></label>
+                </span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="chip" ng-repeat="key in contractOptions track by key">
+                      {[{ key }]}
+                      {# <span class="closebtn" ng-click="removeChipContract('{[{ key }]}')">×</span> #}
+                    </div>
+                  </div>
+                </div>
+
+              {% elseif value.identifier == 'address' %}
+                <div class="tags-wrapper" ng-mouseleave="closeSuggestions()">
+                  <div id="tagsList" class="tags-cloud">
+                    {% if value.validate_length %}
+                      <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+                             class="form-control format-moments2"
+                             ng-click="searchAddress('{{ value.identifier }}')"
+                             ng-change="searchAddress('{{ value.identifier }}')" type="text" autocomplete="off"
+                             ng-keydown="checkKeyDownAddress($event, '{{ value.identifier }}')"
+                             maxlength="{{ value.validate_length }}"/>
+                      <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+                    {% else %}
+                      <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+                             class="form-control format-moments2"
+                             ng-click="searchAddress('{{ value.identifier }}')"
+                             ng-change="searchAddress('{{ value.identifier }}')" type="text" autocomplete="off"
+                             ng-keydown="checkKeyDownAddress($event, '{{ value.identifier }}')"/>
+                      <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+                    {% endif %}
+                  </div>
+                  <div id="suggestions" class="collection" style="border: none;">
+                    <div id="suggestionsAddress">
+                      <ul>
+                        <li ng-repeat="item in suggestionsAddress">
+            <span>
+              <input type="checkbox" id="check-{[{item.name}]}" class="filled-in" value="{[{item.name}]}" ng-model="checked" ng-click="filtersChangeDesktop('address', checked, $event)"/>
+              <label ng-bind-html="item.name" for="check-{[{item.name}]}"></label>
+            </span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="chip" ng-repeat="key in addressOptions track by key">
+                      {[{ key }]}
+                      {#<span class="closebtn" ng-click="removeChipAddress('{[{ key }]}')">×</span>#}
+                    </div>
+                  </div>
+                </div>
+
+              {% elseif value.identifier == 'reference' %}
+                <i class="prefix icon-search-cyan">
+                  <span class="path1"></span>
+                </i>
+                <div class="tags-wrapper" ng-mouseleave="closeSuggestions()">
+                  <div id="tagsList" class="tags-cloud">
+                    {% if value.validate_length %}
+                      <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+                             class="form-control format-moments2"
+                             ng-click="searchReference('{{ value.identifier }}')"
+                             ng-change="searchReference('{{ value.identifier }}')" type="text" autocomplete="off"
+                             ng-keydown="checkKeyDownReference($event, '{{ value.identifier }}')"
+                             maxlength="{{ value.validate_length }}"/>
+                      <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+                    {% else %}
+                      <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+                             class="form-control format-moments2"
+                             ng-click="searchReference('{{ value.identifier }}')"
+                             ng-change="searchReference('{{ value.identifier }}')" type="text" autocomplete="off"
+                             ng-keydown="checkKeyDownReference($event, '{{ value.identifier }}')"/>
+                      <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+                    {% endif %}
+                  </div>
+                  <div id="suggestions" class="collection" style="border: none;">
+                    <div id="suggestionsReferences">
+                      <ul  class="exact-search">
+                        <li class="collection-item" ng-repeat="suggestion in suggestionsReference"
+                            ng-click="resultClickedReference($index, '{{ value.identifier }}')"
+                            ng-mouseover="$parent.selectedIndexReference=$index"
+                            ng-class="{active : selectedIndexReference===$index}">
+                          <span class="tags" ng-bind-html="suggestion.name"></span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endmacro %}
+
+            {% macro paginate() %}
+              <div ng-if="pagedItems.length > 1" class="pagination">
+                <ul class="pagination">
+                  <li class="firts" ng-class="{disabled: currentPage == 0}">
+                    <a href ng-click="prevPage()" >
+                      <i class="icon-prev">
+                        <span class="path1"></span>
+                      </i>
+                    </a>
+                  </li>
+                  <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
+                      ng-class="{active: n == currentPage}"
+                      ng-click="setPage()" class="waves-effect">
+                    <a href ng-bind="n + 1">1</a>
+                  </li>
+                  <li class="last" ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
+                    <a href ng-click="nextPage()">
+                      <i class="icon-next">
+                        <span class="path1"></span>
+                      </i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            {% endmacro %}
+
+            <!-- Add two columns style to field card -->
+            {% macro two_columns_card(label, value, left, right, class) %}
+              {% if label %}
+                <div class="field-2-columns-{{ left }}-{{ right }} {{ class }}">
+                <span class="label">{{ label }}</span>
+                <span class="data">
+      {{ value }}
+    </span>
+              {% else %}
+                <div class="label">
+                <div class="data">
+                  {{ value }}
+                </div>
+              {% endif %}
+              </div>
+              </div>
+            {% endmacro %}
+
+            <!-- Add one columns style to field card  -->
+            {% macro one_column_card(label, value, class) %}
+              <div class="row-field {{ class }}">
+                <span class="texto">{{ label }} <span class="format-moments2">{{ value }}</span></span>
+              </div>
+            {% endmacro %}
+
+            <!-- Add outstanding style to field card  -->
+            {% macro outstanding_card(label, value, class) %}
+              <div class="row-field {{ class }}">
+                {% if label is not empty %}
+                  <h2>{{ label }}</h2>
+                {% endif %}
+                <span class="outstanding">{{ value }}</span>
+              </div>
+            {% endmacro %}
+
+            <!-- Add outstanding style to field card without label on it  -->
+            {% macro no_label_outstanding_card(value, class) %}
+              <div class="row-field {{ class }}">
+                <span class="no_label_outstanding">{{ value }}</span>
+              </div>
+            {% endmacro %}
+
+            <!-- Add style to field card without label -->
+            {% macro no_label_card(value, class) %}
+              <div class="without-label {{ class }}">
+                <span class="label">{{ value }}</span>
+              </div>
+            {% endmacro %}
+
+            <!-- Add two rows style to field card  -->
+            {% macro two_rows_card(label, value, class) %}
+              <div class="field-2-rows {{ class }}">
+                <div class="row-label">
+                  <span class="title">{{ label }}</span>
+                </div>
+                <div class="row-field">
+                  <span class="label">{{ value }}</span>
+                </div>
+              </div>
+            {% endmacro %}
+
+            <!-- Add link style to field card  -->
+            {% macro link_actions(items) %}
+              <div class="actions">
+                {% for item in items %}
+                  <a id="action_{{ item.label }}" data-link-action="{{ item.data_link_action }}" href="{{ item.url }}"
+                     class="{{ item.class }}" target="{{ item.target }}">{{ item.label }}</a>
+                {% endfor %}
+              </div>
+            {% endmacro %}
+
+            <!-- Select with ng-options -->
+            {% macro select_multiple_ng_options(label, value) %}
+              <div class="form-item form-group form-type-select form-item-billing-select-enterprise">
+                <select id="billing-select-category" name="billing-select-category" ng-model="selectedCategory" ng-change='changeCategory()' class="{{class}}" material-select multiple watch>
+                  <option value="" selected disabled>{[{ labelCategory }]}</option>
+                  <option value="" selected disabled>Todas</option>
+                  <option ng-if="quantiyCategory == 1" ng-repeat="option in category" value="{[{option.name}]}" selected disabled>{[{option.name}]}</option>
+                  <option ng-if="quantiyCategory > 1" ng-repeat="option in category" value="{[{option.name}]}">{[{option.name}]}</option>
+                </select>
+              </div>
+            {% endmacro %}
+
+            <!-- Select with ng-options -->
+            {% macro autocomplete_portafolio(label, value) %}
+              <i class="prefix icon-search-cyan">
+                <span class="path1"></span>
+              </i>
+              <div class="tags-wrapper " ng-mouseleave="closeSuggestions()">
+                <div id="tagsList" class="tags-cloud">
+                  {% if value.validate_length %}
+                    <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+                           class="form-control format-moments2"
+                           ng-click="searchAutocompleteClick('{{ value.identifier }}')"
+                           ng-change="searchAutocomplete('{{ value.identifier }}')" type="text" autocomplete="off"
+                           ng-keydown="checkKeyDownReference($event, '{{ value.identifier }}')"
+                           maxlength="{{ value.validate_length }}"/>
+                    <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+                  {% else %}
+                    <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}" data-ng-model="{{ value.identifier }}"
+                           class="form-control format-moments2"
+                           ng-click="searchAutocompleteClick('{{ value.identifier }}')"
+                           ng-change="searchAutocomplete('{{ value.identifier }}')" type="text" autocomplete="off"
+                           ng-keydown="checkKeyDownReference($event, '{{ value.identifier }}')"/>
+                    <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+                  {% endif %}
+                </div>
+                <div id="suggestions" class="collection">
+                  <div id="suggestionsAutocomplete" class="collections suggestions">
+                    <ul>
+                      <li class="collection-item" ng-repeat="suggestion in suggestionsAutocomplete"
+                          ng-click="resultClickedAutocomplete($index, '{{ value.identifier }}')"
+                          ng-mouseover="$parent.selectedIndexAutocomplete=$index"
+                          ng-class="{active : selectedIndexAutocomplete===$index}">
+                        {[{suggestion.name}]}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            {% endmacro %}
+
+            <!-- Select with ng-options -->
+            {% macro logo_filters(label, value) %}
+              <div class="box-filter">
+                <div class="icon-filter">
+                  <span>{{ label }}</span>
+                  <i id="" class="material-icons closed"></i>
+                </div>
+              </div>
+            {% endmacro %}
+
+            <!-- progress -->
+            {% macro progress(class, style) %}
+              <div class="progress {{ class }}">
+                <div class="determinate"
+                    {% if style %}
+                      style="{{ style }}"
+                    {% else %}
+                      style="width:0%"
+                    {% endif %}
+                ></div>
+              </div>
+            {% endmacro %}
+
+            <!--Password with confirm-->
+            {% macro password_to_confirm(label, value, data, disabled) %}
+              {% import _self as forms %}
+              {% if data.icon_left %}
+                <i class="prefix icon-password-cyan">
+                  <span class="path1"></span>
+                  <span class="path2"></span>
+                </i>
+              {% endif %}
+
+              <!--Input password-->
+              <input id="{{ value.identifier }}" placeholder="{{value.placeholder}}"  data-ng-model="{{ value.identifier }}"
+                     class="form-control format-moments2" type="{{ value.input_type }}"
+                     {% if value.ngdisabled %} ng-disabled="state" {% endif %}
+                     {% if  value.validations %} {{ value.validations }} {% endif %}
+                     {% if (value.value is defined) and (value.disabled is defined) %}
+                       value="{{ value.value }}" {{ value.disabled }}
+                     {% endif %}
+                     {% if data.ng_component %} {{ data.ng_component.ng }}="{{ data.ng_component.value }}" {% endif %}
+                     {% if value.max_length %} maxlength="{{ value.max_length }}" {% endif %}
+                     {% if data.pattern %} pattern="{{ data.pattern }}" title="{{ data.title }}" {% endif %}
+                     {% if value.regex %} reg-ex-input {% endif %}
+                     {% if value.attributes %}
+                       {% for key, value in value.attributes %}
+                         {{ key }}="{{ value }}"
+                       {% endfor %}
+                     {% endif %}
+                      />
+              <label for="{{ value.identifier }}" class="{{class}}">{{ label }}</label>
+
+              <!--Password force text-->
+              {% if data.with_pass_force %}
+                <a id="force">{[{ passForce }]}</a>
+              {% endif %}
+
+              <!--Icon-->
+              {% if data.with_icon %}
+                <a href="" class="mask">
+                  <i id="{{ data.with_icon.id }}" class="prefix {{ data.with_icon.icon }} {[{ classState }]}"
+                    {% if data.with_icon.ng %} {{ data.with_icon.ng }}="{{ data.with_icon.value }}" {% endif %} >
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </i>
+                </a>
+              {% endif %}
+
+              <!--Progress bar-->
+              {% if data.with_progress %} {{ forms.progress(data.with_progress.class, data.with_progress.style) }} {% endif %}
+
+              <!--Status text-->
+              {% if data.with_status %}
+                <a id="{{ data.with_status.id }}">{{ data.with_status.angular }}</a>
+              {% endif %}
+            {% endmacro %}

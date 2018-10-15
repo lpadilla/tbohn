@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * Contains adf_tabs.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function adf_tabs_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the adf_tabs module.
+    case 'help.page.adf_tabs':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Crear menus') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function adf_tabs_theme($existing, $type, $theme, $path) {
+  return [
+    'card_menu_tab' =>
+      [
+        'variables' => [
+          'directive' => NULL,
+          'uuid' => NULL,
+          'class' => NULL,
+          'blocks' => NULL,
+          'items' => NULL,
+          'plugin_id' => NULL,
+        ],
+        'template' => 'block--menu-tab',
+      ],
+    'card_menu_tab_movil' => [
+      'variables' => [
+        'block' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--menu-tab-movil',
+    ],
+  ];
+}

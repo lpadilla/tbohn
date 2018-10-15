@@ -1,0 +1,115 @@
+# Company entity menu items definition
+entity.company_entity.collection:
+  title: 'Lista de entidades empresa'
+  route_name: entity.company_entity.collection
+  description: 'Lista de entidades empresa'
+  parent: tbo_general.content_entities
+  weight: 100
+
+company_entity.admin.structure.settings:
+  title: 'Configuración de entidades empresa'
+  description: 'Configuración de entidades empresa'
+  route_name: company_entity.settings
+  parent: tbo_general.entities_settings
+
+# Tipo de documento menu items definition
+entity.document_type_entity.collection:
+  title: 'Lista de entidades tipo de documento'
+  route_name: entity.document_type_entity.collection
+  description: 'Lista de entidades Tipo de documento'
+  parent: tbo_general.config_entities
+  weight: 99
+
+# Invitation access entity menu items definition
+entity.invitation_access_entity.collection:
+  title: 'Lista de entidades invitación de acceso'
+  route_name: entity.invitation_access_entity.collection
+  description: 'Lista de entidades invitación de acceso'
+  parent: tbo_general.content_entities
+  weight: 100
+
+invitation_access_entity.admin.structure.settings:
+  title: 'Configuración de entidades invitación de acceso'
+  description: 'Configuración de entidades invitación de acceso'
+  route_name: invitation_access_entity.settings
+  parent: tbo_general.entities_settings
+
+# Company user relations menu items definition
+entity.company_user_relations.collection:
+  title: 'Company user relations list'
+  route_name: entity.company_user_relations.collection
+  description: 'List Company user relations entities'
+  parent: tbo_general.content_entities
+  weight: 100
+
+company_user_relations.admin.structure.settings:
+  title: Company user relations settings
+  description: 'Configure Company user relations entities'
+  route_name: company_user_relations.settings
+  parent: tbo_general.entities_settings
+
+# Categoria de servicios menu items definition
+entity.category_services_entity.collection:
+  title: 'Lista de entidades categoria de servicios'
+  route_name: entity.category_services_entity.collection
+  description: 'Lista de entidades Categoria de servicios'
+  parent: tbo_general.config_entities
+  weight: 99
+
+# Invitación en popup menu items definition
+entity.invitation_popup_entity.collection:
+  title: 'Lista de entidades Invitación en popup'
+  route_name: entity.invitation_popup_entity.collection
+  description: 'Lista de entidades Invitación en popup'
+  parent: tbo_general.config_entities
+  weight: 99
+
+# Transaction category entity menu items definition
+entity.transaction_category_entity.collection:
+  title: 'Lista de entidades transacciones de categorías '
+  route_name: entity.transaction_category_entity.collection
+  description: 'Lista de entidades transacciones de categorías'
+  parent: tbo_general.config_entities
+  weight: 99
+
+# Wifi channel menu items definition
+entity.wifi_channel.collection:
+  title: 'Wifi channel list'
+  route_name: entity.wifi_channel.collection
+  description: 'List Wifi channel entities'
+  parent: tbo_general.content_entities
+  weight: 100
+
+wifi_channel.admin.structure.settings:
+  title: Wifi channel settings
+  description: 'Configure Wifi channel entities'
+  route_name: wifi_channel.settings
+  parent: tbo_general.entities_settings
+
+# Wifi security type entity menu items definition
+entity.wifi_security_type_entity.collection:
+  title: 'Wifi security type entity list'
+  route_name: entity.wifi_security_type_entity.collection
+  description: 'List Wifi security type entity entities'
+  parent: tbo_general.content_entities
+  weight: 100
+
+wifi_security_type_entity.admin.structure.settings:
+  title: Wifi security type entity settings
+  description: 'Configure Wifi security type entity entities'
+  route_name: wifi_security_type_entity.settings
+  parent: tbo_general.entities_settings
+
+# Notification entity menu items definition
+entity.notification_entity.collection:
+  title: 'Notification entity list'
+  route_name: entity.notification_entity.collection
+  description: 'List Notification entity entities'
+  parent: tbo_services.notifications_settings
+  weight: 100
+
+notification_entity.admin.structure.settings:
+  title: Notification entity settings
+  description: 'Configure Notification entity entities'
+  route_name: notification_entity.settings
+  parent: tbo_general.content_entities

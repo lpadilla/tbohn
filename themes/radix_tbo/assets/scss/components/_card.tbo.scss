@@ -1,0 +1,35 @@
+.card-tbo{
+  padding: 20px 25px 17px 20px;
+  h4{
+    font-size: 18px;
+    color: $color_title;
+    margin: 0;
+  }
+  .card-content{
+    padding: 22px 0 0 8px;
+  }
+}
+
+.icon-list{
+  &:before{
+    @include iconos-material('tigouneico','\e96b', 16px, bold);
+    color:$cyan-tigo;
+  }
+}
+
+.card-call ul.select-dropdown{
+  max-height: 110px !important;
+}
+
+.font-cabecera{
+  font-size: 14px;
+  line-height: 30px;
+  font-weight: 500;
+  color: $blue-tigo;
+}
+/* ocultar o mostrar card por resolucion */
+@media only screen and (max-width: 600px) {
+  .card-hiden-web{
+    display: none;
+  }
+}

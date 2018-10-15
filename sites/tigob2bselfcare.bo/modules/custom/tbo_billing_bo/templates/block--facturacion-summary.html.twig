@@ -1,0 +1,125 @@
+{% extends 'block__card_base.html.twig' %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+  {% block other_content_data %}
+  <div class="card-block">
+      <div class="row">
+        <div class="col s12">
+         <div class="upcardfact" >{{title}}</div>  
+          {% block other_content_data_card %}
+            {% block other_content %}
+              {% if display == 'services' %}
+                <div class="block-services card clearfix {{ type }}">
+                  <div class="icon-here">
+                    {% for field in fields %}
+                      {% if field.service_field == 'icon' and field.show == 1 %}
+                        <span class="prefix icon-{{ type }}">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                        </span>
+                        <span class="tipo">{{ type }}</span>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                  {% set payStatus = '0' %}
+                  {% if type == 'movil' %}
+                    {% set type_service='mobile' %}
+                    {% for field in fields %}
+                      {% if field.service_field == 'total' and field.show == 1 %}
+                        <div class="total-amount col s9 m8">
+                          <p class="title">{{ field.label }}</p>
+                          <span class="total-value">{[{ summary[0].ammount}]}</span>
+                        </div>
+                      {% endif %}
+
+                      {% if field.service_field == 'invoices' and field.show == 1 %}
+                        <div class="total-invoices col s10 m9">
+                      
+                         
+                          <p>{[{ summary[0].facturas }]} {{ field.label }}</p>
+                         
+                        </div>
+                      {% endif %}
+
+                    {% endfor %}
+                  {% endif %}
+
+                  {% if type == 'fijo' %}
+                    {% set type_service='home' %}
+                    {% for field in fields %}
+                      {% if field.service_field == 'total' and field.show == 1 %}
+                        <div class="total-amount col s9 m8">
+                          <p class="title">{{ field.label }}</p>
+                          <span class="total-value">{[{ summaryF.service}]}</span>
+                        </div>
+                      {% endif %}
+
+                      {% if field.service_field == 'invoices' and field.show == 1 %}
+                        <div class="total-invoices col s10 m9">
+                          <p>{[{ summaryF.body }]} {{ field.title }}</p>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+
+                  <div class="buttons">
+                    {% for field in fields %}
+                      {% if field.service_field == 'details' and field.show == 1 %}
+                        {% set segment_payment = (type_service == 'mobile') ? "{[{ summary.segment_amount }]}" : "{[{ summaryF.segment_amount }]}" %}
+                          <a class="waves-effect btn btn-second segment-click"
+                           data-segment-event="TBO - Detalle de Factura - Consulta"
+                           data-segment-properties='{"category":"Dashboard","label":"{{ type }}","value":{{ segment_payment }},"site":"NEW"}'
+                           href="/tbo_billing/summary/details?redirect={{ url }}&type={{ type }}">{{ field.label }}</a>
+                      {% endif %}
+                      {% if field.service_field == 'pay' and field.show == 1 %}
+                        {% if type == 'movil' %}
+                          <a ng-if="summary.body != '0'" class=" waves-effect btn btn-primary segment-click"
+                             data-segment-event="TBO - Pagar Factura"
+                             data-segment-properties='{"category":"Dashboard","label":"{{ type }}","value":{[{ summary.amount }]},"site":"NEW"}'
+                             href="/tbo_billing/summary/payment?redirect={{ url_payment }}&type={{ type }}">{{ field.title }}</a>
+                          <a ng-if="summary.body == '0'" class=" waves-effect btn btn-primary disabled">{{ field.title }}</a>
+                        {% endif %}
+                        {% if type == 'fijo' %}
+                          <a ng-if="summaryF.body != '0'" class="waves-effect btn btn-primary segment-click"
+                             data-segment-event="TBO - Ir a pago múltiples facturas"
+                             data-segment-properties='{"category":"Dashboard","label":"{{ type }} - {[{ summaryF.body }]}","value":"{[{ summaryF.segment_amount }]}","site":"NEW"}'
+                             href="/tbo_billing/summary/payment?redirect={{ url_payment }}&type={{ type }}">{{ field.title }}</a>
+                          <a ng-if="summaryF.body == '0'" class="waves-effect btn btn-primary disabled">{{ field.title }}</a>
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+              {% if display == 'no-services' %}
+                <div class="block-no-services card clearfix segment-send"
+                     data-segment-event="TBO - Visualizar Conocer Servicio"
+                     data-segment-properties='{"category":"Dashboard","label":"{{ type }}","site":"NEW"}'>
+                  <div class="icon-here">
+                    {% for field in fields %}
+                      {% if field.service_field == 'icon' and field.show == 1 %}
+                        <span class="icon-{{ type }}">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                        </span>
+                        <span class=tipo>{{ type }}</span>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+
+                  <h1 class="s9 m9 col title">{{ titleNoServices }}</h1>
+                  <div class="description col s9 m9">{{ description }}</div>
+                  <a class="waves-effect btn btn-second segment-click"
+                     data-segment-event="TBO - Clic Conocer Servicio"
+                     data-segment-properties='{"category":"Dashboard","label":"{{ type }}","site":"NEW"}'
+                     href="/tbo_billing/summary/knowledge?redirect={{ button_url }}&type={{ type }}">{{ button_text }}</a>
+                </div>
+              {% endif %}
+            {% endblock %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  {% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_content_table %}
+{% endblock %}
+
+{% block other_content_data %}
+  {% if items %}
+  <div class="box-body">
+    <div class="row">
+      <div class="col s12 l4 menu-call">
+        <div class=" {{ class }} card clearfix white no-padding">
+          <ul>
+            {% for key,value in items %}
+              <li href="#tab-{{ key }}" ng-class="currentView_menu == '{{ key }}' ? 'active': ''"
+                  ng-click="insertLog('{{ value.label }}','{{ key }}') ">
+                <a ng-click="showCards()" class="segment-click" data-segment-event="TBO - Menú Seleccionar Transacción" data-segment-properties='{ "category":"Portafolio de Servicios","label": "Categoría {{ value.label }} - {[{ product_id_product_fixed }]}","site":"NEW"}'>
+                  {{ value.label }}
+                  <i class="prefix icon-rightside-cyan"><span class="path1"></span></i>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="col s12 m8 card-call">
+        {% for key,value in blocks %}
+          <div id="tab-{{ key }}" class="tab_content">
+            <div class="card-block return hide-on-med-and-up show-on-medium-and-down" ng-click="hideCards()">
+              <div class="box-body">
+                <div class="row mb-0">
+                  <div class="col s12">
+                    <div class="card white clearfix">
+                      <div class="col s12 return-content">
+                          <a class="return-arrow">
+                            <span class="{{ fields.icon.service_field }} prefix icon-left"><span class="path1"></span></span>
+                          </a>
+                          <a class="return-text">
+                            {{ items[key].return_text }}
+                          </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{ value }}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+{% endblock %}

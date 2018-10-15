@@ -1,0 +1,11 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_data %}
+<div class="historical-invoice" {{ directive }} ng-cloak ng-init="uuid='{{ uuid }}'">
+{% endblock %}
+
+{% block table_body_td %}
+  {% for column in fields %}
+    <td> {[{compani.{{ column.service_field }} }]}</td>
+  {% endfor %}
+{% endblock %}

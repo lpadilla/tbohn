@@ -1,0 +1,13 @@
+tbo_mail.tbo_mail_settings_form:
+  title: 'Tbo Mail'
+  route_name: tbo_mail.tbo_mail_settings_form
+  description: 'Configure messages to send'
+  parent: system.admin_config_system
+  weight: 99
+
+tbo_mail.tbo_sms_settings_form:
+  title: 'Tbo Sms'
+  route_name: tbo_mail.tbo_sms_settings_form
+  description: 'Configure sms to send'
+  parent: system.admin_config_system
+  weight: 99

@@ -1,0 +1,181 @@
+<?php
+
+/**
+ * @file
+ * Contains tigoid_migrate.module..
+ */
+
+use Drupal\Core\Url;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tigoid_migrate_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tigoid_migrate module.
+    case 'help.page.tigoid_migrate':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Asistente de migracion de cuentas Drupal a TigoID') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_form_HOOK_form_alter().
+ * Agregar un submit callback para poder controlar la redireccion cuando el usuario
+ * se autenique.
+ */
+function tigoid_migrate_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $tigoid_migrate_config = \Drupal::config('tigoid.migrate');
+
+  // Evitar la redireccion normal de TOL.
+  if (isset($form['#submit']['tol_user_login_form_submit'])) {
+    // unset($form['#submit']['tol_user_login_form_submit']);.
+  }
+  if ($tigoid_migrate_config->get('active_migration')) {
+    $form['#attached']['library'] = ['tigoid_migrate/login'];
+    $form['#submit'][] = 'tigoid_migrate_user_login_form_submit';
+  }
+}
+
+/**
+ * Custom submit handler for login form.
+ * Callback para incluir redireccion a custom page cuando el usuario se autentique.
+ */
+function tigoid_migrate_user_login_form_submit($form, FormStateInterface $form_state) {
+
+  // Include tigoIdEvent GTM.
+  $gtm = \Drupal::service('selfcare_gtm');
+  $label_tag = 'New old user session (Already migrated)';
+
+  $uid = $form_state->getStorage()['uid'];
+
+  // Redireccionar despues del login a micuenta/actualizar si la cuenta no esta
+  // vinculada a TigoID.
+  if (tigoid_migrate_drupal_account_is_connected($uid) === FALSE) {
+    $route = Url::fromUri("internal:/micuenta/actualizar");
+    $form_state->setRedirect($route->getRouteName());
+
+    // Send tigoIdEvent GTM.
+    $label_tag = "New old user session";
+    $gtm->push("tigoIdEvent", "Flow TigoID migration", "Old User logged", "Suggest migration");
+  }
+
+  $gtm->push("tigoIdEvent", "Flow TigoID authentication", "Successful authentication", $label_tag);
+}
+
+/**
+ * Verifica si la linea esta conectada a un usuario de TigoID.
+ *
+ * @param $uid
+ *
+ * @return bool
+ */
+function tigoid_migrate_drupal_account_is_connected($uid) {
+
+  $query = db_select('openid_connect_authmap', 'e')
+    ->fields('e', ['sub'])
+    ->condition('e.uid', $uid);
+
+  $num_records = $query->countQuery()->execute()->fetchField();
+  if ($num_records == 0) {
+    return FALSE;
+  }
+  return TRUE;
+}
+
+/**
+ *
+ */
+function tigoid_migrate_install() {
+  module_set_weight('tigoid_migrate', 10);
+}
+
+/**
+ *
+ */
+function tigoid_migrate_theme($existing, $type, $theme, $path) {
+  return [
+    'wizard_start' => [
+      'variables' => [
+        'lines' => [],
+        'tigoid_form' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'page--wizard-step1-start',
+    ],
+    'login_form' => [
+      'variables' => [],
+      'template' => 'page--login-form',
+    ],
+  ];
+}
+
+/**
+ * Implements preprocess_hook();
+ * Elimina el menu de selfcare en la ruta del asistente de migracion.
+ *
+ * @param $variables
+ */
+function tigoid_migrate_preprocess_page(&$variables) {
+  $current_path = \Drupal::service('path.current')->getPath();
+  if ($current_path == "/micuenta/actualizar") {
+    unset($variables['page']['seflcare_menu']);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ * Agrega configuración para activar flujo de migración.
+ *
+ * @param array $form
+ *   The form.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state.
+ * @param string $form_id
+ *   The form identifier.
+ */
+function tigoid_migrate_form_user_admin_settings_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $tigoid_migrate_config = \Drupal::config('tigoid.migrate');
+
+  $form['tigoid_migrate'] = [
+    '#type' => 'details',
+    '#title' => 'Migración TigoID',
+    '#weight' => 1,
+    '#open' => TRUE,
+  ];
+  $form['tigoid_migrate']['active_migration'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Activar Flujo de Migración'),
+    '#description' => t('Altera el acceso al login para activar el flujo de migración de TigoID'),
+    '#default_value' => $tigoid_migrate_config->get('active_migration'),
+  ];
+  $form['#submit'][] = 'tigoid_migrate_user_admin_settings_form_submit';
+}
+
+/**
+ * Custom callback para guardar la configuracion.
+ *
+ * @param array $form
+ *   The form.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state.
+ */
+function tigoid_migrate_user_admin_settings_form_submit($form, FormStateInterface $form_state) {
+  \Drupal::configFactory()->getEditable('tigoid.migrate')
+    ->set('active_migration', $form_state->getValue('active_migration'))
+    ->save();
+  \Drupal::service("router.builder")->rebuild();
+}
+
+/**
+ *
+ */
+function tigoid_migrate_uninstall() {
+  Drupal::configFactory()->getEditable('tigoid.migrate')->delete();
+}

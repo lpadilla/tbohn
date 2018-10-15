@@ -1,0 +1,60 @@
+# Entities Settings menu items definition
+tbo_general.entities_settings:
+  title: 'Configuración de entidades'
+  route_name: tbo_general.entities_settings
+  description: 'Configuración de entidades'
+  parent: system.admin_structure
+  weight: 100
+
+# Content entities menu items definition
+tbo_general.content_entities:
+  title: 'Entidades tipo contentido'
+  route_name: tbo_general.content_entities
+  description: 'Lista de entidades tipo contentido'
+  parent: system.admin_structure
+  weight: 100
+
+# Content entities menu items definition
+tbo_general.config_entities:
+  title: 'Entidades tipo configuración'
+  route_name: tbo_general.config_entities
+  description: 'Lista de entidades tipo configuración'
+  parent: system.admin_structure
+  weight: 100
+
+# Company selector menu item definition
+tbo_general.company_selector:
+  title: 'Configuración Selector de empresas'
+  route_name: tbo_general.company_selector
+  description: 'Configuración Selector de empresas'
+  parent: system.admin_config_system
+  weight: 99
+
+# Export audit log configurations
+tbo_general.config_audit_export:
+  title: 'Configuración Exportar logs'
+  route_name: tbo_general.export_configs
+  description: 'Configuración Exportar logs'
+  parent: system.admin_config_system
+  weight: 98
+
+tbo_general.settings:
+  title: 'Configuración global Tbo'
+  route_name: tbo_general.settings
+  description: 'Permite establecer la configuración global de Tbo'
+  parent: system.admin_config_system
+  weight: 99
+
+tbo_core.search_b2b_config_form:
+  title: 'Configuración del buscador'
+  route_name: tbo_general.search_b2b_config_form
+  description: 'Configurar el buscador de B2B'
+  parent: system.admin_config_system
+  weight: 99
+
+tbo_general.settings_help_card:
+  title: 'Configuración de textos de ayuda para los formularios'
+  route_name: tbo_general.settings_help_card
+  description: 'Permite establecer la configuración de los textos de ayuda de los formularios'
+  parent: system.admin_config_system
+  weight: 99

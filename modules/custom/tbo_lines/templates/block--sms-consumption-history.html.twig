@@ -1,0 +1,202 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block header_data %}
+{% endblock %}
+
+{% block header_content_filters_card %}
+{% endblock %}
+
+{% block table %}
+  {% set directive_new = directive|replace({'-':'_'}) %}
+  <div class="{{ class }} segment-send" {{ directive }} ng-cloak ng-init="uuid_{{ directive_new }} = '{{ uuid }}'" data-segment-event="TBO - Visualizar histórico consumos - Consulta"
+       data-segment-properties='{"category":"Portafolio de Servicios","label": "Telefonía móvil - SMS - movil","site":"NEW"}'>
+  {% import "/modules/custom/tbo_lines/templates/consumption-filters-base.html.twig" as filter_base %}
+  {% if title.label_display %}
+    <div class="row">
+      <div class="header-card clearfix">
+        <div class="col s12">
+          <h3 class="title-card2">{{ title.label }}</h3>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {{ filter_base.consumption_filters(filters, buttons, 'filter_sms();') }}
+
+  <table class="table-white consumption-table" ng-cloak >
+
+    <thead>
+    {% block table_head %}
+      <tr>
+      {% for item in fields %}
+        <th scope="col" {% if item.service_field != 'msisdn' %} ng-click="sortBySms('{{ item.service_field }}');" {% endif %}
+          {% if item.service_field == 'date_hour' %} class="col-mobile" {% endif %}>
+          {{ item.label }}
+        </th>
+      {% endfor %}
+      </tr>
+    {% endblock %}
+    </thead>
+
+    <tbody>
+    {% block table_body %}
+      <tr data-ng-repeat="sms_data in pagedItemsSms[currentPageSms] track by $index">
+      {% block table_body_td %}
+        {% for field in fields %}
+        <td {% if field.service_field == 'date_hour' %} class="col-mobile regular-cell" {% endif %}>
+          <div  class="regular-cell" ng-click="test();">
+            {[{ sms_data.{{ field.service_field }} == null || sms_data.{{ field.service_field }} == "" ? "No disponible" : sms_data.{{ field.service_field }} }]}
+          </div>
+        </td>
+        {% endfor %}
+      {% endblock %}
+      </tr>
+
+      <tr ng-if="empty_message_sms != '' && empty_message_sms !== undefined " class="empty-message" colspan="12" id="nofoundop" >
+        <td colspan="12">{[{ empty_message_sms }]}</td>
+      </tr>
+    {% endblock %}
+    </tbody>
+
+    <tfoot>
+    {% block table_foot %}
+      <td colspan="12">
+      {% block paginate %}
+        <div ng-if="pagedItemsSms.length > 1" class="pagination">
+          <ul class="pagination">
+            <li class="firts" ng-class="{disabled: currentPageSms == 0}">
+              <a href ng-click="prevPageSms()" >
+                <i class="icon-prev">
+                  <span class="path1"></span>
+                </i>
+              </a>
+            </li>
+            <li ng-repeat="n in rangeSms(pagedItemsSms.length, currentPageSms, currentPageSms + gapSms) "
+                ng-class="{active: n == currentPageSms}"
+                ng-click="setPageSms()" class="waves-effect">
+              <a href ng-bind="n + 1">1</a>
+            </li>
+            <li class="last" ng-class="{disabled: (currentPageSms) == pagedItemsSms.length - 1}">
+              <a href ng-click="nextPageSms()">
+                <i class="icon-next">
+                  <span class="path1"></span>
+                </i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      {% endblock %}
+      </td>
+    {% endblock %}
+    </tfoot>
+
+  </table>
+
+  {% block table_mobile %}
+    <table class="table-white consumption-table table-mobile" ng-cloak >
+
+      <thead>
+      {% block table_head_mobile %}
+        <tr>
+          {% for item in fields_mobile %}
+            <th scope="col" {% if item.service_field != 'msisdn' %} ng-click="sortBySms('{{ item.service_field }}');" {% endif %}>
+              {{ item.label }}
+            </th>
+          {% endfor %}
+        </tr>
+      {% endblock %}
+      </thead>
+
+      <tbody>
+      {% block table_body_mobile %}
+        <tr data-ng-repeat="sms_data in pagedItemsSms[currentPageSms] track by $index">
+          {% block table_body_td_mobile %}
+            {% for field in fields_mobile %}
+              <td {% if field.service_field == 'date_hour' %} class="col-mobile regular-cell" {% endif %}>
+                <div  class="regular-cell" ng-click="test();">
+                  {[{ sms_data.{{ field.service_field }} == null || sms_data.{{ field.service_field }} == "" ? "No disponible": sms_data.{{ field.service_field }} }]}
+                </div>
+              </td>
+            {% endfor %}
+          {% endblock %}
+        </tr>
+
+        <tr ng-if="empty_message_sms != '' && empty_message_sms !== undefined " class="empty-message" colspan="12" id="nofoundop" >
+          <td colspan="12">{[{ empty_message_sms }]}</td>
+        </tr>
+      {% endblock %}
+      </tbody>
+
+      <tfoot>
+      {% block table_foot_movile %}
+        <td colspan="12">
+          {% block paginate_movile %}
+            <div ng-if="pagedItemsSms.length > 1" class="pagination">
+              <ul class="pagination">
+                <li class="firts" ng-class="{disabled: currentPageSms == 0}">
+                  <a href ng-click="prevPageSms()" >
+                    <i class="icon-prev">
+                      <span class="path1"></span>
+                    </i>
+                  </a>
+                </li>
+                <li ng-repeat="n in rangeSms(pagedItemsSms.length, currentPageSms, currentPageSms + gapSms) "
+                    ng-class="{active: n == currentPageSms}"
+                    ng-click="setPageSms()" class="waves-effect">
+                  <a href ng-bind="n + 1">1</a>
+                </li>
+                <li class="last" ng-class="{disabled: (currentPageSms) == pagedItemsSms.length - 1}">
+                  <a href ng-click="nextPageSms()">
+                    <i class="icon-next">
+                      <span class="path1"></span>
+                    </i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          {% endblock %}
+        </td>
+      {% endblock %}
+      </tfoot>
+
+    </table>
+  {% endblock %}
+{% endblock %}
+
+{% block other_content_data %}
+  <div class="card-block download-data">
+    <div class="box-body">
+      <div class="row {% if margin %}{% if margin.show_margin_card == false %} mt-0 {% endif %}{% endif %}">
+        <div class="col s12">
+          {% block other_content_data_card %}
+            <div class="card white clearfix">
+              <div class="col s12">
+                {% block other_content %}
+                  <div class="download-data-wrapper">
+                    {% if report.text_info.show %}
+                      <div class="download-data-text">
+                        <p>{{ report.text_info.label }}</p>
+                      </div>
+                    {% endif %}
+                    {% if report.download_button.show %}
+                      <div class="col input-field s12 m3">
+                        <select name="exportdata" ng-model="data.exportdataSms" ng-change="downloadReportSms(data.exportdataSms)" id="sms-download-select">
+                          <option value="" disabled selected>Seleccionar</option>
+                          <option value="txt">TXT</option>
+                          <option value="xlsx">XLS</option>
+                          <option value="csv">CSV</option>
+                        </select>
+                        <label>Exportación</label>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endblock %}
+              </div>
+            </div>
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

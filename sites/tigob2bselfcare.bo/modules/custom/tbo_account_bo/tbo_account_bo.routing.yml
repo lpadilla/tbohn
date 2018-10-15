@@ -1,0 +1,7 @@
+
+tbo_account_bo.desactivar_usuarios:
+  path: '/tbo-account-bo-desactivar-usuario'
+  defaults:
+    _controller: '\Drupal\tbo_account_bo\Controller\tboAccountBoController::desactivar_usuario'
+  requirements:
+    _access: 'TRUE'

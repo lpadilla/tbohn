@@ -1,0 +1,19 @@
+admin-cards-access:
+  version: 1.0
+  js:
+    js/directive/admin_cards_access.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+consult-companies-blocked-card:
+  version: 1.0
+  js:
+    js/directive/consult_companies_blocked_card.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo

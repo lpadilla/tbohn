@@ -1,0 +1,18 @@
+services:
+  # EmulateAdminCompanySession
+  tbo_user.emulate_admin_company_session_block:
+    class: Drupal\tbo_user\Plugin\Config\Block\EmulateAdminCompanySessionBlockClass
+    arguments: []
+
+  tbo_user.emulate_admin_company_session_rest:
+    class: Drupal\tbo_user\Services\Rest\EmulateSessionRestService
+    arguments: []
+
+  tbo_user.emulate_admin_company_session_controller:
+    class: Drupal\tbo_user\Services\Controller\EmulateSessionControllerService
+    arguments: []
+
+  # UnmasqueradeBlock
+  tbo_user.unmasquerade_block:
+    class: Drupal\tbo_user\Plugin\Config\Block\UnmasqueradeBlockClass
+    arguments: []

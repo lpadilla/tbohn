@@ -1,0 +1,14 @@
+{
+  "name": "drupal/tigoapi_batch",
+  "type": "drupal-module",
+  "description": "Module to call apis by lots",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/tigoapi_batch",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/tigoapi_batch",
+    "source": "http://cgit.drupalcode.org/tigoapi_batch"
+  },
+  "require": { }
+}

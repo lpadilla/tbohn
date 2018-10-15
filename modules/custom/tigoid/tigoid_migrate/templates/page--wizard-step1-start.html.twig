@@ -1,0 +1,12 @@
+<div class="wizard-container">
+  <section>
+    {% if(lines|length > 0) %}
+    <p>{{ "Tienes asociadas las siguientes líneas:"|t }} <span> {{ lines|join(", ") }}</span></p>
+    {% endif %}
+    <p>{{ "Realiza la actualización de datos en la siguiente ventana"|t }}</p>
+    <div class="actions">
+      <div class="start-wizard">{{ tigoid_form }}</div>
+      <div class="in-other-moment">{{ link("En otro momento"|t, "route:<front>", { 'class':['alternative']} ) }}</div>
+    </div>
+  </section>
+</div>

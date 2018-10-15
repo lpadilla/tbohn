@@ -1,0 +1,87 @@
+{% extends 'block__card_base.html.twig' %}
+
+  {% block filters %}
+  {% endblock %}
+
+  {% block header_content_table %}
+  {% endblock %}
+
+{% block other_content_data %}
+  {% set color_ml= '#3164DC' %}
+  {% set color_mnu= '#89C547' %}
+  {% set color_mn0= '#FECB33' %}
+  {% set color_mi= '#DE5824' %}
+  <div class="card-block wrapper-consumption-history {{ class }}">
+    <div class="box-body">
+      <div class="row">
+        <div class="col s12">
+          <div class="card card-white clearfix">
+            <div class="header-card clearfix hide-on-med-and-down">
+              <div class="col s12">
+                <h3 class="title-card2"> {{ 'Histórico de consumos'|t }}</h3>
+                <p class="subtitle-card">{{ 'Mensual'|t }}</p>
+              </div>
+            </div>
+            <div class="box-collapsible">
+              <ul class="collapsible collapsible-tbo"
+                  data-collapsible="accordion">
+                <li ng-repeat="(key, value) in array track by $index">
+                  <div ng-click="log(key)" class="collapsible-header">
+                    {[{key}]}<i class="prefix icon-up"><span
+                        class="path1"></span></i></div>
+                  <div class="collapsible-body">
+                    <table class="striped table-data">
+                      <thead>
+                      <tr>
+                        {% for item in table %}
+                          {% if item.show == 1 %}
+                            <th>
+                              <span>
+                                <i class="prefix icon-circle"><span class="path1" style="background-color:{{ item.color }}"></span></i>{{ item.label }}</span>
+                            </th>
+                          {% endif %}
+                        {% endfor %}
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr>
+                         <td  ng-repeat="(key2, value2) in value track by $index">
+                           <span>{[{value2}]}</span>
+                         </td>
+                       </tr>
+                       <tr>
+                       <td colspan="12">
+                       <div class="card-action col s12 ">
+                         <a class="link-primary right segment-click"
+                            data-segment-event="TBO - Visualizar histórico consumos - Consulta"
+                            data-segment-properties='{"category":"Portafolio de Servicios","label":"Telefonía - mensual - fijo","site":"NEW"}'
+                            href="{{ buttom.url }}?month={[{key}]}">
+                           {{ buttom.label }}
+                         </a>
+                       </div>
+                       </td>
+                       </tr>
+                     </tbody>
+                  </table>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="footer-card clearfix">
+              <div class="col s12">
+                <div class="informative-section clearfix">
+                  <span class="informative_text">
+                    <i class="prefix icon-info-cyan"><span class="path1"></span><span class="path2"></span></i>
+                    {{ 'ML: minutos locales; MNU: minutos nacionales UNE; MNO: minutos nacionales otros; MI: minutos internacionales.
+                  '|t }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+

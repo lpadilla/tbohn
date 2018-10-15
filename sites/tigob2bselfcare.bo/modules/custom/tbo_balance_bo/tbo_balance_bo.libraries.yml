@@ -1,0 +1,12 @@
+balances:
+  version: 1.x
+  css:
+    theme:
+      css/balance_bo.style.css: {}
+  js:
+    js/directive/balances.js: {}    
+    ../../../../../modules/custom/tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings    
+    - tbo_general/angular.tbo

@@ -1,0 +1,7 @@
+selfcare.gtm:
+  version: 1
+  js:
+    js/selfcare_gtm.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings

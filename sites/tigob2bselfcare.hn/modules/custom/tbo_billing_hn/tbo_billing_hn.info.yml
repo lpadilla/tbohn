@@ -1,0 +1,5 @@
+name: tbo_billing_hn
+type: module
+description: Tbo - Billing - Hn
+core: 8.x
+package: Custom

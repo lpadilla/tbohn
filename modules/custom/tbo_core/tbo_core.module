@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * @file
+ * Contains tbo_core.module.
+ */
+
+use Drupal\user\Entity\User;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tbo_core_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tbo_core module.
+    case 'help.page.tbo_core':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('custom tbo core module to have all shared functions') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_user_login().
+ */
+function tbo_core_user_login($account) {
+
+  $conection = \Drupal::database();
+  $user = \Drupal::currentUser();
+  $userEntity = User::load($user->id());
+
+  $query = $conection->select('openid_connect_authmap', 'open')
+    ->fields('open', ['sub'])
+    ->condition('uid', $user->id(), '=');
+
+  $tigoId = $query->execute()->fetchField();
+  $msisdn = $userEntity->get('phone_number')->value;
+
+  // \Drupal::logger('$msisdn')->notice(print_r($msisdn, TRUE));.
+  $segment = [
+    'tigoId' => $tigoId,
+    'site' => 'NEW',
+    'MSISDN' => $msisdn,
+  ];
+
+  $_SESSION['adf_segment']['user']['others'] = $segment;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function tbo_core_theme($existing, $type, $theme, $path) {
+  return [
+    'audit_logs' => [
+      'variables' => [
+        'uuid' => NULL,
+        'options_date' => NULL,
+        'config' => NULL,
+        'filters' => NULL,
+        'fields' => NULL,
+        'directive' => NULL,
+        'title' => NULL,
+        'class' => NULL,
+        'margin' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--audit-logs-list',
+    ],
+  ];
+}

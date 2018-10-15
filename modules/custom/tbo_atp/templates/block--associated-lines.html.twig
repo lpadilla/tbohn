@@ -1,0 +1,127 @@
+{% extends 'block__card_base.html.twig' %}
+
+{% block top_other_content %}
+  <div class="card-block">
+    <div class="box-body">
+      {% if title %}
+        <h5 class="title-front hide-on-med-and-down">
+          {{ title }}
+        </h5>
+      {% endif %}
+
+      {% if fields.client_name %}
+        <h3 ng-if="nameClient">
+          {[{ nameClient }]}
+        </h3>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block header_content_table %}
+  {% if fields.section_of_associated_lines %}
+    <div ng-if="empty_lines || lines.length > 0" class="card-block">
+      <div class="box-body">
+        <div class="row {% if margin %}{% if margin.show_margin_card == false %} mb-0 {% endif %}{% endif %}">
+          <div class="col s12">
+            {% block header_content_table_card %}
+            <div class="card white clearfix atp-assosiated-lines">
+              <div class="col s12 atp-assosiated-lines-title">
+                 {% if fields.title or fields.descriptive_text %}
+                  {% if fields.title %}
+                    <h2 class="title-card">{{ fields.title.label }}</h2>
+                  {% endif %} {% if fields.descriptive_text %}
+                    <p>{{ fields.descriptive_text.label }}</p>
+                  {% endif %}
+                {% endif %}
+                {% endblock %}
+                {% if fields is not empty %}
+                  {% block table %}
+                    <p ng-if="empty_lines">
+                      {{ 'No se encontraron lineas asociadas al perfil ingresado'|t }}
+                    </p>
+                    <table class="table-white atp-assosiated-lines-table">
+                      <thead>
+                      </thead>
+                      <tbody>
+                      {% block table_body %}
+                        <tr data-ng-repeat="lines in pagedItems[currentPage]">
+                          {% block table_body_td %}
+                            <td ng-if="lines.type_line === undefined && lines.msisdn_line === undefined" data-ng-repeat="line in lines">
+                              {% for field in fields.fields_table %}
+                                <strong class="regular-cell line {{ field.class }}">
+                                  {% if field.service_field == 'msisdn_line' %}
+                                    {[{ line.{{ field.service_field }} }]}
+                                  {% endif %}
+                                </strong>
+                                <span>
+                                  {% if field.service_field == 'type_line' %}
+                                    - {[{ line.{{ field.service_field }} }]}
+                                  {% endif %}
+                                </span>
+                              {% endfor %}
+                            </td>
+                            <td ng-if="lines.type_line !== undefined || lines.msisdn_line !== undefined">
+                              {% for field in fields.fields_table %}
+                                <strong class="regular-cell line {{ field.class }}">
+                                  {% if field.service_field == 'msisdn_line' %}
+                                    {[{ lines.{{ field.service_field }} }]}
+                                  {% endif %}
+                                </strong>
+                                <span>
+                                  {% if field.service_field == 'type_line' %}
+                                    - {[{ lines.{{ field.service_field }} }]}
+                                  {% endif %}
+                                </span>
+                              {% endfor %}
+                            </td>
+                          {% endblock %}
+                        </tr>
+                      {% endblock %}
+                      </tbody>
+                      <tfoot>
+                      {% block table_foot %}
+                        <td colspan="3">
+                          {% block paginate %}
+                            <!-- Get paginate  -->
+                            {{ widgets.paginate() }}
+                          {% endblock %}
+                        </td>
+                      {% endblock %}
+                      </tfoot>
+                    </table>
+                  {% endblock %}
+                {% endif %}
+                {# Add btn download #}
+                {% if buttons.download.show %}
+                  <div class="atp-assosiated-lines-buttons">
+                    <div class="input-field">
+                      <a
+                        name="{{ uuid }}" {% if buttons.download.active %}
+                        href="adf_core/export/{{ buttons.download.type_report }}/atp-associated-lines/1/{{ uuid }}?p1={[{p1}]}&p2={[{p2}]}" target="_blank" {% else %} disabled {% endif %}
+                        class="waves-effect waves-light btn btn-second collapse">
+                          {{ buttons.download.label }}
+                        <i class="prefix-btn icon-download2">
+                          <span class="path1"></span>
+                          <span class="path2"></span>
+                        </i>
+                      </a>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block other_content_data %}
+  <div class="hidden">
+    {% for plan in plan_type %}
+      {{ plan }}
+    {% endfor %}
+  </div>
+{% endblock %}

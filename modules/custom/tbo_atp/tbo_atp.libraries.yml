@@ -1,0 +1,49 @@
+search-by-profile:
+  version: 1.x
+  js:
+    js/directive/search_by_profile.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+contract_filter:
+  version: 1.x
+  js:
+    js/directive/atp_contract_filter.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+associated-lines:
+  version: 1.x
+  js:
+    js/directive/angular-ismobile.min.js: {}
+    js/directive/associated_lines.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+atp-corporative-plan-summary:
+  version: 1.x
+  js:
+    js/directive/atp_corporative_plan_summary.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo
+
+corporative_profiles:
+  version: 1.x
+  js:
+    js/directive/corporative_profiles.js: {}
+    ../tbo_general/js/materializeInit.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - tbo_general/angular.tbo

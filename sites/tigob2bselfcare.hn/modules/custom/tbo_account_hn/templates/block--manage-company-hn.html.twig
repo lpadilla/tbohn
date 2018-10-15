@@ -1,0 +1,85 @@
+{% extends 'block__card_base_hn.html.twig' %}
+
+{% block filters_modal_content %}
+  <div class="row">
+    <div class="input-field col s12 m12 l6">
+      {% if title %}
+        <h5 class="title-core">{{ title }}</h5>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block header_content_filters_card_detail %}
+  {% block filter_header_form %}
+    <form data-ng-submit="filterCompanies()">
+  {% endblock %}
+  <div class="row">
+    {% block for_filters %}
+      {% for filter in filters %}
+        {{ widgets.validate_style( filter.label, filter, filter.class) }}
+      {% endfor %}
+    {% endblock %}
+  </div>
+  {% block validate_filters %}
+    {% if filters is not empty %}
+      <div class="row">
+        <div class="col input-field s12 m12 l12">
+          <button class="right waves-effect waves-light btn btn-primary" type="submit">Aplicar</button>
+          <input type="reset" value="limpiar" class="right btn btn-clear click-filter-reset">
+        </div>
+      </div>
+    {% endif %}
+  {% endblock %}
+  </form>
+{% endblock %}
+
+{% block modal %}
+{% endblock %}
+
+{% block table_head %}                                                                                                  
+  <tr>                                                                                                                  
+    {% for item in fields %}                                                                                            
+      {%if (item.label == 'Eliminar') or (item.label == 'Activo') %}                                                                                 
+       <th scope="col" ng-click="orderReverse('{{ header.service_field }}');" class="img-center"> {{ item.label }}</th> 
+      {% else %}                                                                                                        
+      <th scope="col" ng-click="orderReverse('{{ header.service_field }}');"> {{ item.label }}</th>                     
+      {% endif %}                                                                                                         
+    {% endfor %}                                                                                                        
+  </tr>                                                                                                                 
+{% endblock %}                                                                                                          
+
+
+{% block table_body %}
+  <tr data-ng-repeat="compani in pagedItems[currentPage]">
+    {% for column in fields %}
+        <td ng-repeat="(key, value) in compani" ng-if="key != 'status' && key == '{{ column.service_field }}'">
+          {[{ value }]}
+        </td>
+      
+        <td ng-repeat="(key, value) in compani" ng-if="key == 'status' && key == '{{ column.service_field }}'">                  
+          <div class="switch">
+              <label>           
+                  <input ng-if="value == 1" type="checkbox" id="{[{compani.document_number}]}" name="{[{compani.name}]}" ng-model="checked" ng-init='checked=true' ng-click='doIfChecked(checked, $event)' />
+                  <input ng-if="value == 0" type="checkbox" id="{[{compani.document_number}]}" name="{[{compani.name}]}" ng-model="checked" ng-click='doIfChecked(checked, $event) '/>
+                  <span class="lever"></span>
+                  <label for="{[{compani.document_number}]}"></label>            
+              </label>
+          </div>
+        </td>
+    {% endfor %}
+    {% if fields.delete %}
+      <td>
+        <a ng-href="/{[{compani.contractId}]}/{[{compani.invoiceId}]}" class="modalcustomtwo" ng-click="deleteCompany($event, compani.document_number, compani.name)">
+          <i class="icon-bin">
+            <span class="path1"></span>
+          </i>
+        </a>
+      </td>
+    {% endif %}
+  </tr>
+{% endblock %}
+
+{% block other_content_data %}
+  <div id="modal"></div>
+{% endblock %}
